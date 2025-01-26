@@ -1,0 +1,18 @@
+name: 'Word文本抽取插件'
+language: 'Java'
+vendor: 'ModelEngine'
+operators:
+- operator:
+    name: 'Word文本抽取'
+    fitableId: 'modelengine.operators.word_extractor_plugin'
+    version: '1.0.0'
+    description: '抽取Word中的文本'
+    types:
+    - 'cleanse'
+    origin: 'predefined'
+    modal: 'text'
+    effect:
+      before: ''
+      after: ''
+    labels:
+    - '文本'

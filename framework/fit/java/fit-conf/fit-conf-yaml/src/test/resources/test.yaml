@@ -1,0 +1,9 @@
+name: Tom
+phone: 1234567890
+a:
+  b: '${1}'
+  c: '{"2" : "3"}'
+  d: '${hello} : ${bye} : {ok}'
+  n: ${hello}
+  x: '{"name" : "bob"}'
+  y: '{"1" : 2, "2" : ${hello}}'

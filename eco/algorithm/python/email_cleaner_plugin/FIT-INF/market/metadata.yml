@@ -1,0 +1,18 @@
+name: '邮件地址匿名化插件'
+language: 'Python'
+vendor: 'ModelEngine'
+operators:
+- operator:
+    name: '邮件地址匿名化'
+    fitableId: 'modelengine.operators.email_cleaner_plugin'
+    version: '1.0.0'
+    description: '邮件地址匿名化'
+    types:
+    - 'cleanse'
+    origin: 'predefined'
+    modal: 'text'
+    effect:
+      before: '这个是邮箱号：test_email@gmail.com'
+      after: '这个是邮箱号：<email>'
+    labels:
+    - '文本'

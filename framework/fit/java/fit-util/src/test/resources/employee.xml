@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<employee>
+    <id>001</id>
+    <name>John</name>
+    <age>25</age>
+    <entryDate>2023-01-04</entryDate>
+</employee>

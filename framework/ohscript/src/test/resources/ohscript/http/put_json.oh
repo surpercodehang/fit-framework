@@ -1,0 +1,15 @@
+let bodyData = entity{
+    .f1 = "v1";
+    .f2 = entity{
+        .k = 1;
+    };
+    .f3 = [1, 2, 3];
+};
+let request = entity{
+    .body = entity{
+        .type = "json";
+        .data = bodyData;
+    };
+};
+let response = http::putJson(request);
+response

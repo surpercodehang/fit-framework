@@ -1,0 +1,9 @@
+fit:
+  beans:
+    packages:
+    - 'modelengine.fit.http.client.okhttp'
+
+okhttp:
+  config-client:
+    cache:
+      max-size: 20

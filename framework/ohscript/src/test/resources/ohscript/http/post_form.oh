@@ -1,0 +1,11 @@
+let request = entity{
+    .body = entity{
+        .type = "form";
+        .data = entity{
+            .f1 = "v1";
+            .f2 = "v2";
+        };
+    };
+};
+let response = http::postForm(request);
+response

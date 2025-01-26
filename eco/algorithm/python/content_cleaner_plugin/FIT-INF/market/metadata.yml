@@ -1,0 +1,18 @@
+name: '文档目录去除插件'
+language: 'Python'
+vendor: 'ModelEngine'
+operators:
+- operator:
+    name: '文档目录去除'
+    fitableId: 'modelengine.operators.content_cleaner_plugin'
+    version: '1.0.0'
+    description: '去除文档中目录'
+    types:
+    - 'cleanse'
+    origin: 'predefined'
+    modal: 'text'
+    effect:
+      before: ''
+      after: ''
+    labels:
+    - '文本'

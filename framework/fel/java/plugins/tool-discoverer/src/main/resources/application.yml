@@ -1,0 +1,6 @@
+fit:
+  beans:
+    packages:
+    - 'modelengine.fel.tool.support'
+tool:
+  max-num: 64

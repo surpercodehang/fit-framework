@@ -1,0 +1,6 @@
+let map = entity{
+    .k = "hello";
+};
+let list = ["red", "yellow", "blue"];
+let result = fit::method3("", map, list);
+result

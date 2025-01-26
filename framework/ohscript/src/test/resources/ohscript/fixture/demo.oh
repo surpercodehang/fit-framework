@@ -1,0 +1,42 @@
+func new_teacher(name,subject,grade){
+    {
+        _name:name,//private field
+        _subject:(subject,grade),//tuple
+        subject: ()=>this._subject//lambda
+    }
+}
+
+func new_student(name,grade){
+    {
+        _name: name,
+        _teachers: [:]//map
+        _grade:grade,
+        add_teacher: teacher=>this._teachers.put(teacher.subject().0, teacher)
+    }
+
+}
+
+func select_teacher(student,teacher){
+    match teacher.subject(){
+        |("math",..)=>{
+            student.add_teacher(teacher);
+            true
+         }
+        | _ => false
+    }
+}
+
+//async call to get promise
+let promise = async {
+    let will = new_teacher("Will","math", 9);
+    let json = new_student("Json",9);
+    select_teacher(json,will)
+};
+
+promise.then(success=>{
+    if(success){
+        log("will is json math teacher.");
+    }else{
+        warn("will doesn't become json math teacher.");
+    }
+});

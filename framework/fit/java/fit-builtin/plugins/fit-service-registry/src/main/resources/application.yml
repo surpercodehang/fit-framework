@@ -1,0 +1,17 @@
+plugin:
+  registry:
+    sync:
+      period: 15
+  heartbeat:
+    sync:
+      initial-delay: 5
+      period: 2
+      alive-time: 5
+
+worker:
+  expire-time: 20
+
+fit:
+  beans:
+    packages:
+    - 'modelengine.fit.service'

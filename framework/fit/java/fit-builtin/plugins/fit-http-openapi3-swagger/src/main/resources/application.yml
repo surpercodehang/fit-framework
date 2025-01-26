@@ -1,0 +1,9 @@
+fit:
+  beans:
+    packages:
+    - 'modelengine.fit.http.openapi3.swagger'
+server:
+  http:
+    resources:
+      file-locations:
+      - 'static'

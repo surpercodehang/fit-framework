@@ -1,0 +1,45 @@
+{
+  "tools": [
+    {
+      "schema": {
+        "name": "get_delivery_date",
+        "description": "Get the delivery date for a customer's order. Call this whenever you need to know the delivery date, for example when a customer asks 'Where is my package",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "orderId": {
+              "type": "string",
+              "description": "The customer's order ID."
+            },
+            "config": {
+              "type": "string",
+              "description": "The customer's config."
+            }
+          },
+          "required": [
+            "orderId"
+          ]
+        },
+        "order": [
+          "orderId",
+          "config"
+        ],
+        "return": {
+          "type": "string",
+          "converter": ""
+        }
+      },
+      "namespace": "test",
+      "runnables": {
+        "FIT": {
+          "fitableId": "default",
+          "genericableId": "test"
+        }
+      },
+      "extensions": {
+        "k1": "v2",
+        "k2": "v2"
+      }
+    }
+  ]
+}

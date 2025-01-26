@@ -1,0 +1,13 @@
+func add(x,y){ x*10+y}
+
+let add1 = add(10);
+
+func someone(last_name,first_name,birthday,calculate_age){
+    let name = last_name+" "+first_name;
+    let age = calculate_age(birthday);
+    #(last_name+" "+first_name+" oh yeah",calculate_age(birthday)+100)
+    (name,age)
+}
+
+export add, add1,someone;
+

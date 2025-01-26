@@ -1,0 +1,6 @@
+fit:
+  async:
+    core-pool-size: 10
+    max-pool-size: 10
+    keep-alive-seconds: 60
+    blocking-queue-size: 1

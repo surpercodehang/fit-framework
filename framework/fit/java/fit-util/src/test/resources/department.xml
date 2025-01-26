@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<department>
+    <name>Research</name>
+    <employees>
+        <id>123456</id>
+        <name>John</name>
+        <age>25</age>
+        <entryDate>2023-01-04</entryDate>
+    </employees>
+    <employees>
+        <id>234567</id>
+        <name>David</name>
+        <age>30</age>
+    </employees>
+</department>

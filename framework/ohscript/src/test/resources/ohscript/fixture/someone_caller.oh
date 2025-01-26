@@ -1,0 +1,9 @@
+import someone from service;
+
+func birthday_to_age(year){
+    2023-year
+}
+
+# someone("will","zhang",1976,birthday_to_age).1
+let (name,age) = someone("will","zhang",1976,birthday_to_age);
+name+"-"+age

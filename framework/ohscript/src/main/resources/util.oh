@@ -1,0 +1,2 @@
+let log=ext::util.logPanic("log"), warning=ext::util.logPanic("warning"), error=ext::util.logPanic("error"),panic=ext::util.panic;
+export log, warning, error, panic;

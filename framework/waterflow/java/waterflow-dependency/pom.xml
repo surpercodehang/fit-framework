@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>modelengine.fit.jade.waterflow</groupId>
+    <artifactId>waterflow-dependency</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>17</java.version>
+
+        <!-- Framework version -->
+        <fit.version>3.5.0-SNAPSHOT</fit.version>
+        <fel.version>1.0.0-SNAPSHOT</fel.version>
+        <waterflow.version>1.0.0-SNAPSHOT</waterflow.version>
+        <ohscript.version>0.0.3.6-SNAPSHOT</ohscript.version>
+        <task.version>0.1.0</task.version>
+        <jober.genericable.version>0.6.0-SNAPSHOT</jober.genericable.version>
+        <jober.multiversion.genericable.version>0.1.0-SNAPSHOT</jober.multiversion.genericable.version>
+
+        <!-- Third-party versions -->
+        <druid.version>1.2.20</druid.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <guava.version>32.0.1-jre</guava.version>
+        <h2.version>2.2.224</h2.version>
+        <lombok.version>1.18.26</lombok.version>
+        <jackson.version>2.16.2</jackson.version>
+        <mybatis.version>3.5.13</mybatis.version>
+
+        <!-- Test framework versions -->
+        <assertj.version>3.22.0</assertj.version>
+        <junit.version>5.10.3</junit.version>
+        <mockito.version>4.11.0</mockito.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- FIT -->
+            <dependency>
+                <groupId>modelengine.fitframework</groupId>
+                <artifactId>fit-api</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>modelengine.fit.service</groupId>
+                <artifactId>fit-data-repository-service</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>modelengine.fit.service</groupId>
+                <artifactId>fit-http-classic</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>modelengine.fit.integration</groupId>
+                <artifactId>fit-mybatis</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>modelengine.fitframework</groupId>
+                <artifactId>fit-reactor</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>modelengine.fitframework.extension</groupId>
+                <artifactId>fit-schedule</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>modelengine.fit.service</groupId>
+                <artifactId>fit-service-registry-and-discovery</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>modelengine.fitframework.extension</groupId>
+                <artifactId>fit-transaction</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>modelengine.fitframework</groupId>
+                <artifactId>fit-util</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+
+            <!-- WaterFlow -->
+            <dependency>
+                <groupId>modelengine.fit.jade.waterflow</groupId>
+                <artifactId>waterflow-bridge-fit-reactor</artifactId>
+                <version>${waterflow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>modelengine.fit.jade.waterflow</groupId>
+                <artifactId>waterflow-core</artifactId>
+                <version>${waterflow.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>modelengine.fit.jade.waterflow</groupId>
+                <artifactId>waterflow-genericable</artifactId>
+                <version>${waterflow.version}</version>
+            </dependency>
+
+            <!-- Ohscript -->
+            <dependency>
+                <groupId>modelengine.fit.ohscript</groupId>
+                <artifactId>ohscript</artifactId>
+                <version>${ohscript.version}</version>
+            </dependency>
+
+            <!-- Third-party -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <!-- Test -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-inline</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

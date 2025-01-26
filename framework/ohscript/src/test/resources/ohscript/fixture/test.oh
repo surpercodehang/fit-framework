@@ -1,0 +1,53 @@
+var type = safe{ext::context.get(0).get("passData").get("meta").get("fileType")};
+
+if(type.panic_code()>0){
+    panic();
+}
+
+if(type=="pdf"){
+    let context1 = entity{
+        .timeout = 30000; .id = "modelengine.operators.pdf_extractor_plugin";
+    };
+    let f1 = fit::handleTask(context1);
+    ext::context >> f1
+}
+
+if (type == "word") {
+    let context1 = entity{
+        .timeout = 30000; .id = "modelengine.operators.word_extractor_plugin";
+    };
+    let f1 = fit::handleTask(context1);
+    ext::context >> f1
+}
+
+if (type == "md") {
+    let context1 = entity{
+        .timeout = 30000; .id = "modelengine.operators.md_extractor_plugin";
+    };
+    let f1 = fit::handleTask(context1);
+    ext::context >> f1
+}
+
+if (type == "xml") {
+    let context1 = entity{
+        .timeout = 30000; .id = "modelengine.operators.xml_extractor_plugin";
+    };
+    let f1 = fit::handleTask(context1);
+    ext::context >> f1
+}
+
+if (type == "html") {
+    let context1 = entity{
+        .timeout = 30000; .id = "modelengine.operators.html_extractor_plugin";
+    };
+    let f1 = fit::handleTask(context1);
+    ext::context >> f1
+}
+
+if (type == "txt") {
+    let context1 = entity{
+        .timeout = 30000; .id = "modelengine.operators.txt_extractor_plugin";
+    };
+    let f1 = fit::handleTask(context1);
+    ext::context >> f1
+}

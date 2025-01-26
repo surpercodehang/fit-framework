@@ -1,0 +1,18 @@
+name: 'TXT文本抽取插件'
+language: 'Python'
+vendor: 'ModelEngine'
+operators:
+- operator:
+    name: 'TXT文本抽取'
+    fitableId: 'modelengine.operators.txt_extractor_plugin'
+    version: '1.0.0'
+    description: '抽取TXT中的文本'
+    types:
+    - 'cleanse'
+    origin: 'predefined'
+    modal: 'text'
+    effect:
+      before: ''
+      after: ''
+    labels:
+    - '文本'

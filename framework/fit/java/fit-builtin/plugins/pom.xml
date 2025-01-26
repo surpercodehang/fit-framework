@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>modelengine.fit.builtin</groupId>
+        <artifactId>fit-builtin-parent</artifactId>
+        <version>3.5.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>modelengine.fit.plugin</groupId>
+    <artifactId>fit-plugin-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>fit-actuator</module>
+        <module>fit-client-http</module>
+        <module>fit-dynamic-plugin-directory</module>
+        <module>fit-dynamic-plugin-mvn</module>
+        <module>fit-heartbeat-client</module>
+        <module>fit-http-client-okhttp</module>
+        <module>fit-http-handler-registry</module>
+        <module>fit-http-openapi3-swagger</module>
+        <module>fit-http-server-netty</module>
+        <module>fit-logger</module>
+        <module>fit-message-serializer-cbor</module>
+        <module>fit-message-serializer-json-jackson</module>
+        <module>fit-server-http</module>
+        <module>fit-service-coordination-locator</module>
+        <module>fit-service-coordination-simple</module>
+        <module>fit-service-discovery</module>
+        <module>fit-service-registry</module>
+        <module>fit-value-fastjson</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>modelengine.fitframework</groupId>
+                <artifactId>fit-build-maven-plugin</artifactId>
+                <version>${fit.version}</version>
+                <configuration>
+                    <category>system</category>
+                    <level>4</level>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>build-plugin</id>
+                        <goals>
+                            <goal>build-plugin</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>package-plugin</id>
+                        <goals>
+                            <goal>package-plugin</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>modelengine.fitframework</groupId>
+                <artifactId>fit-dependency-maven-plugin</artifactId>
+                <version>${fit.version}</version>
+                <executions>
+                    <execution>
+                        <id>dependency</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>dependency</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.jar.version}</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Created-By>FIT Lab</Created-By>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

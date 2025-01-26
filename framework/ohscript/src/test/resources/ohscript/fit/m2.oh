@@ -1,0 +1,2 @@
+let result = fit::method2("");
+result

@@ -1,0 +1,11 @@
+let context1 = entity{
+    .id = "f1";
+};
+let f1 = fit::method(context1);
+
+let context2 = entity{
+    .id = "f2";
+};
+let f2 = fit::method(context2);
+
+ext::context >> f1 >> f2

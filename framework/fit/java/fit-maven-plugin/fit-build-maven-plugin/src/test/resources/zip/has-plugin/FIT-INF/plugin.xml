@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <group>test.plugin</group>
+    <name>test-plugin</name>
+    <hierarchicalNames>test.plugin</hierarchicalNames>
+    <version>1.0.0-SNAPSHOT</version>
+    <category>system</category>
+    <level>4</level>
+</plugin>

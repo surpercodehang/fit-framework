@@ -1,0 +1,23 @@
+```yaml
+ fit: 
+  datasource:
+    primary: 'app-engine'
+    instances:
+      app-engine:
+        mode: 'shared'
+        url: 'jdbc:postgresql://${ip}:${port}/' # 将 ip 换成本地 pgsql 服务器的 ip 地址，将 port 换成本地 pgsql 监听的端口
+        username: '${username}' # 将 username 换成本地 pgsql 的用户名
+        password: '${password}' # 将 password 换成本地 pgsql 的密码
+        druid:
+          driver-class-name: 'org.postgresql.Driver'
+          initialSize: 5
+          minIdle: 5
+          maxActive: 32
+          maxWait: 60000
+          timeBetweenEvictionRunsMillis: 60000
+          minEvictableIdleTimeMillis: 300000
+          validationQuery: 'SELECT 1'
+          testWhileIdle: true
+          testOnBorrow: false
+          testOnReturn: false
+```

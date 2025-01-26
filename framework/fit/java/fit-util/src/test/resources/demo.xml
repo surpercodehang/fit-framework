@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <first-level id="1">first-level-1</first-level>
+    <first-level id="2" class="class1">first-level-2</first-level>
+    <first-level id="3" class="class1">first-level-3</first-level>
+    <parent>
+        <child />
+    </parent>
+    <first-level id="4">
+        <second-level id="1">second-level-1</second-level>
+        <second-level id="2" class="class2">second-level-2</second-level>
+        <second-level id="3" class="class2">
+            <third-level id="1">third-level-1</third-level>
+            <third-level>third-level-2</third-level>
+        </second-level>
+    </first-level>
+    <parent1>
+        <parent2>
+            <child1 />
+            <child2 />
+        </parent2>
+        <parent3>
+            <child3 />
+            <child4 />
+        </parent3>
+    </parent1>
+</configuration>

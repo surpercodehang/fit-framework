@@ -1,0 +1,8 @@
+let request = entity{
+    .body = entity{
+        .type = "text";
+        .data = "Hello World";
+    };
+};
+let response = http::patchText(request);
+response

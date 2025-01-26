@@ -1,0 +1,7 @@
+let request = entity{
+    .headers = entity{
+        .h1 = "v3";
+    };
+};
+let response = http::deleteText(request);
+response

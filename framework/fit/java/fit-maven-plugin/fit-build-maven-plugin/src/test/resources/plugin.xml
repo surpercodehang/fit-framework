@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <group>group</group>
+    <name>part1-part2</name>
+    <hierarchicalNames>part1.part2</hierarchicalNames>
+    <version>1.0.0</version>
+    <category>user</category>
+    <level>5</level>
+</plugin>

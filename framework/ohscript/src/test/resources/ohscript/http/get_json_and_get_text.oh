@@ -1,0 +1,11 @@
+var request = entity{
+    .headers = entity{
+        .h1 = "v4";
+    };
+};
+var response = http::getJson(request);
+let k1 = response.get("body").get("k1");
+let k2 = response.get("body").get("k2");
+request.headers.h1 = k1 + "," + k2;
+response = http::getText(request);
+response

@@ -1,0 +1,15 @@
+fit:
+  beans:
+    packages:
+    - 'modelengine.fit.http.server.netty'
+
+worker:
+  exit:
+    graceful: false
+
+plugin:
+  http-server:
+    netty:
+      core-thread-num: 10
+      max-thread-num: 100
+      queue-capacity: 0

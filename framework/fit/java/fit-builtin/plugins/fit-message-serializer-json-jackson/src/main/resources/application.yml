@@ -1,0 +1,7 @@
+date-time-format: 'yyyy-MM-dd HH:mm:ss'
+date-format: 'yyyy-MM-dd'
+
+fit:
+  beans:
+    packages:
+    - 'modelengine.fit.serialization.json.jackson'

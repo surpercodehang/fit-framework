@@ -1,0 +1,27 @@
+name: 'PDF抽取插件'
+language: 'Python'
+vendor: 'ModelEngine'
+operators:
+- operator:
+    name: 'PDF文本抽取'
+    fitableId: 'modelengine.operators.pdf_extractor_cpu_plugin'
+    version: '1.0.0'
+    description: 'PDF文本抽取算子'
+    types:
+    - 'cleanse'
+    origin: 'predefined'
+    modal: 'text'
+    effect:
+      before: ''
+      after: ''
+    labels:
+    - '文本'
+    settings:
+        NPUAbility:
+            description: NPU能力
+            mark: 使用NPU能力后，增加PDF抽取精度。
+            type: checkbox
+            default: '1'
+            enum:
+                - name: 使用NPU能力
+                  value: '1'

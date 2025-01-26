@@ -1,0 +1,59 @@
+ {
+     "first-level": [
+         {
+             "#text": "first-level-1",
+             "@id": "1"
+         },
+         {
+             "#text": "first-level-2",
+             "@class": "class1",
+             "@id": "2"
+         },
+         {
+             "#text": "first-level-3",
+             "@class": "class1",
+             "@id": "3"
+         },
+         {
+             "@id": "4",
+             "second-level": [
+                 {
+                     "#text": "second-level-1",
+                     "@id": "1"
+                 },
+                 {
+                     "#text": "second-level-2",
+                     "@class": "class2",
+                     "@id": "2"
+                 },
+                 {
+                     "@class": "class2",
+                     "@id": "3",
+                     "third-level": [
+                         {
+                             "#text": "third-level-1",
+                             "@id": "1"
+                         },
+                         {
+                             "#text": "third-level-2"
+                         }
+                     ]
+                 }
+             ]
+         }
+     ],
+     "parent": {
+         "child": {}
+     },
+     "parent1": {
+         "parent2": {
+             "child1": {},
+             "child2": {}
+         },
+         "parent3": {
+             "child3": {},
+             "child4": {}
+         }
+     }
+ }
+ 

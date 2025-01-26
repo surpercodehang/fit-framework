@@ -1,0 +1,18 @@
+name: '图注表注去除插件'
+language: 'Python'
+vendor: 'ModelEngine'
+operators:
+- operator:
+    name: '图注表注去除'
+    fitableId: 'modelengine.operators.legend_cleaner_plugin'
+    version: '1.0.0'
+    description: '移除文档中图注、表注等'
+    types:
+    - 'cleanse'
+    origin: 'predefined'
+    modal: 'text'
+    effect:
+      before: '图1.1.1 图注名称'
+      after: ''
+    labels:
+    - '文本'

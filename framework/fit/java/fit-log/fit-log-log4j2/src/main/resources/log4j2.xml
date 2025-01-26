@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="600">
+    <Properties>
+        <Property name="CONSOLE_PATTERN">%5p [%t] %d{yyyy-MM-dd HH:mm:ss} (%F:%L) %enc{%m}{JSON}%n</Property>
+        <Property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSSS} [%t] %5p (%F:%L) %enc{%m}{JSON}%n</Property>
+        <Property name="LOG_HOME">/applog</Property>
+    </Properties>
+    <Appenders>
+        <!--这个输出控制台的配置，这里输出除了warn和error级别的信息到System.out-->
+        <Console name="console_out_appender" target="SYSTEM_OUT">
+            <!-- 控制台只输出level及以上级别的信息(onMatch),其他的直接拒绝(onMismatch) -->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- 输出日志的格式 -->
+            <PatternLayout>
+                <Pattern>${CONSOLE_PATTERN}</Pattern>
+            </PatternLayout>
+        </Console>
+        <!--这个输出控制台的配置，这里输出warn和error级别的信息到System.err，在eclipse控制台上看到的是红色文字-->
+        <Console name="console_err_appender" target="SYSTEM_ERR">
+            <!-- 控制台只输出level及以上级别的信息(onMatch),其他的直接拒绝(onMismatch) -->
+            <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- 输出日志的格式 -->
+            <PatternLayout>
+                <Pattern>"%5p [%t] %d{yyyy-MM-dd HH:mm:ss} (%F:%L) %enc{%m}{JSON}%n"</Pattern>
+            </PatternLayout>
+        </Console>
+        <RollingRandomAccessFile name="framework_appender"
+                                 immediateFlush="true" fileName="${LOG_HOME}/framework.log"
+                                 filePattern="${LOG_HOME}/log/log - %d{yyyy-MM-dd HH_mm_ss}.log.gz">
+            <PatternLayout>
+                <Pattern>${PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <Filters>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <!-- 配置日志的根节点 -->
+        <root level="trace">
+            <appender-ref ref="console_out_appender"/>
+            <appender-ref ref="console_err_appender"/>
+            <appender-ref ref="framework_appender"/>
+        </root>
+        <!-- 第三方日志系统 -->
+        <logger name="modelengine.fitframework" level="info"/>
+        <logger name="modelengine.fit" level="info"/>
+    </Loggers>
+</Configuration>

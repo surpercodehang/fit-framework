@@ -1,0 +1,7 @@
+let request = entity{
+    .headers = entity{
+        .h1 = "v4";
+    };
+};
+let response = http::deleteJson(request);
+response

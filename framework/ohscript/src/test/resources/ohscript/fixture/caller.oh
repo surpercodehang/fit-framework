@@ -1,0 +1,16 @@
+import add, add1 from service;
+#function explain
+##x:parameter explain x>10
+##y:parameter explain
+##z:parameter explain
+###return value explain
+func add2(x,y,z){
+   x+y+z
+}
+let value = 12>>add(10)>>(1>>add2(20));
+var result=1;
+match value {
+    |22=>result = 24
+    |_=>100+value
+}
+result

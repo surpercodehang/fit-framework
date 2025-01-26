@@ -1,0 +1,2 @@
+<!ELEMENT root ANY>
+<!ENTITY demoEntity "Demo entity content of a DTD file.">

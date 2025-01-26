@@ -1,0 +1,13 @@
+let context = entity{
+    .alias = "f1";
+    .timeout = 10000;
+    .async = true;
+    .format = "cbor";
+};
+let r1 = fit::method1(context);
+let r2 = r1("Hello");
+let r3 = r2(1);
+let r4 = r3(2);
+let r5 = r4(3.14);
+r5
+

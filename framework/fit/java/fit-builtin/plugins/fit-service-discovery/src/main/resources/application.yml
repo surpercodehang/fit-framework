@@ -1,0 +1,14 @@
+plugin:
+  registry:
+    listener:
+      mode: 'push-and-pull' # 可选值为：push/pull/push-and-pull
+      pull:
+        period: 10 # 单位为秒
+    genericable-repository:
+      pull:
+        period: 10 # 单位为秒
+
+fit:
+  beans:
+    packages:
+    - 'modelengine.fit.service'
