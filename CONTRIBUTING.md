@@ -55,7 +55,7 @@ exec git-hooks/check-utf8-encoding.sh
 ```
 
 > 注意，需要确保`git-hooks/`目录下的所有脚本都有可执行的权限，请在本地执行以下命令：
-> `chmod +x git-hooks/pre-commit`
+> `chmod +x git-hooks/check-utf8-encoding.sh`
 
 ### 提交信息格式
 

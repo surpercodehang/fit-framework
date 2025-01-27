@@ -53,7 +53,7 @@ mvn clean install
 - WaterFlow 流调度引擎 
   - 请参考 [WaterFlow 快速开始](framework%2Fwaterflow%2Fjava%2Fwaterflow-core%2FREADME.md)，该指南将简单介绍 WaterFlow 声明式语法，并构建流程输出`hello world！`。
 - FEL 标准原语 
-  - 请参考 [FEL 快速开始](framework%2Ffel%2Fjava%2Ffel-core%2Freadme.md)，该指南将简要介绍如何使用 FEL 构建端到端的大模型应用程序。
+  - 请参考 [FEL 快速开始](docs/framework/fel/java/quick-start-guide/01.%20模型.md)，该指南将简要介绍如何使用 FEL 构建端到端的大模型应用程序。
 
 
 ## 文档
