@@ -19,11 +19,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
 
-        <!-- FIT Version -->
+        <!-- FIT version -->
         <fit.version>3.5.0-SNAPSHOT</fit.version>
 
-        <!-- Byte Buddy 版本控制 -->
-        <byte-buddy.version>1.14.12</byte-buddy.version>
+        <!-- Byte-buddy version -->
+        <byte-buddy.version>1.16.1</byte-buddy.version>
     </properties>
 
     <dependencies>

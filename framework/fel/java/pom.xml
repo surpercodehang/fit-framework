@@ -29,7 +29,7 @@
         <tool.version>1.0.0-SNAPSHOT</tool.version>
 
         <!-- Third-party versions -->
-        <bytebuddy.version>1.14.12</bytebuddy.version>
+        <bytebuddy.version>1.16.1</bytebuddy.version>
         <jackson.version>2.16.2</jackson.version>
 
         <!-- Test framework versions -->

@@ -13,7 +13,7 @@
 
     <properties>
         <!-- Third-party versions -->
-        <bytebuddy.version>1.14.12</bytebuddy.version>
+        <bytebuddy.version>1.16.1</bytebuddy.version>
         <mybatis.version>3.5.13</mybatis.version>
     </properties>
 
