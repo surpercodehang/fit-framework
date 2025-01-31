@@ -13,7 +13,7 @@
 
     <properties>
         <!-- Third-party versions -->
-        <snakeyaml.version>2.0</snakeyaml.version>
+        <snakeyaml.version>2.3</snakeyaml.version>
     </properties>
 
     <dependencies>
