@@ -47,35 +47,5 @@
             <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
-            <artifactId>fit-heartbeat-client</artifactId>
-            <version>${fit.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
-            <artifactId>fit-service-registry</artifactId>
-            <version>${fit.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
-            <artifactId>fit-service-discovery</artifactId>
-            <version>${fit.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
-            <artifactId>fit-service-coordination-locator</artifactId>
-            <version>${fit.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
-            <artifactId>fit-service-coordination-simple</artifactId>
-            <version>${fit.version}</version>
-            <scope>runtime</scope>
-        </dependency>
     </dependencies>
 </project>
