@@ -30,7 +30,7 @@
 
         <!-- Third-party versions -->
         <bytebuddy.version>1.17.0</bytebuddy.version>
-        <jackson.version>2.16.2</jackson.version>
+        <jackson.version>2.18.2</jackson.version>
 
         <!-- Test framework versions -->
         <assertj.version>3.24.2</assertj.version>
