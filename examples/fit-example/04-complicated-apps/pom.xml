@@ -3,15 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>modelengine.fit.jade.example</groupId>
-    <artifactId>fit-example-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <groupId>modelengine.fit.exmple</groupId>
+    <artifactId>complicated-apps</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>01-simple-web-app</module>
-        <module>02-static-plugin</module>
-        <module>03-dynamic-plugin</module>
-        <module>04-complicated-apps</module>
+        <module>app-assistant</module>
+        <module>app-default-weather</module>
+        <module>app-registry-center</module>
+        <module>service</module>
     </modules>
 </project>
