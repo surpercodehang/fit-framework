@@ -18,7 +18,7 @@
 
         <!-- Third-Party version -->
         <fastjson.version>1.2.83</fastjson.version>
-        <lombok.version>1.18.26</lombok.version>
+        <lombok.version>1.18.36</lombok.version>
 
         <!-- Byte-buddy version -->
         <byte-buddy.version>1.17.0</byte-buddy.version>
