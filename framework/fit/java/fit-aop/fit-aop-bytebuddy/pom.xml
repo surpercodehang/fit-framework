@@ -27,7 +27,7 @@
             <artifactId>fit-aop</artifactId>
         </dependency>
 
-        <!-- Bytebuddy -->
+        <!-- Byte-buddy -->
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
