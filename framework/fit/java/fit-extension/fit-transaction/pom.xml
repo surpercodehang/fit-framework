@@ -13,7 +13,7 @@
 
     <properties>
         <!-- Third-party versions -->
-        <h2.version>2.2.224</h2.version>
+        <h2.version>2.3.232</h2.version>
     </properties>
 
     <dependencies>

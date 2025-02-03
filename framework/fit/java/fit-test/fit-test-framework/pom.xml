@@ -15,7 +15,7 @@
     <properties>
         <!-- Third-party versions -->
         <junit5.version>5.11.4</junit5.version>
-        <h2.version>2.2.224</h2.version>
+        <h2.version>2.3.232</h2.version>
         <mockito.version>4.11.0</mockito.version>
     </properties>
 
