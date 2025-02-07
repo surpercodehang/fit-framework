@@ -37,9 +37,8 @@ public class DigestUtilsTest {
     @DisplayName("given string list and invalid algorithm type when get hash code then throw illegal state exception")
     void testGetHashCodeWhenException() {
         List<String> strList = Arrays.asList("fitableId1:0,1", "fitableId2:0,1,2");
-        IllegalStateException exception =
-                catchThrowableOfType(() -> DigestUtils.hashCode(strList, INVALID_ALGORITHM_TYPE),
-                        IllegalStateException.class);
+        IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                () -> DigestUtils.hashCode(strList, INVALID_ALGORITHM_TYPE));
         assertThat(exception).isNotNull().hasMessage("Failed to get hash code.");
     }
 }

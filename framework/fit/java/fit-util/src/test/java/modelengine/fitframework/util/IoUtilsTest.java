@@ -358,7 +358,7 @@ public class IoUtilsTest {
         @DisplayName("当十六进制字符串中包含非十六进制字符时，抛出异常")
         void shouldThrowExceptionWhenHexStringContainsNonHexChar() {
             IllegalStateException exception =
-                    catchThrowableOfType(() -> IoUtils.fromHexString("g"), IllegalStateException.class);
+                    catchThrowableOfType(IllegalStateException.class, () -> IoUtils.fromHexString("g"));
             assertThat(exception).isNotNull()
                     .hasMessage("Char is out of range, legal char range is [0-9A-Fa-f]. [ch='g']");
         }
@@ -378,8 +378,8 @@ public class IoUtilsTest {
                 @Test
                 @DisplayName("Given resource not found then throw IllegalStateException")
                 void givenResourceNotFoundThenThrowException() {
-                    IllegalStateException exception = catchThrowableOfType(() -> IoUtils.properties(IoUtilsTest.class,
-                            "c5def8de-d547-40dd-91e7-8a09c3a6d3b6"), IllegalStateException.class);
+                    IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                            () -> IoUtils.properties(IoUtilsTest.class, "c5def8de-d547-40dd-91e7-8a09c3a6d3b6"));
                     assertThat(exception).isNotNull()
                             .hasMessage("The embedded resource with specific key not found. "
                                     + "[key=c5def8de-d547-40dd-91e7-8a09c3a6d3b6]");
@@ -404,6 +404,7 @@ public class IoUtilsTest {
                             .containsEntry("code2", "测试");
                 }
 
+                @SuppressWarnings("resource")
                 @Test
                 @DisplayName("Given load resource error then throw IllegalStateException")
                 void givenLoadResourceErrorThenThrowException() throws IOException {
@@ -413,13 +414,12 @@ public class IoUtilsTest {
                         mocked.when(() -> IoUtils.resource(eq(IoUtilsTest.class),
                                 eq(TestProperties.this.invalidResourceKey))).thenReturn(in);
                         mocked.when(() -> IoUtils.properties((Class<?>) any(), any())).thenCallRealMethod();
-                        IllegalStateException exception =
-                                catchThrowableOfType(() -> IoUtils.properties(IoUtilsTest.class,
-                                        TestProperties.this.invalidResourceKey), IllegalStateException.class);
+                        IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                                () -> IoUtils.properties(IoUtilsTest.class, TestProperties.this.invalidResourceKey));
                         assertThat(exception).isNotNull()
                                 .hasMessage("Failed to read properties from embedded resource. [resourceKey="
                                         + TestProperties.this.invalidResourceKey + "]")
-                                .getCause()
+                                .cause()
                                 .isInstanceOf(IOException.class);
                     }
                 }
@@ -440,6 +440,7 @@ public class IoUtilsTest {
                     assertThat(actual).isNotNull().hasSize(2).containsEntry("k1", "v1").containsEntry("k2", "v2");
                 }
 
+                @SuppressWarnings("resource")
                 @Test
                 @DisplayName("Given load resource error then throw IllegalStateException")
                 void givenLoadResourceErrorThenThrowException() throws IOException {
@@ -450,14 +451,13 @@ public class IoUtilsTest {
                                 eq(TestProperties.this.invalidResourceKey))).thenReturn(in);
                         mocked.when(() -> IoUtils.properties(ObjectUtils.<ClassLoader>cast(any()), any()))
                                 .thenCallRealMethod();
-                        IllegalStateException exception =
-                                catchThrowableOfType(() -> IoUtils.properties(Thread.currentThread()
-                                                .getContextClassLoader(), TestProperties.this.invalidResourceKey),
-                                        IllegalStateException.class);
+                        IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                                () -> IoUtils.properties(Thread.currentThread().getContextClassLoader(),
+                                        TestProperties.this.invalidResourceKey));
                         assertThat(exception).isNotNull()
                                 .hasMessage("Failed to read properties from embedded resource. [resourceKey="
                                         + TestProperties.this.invalidResourceKey + "]")
-                                .getCause()
+                                .cause()
                                 .isInstanceOf(IOException.class);
                     }
                 }
@@ -487,9 +487,8 @@ public class IoUtilsTest {
                 @Test
                 @DisplayName("Given resource is text/hello.txt then throw IllegalStateException")
                 void givenResourceNotExistThenThrowException() {
-                    IllegalStateException exception =
-                            catchThrowableOfType(() -> IoUtils.content(IoUtilsTest.class, "text/hello.txt"),
-                                    IllegalStateException.class);
+                    IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                            () -> IoUtils.content(IoUtilsTest.class, "text/hello.txt"));
                     assertThat(exception).isNotNull().hasMessage("The input stream to read cannot be null.");
                 }
             }
@@ -553,7 +552,7 @@ public class IoUtilsTest {
                 @DisplayName("Given length 6 then throw IOException")
                 void givenLength6ThenThrowException() {
                     IOException exception =
-                            catchThrowableOfType(() -> IoUtils.read(TestRead.this.in, 6), IOException.class);
+                            catchThrowableOfType(IOException.class, () -> IoUtils.read(TestRead.this.in, 6));
                     assertThat(exception).isNotNull()
                             .hasMessage("Failed to read from input stream: no enough available bytes. "
                                     + "[expectedLength=6, actualLength=5]");
@@ -579,12 +578,12 @@ public class IoUtilsTest {
             @Nested
             @DisplayName("Given class is IoUtilsTest.class")
             class GivenClassThis {
+                @SuppressWarnings("resource")
                 @Test
                 @DisplayName("Given key not exist then throw IllegalStateException")
                 void givenResourceNotExistThenThrowException() {
-                    IllegalStateException exception =
-                            catchThrowableOfType(() -> IoUtils.resource(IoUtils.class, "NotExist"),
-                                    IllegalStateException.class);
+                    IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                            () -> IoUtils.resource(IoUtils.class, "NotExist"));
                     assertThat(exception).isNotNull()
                             .hasMessage("The embedded resource with specific key not found. [key=NotExist]");
                 }
@@ -604,12 +603,12 @@ public class IoUtilsTest {
             @Nested
             @DisplayName("Given class loader is Thread.currentThread().getContextClassLoader()")
             class GivenClassThis {
+                @SuppressWarnings("resource")
                 @Test
                 @DisplayName("Given key not exist then throw IllegalStateException")
                 void givenResourceNotExistThenThrowException() {
-                    IllegalStateException exception =
-                            catchThrowableOfType(() -> IoUtils.resource(Thread.currentThread().getContextClassLoader(),
-                                    "NotExist"), IllegalStateException.class);
+                    IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                            () -> IoUtils.resource(Thread.currentThread().getContextClassLoader(), "NotExist"));
                     assertThat(exception).isNotNull()
                             .hasMessage("The embedded resource with specific key not found. [key=NotExist]");
                 }
@@ -646,6 +645,7 @@ public class IoUtilsTest {
     @Nested
     @DisplayName("测试方法：emptyInputStream()")
     class TestEmptyInputStream {
+        @SuppressWarnings("resource")
         @Test
         @DisplayName("应该返回空的输入流")
         void shouldReturnEmptyInputStream() throws IOException {
@@ -694,6 +694,7 @@ public class IoUtilsTest {
                 assertThat(readBytes).isEqualTo(Arrays.copyOf(GivenRandomAccessFile.this.bytes, readBytes.length));
             }
 
+            @SuppressWarnings("resource")
             @Test
             @DisplayName("接收内容字节数组超过文件大小时，抛出异常")
             void whenFillBytesSizeGreaterFileSizeThenThrowException() throws IOException {

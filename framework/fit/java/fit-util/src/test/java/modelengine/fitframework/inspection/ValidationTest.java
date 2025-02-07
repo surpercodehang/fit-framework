@@ -38,8 +38,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, min: 1, max: 2)")
             void given0LessThanMinThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.between(0, 1, 2, "Error"),
-                        IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.between(0, 1, 2, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -60,10 +60,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, min: 1, max: 2)")
             void given0LessThanMinThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.between(0,
-                        1,
-                        2,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.between(0, 1, 2, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -89,7 +87,7 @@ public class ValidationTest {
             @DisplayName("Validation failed (actual: 0, expected: 1)")
             void given0LessThanMinThenThrowException() {
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.equals(0, 1, "Error"), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> Validation.equals(0, 1, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -110,9 +108,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, expected: 1)")
             void given0LessThanMinThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.equals(0, 1, () -> new IllegalArgumentException("Error")),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.equals(0, 1, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -137,8 +134,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: 1)")
             void given0AndBound1ThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.greaterThan(0, 1, "Error"),
-                        IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.greaterThan(0, 1, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -159,9 +156,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: 1)")
             void given0AndBound1ThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.greaterThan(0,
-                        1,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.greaterThan(0, 1, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -182,8 +178,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: 1)")
             void given0AndBound1ThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.greaterThan(0L, 1L, "Error"),
-                        IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.greaterThan(0L, 1L, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -204,9 +200,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: 1)")
             void given0AndBound1ThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.greaterThan(0L,
-                        1L,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.greaterThan(0L, 1L, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -231,9 +226,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: 1)")
             void given0AndBound1ThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.greaterThanOrEquals(0, 1, "Error"),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.greaterThanOrEquals(0, 1, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -261,9 +255,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: 1)")
             void given0AndBound1ThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.greaterThanOrEquals(0,
-                        1,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.greaterThanOrEquals(0, 1, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -291,9 +284,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: 1)")
             void given0AndBound1ThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.greaterThanOrEquals(0L, 1L, "Error"),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.greaterThanOrEquals(0L, 1L, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -321,9 +313,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: 1)")
             void given0AndBound1ThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.greaterThanOrEquals(0L,
-                        1L,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.greaterThanOrEquals(0L, 1L, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -357,7 +348,7 @@ public class ValidationTest {
             @DisplayName("Validation failed (actual: true)")
             void givenTrueThenThrowException() {
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.isFalse(true, "Error"), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> Validation.isFalse(true, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -380,8 +371,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: true)")
             void givenTrueThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.isFalse(true,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.isFalse(true, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -407,9 +398,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 1, clazz: String.class)")
             void given1AndStringClassThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.isInstanceOf(1, String.class, "Error"),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.isInstanceOf(1, String.class, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -430,9 +420,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 1, clazz: String.class)")
             void given1AndStringClassThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.isInstanceOf(1,
-                        String.class,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.isInstanceOf(1, String.class, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -460,7 +449,7 @@ public class ValidationTest {
             @DisplayName("Validation failed (actual: false)")
             void givenFalseThenThrowException() {
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.isTrue(false, "Error"), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> Validation.isTrue(false, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -483,8 +472,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: false)")
             void givenFalseThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.isTrue(false,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.isTrue(false, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -511,7 +500,7 @@ public class ValidationTest {
             @DisplayName("Validation failed (actual: 0, bound: -1)")
             void given0AndBoundMinus1ThenThrowException() {
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.lessThan(0, -1, "Error"), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> Validation.lessThan(0, -1, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -532,9 +521,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: -1)")
             void given0AndBoundMinus1ThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.lessThan(0,
-                        -1,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.lessThan(0, -1, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -555,8 +543,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: -1)")
             void given0AndBoundMinus1ThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.lessThan(0L, -1L, "Error"),
-                        IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.lessThan(0L, -1L, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -577,9 +565,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: -1)")
             void given0AndBoundMinus1ThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.lessThan(0L,
-                        -1L,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.lessThan(0L, -1L, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -604,9 +591,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: -1)")
             void given0AndBoundMinus1ThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.lessThanOrEquals(0, -1, "Error"),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.lessThanOrEquals(0, -1, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -634,9 +620,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: -1)")
             void given0AndBoundMinus1ThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.lessThanOrEquals(0,
-                        -1,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.lessThanOrEquals(0, -1, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -664,9 +649,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: -1)")
             void given0AndBoundMinus1ThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.lessThanOrEquals(0L, -1L, "Error"),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.lessThanOrEquals(0L, -1L, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -694,9 +678,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 0, bound: -1)")
             void given0AndBoundMinus1ThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.lessThanOrEquals(0L,
-                        -1L,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.lessThanOrEquals(0L, -1L, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -729,25 +712,23 @@ public class ValidationTest {
             @DisplayName("Validation failed (actual: null)")
             void givenNullThenThrowException() {
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.notBlank(null, "Error"), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> Validation.notBlank(null, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
             @Test
             @DisplayName("Validation failed (actual: '')")
             void givenEmptyThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.notBlank(StringUtils.EMPTY, "Error"),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.notBlank(StringUtils.EMPTY, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
             @Test
             @DisplayName("Validation failed (actual: ' \n\t')")
             void givenWhiteSpaceThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.notBlank(WHITE_SPACE, "Error"),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.notBlank(WHITE_SPACE, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -768,24 +749,24 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: null)")
             void givenNullThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.notBlank(null,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.notBlank(null, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
             @Test
             @DisplayName("Validation failed (actual: '')")
             void givenEmptyThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.notBlank(StringUtils.EMPTY,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.notBlank(StringUtils.EMPTY, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
             @Test
             @DisplayName("Validation failed (actual: ' \n\t')")
             void givenWhiteSpaceThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.notBlank(WHITE_SPACE,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.notBlank(WHITE_SPACE, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -808,7 +789,7 @@ public class ValidationTest {
             @DisplayName("Validation failed (actual: -1)")
             void givenMinus1ThenThrowException() {
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.notNegative(-1, "Error"), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> Validation.notNegative(-1, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -826,8 +807,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: -1)")
             void givenMinus1ThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.notNegative(-1,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.notNegative(-1, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -854,7 +835,7 @@ public class ValidationTest {
             @DisplayName("Validation failed (actual: null)")
             void givenNullThenThrowException() {
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.notNull(null, "Error"), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> Validation.notNull(null, "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -876,8 +857,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: null)")
             void givenNullThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.notNull(null,
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.notNull(null, () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -902,9 +883,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 'Hello', expected: 'Hello World')")
             void givenDifferentStringThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> Validation.same("Hello", "Hello World", "Error"),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.same("Hello", "Hello World", "Error"));
                 assertThat(exception).hasMessage("Error");
             }
 
@@ -925,9 +905,8 @@ public class ValidationTest {
             @Test
             @DisplayName("Validation failed (actual: 'Hello', expected: 'Hello World')")
             void givenDifferentStringThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> Validation.same("Hello",
-                        "Hello World",
-                        () -> new IllegalArgumentException("Error")), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> Validation.same("Hello", "Hello World", () -> new IllegalArgumentException("Error")));
                 assertThat(exception).hasMessage("Error");
             }
 

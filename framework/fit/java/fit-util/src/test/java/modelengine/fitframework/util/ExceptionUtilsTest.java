@@ -59,8 +59,8 @@ public class ExceptionUtilsTest {
             MethodInvocationException e2 = new MethodInvocationException("e2");
             e1.initCause(e2);
             e2.initCause(e1);
-            IllegalStateException exception = catchThrowableOfType(() -> ExceptionUtils.getActualCause(e1),
-                    IllegalStateException.class);
+            IllegalStateException exception =
+                    catchThrowableOfType(IllegalStateException.class, () -> ExceptionUtils.getActualCause(e1));
             assertThat(exception).isNotNull().hasMessage("Cyclic throwable cause.");
         }
 
@@ -68,6 +68,15 @@ public class ExceptionUtilsTest {
         @Test
         @DisplayName("when too many MethodInvocationException, then throw exception")
         void givenTooManyMethodInvocationExceptionThenThrowException() {
+            MethodInvocationException e8 = getMethodInvocationException();
+            MethodInvocationException e9 = new MethodInvocationException(e8);
+            MethodInvocationException e10 = new MethodInvocationException(e9);
+            IllegalStateException exception =
+                    catchThrowableOfType(IllegalStateException.class, () -> ExceptionUtils.getActualCause(e10));
+            assertThat(exception).isNotNull().hasMessage("Too many duplicated throwable.");
+        }
+
+        private static MethodInvocationException getMethodInvocationException() {
             MethodInvocationException e1 = new MethodInvocationException("e1");
             MethodInvocationException e2 = new MethodInvocationException(e1);
             MethodInvocationException e3 = new MethodInvocationException(e2);
@@ -75,12 +84,7 @@ public class ExceptionUtilsTest {
             MethodInvocationException e5 = new MethodInvocationException(e4);
             MethodInvocationException e6 = new MethodInvocationException(e5);
             MethodInvocationException e7 = new MethodInvocationException(e6);
-            MethodInvocationException e8 = new MethodInvocationException(e7);
-            MethodInvocationException e9 = new MethodInvocationException(e8);
-            MethodInvocationException e10 = new MethodInvocationException(e9);
-            IllegalStateException exception = catchThrowableOfType(() -> ExceptionUtils.getActualCause(e10),
-                    IllegalStateException.class);
-            assertThat(exception).isNotNull().hasMessage("Too many duplicated throwable.");
+            return new MethodInvocationException(e7);
         }
 
         @Test

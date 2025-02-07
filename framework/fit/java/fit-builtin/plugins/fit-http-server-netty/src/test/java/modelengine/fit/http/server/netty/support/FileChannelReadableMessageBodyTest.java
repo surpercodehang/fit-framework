@@ -73,7 +73,7 @@ public class FileChannelReadableMessageBodyTest {
         try (MockedStatic<Files> mocked = mockStatic(Files.class)) {
             mocked.when(() -> Files.createTempFile(anyString(), anyString())).thenThrow(new IOException());
             IllegalStateException cause =
-                    catchThrowableOfType(FileChannelReadableMessageBody::new, IllegalStateException.class);
+                    catchThrowableOfType(IllegalStateException.class, FileChannelReadableMessageBody::new);
             assertThat(cause).hasMessage("Failed to create tmp file by channel.");
         }
     }
@@ -202,10 +202,8 @@ public class FileChannelReadableMessageBodyTest {
                 @DisplayName("当 off 小于 0 时，抛出 IndexOutOfBoundsException")
                 void givenOffLessThan0ThenThrowIndexOutOfBoundsException() {
                     byte[] bytes = new byte[1];
-                    IndexOutOfBoundsException exception =
-                            catchThrowableOfType(() -> FileChannelReadableMessageBodyTest.this.messageBody.read(bytes,
-                                    -1,
-                                    1), IndexOutOfBoundsException.class);
+                    IndexOutOfBoundsException exception = catchThrowableOfType(IndexOutOfBoundsException.class,
+                            () -> FileChannelReadableMessageBodyTest.this.messageBody.read(bytes, -1, 1));
                     assertThat(exception).isNotNull().hasMessage("The off in read cannot be negative. [off=-1]");
                 }
 
@@ -213,10 +211,8 @@ public class FileChannelReadableMessageBodyTest {
                 @DisplayName("当 len 小于 0 时，抛出 IndexOutOfBoundsException")
                 void givenLenLessThan0ThenThrowIndexOutOfBoundsException() {
                     byte[] bytes = new byte[1];
-                    IndexOutOfBoundsException exception =
-                            catchThrowableOfType(() -> FileChannelReadableMessageBodyTest.this.messageBody.read(bytes,
-                                    0,
-                                    -1), IndexOutOfBoundsException.class);
+                    IndexOutOfBoundsException exception = catchThrowableOfType(IndexOutOfBoundsException.class,
+                            () -> FileChannelReadableMessageBodyTest.this.messageBody.read(bytes, 0, -1));
                     assertThat(exception).isNotNull().hasMessage("The len in read cannot be negative. [len=-1]");
                 }
 
@@ -224,10 +220,8 @@ public class FileChannelReadableMessageBodyTest {
                 @DisplayName("当 off + len 超过字节数组大小时，抛出 IndexOutOfBoundsException")
                 void givenOffLenSumGreaterThanBytesSizeThenThrowIndexOutOfBoundsException() {
                     byte[] bytes = new byte[1];
-                    IndexOutOfBoundsException exception =
-                            catchThrowableOfType(() -> FileChannelReadableMessageBodyTest.this.messageBody.read(bytes,
-                                    1,
-                                    1), IndexOutOfBoundsException.class);
+                    IndexOutOfBoundsException exception = catchThrowableOfType(IndexOutOfBoundsException.class,
+                            () -> FileChannelReadableMessageBodyTest.this.messageBody.read(bytes, 1, 1));
                     assertThat(exception).isNotNull()
                             .hasMessage("The (off + len) in read cannot be greater than bytes.length. "
                                     + "[off=1, len=1, bytesLength=1]");
@@ -297,7 +291,7 @@ public class FileChannelReadableMessageBodyTest {
                 @Test
                 @DisplayName("读取单个字节数据，抛出异常")
                 void shouldThrowExceptionWhenReadByte() {
-                    IOException exception = catchThrowableOfType(() -> this.getMessageBody().read(), IOException.class);
+                    IOException exception = catchThrowableOfType(IOException.class, () -> this.getMessageBody().read());
                     assertThat(exception).hasMessage("The netty readable message body has already been closed.");
                 }
 
@@ -305,7 +299,7 @@ public class FileChannelReadableMessageBodyTest {
                 @DisplayName("读取字节数组，抛出异常")
                 void shouldThrowExceptionWhenReadBytes() {
                     IOException exception =
-                            catchThrowableOfType(() -> this.getMessageBody().read(new byte[1]), IOException.class);
+                            catchThrowableOfType(IOException.class, () -> this.getMessageBody().read(new byte[1]));
                     assertThat(exception).hasMessage("The netty readable message body has already been closed.");
                 }
 

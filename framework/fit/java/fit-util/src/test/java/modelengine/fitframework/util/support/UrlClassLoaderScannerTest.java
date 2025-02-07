@@ -134,6 +134,7 @@ public class UrlClassLoaderScannerTest {
                 verify(consumer, times(0)).accept(any());
             }
 
+            @SuppressWarnings("resource")
             @Test
             @DisplayName("当扫描的文件夹在遍历时发生输入输出异常时，会抛出 IllegalStateException")
             void givenWalkDirectoryWithExceptionThenThrowException() throws IOException {
@@ -147,10 +148,10 @@ public class UrlClassLoaderScannerTest {
                 UrlClassLoaderScanner actual = new UrlClassLoaderScanner(classLoader, null);
                 try (MockedStatic<Files> mocked = mockStatic(Files.class)) {
                     mocked.when(() -> Files.walk(any(), anyInt())).thenThrow(new IOException());
-                    IllegalStateException exception = catchThrowableOfType(actual::scan, IllegalStateException.class);
+                    IllegalStateException exception = catchThrowableOfType(IllegalStateException.class, actual::scan);
                     assertThat(exception).isNotNull()
                             .hasMessage("Failed to scan class directory. [directory=" + FileUtils.path(directory) + "]")
-                            .getCause()
+                            .cause()
                             .isInstanceOf(IOException.class);
                 }
             }
@@ -176,6 +177,7 @@ public class UrlClassLoaderScannerTest {
                 verify(consumer, times(0)).accept(any());
             }
 
+            @SuppressWarnings("resource")
             @Test
             @DisplayName("当扫描时发生输入输出异常时，会抛出 IllegalStateException")
             void givenScanWithIOExceptionThenThrowException() throws IOException {
@@ -190,10 +192,10 @@ public class UrlClassLoaderScannerTest {
                     mock.when(() -> UrlUtils.toJarFile(any())).thenReturn(jar);
                     mock.when(() -> UrlUtils.isJar(any())).thenCallRealMethod();
                     mock.when(() -> UrlUtils.exists(any())).thenCallRealMethod();
-                    IllegalStateException exception = catchThrowableOfType(actual::scan, IllegalStateException.class);
+                    IllegalStateException exception = catchThrowableOfType(IllegalStateException.class, actual::scan);
                     assertThat(exception).isNotNull()
                             .hasMessage("Failed to load JAR file. [url=" + urls[0].toExternalForm() + "]")
-                            .getCause()
+                            .cause()
                             .isInstanceOf(IOException.class);
                 }
             }
@@ -216,10 +218,10 @@ public class UrlClassLoaderScannerTest {
                     mock.when(() -> UrlUtils.toJarFile(any())).thenReturn(jar);
                     mock.when(() -> UrlUtils.isJar(any())).thenReturn(true);
                     mock.when(() -> UrlUtils.exists(any())).thenReturn(true);
-                    IllegalStateException exception = catchThrowableOfType(actual::scan, IllegalStateException.class);
+                    IllegalStateException exception = catchThrowableOfType(IllegalStateException.class, actual::scan);
                     assertThat(exception).isNotNull()
                             .hasMessage("Failed to parse class path. [classPath=://fit.lab?q=%]")
-                            .getCause()
+                            .cause()
                             .isInstanceOf(IOException.class);
                 }
             }

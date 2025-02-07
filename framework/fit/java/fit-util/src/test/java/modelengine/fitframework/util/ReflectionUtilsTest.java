@@ -49,9 +49,8 @@ public class ReflectionUtilsTest {
         @Test
         @DisplayName("当 class 类型为 null，入参类型为空时，抛出参数异常")
         void givenNullThenThrowException() {
-            IllegalArgumentException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.getDeclaredConstructor(null),
-                            IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> ReflectionUtils.getDeclaredConstructor(null));
             assertThat(exception).hasMessage("The class to detect constructor cannot be null.");
         }
 
@@ -69,10 +68,9 @@ public class ReflectionUtilsTest {
         @Test
         @DisplayName("当 class 类型为 MockClass，入参类型与实际入参类型不匹配时，抛出方法未找到异常")
         void givenMockClassClassAndIntegerParamTypeThenThrowException() {
-            MethodNotFoundException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.getDeclaredConstructor(MockClass.class, Integer.class),
-                            MethodNotFoundException.class);
-            assertThat(exception).isNotNull().getCause().isInstanceOf(NoSuchMethodException.class);
+            MethodNotFoundException exception = catchThrowableOfType(MethodNotFoundException.class,
+                    () -> ReflectionUtils.getDeclaredConstructor(MockClass.class, Integer.class));
+            assertThat(exception).isNotNull().cause().isInstanceOf(NoSuchMethodException.class);
         }
     }
 
@@ -135,9 +133,8 @@ public class ReflectionUtilsTest {
         @Test
         @DisplayName("当 class 类型为 null 时，抛出参数异常")
         void givenNullThenThrowException() {
-            IllegalArgumentException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.getDeclaredConstructors(null),
-                            IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> ReflectionUtils.getDeclaredConstructors(null));
             assertThat(exception).hasMessage("The class to detect constructors cannot be null.");
         }
 
@@ -159,7 +156,7 @@ public class ReflectionUtilsTest {
         @DisplayName("当 class 类型为 null 时，抛出参数异常")
         void givenNullThenThrowException() {
             IllegalArgumentException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.getDeclaredFields(null), IllegalArgumentException.class);
+                    catchThrowableOfType(IllegalArgumentException.class, () -> ReflectionUtils.getDeclaredFields(null));
             assertThat(exception).hasMessage("The class to detect fields cannot be null.");
         }
 
@@ -181,17 +178,16 @@ public class ReflectionUtilsTest {
         @Test
         @DisplayName("当 class 类型为 null，方法名为空字符串，入参为空数组时，抛出参数异常")
         void givenClassNullThenThrowException() {
-            IllegalArgumentException exception = catchThrowableOfType(() -> ReflectionUtils.getDeclaredMethod(null, ""),
-                    IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> ReflectionUtils.getDeclaredMethod(null, ""));
             assertThat(exception).hasMessage("The class to detect method cannot be null.");
         }
 
         @Test
         @DisplayName("当 class 类型为 MockClass，方法名为 null，入参为空数组时，抛出参数异常")
         void givenMockClassAndMethodNullThenThrowException() {
-            IllegalArgumentException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.getDeclaredMethod(MockClass.class, null),
-                            IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> ReflectionUtils.getDeclaredMethod(MockClass.class, null));
             assertThat(exception).hasMessage("The method name cannot be null.");
         }
 
@@ -207,10 +203,9 @@ public class ReflectionUtilsTest {
         @Test
         @DisplayName("当 class 类型为 MockClass，方法名为不存在的方法名称，入参为空数组时，返抛出方法未找到异常")
         void givenMockClassAndNotExistMethodThenThrowException() {
-            MethodNotFoundException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.getDeclaredMethod(MockClass.class, "notExist"),
-                            MethodNotFoundException.class);
-            assertThat(exception).isNotNull().getCause().isInstanceOf(NoSuchMethodException.class);
+            MethodNotFoundException exception = catchThrowableOfType(MethodNotFoundException.class,
+                    () -> ReflectionUtils.getDeclaredMethod(MockClass.class, "notExist"));
+            assertThat(exception).isNotNull().cause().isInstanceOf(NoSuchMethodException.class);
         }
     }
 
@@ -223,8 +218,8 @@ public class ReflectionUtilsTest {
         @Test
         @DisplayName("当 class 类型为 null 时，抛出参数异常")
         void givenClassNullThenThrowException() {
-            IllegalArgumentException exception = catchThrowableOfType(() -> ReflectionUtils.getDeclaredMethods(null),
-                    IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> ReflectionUtils.getDeclaredMethods(null));
             assertThat(exception).hasMessage("The class to detect methods cannot be null.");
         }
 
@@ -248,9 +243,8 @@ public class ReflectionUtilsTest {
             @Test
             @DisplayName("当 owner 类型和 field 类型都为 null时，抛出参数异常")
             void givenFieldNullThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.getField(null, ObjectUtils.<Field>cast(null)),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> ReflectionUtils.getField(null, ObjectUtils.<Field>cast(null)));
                 assertThat(exception).hasMessage("The field to get value cannot be null.");
             }
 
@@ -259,7 +253,7 @@ public class ReflectionUtilsTest {
             void givenOwnerNullAndFieldNotStaticThenThrowException() throws NoSuchFieldException {
                 Field f3 = MockClass.class.getDeclaredField("f3");
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.getField(null, f3), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> ReflectionUtils.getField(null, f3));
                 assertThat(exception).hasMessage(
                         "The specified owner is null and the field is an instance field. [field=f3]");
             }
@@ -284,10 +278,9 @@ public class ReflectionUtilsTest {
             @DisplayName("当 owner 类型为 MockClass 对象，字段为该类不存在字段时，抛出参数异常")
             void givenDefaultMockClassAndOtherClassFieldThenThrowException() throws NoSuchFieldException {
                 Field field = AnotherClass.class.getDeclaredField("f3");
-                FieldVisitException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.getField(new MockClass(), field),
-                                FieldVisitException.class);
-                assertThat(exception).isNotNull().getCause().isInstanceOf(IllegalArgumentException.class);
+                FieldVisitException exception = catchThrowableOfType(FieldVisitException.class,
+                        () -> ReflectionUtils.getField(new MockClass(), field));
+                assertThat(exception).isNotNull().cause().isInstanceOf(IllegalArgumentException.class);
             }
         }
 
@@ -300,9 +293,8 @@ public class ReflectionUtilsTest {
             @Test
             @DisplayName("当 owner 类型和 field 类型都为 null时，抛出参数异常")
             void givenFieldNameNullThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.getField(null, ObjectUtils.<String>cast(null)),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> ReflectionUtils.getField(null, ObjectUtils.<String>cast(null)));
                 assertThat(exception).hasMessage("The name of field to get value cannot be blank.");
             }
 
@@ -316,19 +308,17 @@ public class ReflectionUtilsTest {
             @Test
             @DisplayName("当 owner 类型为 MockClass 对象，字段为该类不存在字段时，抛出参数异常")
             void givenDefaultMockClassAndFieldNotExistThenThrowException() {
-                FieldVisitException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.getField(new MockClass(), "notExist"),
-                                FieldVisitException.class);
-                assertThat(exception).isNotNull().getCause().isInstanceOf(NoSuchFieldException.class);
+                FieldVisitException exception = catchThrowableOfType(FieldVisitException.class,
+                        () -> ReflectionUtils.getField(new MockClass(), "notExist"));
+                assertThat(exception).isNotNull().cause().isInstanceOf(NoSuchFieldException.class);
             }
 
             @Test
             @DisplayName("当 owner 类型为 MockClass，字段为非静态字段时，抛出参数异常")
             void givenOwnerIsClassThenThrowException() {
-                FieldVisitException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.getField(MockClass.class, "f3"),
-                                FieldVisitException.class);
-                assertThat(exception).isNotNull().getCause().isInstanceOf(IllegalArgumentException.class);
+                FieldVisitException exception = catchThrowableOfType(FieldVisitException.class,
+                        () -> ReflectionUtils.getField(MockClass.class, "f3"));
+                assertThat(exception).isNotNull().cause().isInstanceOf(IllegalArgumentException.class);
             }
         }
     }
@@ -491,7 +481,7 @@ public class ReflectionUtilsTest {
         @DisplayName("当指定方法为 null时，抛出参数异常")
         void givenNullThenThrowException() {
             IllegalArgumentException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.getParameters(null), IllegalArgumentException.class);
+                    catchThrowableOfType(IllegalArgumentException.class, () -> ReflectionUtils.getParameters(null));
             assertThat(exception).hasMessage("The method to get parameters cannot be null.");
         }
 
@@ -537,8 +527,8 @@ public class ReflectionUtilsTest {
         @Test
         @DisplayName("当 class 类型为 null时，抛出参数异常")
         void givenNullThenThrowException() {
-            IllegalArgumentException exception = catchThrowableOfType(() -> ReflectionUtils.ignorePrimitiveClass(null),
-                    IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> ReflectionUtils.ignorePrimitiveClass(null));
             assertThat(exception).hasMessage("Source class cannot be null.");
         }
 
@@ -563,9 +553,8 @@ public class ReflectionUtilsTest {
         @Test
         @DisplayName("当 class 类型为 null时，抛出参数异常")
         void givenNullThenThrowException() {
-            IllegalArgumentException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.getPrimitiveDefaultValue(null),
-                            IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> ReflectionUtils.getPrimitiveDefaultValue(null));
             assertThat(exception).hasMessage("Source class cannot be null.");
         }
 
@@ -591,7 +580,7 @@ public class ReflectionUtilsTest {
         @DisplayName("当 class 类型为 null 时，抛出参数异常")
         void givenNullThenThrowException() {
             IllegalArgumentException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.isPrimitive(null), IllegalArgumentException.class);
+                    catchThrowableOfType(IllegalArgumentException.class, () -> ReflectionUtils.isPrimitive(null));
             assertThat(exception).hasMessage("Source class cannot be null.");
         }
 
@@ -623,7 +612,7 @@ public class ReflectionUtilsTest {
             @DisplayName("当 class 类型为 null 时，抛出参数异常")
             void givenNullThenThrowException() {
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.instantiate(null), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> ReflectionUtils.instantiate(null));
                 assertThat(exception).hasMessage("The class to instantiate new object cannot be null.");
             }
 
@@ -639,10 +628,9 @@ public class ReflectionUtilsTest {
             @Test
             @DisplayName("当 class 类型为没有无参构造的类型时，抛出异常")
             void givenNoDefaultConstructorErrorThenThrowException() {
-                ObjectInstantiationException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.instantiate(MoDefaultConstructorError.class),
-                                ObjectInstantiationException.class);
-                assertThat(exception).isNotNull().getCause().isInstanceOf(NoSuchMethodException.class);
+                ObjectInstantiationException exception = catchThrowableOfType(ObjectInstantiationException.class,
+                        () -> ReflectionUtils.instantiate(MoDefaultConstructorError.class));
+                assertThat(exception).isNotNull().cause().isInstanceOf(NoSuchMethodException.class);
             }
         }
 
@@ -655,9 +643,8 @@ public class ReflectionUtilsTest {
             @Test
             @DisplayName("当构造方法为 null，构造方法参数为空数组时，抛出参数异常")
             void givenConstructorNullThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.instantiate((Constructor<?>) null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> ReflectionUtils.instantiate((Constructor<?>) null));
                 assertThat(exception).hasMessage("The constructor to instantiate new object cannot be null.");
             }
 
@@ -676,10 +663,9 @@ public class ReflectionUtilsTest {
             void givenDefaultConstructorErrorThenThrowException() throws NoSuchMethodException {
                 Constructor<DefaultConstructorError> constructor =
                         DefaultConstructorError.class.getDeclaredConstructor();
-                ObjectInstantiationException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.instantiate(constructor),
-                                ObjectInstantiationException.class);
-                assertThat(exception).isNotNull().getCause().isInstanceOf(IllegalStateException.class);
+                ObjectInstantiationException exception = catchThrowableOfType(ObjectInstantiationException.class,
+                        () -> ReflectionUtils.instantiate(constructor));
+                assertThat(exception).isNotNull().cause().isInstanceOf(IllegalStateException.class);
             }
 
             @Test
@@ -687,10 +673,9 @@ public class ReflectionUtilsTest {
             void givenNoDefaultConstructorErrorThenThrowException() throws NoSuchMethodException {
                 Constructor<MoDefaultConstructorError> constructor =
                         MoDefaultConstructorError.class.getDeclaredConstructor(int.class);
-                ObjectInstantiationException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.instantiate(constructor),
-                                ObjectInstantiationException.class);
-                assertThat(exception).isNotNull().getCause().isInstanceOf(IllegalArgumentException.class);
+                ObjectInstantiationException exception = catchThrowableOfType(ObjectInstantiationException.class,
+                        () -> ReflectionUtils.instantiate(constructor));
+                assertThat(exception).isNotNull().cause().isInstanceOf(IllegalArgumentException.class);
             }
         }
     }
@@ -705,7 +690,7 @@ public class ReflectionUtilsTest {
         @DisplayName("当 owner 和方法都为 null 时，抛出参数异常")
         void givenMethodNullThenThrowException() {
             IllegalArgumentException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.invoke(null, null), IllegalArgumentException.class);
+                    catchThrowableOfType(IllegalArgumentException.class, () -> ReflectionUtils.invoke(null, null));
             assertThat(exception).hasMessage("The method to invoke cannot be null.");
         }
 
@@ -714,7 +699,7 @@ public class ReflectionUtilsTest {
         void givenOwnerNullAndMethodNotStaticThenThrowException() throws NoSuchMethodException {
             Method setF3 = MockClass.class.getDeclaredMethod("setF3", long.class);
             IllegalArgumentException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.invoke(null, setF3), IllegalArgumentException.class);
+                    catchThrowableOfType(IllegalArgumentException.class, () -> ReflectionUtils.invoke(null, setF3));
             assertThat(exception).hasMessage(
                     "The specified owner is null and the method is an instance method. [method=setF3]");
         }
@@ -743,10 +728,9 @@ public class ReflectionUtilsTest {
         void givenDefaultMockClassAndExceptionMethodThenThrowException() throws NoSuchMethodException {
             Method exceptionMethod = MockClass.class.getDeclaredMethod("exceptionMethod");
             MockClass mockClass = new MockClass();
-            MethodInvocationException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.invoke(mockClass, exceptionMethod),
-                            MethodInvocationException.class);
-            assertThat(exception).isNotNull().getCause().isInstanceOf(IllegalStateException.class);
+            MethodInvocationException exception = catchThrowableOfType(MethodInvocationException.class,
+                    () -> ReflectionUtils.invoke(mockClass, exceptionMethod));
+            assertThat(exception).isNotNull().cause().isInstanceOf(IllegalStateException.class);
         }
 
         @Test
@@ -754,10 +738,9 @@ public class ReflectionUtilsTest {
         void givenDefaultMockClassAndSetF3WithStringParamThenThrowException() throws NoSuchMethodException {
             Method invokeExceptionMethod = MockClass.class.getDeclaredMethod("invokeExceptionMethod");
             MockClass mockClass = new MockClass();
-            MethodInvocationException exception =
-                    catchThrowableOfType(() -> ReflectionUtils.invoke(mockClass, invokeExceptionMethod),
-                            MethodInvocationException.class);
-            assertThat(exception).isNotNull().getCause().isInstanceOf(IllegalArgumentException.class);
+            MethodInvocationException exception = catchThrowableOfType(MethodInvocationException.class,
+                    () -> ReflectionUtils.invoke(mockClass, invokeExceptionMethod));
+            assertThat(exception).isNotNull().cause().isInstanceOf(IllegalArgumentException.class);
         }
     }
 
@@ -784,11 +767,8 @@ public class ReflectionUtilsTest {
                 throws NoSuchMethodException {
             Method getString = MockClass.class.getDeclaredMethod("getString", String.class);
             MockClass mockClass = new MockClass();
-            MethodInvocationException exception = catchThrowableOfType(() -> ReflectionUtils.invokeWithReturnType(
-                    mockClass,
-                    getString,
-                    Long.class,
-                    "Hello"), MethodInvocationException.class);
+            MethodInvocationException exception = catchThrowableOfType(MethodInvocationException.class,
+                    () -> ReflectionUtils.invokeWithReturnType(mockClass, getString, Long.class, "Hello"));
             assertThat(exception).hasMessage(
                     "Return type is mismatch. [returnType=java.lang.Long, actualType=java.lang.String]");
         }
@@ -815,9 +795,8 @@ public class ReflectionUtilsTest {
             @Test
             @DisplayName("当 owner、字段、字段设置值都为 null时，抛出参数异常")
             void givenFieldNullThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.setField(null, ObjectUtils.<Field>cast(null), null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> ReflectionUtils.setField(null, ObjectUtils.<Field>cast(null), null));
                 assertThat(exception).hasMessage("The field to set value cannot be null.");
             }
 
@@ -825,9 +804,8 @@ public class ReflectionUtilsTest {
             @DisplayName("当 owner 为 null，字段不为 null，字段设置值为 null时，抛出参数异常")
             void givenOwnerNullAndFieldNotStaticThenThrowException() throws NoSuchFieldException {
                 Field f3 = MockClass.class.getDeclaredField("f3");
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.setField(null, f3, null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> ReflectionUtils.setField(null, f3, null));
                 assertThat(exception).hasMessage(
                         "The specified owner is null and the field is an instance field. [field=f3]");
             }
@@ -853,10 +831,9 @@ public class ReflectionUtilsTest {
             @DisplayName("当 owner 为 MockClass 对象，字段为非静态，字段设置值类型不匹配时，抛出访问字段失败异常")
             void givenDefaultMockClassAndOtherClassFieldThenThrowException() throws NoSuchFieldException {
                 Field field = AnotherClass.class.getDeclaredField("f3");
-                FieldVisitException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.setField(new MockClass(), field, "Hello"),
-                                FieldVisitException.class);
-                assertThat(exception).isNotNull().getCause().isInstanceOf(IllegalArgumentException.class);
+                FieldVisitException exception = catchThrowableOfType(FieldVisitException.class,
+                        () -> ReflectionUtils.setField(new MockClass(), field, "Hello"));
+                assertThat(exception).isNotNull().cause().isInstanceOf(IllegalArgumentException.class);
             }
         }
 
@@ -869,9 +846,8 @@ public class ReflectionUtilsTest {
             @Test
             @DisplayName("当 owner、字段名称、字段设置值都为 null时，抛出参数异常")
             void givenFieldNameNullThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.setField(null, ObjectUtils.<String>cast(null), null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> ReflectionUtils.setField(null, ObjectUtils.<String>cast(null), null));
                 assertThat(exception).hasMessage("The name of field to set value cannot be blank.");
             }
 
@@ -886,10 +862,9 @@ public class ReflectionUtilsTest {
             @Test
             @DisplayName("当 owner 为 MockClass 对象，字段名称为不存在名称，字段设置值类型匹配时，抛出访问字段失败异常")
             void givenDefaultMockClassAndFieldNotExistThenThrowException() {
-                FieldVisitException exception =
-                        catchThrowableOfType(() -> ReflectionUtils.setField(new MockClass(), "notExist", 1),
-                                FieldVisitException.class);
-                assertThat(exception).isNotNull().getCause().isInstanceOf(NoSuchFieldException.class);
+                FieldVisitException exception = catchThrowableOfType(FieldVisitException.class,
+                        () -> ReflectionUtils.setField(new MockClass(), "notExist", 1));
+                assertThat(exception).isNotNull().cause().isInstanceOf(NoSuchFieldException.class);
             }
         }
     }

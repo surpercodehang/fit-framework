@@ -28,6 +28,7 @@ import java.util.Optional;
  */
 @DisplayName("测试 AspectAroundInterceptor")
 public class AspectAroundInterceptorTest {
+    @SuppressWarnings("resource")
     @Test
     @DisplayName("当 @Around 定义的切面没有参数时，生成方法拦截器失败")
     void givenAroundMethodNoParametersThenFailToGenerateMethodInterceptor() throws NoSuchMethodException {
@@ -35,13 +36,13 @@ public class AspectAroundInterceptorTest {
         BeanFactory aspectFactory = mock(BeanFactory.class);
         Object aspect = new AspectAroundInterceptorTest();
         when(aspectFactory.get()).thenReturn(aspect);
-        IllegalArgumentException exception =
-                catchThrowableOfType(() -> new AspectAroundInterceptor(aspectFactory, method),
-                        IllegalArgumentException.class);
+        IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                () -> new AspectAroundInterceptor(aspectFactory, method));
         assertThat(exception).hasMessage(
                 "@Around interceptor in Aspect must have at least 1 parameter: ProceedingJoinPoint.");
     }
 
+    @SuppressWarnings("resource")
     @Test
     @DisplayName("当 @Around 定义的切面缺少 ProceedingJoinPoint 参数时，生成方法拦截器失败")
     void givenAroundMethodNoProceedingJoinPointThenFailToGenerateMethodInterceptor() throws NoSuchMethodException {
@@ -50,9 +51,8 @@ public class AspectAroundInterceptorTest {
         BeanFactory aspectFactory = mock(BeanFactory.class);
         Object aspect = new AspectAroundInterceptorTest();
         when(aspectFactory.get()).thenReturn(aspect);
-        IllegalArgumentException exception =
-                catchThrowableOfType(() -> new AspectAroundInterceptor(aspectFactory, method),
-                        IllegalArgumentException.class);
+        IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                () -> new AspectAroundInterceptor(aspectFactory, method));
         assertThat(exception).hasMessage(
                 "The 1st parameter of @Around interceptor in Aspect must be ProceedingJoinPoint.");
     }

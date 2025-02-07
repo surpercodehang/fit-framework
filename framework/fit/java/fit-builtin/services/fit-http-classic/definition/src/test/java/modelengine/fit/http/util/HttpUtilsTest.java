@@ -47,7 +47,7 @@ public class HttpUtilsTest {
     void givenIncorrectUrlWhenInvokeToUrlThenThrowException() {
         String incorrectUrl = "errorUrl";
         IllegalStateException illegalStateException =
-                catchThrowableOfType(() -> HttpUtils.toUrl(incorrectUrl), IllegalStateException.class);
+                catchThrowableOfType(IllegalStateException.class, () -> HttpUtils.toUrl(incorrectUrl));
         assertThat(illegalStateException).hasMessage("The request URL is incorrect.");
     }
 
@@ -56,7 +56,7 @@ public class HttpUtilsTest {
     void givenIncorrectUrlWhenInvokeToUriThenThrowException() throws MalformedURLException {
         URL url = new URL("jar", null, -1, "");
         IllegalStateException illegalStateException =
-                catchThrowableOfType(() -> HttpUtils.toUri(url), IllegalStateException.class);
+                catchThrowableOfType(IllegalStateException.class, () -> HttpUtils.toUri(url));
         assertThat(illegalStateException).hasMessage("The request URL is incorrect.");
     }
 }

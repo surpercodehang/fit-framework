@@ -18,6 +18,7 @@ import modelengine.fit.serialization.test.person.PersonTransient;
 import modelengine.fitframework.serialization.ObjectSerializer;
 import modelengine.fitframework.util.MapBuilder;
 
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -144,7 +145,9 @@ public class JacksonObjectSerializerTest {
             Object actual = JacksonObjectSerializerTest.this.jsonSerializer.deserialize(in,
                     JacksonObjectSerializerTest.this.charset,
                     Object.class);
-            assertThat(actual).isInstanceOf(List.class).asList().containsSequence(1, 2);
+            assertThat(actual).isInstanceOf(List.class)
+                    .asInstanceOf(InstanceOfAssertFactories.LIST)
+                    .containsSequence(1, 2);
         }
 
         @Test

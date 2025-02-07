@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
+ *  Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
  *  This file is a part of the ModelEngine Project.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -8,9 +8,6 @@ package modelengine.fitframework.parameterization;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowableOfType;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import modelengine.fitframework.util.IoUtils;
 import modelengine.fitframework.util.MapBuilder;
@@ -19,7 +16,6 @@ import modelengine.fitframework.util.StringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -73,7 +69,7 @@ public class ParameterizedStringResolverTest {
     private static ParameterizedString getParameterizedString(String format) {
         ParameterizedStringResolver resolver = ParameterizedStringResolver.create(PREFIX, SUFFIX, ESCAPE_CHARACTER);
         ParameterizedString parameterizedString = resolver.resolve(format);
-        assertNotNull(parameterizedString);
+        assertThat(parameterizedString).isNotNull();
         return parameterizedString;
     }
 
@@ -83,19 +79,18 @@ public class ParameterizedStringResolverTest {
     @Test
     public void should_return_result_when_resolved() {
         ParameterizedString result = getParameterizedString(SOURCE_STRING);
-        assertNotNull(result);
-        assertEquals(result.getOriginalString(), SOURCE_STRING);
+        assertThat(result).isNotNull();
+        assertThat(result.getOriginalString()).isEqualTo(SOURCE_STRING);
 
         List<ResolvedParameter> variables = result.getParameters();
-        assertNotNull(variables);
-        assertEquals(variables.size(), 1);
+        assertThat(variables).isNotNull().hasSize(1);
         ResolvedParameter variable = variables.get(0);
-        assertNotNull(variable);
-        assertEquals(variable.getName(), VARIABLE_NAME);
-        assertEquals(variable.getPosition(), VARIABLE_POSITION);
+        assertThat(variable).isNotNull();
+        assertThat(variable.getName()).isEqualTo(VARIABLE_NAME);
+        assertThat(variable.getPosition()).isEqualTo(VARIABLE_POSITION);
 
         String formattedString = result.format(VARIABLES);
-        assertEquals(formattedString, FORMATTED_STRING);
+        assertThat(formattedString).isEqualTo(FORMATTED_STRING);
     }
 
     /**
@@ -107,10 +102,9 @@ public class ParameterizedStringResolverTest {
         final String originalString = "Parameterized string. //";
         final String escapedString = "Parameterized string. /";
         ParameterizedString parameterizedString = getParameterizedString(originalString);
-        assertNotNull(parameterizedString);
+        assertThat(parameterizedString).isNotNull();
         String resolvedString = parameterizedString.format(null);
-        assertNotNull(resolvedString);
-        assertEquals(resolvedString, escapedString);
+        assertThat(resolvedString).isNotNull().isEqualTo(escapedString);
     }
 
     /**
@@ -125,7 +119,7 @@ public class ParameterizedStringResolverTest {
         final String resolvedString = "MyStartParameterMyEndParameter";
         ParameterizedString parameterizedString = getParameterizedString(originalString);
         String result = parameterizedString.format(parameters);
-        assertEquals(result, resolvedString);
+        assertThat(result).isEqualTo(resolvedString);
     }
 
     /**
@@ -139,8 +133,7 @@ public class ParameterizedStringResolverTest {
         final String resolvedString = "parameter-in";
         ParameterizedString parameterizedString = getParameterizedString(originalString);
         String result = parameterizedString.format(parameters);
-        assertNotNull(result);
-        assertEquals(result, resolvedString);
+        assertThat(result).isNotNull().isEqualTo(resolvedString);
     }
 
     /**
@@ -149,8 +142,9 @@ public class ParameterizedStringResolverTest {
      */
     @Test
     public void should_throws_when_prefix_is_null() {
-        Executable action = () -> ParameterizedStringResolver.create(null, SUFFIX, ESCAPE_CHARACTER);
-        assertThrows(IllegalArgumentException.class, action);
+        IllegalArgumentException cause = catchThrowableOfType(IllegalArgumentException.class,
+                () -> ParameterizedStringResolver.create(null, SUFFIX, ESCAPE_CHARACTER));
+        assertThat(cause).isNotNull();
     }
 
     /**
@@ -159,8 +153,9 @@ public class ParameterizedStringResolverTest {
      */
     @Test
     public void should_throws_when_suffix_is_empty() {
-        Executable action = () -> ParameterizedStringResolver.create(PREFIX, StringUtils.EMPTY, ESCAPE_CHARACTER);
-        assertThrows(IllegalArgumentException.class, action);
+        IllegalArgumentException cause = catchThrowableOfType(IllegalArgumentException.class,
+                () -> ParameterizedStringResolver.create(PREFIX, StringUtils.EMPTY, ESCAPE_CHARACTER));
+        assertThat(cause).isNotNull();
     }
 
     /**
@@ -169,8 +164,9 @@ public class ParameterizedStringResolverTest {
      */
     @Test
     public void should_throws_when_prefix_contains_escape_character() {
-        Executable action = () -> ParameterizedStringResolver.create(ILLEGAL_PREFIX, SUFFIX, ESCAPE_CHARACTER);
-        assertThrows(IllegalArgumentException.class, action);
+        IllegalArgumentException cause = catchThrowableOfType(IllegalArgumentException.class,
+                () -> ParameterizedStringResolver.create(ILLEGAL_PREFIX, SUFFIX, ESCAPE_CHARACTER));
+        assertThat(cause).isNotNull();
     }
 
     /**
@@ -179,8 +175,9 @@ public class ParameterizedStringResolverTest {
      */
     @Test
     public void should_throws_when_suffix_contains_escape_character() {
-        Executable action = () -> ParameterizedStringResolver.create(PREFIX, ILLEGAL_SUFFIX, ESCAPE_CHARACTER);
-        assertThrows(IllegalArgumentException.class, action);
+        IllegalArgumentException cause = catchThrowableOfType(IllegalArgumentException.class,
+                () -> ParameterizedStringResolver.create(PREFIX, ILLEGAL_SUFFIX, ESCAPE_CHARACTER));
+        assertThat(cause).isNotNull();
     }
 
     /**
@@ -190,8 +187,9 @@ public class ParameterizedStringResolverTest {
     @Test
     public void should_throws_when_parameter_incomplete() {
         final String originalString = "Parameterized string. ${parameter";
-        Executable action = () -> getParameterizedString(originalString);
-        assertThrows(StringFormatException.class, action);
+        IllegalArgumentException cause =
+                catchThrowableOfType(StringFormatException.class, () -> getParameterizedString(originalString));
+        assertThat(cause).isNotNull();
     }
 
     /**
@@ -201,8 +199,9 @@ public class ParameterizedStringResolverTest {
     @Test
     public void should_throws_when_parameter_not_started() {
         final String originalString = "Parameterized string. parameter}";
-        Executable action = () -> getParameterizedString(originalString);
-        assertThrows(StringFormatException.class, action);
+        IllegalArgumentException cause =
+                catchThrowableOfType(StringFormatException.class, () -> getParameterizedString(originalString));
+        assertThat(cause).isNotNull();
     }
 
     /**
@@ -212,8 +211,9 @@ public class ParameterizedStringResolverTest {
     @Test
     public void should_throws_when_end_with_escape_character() {
         final String originalString = "Parameterized string. parameter/";
-        Executable action = () -> getParameterizedString(originalString);
-        assertThrows(StringFormatException.class, action);
+        IllegalArgumentException cause =
+                catchThrowableOfType(StringFormatException.class, () -> getParameterizedString(originalString));
+        assertThat(cause).isNotNull();
     }
 
     /**
@@ -224,8 +224,9 @@ public class ParameterizedStringResolverTest {
     public void should_throws_when_required_parameter_not_supplied() {
         final String originalString = "${required-parameter}";
         ParameterizedString parameterizedString = getParameterizedString(originalString);
-        Executable action = () -> parameterizedString.format(null);
-        assertThrows(StringFormatException.class, action);
+        IllegalArgumentException cause =
+                catchThrowableOfType(StringFormatException.class, () -> parameterizedString.format(null));
+        assertThat(cause).isNotNull();
     }
 
     /**
@@ -235,8 +236,9 @@ public class ParameterizedStringResolverTest {
     @Test
     public void should_throws_when_parameter_contained_recursively() {
         final String originalString = "${parameter${recursive-parameter}}";
-        Executable action = () -> getParameterizedString(originalString);
-        assertThrows(StringFormatException.class, action);
+        IllegalArgumentException cause =
+                catchThrowableOfType(StringFormatException.class, () -> getParameterizedString(originalString));
+        assertThat(cause).isNotNull();
     }
 
     /**
@@ -253,8 +255,8 @@ public class ParameterizedStringResolverTest {
         parameterizedString = parameterizedString.replace("/", "//");
         ParameterizedString format = getParameterizedString(parameterizedString);
         String result = format.format(params);
-        assertNotNull(result);
-        assertEquals(result, IoUtils.content(ParameterizedStringResolverTest.class, "/ParameterizedStringResult.xml"));
+        assertThat(result).isNotNull()
+                .isEqualTo(IoUtils.content(ParameterizedStringResolverTest.class, "/ParameterizedStringResult.xml"));
     }
 
     @Nested
@@ -267,9 +269,8 @@ public class ParameterizedStringResolverTest {
             @DisplayName("当参数中不包含格式化字符串所需要的变量时，抛出 StringFormatException")
             void givenArgsNotContainsRequiredVariableThenThrowStringFormatException() {
                 ParameterizedString format = getParameterizedString("${required}");
-                StringFormatException exception =
-                        catchThrowableOfType(() -> format.format(MapBuilder.get().put("someOther", "value").build()),
-                                StringFormatException.class);
+                StringFormatException exception = catchThrowableOfType(StringFormatException.class,
+                        () -> format.format(MapBuilder.get().put("someOther", "value").build()));
                 assertThat(exception).isNotNull().hasMessage("Parameter 'required' required but not supplied.");
             }
         }
@@ -294,14 +295,24 @@ public class ParameterizedStringResolverTest {
     void shouldOkWhenSpaceHolderWithBrackets() {
         ParameterizedStringResolver resolver =
                 ParameterizedStringResolver.create(PREFIX, SUFFIX, EMPTY_ESCAPE_CHARACTER, false);
-        String input = "a:\n" + "  c: '{\"2\" : \"3\"}'\n" + "  d: '${hello} : ${bye} : {ok}'\n" + "  n: ${hello}\n"
-                + "  x: '{\"name\":\"bob\"}'\n" + "  y: '{\"1\" : 2, \"2\" : ${hello}}'";
+        String input = """
+                a:
+                  c: '{"2" : "3"}'
+                  d: '${hello} : ${bye} : {ok}'
+                  n: ${hello}
+                  x: '{"name":"bob"}'
+                  y: '{"1" : 2, "2" : ${hello}}'""";
         Map<String, String> params =
                 MapBuilder.<String, String>get().put("hi", "嗨").put("hello", "你好").put("bye", "再见").build();
         ParameterizedString parameterizedString = resolver.resolve(input);
         String actual = parameterizedString.format(params);
-        String except = "a:\n" + "  c: '{\"2\" : \"3\"}'\n" + "  d: '你好 : 再见 : {ok}'\n" + "  n: 你好\n"
-                + "  x: '{\"name\":\"bob\"}'\n" + "  y: '{\"1\" : 2, \"2\" : 你好}'";
+        String except = """
+                a:
+                  c: '{"2" : "3"}'
+                  d: '你好 : 再见 : {ok}'
+                  n: 你好
+                  x: '{"name":"bob"}'
+                  y: '{"1" : 2, "2" : 你好}'""";
         assertThat(actual).isEqualTo(except);
     }
 }

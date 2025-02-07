@@ -319,9 +319,8 @@ public class ValueConverterTest {
                 @Test
                 @DisplayName("Given targetClass is long[].class, then throw exception")
                 void givenTargetClassIsPrimitiveLongArrayThenThrowException() {
-                    ClassCastException exception =
-                            catchThrowableOfType(() -> ValueConverter.convert(StringUtils.EMPTY, long[].class),
-                                    ClassCastException.class);
+                    ClassCastException exception = catchThrowableOfType(ClassCastException.class,
+                            () -> ValueConverter.convert(StringUtils.EMPTY, long[].class));
                     assertThat(exception).hasMessage(
                             "Not supported class to resolve configuration. [targetClass=long[]]");
                 }
@@ -329,9 +328,8 @@ public class ValueConverterTest {
                 @Test
                 @DisplayName("Given targetClass is Object.class, then throw exception")
                 void givenTargetClassIsObjectThenThrowException() {
-                    ClassCastException exception =
-                            catchThrowableOfType(() -> ValueConverter.convert(StringUtils.EMPTY, Object.class),
-                                    ClassCastException.class);
+                    ClassCastException exception = catchThrowableOfType(ClassCastException.class,
+                            () -> ValueConverter.convert(StringUtils.EMPTY, Object.class));
                     assertThat(exception).hasMessage(
                             "Not supported class to resolve configuration. [targetClass=Object]");
                 }

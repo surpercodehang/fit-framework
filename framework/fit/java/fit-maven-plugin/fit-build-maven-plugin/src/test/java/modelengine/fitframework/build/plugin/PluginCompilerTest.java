@@ -67,8 +67,8 @@ public class PluginCompilerTest {
         when(artifact.getGroupId()).thenReturn("test.plugin");
         when(artifact.getArtifactId()).thenReturn("test-plugin");
         when(this.mavenProject.getArtifacts()).thenReturn(Collections.singleton(artifact));
-        MojoExecutionException cause = catchThrowableOfType(() -> this.compiler.output(null, directory.getPath()),
-                MojoExecutionException.class);
+        MojoExecutionException cause = catchThrowableOfType(MojoExecutionException.class,
+                () -> this.compiler.output(null, directory.getPath()));
         assertThat(cause).hasMessage(
                 "Plugin cannot depend on another plugin. [groupId=test.plugin, artifactId=test-plugin]");
     }

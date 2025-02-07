@@ -17,7 +17,7 @@
         <fit.version>3.5.0-SNAPSHOT</fit.version>
 
         <!-- Test framework versions -->
-        <assertj.version>3.22.0</assertj.version>
+        <assertj.version>3.27.3</assertj.version>
         <junit5.version>5.11.4</junit5.version>
         <mockito.version>5.15.2</mockito.version>
         <h2.version>2.3.232</h2.version>

@@ -12,6 +12,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.assertj.core.api.AbstractListAssert;
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.assertj.core.api.ObjectAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -54,22 +55,31 @@ public class PropertiesUtilsTest {
                     ObjectAssert<Object> genericable1 = assertThat(map).isNotEmpty()
                             .containsKey("genericables")
                             .extractingByKey("genericables")
-                            .asList()
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
                             .hasSize(1)
                             .element(0);
                     genericable1.extracting("id").isEqualTo("g1");
                     genericable1.extracting("name").isEqualTo("modelengine.fit.G1");
-                    genericable1.extracting("tags").asList().containsSequence("t1", "t2");
+                    genericable1.extracting("tags")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("t1", "t2");
                     genericable1.extracting("route").isEqualTo("a1");
                     genericable1.extracting("trust")
                             .hasFieldOrPropertyWithValue("validation", "validate")
                             .hasFieldOrPropertyWithValue("before", "before")
                             .hasFieldOrPropertyWithValue("after", "after")
                             .hasFieldOrPropertyWithValue("error", "error");
-                    ObjectAssert<Object> fitable1 = genericable1.extracting("fitables").asList().hasSize(1).element(0);
+                    ObjectAssert<Object> fitable1 = genericable1.extracting("fitables")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .hasSize(1)
+                            .element(0);
                     fitable1.hasFieldOrPropertyWithValue("id", "modelengine.fit.F1.f1");
-                    fitable1.extracting("tags").asList().containsSequence("f1", "f2");
-                    fitable1.extracting("aliases").asList().containsSequence("a1", "a2");
+                    fitable1.extracting("tags")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("f1", "f2");
+                    fitable1.extracting("aliases")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("a1", "a2");
                 }
             }
 
@@ -90,10 +100,10 @@ public class PropertiesUtilsTest {
                     when(spy.exists()).thenReturn(true);
                     when(spy.getName()).thenReturn("testFile.txt");
                     IllegalStateException exception =
-                            catchThrowableOfType(() -> PropertiesUtils.mapFrom(spy), IllegalStateException.class);
+                            catchThrowableOfType(IllegalStateException.class, () -> PropertiesUtils.mapFrom(spy));
                     assertThat(exception).isNotNull()
                             .hasMessage("Failed to load configuration from properties. [file=testFile.txt]")
-                            .getCause()
+                            .cause()
                             .isInstanceOf(IOException.class);
                 }
             }
@@ -118,22 +128,31 @@ public class PropertiesUtilsTest {
                     ObjectAssert<Object> genericable1 = assertThat(map).isNotEmpty()
                             .containsKey("genericables")
                             .extractingByKey("genericables")
-                            .asList()
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
                             .hasSize(1)
                             .element(0);
                     genericable1.extracting("id").isEqualTo("g1");
                     genericable1.extracting("name").isEqualTo("modelengine.fit.G1");
-                    genericable1.extracting("tags").asList().containsSequence("t1", "t2");
+                    genericable1.extracting("tags")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("t1", "t2");
                     genericable1.extracting("route").isEqualTo("a1");
                     genericable1.extracting("trust")
                             .hasFieldOrPropertyWithValue("validation", "validate")
                             .hasFieldOrPropertyWithValue("before", "before")
                             .hasFieldOrPropertyWithValue("after", "after")
                             .hasFieldOrPropertyWithValue("error", "error");
-                    ObjectAssert<Object> fitable1 = genericable1.extracting("fitables").asList().hasSize(1).element(0);
+                    ObjectAssert<Object> fitable1 = genericable1.extracting("fitables")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .hasSize(1)
+                            .element(0);
                     fitable1.hasFieldOrPropertyWithValue("id", "modelengine.fit.F1.f1");
-                    fitable1.extracting("tags").asList().containsSequence("f1", "f2");
-                    fitable1.extracting("aliases").asList().containsSequence("a1", "a2");
+                    fitable1.extracting("tags")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("f1", "f2");
+                    fitable1.extracting("aliases")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("a1", "a2");
                 }
             }
 
@@ -143,13 +162,14 @@ public class PropertiesUtilsTest {
                 @Test
                 @DisplayName("Given read input stream with IOException then throw IllegalStateException")
                 void givenInputStreamWithExceptionThenThrowException() throws IOException {
-                    InputStream in = Mockito.mock(InputStream.class);
+                    @SuppressWarnings("resource") InputStream in = Mockito.mock(InputStream.class);
                     when(in.read(any())).thenThrow(new IOException());
                     IllegalStateException exception =
-                            catchThrowableOfType(() -> PropertiesUtils.mapFrom(in), IllegalStateException.class);
+                            catchThrowableOfType(IllegalStateException.class, () -> PropertiesUtils.mapFrom(in));
                     assertThat(exception).isNotNull()
                             .hasMessage("Failed to load configuration from properties input stream.")
-                            .getCause().isInstanceOf(IOException.class);
+                            .cause()
+                            .isInstanceOf(IOException.class);
                 }
             }
         }
@@ -174,22 +194,31 @@ public class PropertiesUtilsTest {
                     ObjectAssert<Object> genericable1 = assertThat(map).isNotEmpty()
                             .containsKey("genericables")
                             .extractingByKey("genericables")
-                            .asList()
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
                             .hasSize(1)
                             .element(0);
                     genericable1.extracting("id").isEqualTo("g1");
                     genericable1.extracting("name").isEqualTo("modelengine.fit.G1");
-                    genericable1.extracting("tags").asList().containsSequence("t1", "t2");
+                    genericable1.extracting("tags")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("t1", "t2");
                     genericable1.extracting("route").isEqualTo("a1");
                     genericable1.extracting("trust")
                             .hasFieldOrPropertyWithValue("validation", "validate")
                             .hasFieldOrPropertyWithValue("before", "before")
                             .hasFieldOrPropertyWithValue("after", "after")
                             .hasFieldOrPropertyWithValue("error", "error");
-                    ObjectAssert<Object> fitable1 = genericable1.extracting("fitables").asList().hasSize(1).element(0);
+                    ObjectAssert<Object> fitable1 = genericable1.extracting("fitables")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .hasSize(1)
+                            .element(0);
                     fitable1.hasFieldOrPropertyWithValue("id", "modelengine.fit.F1.f1");
-                    fitable1.extracting("tags").asList().containsSequence("f1", "f2");
-                    fitable1.extracting("aliases").asList().containsSequence("a1", "a2");
+                    fitable1.extracting("tags")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("f1", "f2");
+                    fitable1.extracting("aliases")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("a1", "a2");
                 }
 
                 @Test
@@ -207,26 +236,44 @@ public class PropertiesUtilsTest {
                             assertThat(map).isNotEmpty()
                                     .containsKey("genericables")
                                     .extractingByKey("genericables")
-                                    .asList();
+                                    .asInstanceOf(InstanceOfAssertFactories.LIST);
                     genericables.hasSize(2);
                     ObjectAssert<Object> genericable1 = genericables.element(0);
                     genericable1.extracting("id").isEqualTo("g1");
                     genericable1.extracting("name").isEqualTo("modelengine.fit.G1");
-                    genericable1.extracting("tags").asList().containsSequence("t1", "t2");
+                    genericable1.extracting("tags")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("t1", "t2");
                     genericable1.extracting("route").isEqualTo("a1");
-                    ObjectAssert<Object> fitable1 = genericable1.extracting("fitables").asList().hasSize(1).element(0);
+                    ObjectAssert<Object> fitable1 = genericable1.extracting("fitables")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .hasSize(1)
+                            .element(0);
                     fitable1.hasFieldOrPropertyWithValue("id", "modelengine.fit.F1.f1");
-                    fitable1.extracting("tags").asList().containsSequence("f1", "f2");
-                    fitable1.extracting("aliases").asList().containsSequence("a1", "a2");
+                    fitable1.extracting("tags")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("f1", "f2");
+                    fitable1.extracting("aliases")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("a1", "a2");
                     ObjectAssert<Object> genericable2 = genericables.element(1);
                     genericable2.extracting("id").isEqualTo("g2");
                     genericable2.extracting("name").isEqualTo("modelengine.fit.G2");
-                    genericable2.extracting("tags").asList().containsSequence("t1", "t2");
+                    genericable2.extracting("tags")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("t1", "t2");
                     genericable2.extracting("route").isEqualTo("a3");
-                    ObjectAssert<Object> fitable2 = genericable2.extracting("fitables").asList().hasSize(1).element(0);
+                    ObjectAssert<Object> fitable2 = genericable2.extracting("fitables")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .hasSize(1)
+                            .element(0);
                     fitable2.hasFieldOrPropertyWithValue("id", "modelengine.fit.F1.f2");
-                    fitable2.extracting("tags").asList().containsSequence("f1", "f2");
-                    fitable2.extracting("aliases").asList().containsSequence("a3", "a4");
+                    fitable2.extracting("tags")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("f1", "f2");
+                    fitable2.extracting("aliases")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .containsSequence("a3", "a4");
                 }
 
                 @Test
@@ -240,7 +287,11 @@ public class PropertiesUtilsTest {
                     Map<String, Object> map = PropertiesUtils.mapFrom(properties);
 
                     // then
-                    assertThat(map).isNotEmpty().hasSize(1).extractingByKey("genericables").asList().hasSize(11);
+                    assertThat(map).isNotEmpty()
+                            .hasSize(1)
+                            .extractingByKey("genericables")
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
+                            .hasSize(11);
                 }
             }
 
@@ -252,8 +303,8 @@ public class PropertiesUtilsTest {
                 void givenUniqueKeyIsEmptyThenThrowException() {
                     Properties properties = new Properties();
                     properties.setProperty("", "value");
-                    IllegalArgumentException exception = catchThrowableOfType(() -> PropertiesUtils.mapFrom(properties),
-                            IllegalArgumentException.class);
+                    IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                            () -> PropertiesUtils.mapFrom(properties));
                     assertThat(exception).isNotNull().hasMessage("Property key must have 1 sub-key at least. [key=]");
                 }
 
@@ -262,8 +313,8 @@ public class PropertiesUtilsTest {
                 void givenKeyHasIllegalNumberAsArrayIndexThenThrowException() {
                     Properties properties = new Properties();
                     properties.setProperty("key[hello]", "value");
-                    IllegalArgumentException exception = catchThrowableOfType(() -> PropertiesUtils.mapFrom(properties),
-                            IllegalArgumentException.class);
+                    IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                            () -> PropertiesUtils.mapFrom(properties));
                     assertThat(exception).isNotNull().hasMessage("Illegal property key pattern. [key=key[hello]]");
                 }
             }

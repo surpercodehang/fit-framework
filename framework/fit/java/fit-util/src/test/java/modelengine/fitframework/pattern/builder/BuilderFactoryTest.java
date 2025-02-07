@@ -73,8 +73,8 @@ public class BuilderFactoryTest {
             int port = 8080;
 
             Address address = Address.builder().host(host).port(port).build();
-            UnsupportedOperationException unsupportedOperationException = catchThrowableOfType(address::copy,
-                    UnsupportedOperationException.class);
+            UnsupportedOperationException unsupportedOperationException =
+                    catchThrowableOfType(UnsupportedOperationException.class, address::copy);
             assertThat(unsupportedOperationException).isNotNull().hasMessage("Not supported default method to invoke.");
         }
     }

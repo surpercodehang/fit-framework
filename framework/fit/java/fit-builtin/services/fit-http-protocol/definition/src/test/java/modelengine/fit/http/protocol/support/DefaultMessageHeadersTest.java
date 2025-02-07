@@ -107,7 +107,7 @@ public class DefaultMessageHeadersTest {
             void givenNonexistentHeaderThenThrowException() {
                 MessageHeaders headers = ConfigurableMessageHeaders.create().set("key", "value");
                 IllegalStateException actual =
-                        catchThrowableOfType(() -> headers.require("nonexistent"), IllegalStateException.class);
+                        catchThrowableOfType(IllegalStateException.class, () -> headers.require("nonexistent"));
                 assertThat(actual).hasMessage("No specified header. [header=nonexistent]");
             }
         }
@@ -198,7 +198,7 @@ public class DefaultMessageHeadersTest {
                 void givenKeyIsBlankThanThrowIllegalArgumentException() {
                     ConfigurableMessageHeaders headers = ConfigurableMessageHeaders.create();
                     IllegalArgumentException exception =
-                            catchThrowableOfType(() -> headers.set("", "value"), IllegalArgumentException.class);
+                            catchThrowableOfType(IllegalArgumentException.class, () -> headers.set("", "value"));
                     assertThat(exception).isNotNull().hasMessage("The name of header cannot be blank.");
                 }
             }

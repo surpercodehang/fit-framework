@@ -130,8 +130,9 @@ public class DefaultThreadPoolExecutorTest {
         @DisplayName("调用执行方法，任务执行失败并抛出异常")
         @Test
         void executeExecuteMethodThenFailedAndThrowsException() {
-            RejectedExecutionException rejectedExecutionException = catchThrowableOfType(() -> this.executor()
-                    .execute(DefaultThreadPoolExecutorTest.this.disposableTask), RejectedExecutionException.class);
+            RejectedExecutionException rejectedExecutionException =
+                    catchThrowableOfType(RejectedExecutionException.class,
+                            () -> this.executor().execute(DefaultThreadPoolExecutorTest.this.disposableTask));
             assertThat(rejectedExecutionException).isNotNull();
             assertThat(DefaultThreadPoolExecutorTest.this.message.get()).isNotEqualTo(this.expected());
         }
@@ -139,8 +140,9 @@ public class DefaultThreadPoolExecutorTest {
         @DisplayName("调用提交方法，任务执行失败并抛出异常")
         @Test
         void executeSubmitMethodThenFailedAndThrowsException() {
-            RejectedExecutionException rejectedExecutionException = catchThrowableOfType(() -> this.executor()
-                    .submit(DefaultThreadPoolExecutorTest.this.disposableTask), RejectedExecutionException.class);
+            RejectedExecutionException rejectedExecutionException =
+                    catchThrowableOfType(RejectedExecutionException.class,
+                            () -> this.executor().submit(DefaultThreadPoolExecutorTest.this.disposableTask));
             assertThat(rejectedExecutionException).isNotNull();
             assertThat(DefaultThreadPoolExecutorTest.this.message.get()).isNotEqualTo(this.expected());
         }

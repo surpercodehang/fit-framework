@@ -61,9 +61,11 @@ public class EmptyFilterTest {
         @Test
         @DisplayName("抛出参数异常")
         void throwIllegalArgumentException() {
-            IllegalArgumentException exception = catchThrowableOfType(() -> EmptyFilterTest.this.filter.filter(
-                    EmptyFilterTest.this.fitable, this.workerId, null, new HashMap<>()),
-                    IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> EmptyFilterTest.this.filter.filter(EmptyFilterTest.this.fitable,
+                            this.workerId,
+                            null,
+                            new HashMap<>()));
             assertThat(exception).isNotNull()
                     .hasMessage("The targets to balance load cannot be null. [genericableId=gid, fitableId=fid]");
         }
@@ -78,8 +80,11 @@ public class EmptyFilterTest {
             @Test
             @DisplayName("抛出参数异常")
             void throwIllegalArgumentException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> EmptyFilterTest.this.filter.filter(
-                        EmptyFilterTest.this.fitable, null, null, new HashMap<>()), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> EmptyFilterTest.this.filter.filter(EmptyFilterTest.this.fitable,
+                                null,
+                                null,
+                                new HashMap<>()));
                 assertThat(exception).isNotNull()
                         .hasMessage("The local worker id to balance load cannot be blank. [genericableId=gid, "
                                 + "fitableId=fid]");
@@ -94,9 +99,11 @@ public class EmptyFilterTest {
             @Test
             @DisplayName("当待过滤的服务地址列表为 Null 时，抛出参数异常")
             void givenToFilterTargetsIsNullThenThrowIllegalArgumentException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> EmptyFilterTest.this.filter.filter(
-                        EmptyFilterTest.this.fitable, this.workerId, null, new HashMap<>()),
-                        IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> EmptyFilterTest.this.filter.filter(EmptyFilterTest.this.fitable,
+                                this.workerId,
+                                null,
+                                new HashMap<>()));
                 assertThat(exception).isNotNull()
                         .hasMessage("The targets to balance load cannot be null. [genericableId=gid, fitableId=fid]");
             }

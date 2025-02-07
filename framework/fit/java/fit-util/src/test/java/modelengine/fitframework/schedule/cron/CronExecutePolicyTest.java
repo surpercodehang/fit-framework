@@ -240,9 +240,9 @@ public class CronExecutePolicyTest {
                     "2022-12-09T04:37:06.00Z").toInstant()));
             String cronExpression = "0 * * * * *";
             ExecutePolicy executePolicy = ExecutePolicy.cron(cronExpression);
-            IllegalArgumentException illegalArgumentException =
-                    catchThrowableOfType(() -> executePolicy.nextExecuteTime(CronExecutePolicyTest.this.execution,
-                            CronExecutePolicyTest.this.startTime.toInstant()), IllegalArgumentException.class);
+            IllegalArgumentException illegalArgumentException = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> executePolicy.nextExecuteTime(CronExecutePolicyTest.this.execution,
+                            CronExecutePolicyTest.this.startTime.toInstant()));
             assertThat(illegalArgumentException).isNotNull();
         }
 
@@ -251,7 +251,7 @@ public class CronExecutePolicyTest {
         void givenCronExpressionNotContainsSixPartsThenThrowException() {
             String cronExpression = "0 * * * *";
             IllegalArgumentException illegalArgumentException =
-                    catchThrowableOfType(() -> ExecutePolicy.cron(cronExpression), IllegalArgumentException.class);
+                    catchThrowableOfType(IllegalArgumentException.class, () -> ExecutePolicy.cron(cronExpression));
             assertThat(illegalArgumentException).isNotNull();
         }
     }

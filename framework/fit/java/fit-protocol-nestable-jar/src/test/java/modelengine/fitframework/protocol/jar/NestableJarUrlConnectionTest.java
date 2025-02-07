@@ -47,11 +47,8 @@ public class NestableJarUrlConnectionTest {
         @Test
         @DisplayName("当 URL 的 file 字段不包含 '!/' 时，抛出异常")
         void whenFileNotContainsSeparatorThenThrowException() {
-            MalformedURLException malformedURLException =
-                    catchThrowableOfType(() -> new NestableJarUrlConnection(new URL("jar",
-                            null,
-                            -1,
-                            "file:newJar.class")), MalformedURLException.class);
+            MalformedURLException malformedURLException = catchThrowableOfType(MalformedURLException.class,
+                    () -> new NestableJarUrlConnection(new URL("jar", null, -1, "file:newJar.class")));
             assertThat(malformedURLException).hasMessageStartingWith("The URL does not specify a entry in JAR.");
         }
     }
@@ -127,9 +124,8 @@ public class NestableJarUrlConnectionTest {
         @Test
         @DisplayName("调用 setDoInput(boolean) 方法，给定参数值为 false，抛出异常")
         void givenParameterFalseWhenInvokeSetDoInputMethodThenThrowException() {
-            IllegalStateException illegalStateException =
-                    catchThrowableOfType(() -> this.nestableJarUrlConnection.setDoInput(false),
-                            IllegalStateException.class);
+            IllegalStateException illegalStateException = catchThrowableOfType(IllegalStateException.class,
+                    () -> this.nestableJarUrlConnection.setDoInput(false));
             assertThat(illegalStateException).hasMessage("The doInput is always be true.");
         }
 
@@ -149,9 +145,8 @@ public class NestableJarUrlConnectionTest {
         @Test
         @DisplayName("调用 setDoOutput(boolean) 方法，给定参数值为 true，抛出异常")
         void givenParameterTrueWhenInvokeSetDoOutputThenThrowException() {
-            IllegalStateException illegalStateException =
-                    catchThrowableOfType(() -> this.nestableJarUrlConnection.setDoOutput(true),
-                            IllegalStateException.class);
+            IllegalStateException illegalStateException = catchThrowableOfType(IllegalStateException.class,
+                    () -> this.nestableJarUrlConnection.setDoOutput(true));
             assertThat(illegalStateException).hasMessage("The doOutput is always be false.");
         }
 
@@ -179,7 +174,7 @@ public class NestableJarUrlConnectionTest {
         @DisplayName("调用 getOutputStream() 方法，返回写入此连接的输出流，抛出异常")
         void invokeGetOutputStreamMethodThenThrowException() {
             IOException ioException =
-                    catchThrowableOfType(() -> this.nestableJarUrlConnection.getOutputStream(), IOException.class);
+                    catchThrowableOfType(IOException.class, () -> this.nestableJarUrlConnection.getOutputStream());
             assertThat(ioException).hasMessage("Cannot write data into a nested JAR.");
         }
 

@@ -69,7 +69,7 @@ public class FileUtilsTest {
             void givenInvalidFileThenReturnOriginalFile() {
                 File expected = new File("/a\u0000");
                 IllegalStateException exception =
-                        catchThrowableOfType(() -> FileUtils.canonicalize(expected), IllegalStateException.class);
+                        catchThrowableOfType(IllegalStateException.class, () -> FileUtils.canonicalize(expected));
                 assertThat(exception).hasMessage(StringUtils.format("Fail to canonicalize file. [file={0}]",
                         expected.getPath()));
             }
@@ -170,7 +170,7 @@ public class FileUtilsTest {
                 try (MockedStatic<Files> mocked = mockStatic(Files.class)) {
                     mocked.when(() -> Files.deleteIfExists(any())).thenThrow(IOException.class);
                     IllegalStateException exception =
-                            catchThrowableOfType(() -> FileUtils.delete(file), IllegalStateException.class);
+                            catchThrowableOfType(IllegalStateException.class, () -> FileUtils.delete(file));
                     assertThat(exception).isNotNull();
                 }
             }
@@ -215,7 +215,7 @@ public class FileUtilsTest {
         void givenNotDirectoryThenThrowException() throws IOException {
             File file = FileUtilsTest.this.createTempFile();
             IllegalStateException exception =
-                    catchThrowableOfType(() -> FileUtils.ensureDirectory(file), IllegalStateException.class);
+                    catchThrowableOfType(IllegalStateException.class, () -> FileUtils.ensureDirectory(file));
             assertThat(exception).hasMessage(StringUtils.format("The directory to ensure is a file. [file={0}]",
                     file.getPath()));
         }
@@ -303,7 +303,7 @@ public class FileUtilsTest {
         void givenInvalidUrlThenThrowException() throws MalformedURLException {
             URL url = new URL("http://fit.lab?q=%");
             IllegalStateException exception =
-                    catchThrowableOfType(() -> FileUtils.file(url), IllegalStateException.class);
+                    catchThrowableOfType(IllegalStateException.class, () -> FileUtils.file(url));
             assertThat(exception).hasMessage("To uri failed. [url=http://fit.lab?q=%]");
         }
     }

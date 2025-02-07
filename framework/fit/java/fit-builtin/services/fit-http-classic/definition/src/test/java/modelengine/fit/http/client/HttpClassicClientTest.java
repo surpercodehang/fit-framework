@@ -115,9 +115,8 @@ public class HttpClassicClientTest {
                     new DefaultClientResponse(401, this.reasonPhrase, this.headers, this.responseStream);
             when(this.clientRequest.readResponse()).thenReturn(clientResponse);
             this.httpClassicClientRequest = new DefaultHttpClassicClientRequest(this.httpResource, this.clientRequest);
-            HttpClientErrorException httpClientErrorException =
-                    catchThrowableOfType(() -> this.httpClassicClient.exchangeForEntity(this.httpClassicClientRequest,
-                            Integer.class), HttpClientErrorException.class);
+            HttpClientErrorException httpClientErrorException = catchThrowableOfType(HttpClientErrorException.class,
+                    () -> this.httpClassicClient.exchangeForEntity(this.httpClassicClientRequest, Integer.class));
             assertThat(httpClientErrorException).isNotNull();
         }
 
@@ -128,9 +127,8 @@ public class HttpClassicClientTest {
                     new DefaultClientResponse(501, this.reasonPhrase, this.headers, this.responseStream);
             when(this.clientRequest.readResponse()).thenReturn(clientResponse);
             this.httpClassicClientRequest = new DefaultHttpClassicClientRequest(this.httpResource, this.clientRequest);
-            HttpServerErrorException httpServerErrorException =
-                    catchThrowableOfType(() -> this.httpClassicClient.exchangeForEntity(this.httpClassicClientRequest,
-                            Integer.class), HttpServerErrorException.class);
+            HttpServerErrorException httpServerErrorException = catchThrowableOfType(HttpServerErrorException.class,
+                    () -> this.httpClassicClient.exchangeForEntity(this.httpClassicClientRequest, Integer.class));
             assertThat(httpServerErrorException).isNotNull();
         }
 
@@ -144,8 +142,9 @@ public class HttpClassicClientTest {
             this.httpClassicClientRequest = new DefaultHttpClassicClientRequest(this.httpResource, this.clientRequest);
             HttpClassicClientFactory.Config.builder().build();
             HttpClientResponseException httpClientResponseException =
-                    catchThrowableOfType(() -> this.httpClassicClient.exchangeForEntity(this.httpClassicClientRequest,
-                            Integer.class), HttpClientResponseException.class);
+                    catchThrowableOfType(HttpClientResponseException.class,
+                            () -> this.httpClassicClient.exchangeForEntity(this.httpClassicClientRequest,
+                                    Integer.class));
             assertThat(httpClientResponseException).isNotNull();
         }
     }

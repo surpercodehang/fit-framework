@@ -99,8 +99,8 @@ public class LockUtilsTest {
                 @DisplayName("Given runnable is null then throw IllegalArgumentException")
                 void givenRunnableIsNullThenThrowException() {
                     Lock lock = LockUtils.newReentrantLock();
-                    IllegalArgumentException exception = catchThrowableOfType(() -> LockUtils.synchronize(lock,
-                            ObjectUtils.<BooleanSupplier>cast(null)), IllegalArgumentException.class);
+                    IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                            () -> LockUtils.synchronize(lock, ObjectUtils.<BooleanSupplier>cast(null)));
                     assertThat(exception).isNotNull().hasMessage("The supplier to get value cannot be null.");
                 }
 
@@ -108,10 +108,10 @@ public class LockUtilsTest {
                 @DisplayName("Given runnable throw Exception then throw its original Exception")
                 void givenRunnableThrowExceptionThenThrowException() {
                     Lock lock = LockUtils.newReentrantLock();
-                    IllegalStateException exception =
-                            catchThrowableOfType(() -> LockUtils.synchronize(lock, (BooleanSupplier) () -> {
+                    IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                            () -> LockUtils.synchronize(lock, (BooleanSupplier) () -> {
                                 throw new IllegalStateException();
-                            }), IllegalStateException.class);
+                            }));
                     assertThat(exception).isNotNull();
                 }
             }
@@ -138,7 +138,7 @@ public class LockUtilsTest {
                 }
             }
 
-            private class TestBooleanSupplier extends TestAction implements Runnable {
+            private static class TestBooleanSupplier extends TestAction implements Runnable {
                 private final Lock lock;
 
                 TestBooleanSupplier(List<Integer> list, Lock lock) {
@@ -185,9 +185,8 @@ public class LockUtilsTest {
                 @DisplayName("Given runnable is null then throw IllegalArgumentException")
                 void givenRunnableIsNullThenThrowException() {
                     Lock lock = LockUtils.newReentrantLock();
-                    IllegalArgumentException exception =
-                            catchThrowableOfType(() -> LockUtils.synchronize(lock, ObjectUtils.<IntSupplier>cast(null)),
-                                    IllegalArgumentException.class);
+                    IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                            () -> LockUtils.synchronize(lock, ObjectUtils.<IntSupplier>cast(null)));
                     assertThat(exception).isNotNull().hasMessage("The supplier to get value cannot be null.");
                 }
 
@@ -195,10 +194,10 @@ public class LockUtilsTest {
                 @DisplayName("Given runnable throw Exception then throw its original Exception")
                 void givenRunnableThrowExceptionThenThrowException() {
                     Lock lock = LockUtils.newReentrantLock();
-                    IllegalStateException exception =
-                            catchThrowableOfType(() -> LockUtils.synchronize(lock, (IntSupplier) () -> {
+                    IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                            () -> LockUtils.synchronize(lock, (IntSupplier) () -> {
                                 throw new IllegalStateException();
-                            }), IllegalStateException.class);
+                            }));
                     assertThat(exception).isNotNull();
                 }
             }
@@ -225,7 +224,7 @@ public class LockUtilsTest {
                 }
             }
 
-            private class TestIntSupplier extends TestAction implements Runnable {
+            private static class TestIntSupplier extends TestAction implements Runnable {
                 private final Lock lock;
 
                 TestIntSupplier(List<Integer> list, Lock lock) {
@@ -272,9 +271,8 @@ public class LockUtilsTest {
                 @DisplayName("Given runnable is null then throw IllegalArgumentException")
                 void givenRunnableIsNullThenThrowException() {
                     Lock lock = LockUtils.newReentrantLock();
-                    IllegalArgumentException exception =
-                            catchThrowableOfType(() -> LockUtils.synchronize(lock, ObjectUtils.<Runnable>cast(null)),
-                                    IllegalArgumentException.class);
+                    IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                            () -> LockUtils.synchronize(lock, ObjectUtils.<Runnable>cast(null)));
                     assertThat(exception).isNotNull().hasMessage("The action to perform synchronously cannot be null.");
                 }
             }
@@ -301,7 +299,7 @@ public class LockUtilsTest {
                 }
             }
 
-            private class TestRunnable extends TestAction implements Runnable {
+            private static class TestRunnable extends TestAction implements Runnable {
                 private final Lock lock;
 
                 TestRunnable(List<Integer> list, Lock lock) {
@@ -345,9 +343,8 @@ public class LockUtilsTest {
                 @DisplayName("Given runnable is null then throw IllegalArgumentException")
                 void givenRunnableIsNullThenThrowException() {
                     Lock lock = LockUtils.newReentrantLock();
-                    IllegalArgumentException exception =
-                            catchThrowableOfType(() -> LockUtils.synchronize(lock, (Supplier<Integer>) null),
-                                    IllegalArgumentException.class);
+                    IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                            () -> LockUtils.synchronize(lock, (Supplier<Integer>) null));
                     assertThat(exception).isNotNull().hasMessage("The supplier to get value cannot be null.");
                 }
 
@@ -355,10 +352,10 @@ public class LockUtilsTest {
                 @DisplayName("Given runnable throw Exception then throw its original Exception")
                 void givenRunnableThrowExceptionThenThrowException() {
                     Lock lock = LockUtils.newReentrantLock();
-                    IllegalStateException exception =
-                            catchThrowableOfType(() -> LockUtils.synchronize(lock, (Supplier<Object>) () -> {
+                    IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                            () -> LockUtils.synchronize(lock, (Supplier<Object>) () -> {
                                 throw new IllegalStateException();
-                            }), IllegalStateException.class);
+                            }));
                     assertThat(exception).isNotNull();
                 }
             }
@@ -385,7 +382,7 @@ public class LockUtilsTest {
                 }
             }
 
-            private class TestSupplier extends TestAction implements Runnable {
+            private static class TestSupplier extends TestAction implements Runnable {
                 private final Lock lock;
 
                 TestSupplier(List<Integer> list, Lock lock) {
@@ -403,7 +400,7 @@ public class LockUtilsTest {
             }
         }
 
-        private class TestAction {
+        private static class TestAction {
             private final List<Integer> list;
             private final Lock lock;
 

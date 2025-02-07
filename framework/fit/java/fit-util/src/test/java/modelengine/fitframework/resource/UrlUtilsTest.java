@@ -129,12 +129,11 @@ public class UrlUtilsTest {
                 try (MockedStatic<URLDecoder> mocked = mockStatic(URLDecoder.class)) {
                     mocked.when(() -> URLDecoder.decode(eq(UrlUtilsTest.this.encodedForm),
                             eq(StandardCharsets.UTF_8.toString()))).thenThrow(new UnsupportedEncodingException());
-                    IllegalStateException exception =
-                            catchThrowableOfType(() -> UrlUtils.decodeForm(UrlUtilsTest.this.encodedForm),
-                                    IllegalStateException.class);
+                    IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                            () -> UrlUtils.decodeForm(UrlUtilsTest.this.encodedForm));
                     assertThat(exception).isNotNull()
                             .hasMessage("Unsupported decoding type: UTF-8.")
-                            .getCause()
+                            .cause()
                             .isInstanceOf(UnsupportedEncodingException.class);
                 }
             }
@@ -171,12 +170,11 @@ public class UrlUtilsTest {
                 try (MockedStatic<URLEncoder> mocked = mockStatic(URLEncoder.class)) {
                     mocked.when(() -> URLEncoder.encode(eq(UrlUtilsTest.this.originForm),
                             eq(StandardCharsets.UTF_8.toString()))).thenThrow(new UnsupportedEncodingException());
-                    IllegalStateException exception =
-                            catchThrowableOfType(() -> UrlUtils.encodeForm(UrlUtilsTest.this.originForm),
-                                    IllegalStateException.class);
+                    IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                            () -> UrlUtils.encodeForm(UrlUtilsTest.this.originForm));
                     assertThat(exception).isNotNull()
                             .hasMessage("Unsupported encoding type: UTF-8.")
-                            .getCause()
+                            .cause()
                             .isInstanceOf(UnsupportedEncodingException.class);
                 }
             }
@@ -207,10 +205,10 @@ public class UrlUtilsTest {
             void givenInvalidUrlThenThrowException() throws MalformedURLException {
                 URL url = new URL("http://fit.lab?q=%");
                 IllegalStateException exception =
-                        catchThrowableOfType(() -> UrlUtils.exists(url), IllegalStateException.class);
+                        catchThrowableOfType(IllegalStateException.class, () -> UrlUtils.exists(url));
                 assertThat(exception).isNotNull()
                         .hasMessage("Failed to convert url to file. [url=]")
-                        .getCause()
+                        .cause()
                         .isInstanceOf(URISyntaxException.class);
             }
         }
@@ -261,17 +259,18 @@ public class UrlUtilsTest {
         @Nested
         @DisplayName("Exception scenario")
         class TestExceptionScenario {
+            @SuppressWarnings("resource")
             @Test
             @DisplayName("Given url suffix is '.jar' with empty content then throw IllegalStateException")
             void givenUrlSuffixIsJarWithEmptyContentThenThrowException() throws IOException {
                 File file = Files.createTempFile("UrlUtilsTest-", ".jar").toFile();
                 file.deleteOnExit();
-                IllegalStateException exception = catchThrowableOfType(() -> UrlUtils.toJarFile(file.toURI().toURL()),
-                        IllegalStateException.class);
+                IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                        () -> UrlUtils.toJarFile(file.toURI().toURL()));
                 assertThat(exception).isNotNull()
                         .hasMessage(StringUtils.format("Failed to create jar file. [url={0}]",
                                 file.toURI().toURL().getPath()))
-                        .getCause()
+                        .cause()
                         .isInstanceOf(IOException.class);
             }
         }

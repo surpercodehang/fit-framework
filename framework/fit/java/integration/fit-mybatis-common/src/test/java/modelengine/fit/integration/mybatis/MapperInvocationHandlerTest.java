@@ -51,7 +51,7 @@ public class MapperInvocationHandlerTest {
         when(sqlSessionFactory.openSession(eq(false))).thenReturn(session);
         when(session.getMapper(eq(Mapper.class))).thenThrow(new PersistenceException());
         Mapper proxiedMapper = MapperInvocationHandler.proxy(sqlSessionFactory, Mapper.class, true);
-        DataAccessException exception = catchThrowableOfType(() -> proxiedMapper.count(0), DataAccessException.class);
+        DataAccessException exception = catchThrowableOfType(DataAccessException.class, () -> proxiedMapper.count(0));
         assertThat(exception).isNotNull();
     }
 
@@ -64,8 +64,8 @@ public class MapperInvocationHandlerTest {
         Mapper actual = new MapperStub();
         when(session.getMapper(eq(Mapper.class))).thenReturn(actual);
         Mapper proxiedMapper = MapperInvocationHandler.proxy(sqlSessionFactory, Mapper.class, true);
-        DataAccessException exception = catchThrowableOfType(() -> proxiedMapper.count(-1), DataAccessException.class);
-        assertThat(exception).isNotNull().getCause().isNotNull().hasMessage("DataAccessError");
+        DataAccessException exception = catchThrowableOfType(DataAccessException.class, () -> proxiedMapper.count(-1));
+        assertThat(exception).isNotNull().cause().isNotNull().hasMessage("DataAccessError");
     }
 
     @Test
@@ -78,7 +78,7 @@ public class MapperInvocationHandlerTest {
         when(session.getMapper(eq(Mapper.class))).thenReturn(actual);
         Mapper proxiedMapper = MapperInvocationHandler.proxy(sqlSessionFactory, Mapper.class, true);
         IllegalStateException exception =
-                catchThrowableOfType(() -> proxiedMapper.count(-2), IllegalStateException.class);
+                catchThrowableOfType(IllegalStateException.class, () -> proxiedMapper.count(-2));
         assertThat(exception).isNotNull().hasMessage("IllegalStateException");
     }
 

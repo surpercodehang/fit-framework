@@ -36,9 +36,8 @@ public class SecurityUtilsTest {
             File file = new File("");
             final String algorithm = "fake-algorithm";
             final int bufferSize = 1;
-            IllegalStateException exception =
-                    catchThrowableOfType(() -> SecurityUtils.signatureOf(file, algorithm, bufferSize),
-                            IllegalStateException.class);
+            IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                    () -> SecurityUtils.signatureOf(file, algorithm, bufferSize));
             assertThat(exception).hasMessage("Signature algorithm not found. [algorithm=fake-algorithm]");
         }
 
@@ -48,9 +47,8 @@ public class SecurityUtilsTest {
             File file = new File("bcb4a610-5aec-4e32-ac6d-16861ec0cb8e");
             final String algorithm = "MD5";
             final int bufferSize = 1;
-            IllegalStateException exception =
-                    catchThrowableOfType(() -> SecurityUtils.signatureOf(file, algorithm, bufferSize),
-                            IllegalStateException.class);
+            IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                    () -> SecurityUtils.signatureOf(file, algorithm, bufferSize));
             assertThat(exception).hasMessageContaining("Failed to read file to compute signature.");
         }
 

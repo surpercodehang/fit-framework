@@ -122,7 +122,7 @@ public class ArrayUtilsTest {
             @DisplayName("Array is null, output is exception")
             void givenArrayNullThenThrowException() {
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ArrayUtils.binarySearch(null, 1), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> ArrayUtils.binarySearch(null, 1));
                 assertThat(exception).hasMessage("The array to binary search cannot be null.");
             }
 
@@ -152,9 +152,8 @@ public class ArrayUtilsTest {
             @Test
             @DisplayName("Array is [], key is null, mapper is null, output is exception")
             void givenMapperIsNullThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ArrayUtils.binarySearch(new Integer[] {}, 1, null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> ArrayUtils.binarySearch(new Integer[] {}, 1, null));
                 assertThat(exception).hasMessage("The mapper to map element cannot be null.");
             }
         }
@@ -170,9 +169,8 @@ public class ArrayUtilsTest {
                     "Array is [], key is null, mapper is Function.identity(), comparator is null, output is exception")
             void givenComparatorIsNullThenThrowException() {
                 Function<Integer, Integer> mapper = Function.identity();
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ArrayUtils.binarySearch(new Integer[] {}, 1, mapper, null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> ArrayUtils.binarySearch(new Integer[] {}, 1, mapper, null));
                 assertThat(exception).hasMessage("The comparator to compare elements cannot be null.");
             }
         }
@@ -196,7 +194,7 @@ public class ArrayUtilsTest {
         @DisplayName("Input is null, output is exception")
         void givenNullThenThrowException() {
             IllegalArgumentException exception =
-                    catchThrowableOfType(() -> ArrayUtils.concrete(null), IllegalArgumentException.class);
+                    catchThrowableOfType(IllegalArgumentException.class, () -> ArrayUtils.concrete(null));
             assertThat(exception).hasMessage("Array cannot be null.");
         }
     }

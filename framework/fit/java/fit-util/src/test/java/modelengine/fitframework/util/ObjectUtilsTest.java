@@ -17,6 +17,7 @@ import modelengine.fitframework.beans.Object3;
 import modelengine.fitframework.beans.Object4;
 import modelengine.fitframework.beans.Object5;
 
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -231,9 +232,8 @@ public class ObjectUtilsTest {
                 @Test
                 @DisplayName("Given -100 vs 100 then throw IllegalArgumentException")
                 void given2ComparablesThenThrowException() {
-                    IllegalArgumentException exception =
-                            catchThrowableOfType(() -> ObjectUtils.compare(COMPARABLE_SMALL, COMPARABLE_BIG, null),
-                                    IllegalArgumentException.class);
+                    IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                            () -> ObjectUtils.compare(COMPARABLE_SMALL, COMPARABLE_BIG, null));
                     assertThat(exception).isNotNull().hasMessage("The comparator to compare objects cannot be null.");
                 }
             }
@@ -253,7 +253,7 @@ public class ObjectUtilsTest {
             @DisplayName("Throw IllegalArgumentException")
             void throwException() {
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ObjectUtils.defaultValue(null), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> ObjectUtils.defaultValue(null));
                 assertThat(exception).isNotNull().hasMessage("The class to look up default value cannot be null.");
             }
         }
@@ -301,7 +301,7 @@ public class ObjectUtilsTest {
             @DisplayName("Given factory is null then throw IllegalArgumentException")
             void givenFactoryIsNullThenThrowException() {
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ObjectUtils.getIfNull(0, null), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> ObjectUtils.getIfNull(0, null));
                 assertThat(exception).isNotNull().hasMessage("The factory to create default value cannot be null.");
             }
 
@@ -344,9 +344,8 @@ public class ObjectUtilsTest {
             @Test
             @DisplayName("Given mapper is null then throw IllegalArgumentException")
             void givenMapperIsNullThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ObjectUtils.mapIfNotNull(COMPARABLE_NULL, null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> ObjectUtils.mapIfNotNull(COMPARABLE_NULL, null));
                 assertThat(exception).isNotNull().hasMessage("The mapper cannot be null.");
             }
         }
@@ -529,7 +528,9 @@ public class ObjectUtilsTest {
         void shouldReturnList() {
             List<Object> list = Arrays.asList(1, "v2");
             Object javaObject = ObjectUtils.toJavaObject(list);
-            assertThat(javaObject).isInstanceOf(List.class).asList().contains(1, "v2");
+            assertThat(javaObject).isInstanceOf(List.class)
+                    .asInstanceOf(InstanceOfAssertFactories.LIST)
+                    .contains(1, "v2");
         }
 
         @Test
@@ -537,7 +538,9 @@ public class ObjectUtilsTest {
         void shouldReturnListWhenInputIsArray() {
             Object[] array = new Object[] {1, "v2"};
             Object javaObject = ObjectUtils.toJavaObject(array);
-            assertThat(javaObject).isInstanceOf(List.class).asList().contains(1, "v2");
+            assertThat(javaObject).isInstanceOf(List.class)
+                    .asInstanceOf(InstanceOfAssertFactories.LIST)
+                    .contains(1, "v2");
         }
 
         @Test
@@ -660,9 +663,7 @@ public class ObjectUtilsTest {
         @Test
         @DisplayName("当对象属性和自定义对象存在别名关系时，转换成合适的自定义对象")
         void shouldReturnObject5WhenAttributesHaveCustomObjectValues() {
-            Map<String, Object> map = MapBuilder.<String, Object>get()
-                .put("foo_bar", "out")
-                .build();
+            Map<String, Object> map = MapBuilder.<String, Object>get().put("foo_bar", "out").build();
             Object5 obj5 = ObjectUtils.toCustomObject(map, Object5.class);
             assertThat(obj5).returns("out", Object5::getFooBar);
         }

@@ -56,12 +56,13 @@ public class BeanPropertyAccessorTest {
         void setReadMethodAsNullThenThrowException() throws IntrospectionException {
             propertyDescriptor.setReadMethod(null);
             beanPropertyAccessor = BeanPropertyAccessor.of(beanAccessor, propertyDescriptor);
-            UnsupportedOperationException unsupportedOperationException =
-                    catchThrowableOfType(() -> beanPropertyAccessor.get(beanAccessor),
-                            UnsupportedOperationException.class);
-            assertThat(unsupportedOperationException).hasMessage(
-                    StringUtils.format("The property is not readable. [bean={0}, property={1}]",
-                            beanAccessor.type().getName(), propertyDescriptor.getName()));
+            UnsupportedOperationException unsupportedOperationException = catchThrowableOfType(
+                    UnsupportedOperationException.class,
+                    () -> beanPropertyAccessor.get(beanAccessor));
+            assertThat(unsupportedOperationException).hasMessage(StringUtils.format(
+                    "The property is not readable. [bean={0}, property={1}]",
+                    beanAccessor.type().getName(),
+                    propertyDescriptor.getName()));
         }
     }
 
@@ -73,12 +74,13 @@ public class BeanPropertyAccessorTest {
         void setWriteMethodAsNullThenThrowException() throws IntrospectionException {
             propertyDescriptor.setWriteMethod(null);
             beanPropertyAccessor = BeanPropertyAccessor.of(beanAccessor, propertyDescriptor);
-            UnsupportedOperationException unsupportedOperationException =
-                    catchThrowableOfType(() -> beanPropertyAccessor.set(beanAccessor, 10),
-                            UnsupportedOperationException.class);
-            assertThat(unsupportedOperationException).hasMessage(
-                    StringUtils.format("The property is not writable. [bean={0}, property={1}]",
-                            beanAccessor.type().getName(), propertyDescriptor.getName()));
+            UnsupportedOperationException unsupportedOperationException = catchThrowableOfType(
+                    UnsupportedOperationException.class,
+                    () -> beanPropertyAccessor.set(beanAccessor, 10));
+            assertThat(unsupportedOperationException).hasMessage(StringUtils.format(
+                    "The property is not writable. [bean={0}, property={1}]",
+                    beanAccessor.type().getName(),
+                    propertyDescriptor.getName()));
         }
     }
 
@@ -86,8 +88,10 @@ public class BeanPropertyAccessorTest {
     @DisplayName("获取 Bean 的属性提供访问程序的参数值与给定值相等")
     void theParameterOfBeanPropertyAccessorShouldBeEqualsToTheGivenParameter() {
         String actual = this.beanPropertyAccessor.toString();
-        assertThat(actual).isEqualTo(StringUtils.format("{0}.{1} : {2}", this.beanAccessor.type().getName(),
-                this.propertyDescriptor.getName(), "long"));
+        assertThat(actual).isEqualTo(StringUtils.format("{0}.{1} : {2}",
+                this.beanAccessor.type().getName(),
+                this.propertyDescriptor.getName(),
+                "long"));
     }
 
     static class MockClass {

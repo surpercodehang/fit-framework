@@ -28,6 +28,7 @@ import java.lang.reflect.Method;
  */
 @DisplayName("测试 AspectAfterThrowingInterceptor")
 public class AspectAfterThrowingInterceptorTest {
+    @SuppressWarnings("resource")
     @Test
     @DisplayName("当 @AfterThrowing 定义的切面第一个参数是 ProceedingJoinPoint 时，生成方法拦截器失败")
     void givenAfterThrowingMethodWithProceedingJoinPointAsThe1stParamThenFailToGenerateMethodInterceptor()
@@ -38,9 +39,8 @@ public class AspectAfterThrowingInterceptorTest {
         BeanFactory aspectFactory = mock(BeanFactory.class);
         Object aspect = new AspectAfterThrowingInterceptorTest();
         when(aspectFactory.get()).thenReturn(aspect);
-        IllegalArgumentException exception =
-                catchThrowableOfType(() -> new AspectAfterThrowingInterceptor(aspectFactory, method),
-                        IllegalArgumentException.class);
+        IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                () -> new AspectAfterThrowingInterceptor(aspectFactory, method));
         assertThat(exception).hasMessage(
                 "The 1st parameter of @AfterThrowing interceptor in Aspect cannot be ProceedingJoinPoint.");
     }

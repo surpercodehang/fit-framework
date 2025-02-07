@@ -40,9 +40,8 @@ class StandardConversionServiceTest {
         @Test
         @DisplayName("当将 null 转为基本类型时抛出异常")
         void shouldThrowWhenConvert2Primitive() {
-            IllegalArgumentException actual =
-                    catchThrowableOfType(() -> ConversionService.forStandard().convert(null, int.class),
-                            IllegalArgumentException.class);
+            IllegalArgumentException actual = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> ConversionService.forStandard().convert(null, int.class));
             assertThat(actual).hasMessage("Cannot convert null to a primitive class. [target=int]");
         }
 
@@ -199,9 +198,9 @@ class StandardConversionServiceTest {
         @Test
         @DisplayName("将一个标量值转为列表，抛出异常")
         void shouldThrowExceptionWhenConvertSingleValueToList() {
-            IllegalArgumentException actual = catchThrowableOfType(() -> ConversionService.forStandard()
-                            .convert("1.5", TypeUtils.parameterized(List.class, new Type[] {Double.class})),
-                    IllegalArgumentException.class);
+            IllegalArgumentException actual = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> ConversionService.forStandard()
+                            .convert("1.5", TypeUtils.parameterized(List.class, new Type[] {Double.class})));
             assertThat(actual).hasMessage("Cannot convert value to List. [source=java.lang.String]");
         }
     }

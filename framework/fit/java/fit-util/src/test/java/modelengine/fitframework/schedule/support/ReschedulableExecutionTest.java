@@ -82,8 +82,8 @@ public class ReschedulableExecutionTest {
         @Test
         @DisplayName("更新任务执行时间，抛出异常")
         void updateExecuteTimeThrowException() {
-            IllegalArgumentException illegalArgumentException = catchThrowableOfType(() -> this.getExecution()
-                    .updateExecuteTime(ReschedulableExecutionTest.this.now), IllegalArgumentException.class);
+            IllegalArgumentException illegalArgumentException = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> this.getExecution().updateExecuteTime(ReschedulableExecutionTest.this.now));
             assertThat(illegalArgumentException).hasMessage(StringUtils.format(
                     "Failed to update execute time: The execution status is incorrect. [status={0}]",
                     ExecutePolicy.ExecutionStatus.SCHEDULING));
@@ -92,8 +92,8 @@ public class ReschedulableExecutionTest {
         @Test
         @DisplayName("更新任务执行完成时间，抛出异常")
         void updateCompleteTimeThrowException() {
-            IllegalArgumentException illegalArgumentException = catchThrowableOfType(() -> this.getExecution()
-                    .updateCompleteTime(ReschedulableExecutionTest.this.now), IllegalArgumentException.class);
+            IllegalArgumentException illegalArgumentException = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> this.getExecution().updateCompleteTime(ReschedulableExecutionTest.this.now));
             assertThat(illegalArgumentException).hasMessage(StringUtils.format(
                     "Failed to update complete time: The execution status is incorrect. [status={0}]",
                     ExecutePolicy.ExecutionStatus.SCHEDULING));
@@ -116,8 +116,8 @@ public class ReschedulableExecutionTest {
         @Test
         @DisplayName("更新任务调度时间，抛出异常")
         void updateScheduledTimeThrowException() {
-            IllegalArgumentException illegalArgumentException = catchThrowableOfType(() -> this.getExecution()
-                    .updateScheduledTime(ReschedulableExecutionTest.this.now), IllegalArgumentException.class);
+            IllegalArgumentException illegalArgumentException = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> this.getExecution().updateScheduledTime(ReschedulableExecutionTest.this.now));
             assertThat(illegalArgumentException).hasMessage(StringUtils.format(
                     "Failed to update scheduled time: The execution status is incorrect. [status={0}]",
                     ExecutePolicy.ExecutionStatus.EXECUTING));

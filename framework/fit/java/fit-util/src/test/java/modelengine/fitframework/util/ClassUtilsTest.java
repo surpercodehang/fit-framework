@@ -44,9 +44,8 @@ class ClassUtilsTest {
             @Test
             @DisplayName("and from class is null then return false")
             void andFromClassIsNullThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ClassUtils.isAssignableFrom(this.targetClass, null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> ClassUtils.isAssignableFrom(this.targetClass, null));
                 assertThat(exception).isNotNull().hasMessage("The fromClass cannot be null.");
             }
         }
@@ -73,9 +72,8 @@ class ClassUtilsTest {
             @Test
             @DisplayName("and from class is null then throw IllegalArgumentException")
             void andFromClassIsNullThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ClassUtils.isAssignableFrom(this.targetClass, null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> ClassUtils.isAssignableFrom(this.targetClass, null));
                 assertThat(exception).isNotNull().hasMessage("The fromClass cannot be null.");
             }
         }
@@ -102,9 +100,8 @@ class ClassUtilsTest {
             @Test
             @DisplayName("and from class is null then throw IllegalArgumentException")
             void andFromClassIsNullThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> ClassUtils.isAssignableFrom(this.targetClass, null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> ClassUtils.isAssignableFrom(this.targetClass, null));
                 assertThat(exception).isNotNull().hasMessage("The fromClass cannot be null.");
             }
         }
@@ -160,17 +157,17 @@ class ClassUtilsTest {
         /**
          * 测试父类。
          */
-        class TestParent {}
+        static class TestParent {}
 
         /**
          * 测试子类。
          */
-        class TestChild extends TestParent {}
+        static class TestChild extends TestParent {}
 
         /**
          * 测试实现了接口的类。
          */
-        class TestAnotherClass implements TestLambda {
+        static class TestAnotherClass implements TestLambda {
             @Override
             public boolean test() {
                 return false;
@@ -181,6 +178,7 @@ class ClassUtilsTest {
     @Nested
     @DisplayName("测试方法：locateOfProtectionDomain(Class<?> clazz)")
     class TestLocateOfProtectionDomain {
+        @SuppressWarnings("DataFlowIssue")
         @Test
         @DisplayName("当 clazz 是一个用户定义的类时，返回该类的保护域")
         void givenClazzIsUserDefinedThenReturnProtectionDomain() {
@@ -195,7 +193,7 @@ class ClassUtilsTest {
         void givenClazzIsObjectThenThrowException() {
             Class<?> clazz = Object.class;
             IllegalStateException cause =
-                    catchThrowableOfType(() -> ClassUtils.locateOfProtectionDomain(clazz), IllegalStateException.class);
+                    catchThrowableOfType(IllegalStateException.class, () -> ClassUtils.locateOfProtectionDomain(clazz));
             assertThat(cause).isNotNull();
         }
     }

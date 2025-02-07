@@ -40,16 +40,16 @@ public class PropertyKeyTest {
     @Test
     @DisplayName("Given key is null then throw IllegalArgumentException")
     void givenKeyIsNullThenThrowException() {
-        IllegalArgumentException exception = catchThrowableOfType(() -> new PropertyKey(null),
-                IllegalArgumentException.class);
+        IllegalArgumentException exception =
+                catchThrowableOfType(IllegalArgumentException.class, () -> new PropertyKey(null));
         assertThat(exception).isNotNull().hasMessage("Property key cannot be blank.");
     }
 
     @Test
     @DisplayName("Given key is a[-1] then throw IllegalArgumentException")
     void givenKeyIsNotMatchPatternThenThrowException() {
-        IllegalArgumentException exception = catchThrowableOfType(() -> new PropertyKey("a[-1]"),
-                IllegalArgumentException.class);
+        IllegalArgumentException exception =
+                catchThrowableOfType(IllegalArgumentException.class, () -> new PropertyKey("a[-1]"));
         assertThat(exception).isNotNull().hasMessage("Illegal property key pattern. [key=a[-1]]");
     }
 }

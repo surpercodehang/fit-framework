@@ -905,7 +905,7 @@ public class StringUtilsTest {
         @DisplayName("当映射程序为null时，抛出异常")
         void givenNullMapperThenThrowException() {
             ThrowableAssert.ThrowingCallable execution = () -> StringUtils.mapIfNotBlank("1", null);
-            IllegalArgumentException ex = catchThrowableOfType(execution, IllegalArgumentException.class);
+            IllegalArgumentException ex = catchThrowableOfType(IllegalArgumentException.class, execution);
             assertThat(ex).isNotNull();
         }
 
@@ -1106,18 +1106,16 @@ public class StringUtilsTest {
             @Test
             @DisplayName("To list: input is null, output is IllegalArgumentException")
             void givenNoOriginalStringThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> StringUtils.split(null, SEPARATOR, ArrayList::new, null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> StringUtils.split(null, SEPARATOR, ArrayList::new, null));
                 assertThat(exception).hasMessage("The string to be split cannot be null.");
             }
 
             @Test
             @DisplayName("To unknown collection: input is '', output is IllegalArgumentException")
             void givenNoCollectionSupplierThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> StringUtils.split(StringUtils.EMPTY, SEPARATOR, null, null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> StringUtils.split(StringUtils.EMPTY, SEPARATOR, null, null));
                 assertThat(exception).hasMessage("The collectionSupplier cannot be null.");
             }
 
@@ -1202,18 +1200,16 @@ public class StringUtilsTest {
             @Test
             @DisplayName("To list: input is null, output is IllegalArgumentException")
             void givenNoOriginalStringThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> StringUtils.split(null, SEPARATOR, ArrayList::new, null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> StringUtils.split(null, SEPARATOR, ArrayList::new, null));
                 assertThat(exception).hasMessage("The string to be split cannot be null.");
             }
 
             @Test
             @DisplayName("To unknown collection: input is '', output is IllegalArgumentException")
             void givenNoCollectionSupplierThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> StringUtils.split(StringUtils.EMPTY, SEPARATOR, null, null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> StringUtils.split(StringUtils.EMPTY, SEPARATOR, null, null));
                 assertThat(exception).hasMessage("The collectionSupplier cannot be null.");
             }
 
@@ -1402,31 +1398,31 @@ public class StringUtilsTest {
         @DisplayName("Input is null, output is IllegalArgumentException")
         void givenNullThenThrowException() {
             IllegalArgumentException exception =
-                    catchThrowableOfType(() -> StringUtils.substring(null, 0, 0), IllegalArgumentException.class);
+                    catchThrowableOfType(IllegalArgumentException.class, () -> StringUtils.substring(null, 0, 0));
             assertThat(exception).isNotNull().hasMessage("The source string is null.");
         }
 
         @Test
         @DisplayName("Input is 'Hello World', output is IllegalStateException (startIndex: -12, endIndex: 5)")
         void givenHelloWorldAndBetweenMinus12And5ThenThrowException() {
-            IllegalStateException exception = catchThrowableOfType(() -> StringUtils.substring("Hello World", -12, 5),
-                    IllegalStateException.class);
+            IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                    () -> StringUtils.substring("Hello World", -12, 5));
             assertThat(exception).isNotNull().hasMessage("The start index is out of range: -12.");
         }
 
         @Test
         @DisplayName("Input is 'Hello World', output is IllegalStateException (startIndex: 0, endIndex: 12)")
         void givenHelloWorldAndBetween0And12ThenThrowException() {
-            IllegalStateException exception = catchThrowableOfType(() -> StringUtils.substring("Hello World", 0, 12),
-                    IllegalStateException.class);
+            IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                    () -> StringUtils.substring("Hello World", 0, 12));
             assertThat(exception).isNotNull().hasMessage("The end index is out of range: 12.");
         }
 
         @Test
         @DisplayName("Input is 'Hello World', output is IllegalStateException (startIndex: -1, endIndex: 1)")
         void givenHelloWorldAndBetweenMinus1And1ThenThrowException() {
-            IllegalStateException exception = catchThrowableOfType(() -> StringUtils.substring("Hello World", -1, 1),
-                    IllegalStateException.class);
+            IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                    () -> StringUtils.substring("Hello World", -1, 1));
             assertThat(exception).isNotNull()
                     .hasMessage("The canonical start index is greater than the canonical end index. "
                             + "[startIndex=-1, endIndex=1, canonicalStartIndex=10, canonicalEndIndex=1]");

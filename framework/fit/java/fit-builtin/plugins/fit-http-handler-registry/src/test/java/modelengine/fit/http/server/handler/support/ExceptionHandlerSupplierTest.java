@@ -60,7 +60,7 @@ public class ExceptionHandlerSupplierTest {
     private BeanContainer beanContainer;
     private final Type type = Integer.class.getGenericSuperclass();
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "resource"})
     @BeforeEach
     void setup() {
         this.initializeBeanFactory();
@@ -114,11 +114,8 @@ public class ExceptionHandlerSupplierTest {
                     "resolve",
                     BeanContainer.class,
                     BeanFactory.class);
-            MethodInvocationException methodInvocationException = catchThrowableOfType(() -> ReflectionUtils.invoke(
-                    exceptionHandlerResolver,
-                    method,
-                    beanContainer,
-                    beanFactory), MethodInvocationException.class);
+            MethodInvocationException methodInvocationException = catchThrowableOfType(MethodInvocationException.class,
+                    () -> ReflectionUtils.invoke(exceptionHandlerResolver, method, beanContainer, beanFactory));
             assertThat(methodInvocationException.getCause() instanceof ConflictException).isTrue();
             assertThat(methodInvocationException.getCause()
                     .getMessage()

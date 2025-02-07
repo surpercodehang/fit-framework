@@ -83,13 +83,14 @@ public class BuiltinValueConvertersTest {
         Date expected = calendar.getTime();
         assertThat(actual).isEqualTo(expected);
     }
+
     @Test
     @DisplayName("给定一个非日期格式的 String 值，抛出异常")
     void givenNotDateFormatStringValueThenThrowException() {
         String date = "errorDateFormat";
         IllegalStateException illegalStateException =
-                catchThrowableOfType(() -> BuiltinValueConverters.toDate(date), IllegalStateException.class);
-        assertThat(illegalStateException).hasMessageStartingWith(
-                StringUtils.format("Illegal date string. [value={0}]", date));
+                catchThrowableOfType(IllegalStateException.class, () -> BuiltinValueConverters.toDate(date));
+        assertThat(illegalStateException).hasMessageStartingWith(StringUtils.format("Illegal date string. [value={0}]",
+                date));
     }
 }

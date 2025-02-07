@@ -105,11 +105,13 @@ public class DefaultDependencyResolverTest {
                     DefaultDependencyResolverTest.this.applicable,
                     DefaultDependencyResolverTest.this.annotations,
                     DefaultDependencyResolverTest.this.config);
-            UnresolvableDependencyException unresolvableDependencyException = catchThrowableOfType(() -> this.resolver()
-                    .resolve(DefaultDependencyResolverTest.this.beanMetadata,
-                            StringUtils.EMPTY,
-                            DefaultDependencyResolverTest.this.type,
-                            DefaultDependencyResolverTest.this.annotations), UnresolvableDependencyException.class);
+            UnresolvableDependencyException unresolvableDependencyException = catchThrowableOfType(
+                    UnresolvableDependencyException.class,
+                    () -> this.resolver()
+                            .resolve(DefaultDependencyResolverTest.this.beanMetadata,
+                                    StringUtils.EMPTY,
+                                    DefaultDependencyResolverTest.this.type,
+                                    DefaultDependencyResolverTest.this.annotations));
             assertThat(unresolvableDependencyException).hasMessage(StringUtils.format(
                     "Dependency unresolvable. [source={0}, dependency.name={1}, dependency.type={2}]",
                     DefaultDependencyResolverTest.this.beanMetadata.name(),

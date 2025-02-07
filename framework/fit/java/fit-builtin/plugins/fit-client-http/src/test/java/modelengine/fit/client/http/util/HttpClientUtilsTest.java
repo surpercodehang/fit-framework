@@ -50,8 +50,8 @@ public class HttpClientUtilsTest {
         HttpClassicClientResponse<Object> response = cast(mock(HttpClassicClientResponse.class));
         ConfigurableMessageHeaders headers = ConfigurableMessageHeaders.create();
         when(response.headers()).thenReturn(headers);
-        IllegalStateException cause = catchThrowableOfType(() -> HttpClientUtils.getResponseCode(request, response),
-                IllegalStateException.class);
+        IllegalStateException cause = catchThrowableOfType(IllegalStateException.class,
+                () -> HttpClientUtils.getResponseCode(request, response));
         assertThat(cause).isNotNull();
     }
 
@@ -64,8 +64,8 @@ public class HttpClientUtilsTest {
         HttpClassicClientResponse<Object> response = cast(mock(HttpClassicClientResponse.class));
         ConfigurableMessageHeaders headers = ConfigurableMessageHeaders.create().add(FIT_CODE.value(), "Hello");
         when(response.headers()).thenReturn(headers);
-        IllegalStateException cause = catchThrowableOfType(() -> HttpClientUtils.getResponseCode(request, response),
-                IllegalStateException.class);
+        IllegalStateException cause = catchThrowableOfType(IllegalStateException.class,
+                () -> HttpClientUtils.getResponseCode(request, response));
         assertThat(cause).isNotNull();
     }
 }

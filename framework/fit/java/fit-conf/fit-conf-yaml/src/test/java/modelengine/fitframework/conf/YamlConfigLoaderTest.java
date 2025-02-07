@@ -88,7 +88,7 @@ public class YamlConfigLoaderTest {
         try (InputStream in = IoUtils.resource(YamlConfigLoaderTest.class.getClassLoader(), "list-config.yaml")) {
             when(this.resource.read()).thenReturn(in);
             ConfigLoadException cause =
-                    catchThrowableOfType(() -> loader.load(this.resource, null), ConfigLoadException.class);
+                    catchThrowableOfType(ConfigLoadException.class, () -> loader.load(this.resource, null));
             String error = StringUtils.format("The content of config must be an object. [url={0}]", this.resource);
             assertThat(cause).hasMessage(error);
         }
@@ -105,7 +105,7 @@ public class YamlConfigLoaderTest {
         };
         when(this.resource.read()).thenReturn(in);
         YamlConfigLoader loader = new YamlConfigLoader();
-        ConfigLoadException cause = catchThrowableOfType(() -> loader.load(this.resource), ConfigLoadException.class);
+        ConfigLoadException cause = catchThrowableOfType(ConfigLoadException.class, () -> loader.load(this.resource));
         String error = StringUtils.format("Failed to parse YAML from config resource. [url={0}]", this.resource);
         assertThat(cause).hasMessage(error);
     }

@@ -25,6 +25,7 @@ import modelengine.fitframework.util.MapBuilder;
 import modelengine.fitframework.util.ObjectUtils;
 import modelengine.fitframework.value.ValueFetcher;
 
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,9 +61,8 @@ public class HttpTest {
         this.parserBuilder = new ParserBuilder(grammarBuilder, lexer);
 
         ObjectSerializer jsonSerializer = new JacksonObjectSerializer(null, null, null);
-        Map<String, ObjectSerializer> serializers = MapBuilder.<String, ObjectSerializer>get()
-                .put("json", jsonSerializer)
-                .build();
+        Map<String, ObjectSerializer> serializers =
+                MapBuilder.<String, ObjectSerializer>get().put("json", jsonSerializer).build();
         ValueFetcher valueFetcher = new FastJsonValueHandler();
     }
 
@@ -145,7 +145,7 @@ public class HttpTest {
             Map<String, Object> body = cast(response.get("body"));
             assertThat(body).containsEntry("f1", "v1");
             assertThat(body.get("f2")).isNotNull().hasFieldOrPropertyWithValue("k", 1);
-            assertThat(body.get("f3")).asList().contains(1, 2, 3);
+            assertThat(body.get("f3")).asInstanceOf(InstanceOfAssertFactories.LIST).contains(1, 2, 3);
             assertThat(response.get("headers")).isNotNull();
         }
 
@@ -192,7 +192,7 @@ public class HttpTest {
             Map<String, Object> body = cast(response.get("body"));
             assertThat(body).containsEntry("f1", "v1");
             assertThat(body.get("f2")).isNotNull().hasFieldOrPropertyWithValue("k", 1);
-            assertThat(body.get("f3")).asList().contains(1, 2, 3);
+            assertThat(body.get("f3")).asInstanceOf(InstanceOfAssertFactories.LIST).contains(1, 2, 3);
             assertThat(response.get("headers")).isNotNull();
         }
 
@@ -238,7 +238,7 @@ public class HttpTest {
             Map<String, Object> body = cast(response.get("body"));
             assertThat(body).containsEntry("f1", "v1");
             assertThat(body.get("f2")).isNotNull().hasFieldOrPropertyWithValue("k", 1);
-            assertThat(body.get("f3")).asList().contains(1, 2, 3);
+            assertThat(body.get("f3")).asInstanceOf(InstanceOfAssertFactories.LIST).contains(1, 2, 3);
             assertThat(response.get("headers")).isNotNull();
         }
 
@@ -262,7 +262,8 @@ public class HttpTest {
         @Test
         @DisplayName("获取文本返回值成功")
         void shouldDeleteTextSuccessfully() throws OhPanic {
-            HttpTest.this.parserBuilder.addHttpOh("deleteText", "delete",
+            HttpTest.this.parserBuilder.addHttpOh("deleteText",
+                    "delete",
                     "http://localhost:8080/oh/delete/text?q1=v1&q1=v2");
             String ohScript = OhScriptReader.read("http/delete_text.oh");
             AST ast = HttpTest.this.parserBuilder.parseString("", ohScript);

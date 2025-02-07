@@ -92,9 +92,8 @@ public class DefaultFilterTest {
         @Test
         @DisplayName("当待过滤的泛服务实现列表为 Null 时，抛出参数异常")
         void givenToFilterFitablesNullThenThrowIllegalArgumentException() {
-            IllegalArgumentException exception =
-                    catchThrowableOfType(() -> this.filter.filter(this.genericable, null, null, new HashMap<>()),
-                            IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> this.filter.filter(this.genericable, null, null, new HashMap<>()));
             assertThat(exception).isNotNull().hasMessage("The metadata of fitables to filter cannot be null.");
         }
     }

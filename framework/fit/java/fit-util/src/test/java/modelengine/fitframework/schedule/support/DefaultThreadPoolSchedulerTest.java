@@ -112,8 +112,9 @@ public class DefaultThreadPoolSchedulerTest {
         @DisplayName("调用调度方法，任务执行失败并抛出异常")
         void executeScheduleMethodThenFailedAndThrowsException() {
             RejectedExecutionException rejectedExecutionException =
-                    catchThrowableOfType(() -> DefaultThreadPoolSchedulerTest.this.threadPoolScheduler.schedule(
-                            DefaultThreadPoolSchedulerTest.this.task), RejectedExecutionException.class);
+                    catchThrowableOfType(RejectedExecutionException.class,
+                            () -> DefaultThreadPoolSchedulerTest.this.threadPoolScheduler.schedule(
+                                    DefaultThreadPoolSchedulerTest.this.task));
             assertThat(rejectedExecutionException).isNotNull();
             assertThat(DefaultThreadPoolSchedulerTest.this.message.get()).isNotEqualTo(this.expected());
         }

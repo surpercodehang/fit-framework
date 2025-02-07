@@ -39,7 +39,6 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * {@link ValidationHandler} 的单元测试。
@@ -81,15 +80,13 @@ public class ValidationHandlerTest {
             JoinPoint joinPoint = mock(JoinPoint.class);
             when(joinPoint.getMethod()).thenReturn(validateMethod);
             when(joinPoint.getArgs()).thenReturn(new Object[] {car});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
                     ObjectUtils.cast(invocationTargetException.getTargetException());
-            assertThat(expectedException.getMessage()).isEqualTo(
-                    "座位数量范围只能在0和6！, 发动机数量范围只能在0和2！, 品牌不能为空！, 型号不能为空！");
+            assertThat(expectedException.getMessage()).isEqualTo("座位数量范围只能在0和6！, 发动机数量范围只能在0和2！, 品牌不能为空！, 型号不能为空！");
         }
 
         /**
@@ -110,9 +107,8 @@ public class ValidationHandlerTest {
             JoinPoint joinPoint = mock(JoinPoint.class);
             when(joinPoint.getMethod()).thenReturn(validateMethod);
             when(joinPoint.getArgs()).thenReturn(new Object[] {product});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
@@ -138,9 +134,8 @@ public class ValidationHandlerTest {
             JoinPoint joinPoint = mock(JoinPoint.class);
             when(joinPoint.getMethod()).thenReturn(validateMethod);
             when(joinPoint.getArgs()).thenReturn(new Object[] {product});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
@@ -165,9 +160,8 @@ public class ValidationHandlerTest {
             JoinPoint joinPoint = mock(JoinPoint.class);
             when(joinPoint.getMethod()).thenReturn(validateMethod);
             when(joinPoint.getArgs()).thenReturn(new Object[] {-1, -1});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
@@ -203,9 +197,8 @@ public class ValidationHandlerTest {
             JoinPoint joinPoint = mock(JoinPoint.class);
             when(joinPoint.getMethod()).thenReturn(validateMethod);
             when(joinPoint.getArgs()).thenReturn(new Object[] {car});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
@@ -230,9 +223,8 @@ public class ValidationHandlerTest {
             JoinPoint joinPoint = mock(JoinPoint.class);
             when(joinPoint.getMethod()).thenReturn(validateMethod);
             when(joinPoint.getArgs()).thenReturn(new Object[] {-1});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
@@ -257,9 +249,8 @@ public class ValidationHandlerTest {
             JoinPoint joinPoint = mock(JoinPoint.class);
             when(joinPoint.getMethod()).thenReturn(validateMethod);
             when(joinPoint.getArgs()).thenReturn(new Object[] {-1});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, joinPoint, validated));
 
             // then
             assertThat(invocationTargetException == null).isTrue();
@@ -274,15 +265,15 @@ public class ValidationHandlerTest {
         private static final String INVALID_PRODUCT1_MSG = "产品名不能为空, 产品数量必须为正";
         private static final String INVALID_PRODUCT2_MSG = "产品类别不能为空";
 
-        private Car validCar = new Car(5, 1, "brand", "model", 2024, 1999);
-        private Car invalidCar1 = new Car(-1, 1, "", "model", 2024, 1999);
-        private Car invalidCar2 = new Car(5, 1, "brand", "", 2024, 1999);
-        private Product validProduct = new Product("name", 1.0, 1, "category");
-        private Product invalidProduct1 = new Product("", 1.0, -1, "category");
-        private Product invalidProduct2 = new Product("name", 1.0, 1, "");
-        private Method handleValidatedMethod =
+        private final Car validCar = new Car(5, 1, "brand", "model", 2024, 1999);
+        private final Car invalidCar1 = new Car(-1, 1, "", "model", 2024, 1999);
+        private final Car invalidCar2 = new Car(5, 1, "brand", "", 2024, 1999);
+        private final Product validProduct = new Product("name", 1.0, 1, "category");
+        private final Product invalidProduct1 = new Product("", 1.0, -1, "category");
+        private final Product invalidProduct2 = new Product("name", 1.0, 1, "");
+        private final Method handleValidatedMethod =
                 ReflectionUtils.getDeclaredMethod(ValidationHandler.class, "handle", JoinPoint.class, Validated.class);
-        private JoinPoint joinPoint = mock(JoinPoint.class);
+        private final JoinPoint joinPoint = mock(JoinPoint.class);
 
         @BeforeEach
         void setUp() {
@@ -300,16 +291,15 @@ public class ValidationHandlerTest {
             Company company =
                     new Company(-1, 100, this.invalidProduct2, Arrays.asList(this.invalidCar1, this.invalidCar2));
             when(this.joinPoint.getArgs()).thenReturn(new Object[] {company});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, this.joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, this.joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
                     ObjectUtils.cast(invocationTargetException.getTargetException());
             List<String> msgList =
                     Arrays.asList("经理只能有0-1个！", INVALID_PRODUCT2_MSG, INVALID_CAR1_MSG, INVALID_CAR2_MSG);
-            assertThat(expectedException.getMessage()).isEqualTo(msgList.stream().collect(Collectors.joining(", ")));
+            assertThat(expectedException.getMessage()).isEqualTo(String.join(", ", msgList));
         }
 
         @Test
@@ -320,15 +310,14 @@ public class ValidationHandlerTest {
             when(this.joinPoint.getArgs()).thenReturn(new Object[] {
                     Arrays.asList(this.validCar, this.invalidCar1, this.invalidCar2)
             });
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, this.joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, this.joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
                     ObjectUtils.cast(invocationTargetException.getTargetException());
             List<String> msgList = Arrays.asList(INVALID_CAR1_MSG, INVALID_CAR2_MSG);
-            assertThat(expectedException.getMessage()).isEqualTo(msgList.stream().collect(Collectors.joining(", ")));
+            assertThat(expectedException.getMessage()).isEqualTo(String.join(", ", msgList));
         }
 
         @Test
@@ -340,15 +329,14 @@ public class ValidationHandlerTest {
             List<Car> personList2 = Arrays.asList(this.validCar, this.invalidCar1);
 
             when(this.joinPoint.getArgs()).thenReturn(new Object[] {Arrays.asList(personList1, personList2)});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, this.joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, this.joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
                     ObjectUtils.cast(invocationTargetException.getTargetException());
             List<String> msgList = Arrays.asList(INVALID_CAR1_MSG, INVALID_CAR2_MSG, INVALID_CAR1_MSG);
-            assertThat(expectedException.getMessage()).isEqualTo(msgList.stream().collect(Collectors.joining(", ")));
+            assertThat(expectedException.getMessage()).isEqualTo(String.join(", ", msgList));
         }
 
         @Test
@@ -362,15 +350,14 @@ public class ValidationHandlerTest {
             map.put("3", this.invalidCar2);
 
             when(this.joinPoint.getArgs()).thenReturn(new Object[] {map});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, this.joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, this.joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
                     ObjectUtils.cast(invocationTargetException.getTargetException());
             List<String> msgList = Arrays.asList(INVALID_CAR1_MSG, INVALID_CAR2_MSG);
-            assertThat(expectedException.getMessage()).isEqualTo(msgList.stream().collect(Collectors.joining(", ")));
+            assertThat(expectedException.getMessage()).isEqualTo(String.join(", ", msgList));
         }
 
         @Test
@@ -384,16 +371,15 @@ public class ValidationHandlerTest {
             map.put(this.invalidCar2, this.invalidProduct2);
 
             when(this.joinPoint.getArgs()).thenReturn(new Object[] {map});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, this.joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, this.joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
                     ObjectUtils.cast(invocationTargetException.getTargetException());
             List<String> msgList =
                     Arrays.asList(INVALID_CAR1_MSG, INVALID_PRODUCT1_MSG, INVALID_CAR2_MSG, INVALID_PRODUCT2_MSG);
-            assertThat(expectedException.getMessage()).isEqualTo(msgList.stream().collect(Collectors.joining(", ")));
+            assertThat(expectedException.getMessage()).isEqualTo(String.join(", ", msgList));
         }
 
         @Test
@@ -414,9 +400,8 @@ public class ValidationHandlerTest {
             nestMap.put(this.invalidCar1, map2);
 
             when(this.joinPoint.getArgs()).thenReturn(new Object[] {nestMap});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, this.joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, this.joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
@@ -428,7 +413,7 @@ public class ValidationHandlerTest {
                     INVALID_CAR1_MSG,
                     INVALID_CAR1_MSG,
                     INVALID_PRODUCT1_MSG);
-            assertThat(expectedException.getMessage()).isEqualTo(msgList.stream().collect(Collectors.joining(", ")));
+            assertThat(expectedException.getMessage()).isEqualTo(String.join(", ", msgList));
         }
 
         @Test
@@ -445,9 +430,8 @@ public class ValidationHandlerTest {
             map2.put(this.validCar, this.validProduct);
 
             when(this.joinPoint.getArgs()).thenReturn(new Object[] {Arrays.asList(map1, map2)});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, this.joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, this.joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
@@ -458,7 +442,7 @@ public class ValidationHandlerTest {
                     INVALID_PRODUCT2_MSG,
                     INVALID_CAR1_MSG,
                     INVALID_PRODUCT1_MSG);
-            assertThat(expectedException.getMessage()).isEqualTo(msgList.stream().collect(Collectors.joining(", ")));
+            assertThat(expectedException.getMessage()).isEqualTo(String.join(", ", msgList));
         }
 
         @Test
@@ -473,16 +457,15 @@ public class ValidationHandlerTest {
             map.put(this.invalidCar2, productList2);
 
             when(this.joinPoint.getArgs()).thenReturn(new Object[] {map});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, this.joinPoint, validated),
-                            InvocationTargetException.class);
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, this.joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
                     ObjectUtils.cast(invocationTargetException.getTargetException());
             List<String> msgList =
                     Arrays.asList(INVALID_CAR1_MSG, INVALID_PRODUCT1_MSG, INVALID_CAR2_MSG, INVALID_PRODUCT2_MSG);
-            assertThat(expectedException.getMessage()).isEqualTo(msgList.stream().collect(Collectors.joining(", ")));
+            assertThat(expectedException.getMessage()).isEqualTo(String.join(", ", msgList));
         }
 
         @Test
@@ -492,16 +475,15 @@ public class ValidationHandlerTest {
             when(this.joinPoint.getMethod()).thenReturn(validateMethod);
             Company company =
                     new Company(-1, 100, this.validProduct, Arrays.asList(this.invalidCar1, this.invalidCar2));
-            when(this.joinPoint.getArgs()).thenReturn(new Object[] {Arrays.asList(company)});
-            InvocationTargetException invocationTargetException =
-                    catchThrowableOfType(() -> handleValidatedMethod.invoke(handler, this.joinPoint, validated),
-                            InvocationTargetException.class);
+            when(this.joinPoint.getArgs()).thenReturn(new Object[] {List.of(company)});
+            InvocationTargetException invocationTargetException = catchThrowableOfType(InvocationTargetException.class,
+                    () -> handleValidatedMethod.invoke(handler, this.joinPoint, validated));
 
             // then
             ConstraintViolationException expectedException =
                     ObjectUtils.cast(invocationTargetException.getTargetException());
             List<String> msgList = Arrays.asList("经理只能有0-1个！", INVALID_CAR1_MSG, INVALID_CAR2_MSG);
-            assertThat(expectedException.getMessage()).isEqualTo(msgList.stream().collect(Collectors.joining(", ")));
+            assertThat(expectedException.getMessage()).isEqualTo(String.join(", ", msgList));
         }
     }
 }

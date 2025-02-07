@@ -9,6 +9,7 @@ package modelengine.fit.serialization.cbor;
 import static modelengine.fitframework.util.ObjectUtils.cast;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -108,11 +109,20 @@ public class CborDecoderTest {
     void shouldReturnCorrectNestedArray() throws IOException {
         byte[] encoded = convertHexStringToByteArray("838101820203820405");
         Object decoded = this.decoder.decode(encoded);
-        assertThat(decoded).isInstanceOf(List.class).asList().hasSize(3);
+        assertThat(decoded).isInstanceOf(List.class).asInstanceOf(InstanceOfAssertFactories.LIST).hasSize(3);
         List<Object> list = cast(decoded);
-        assertThat(list.get(0)).isInstanceOf(List.class).asList().hasSize(1).contains(1L);
-        assertThat(list.get(1)).isInstanceOf(List.class).asList().hasSize(2).contains(2L, 3L);
-        assertThat(list.get(2)).isInstanceOf(List.class).asList().hasSize(2).contains(4L, 5L);
+        assertThat(list.get(0)).isInstanceOf(List.class)
+                .asInstanceOf(InstanceOfAssertFactories.LIST)
+                .hasSize(1)
+                .contains(1L);
+        assertThat(list.get(1)).isInstanceOf(List.class)
+                .asInstanceOf(InstanceOfAssertFactories.LIST)
+                .hasSize(2)
+                .contains(2L, 3L);
+        assertThat(list.get(2)).isInstanceOf(List.class)
+                .asInstanceOf(InstanceOfAssertFactories.LIST)
+                .hasSize(2)
+                .contains(4L, 5L);
     }
 
     @Test
@@ -120,7 +130,10 @@ public class CborDecoderTest {
     void shouldReturnCorrectIntArray() throws IOException {
         byte[] encoded = convertHexStringToByteArray("8318181819181A");
         Object decoded = this.decoder.decode(encoded);
-        assertThat(decoded).isInstanceOf(List.class).asList().hasSize(3).contains(24L, 25L, 26L);
+        assertThat(decoded).isInstanceOf(List.class)
+                .asInstanceOf(InstanceOfAssertFactories.LIST)
+                .hasSize(3)
+                .contains(24L, 25L, 26L);
     }
 
     @Test

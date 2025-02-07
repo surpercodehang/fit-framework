@@ -39,6 +39,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -65,6 +66,7 @@ public class XmlUtilsTest {
     private Map<String, Object> documentMap;
     private final ObjectMapper mapper = new ObjectMapper();
 
+    @SuppressWarnings("unchecked")
     @BeforeEach
     void setup() throws IOException {
         try (InputStream in = XmlUtilsTest.class.getResourceAsStream("/demo.xml")) {
@@ -81,7 +83,7 @@ public class XmlUtilsTest {
         }
 
         try (InputStream in = XmlUtilsTest.class.getResourceAsStream("/demo.json")) {
-            this.documentMap = mapper.readValue(in, Map.class);
+            this.documentMap = this.mapper.readValue(in, Map.class);
         }
     }
 
@@ -101,8 +103,8 @@ public class XmlUtilsTest {
         @DisplayName("ParentNode is single element, factory is not null, output is exception")
         void givenParentNodeIsSingleElementThenThrowException() {
             Element element = mock(Element.class);
-            IllegalStateException exception = catchThrowableOfType(() -> XmlUtils.appendChild(element,
-                    document -> document.createElement("Name")), IllegalStateException.class);
+            IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                    () -> XmlUtils.appendChild(element, document -> document.createElement("Name")));
             assertThat(exception).hasMessage("The XML node to create child does not belong to any document.");
         }
     }
@@ -117,7 +119,7 @@ public class XmlUtilsTest {
         @DisplayName("ParentNode is null, tagName is '', output is exception")
         void givenParentNodeNullThenThrowException() {
             IllegalArgumentException exception =
-                    catchThrowableOfType(() -> XmlUtils.appendElement(null, "Hello"), IllegalArgumentException.class);
+                    catchThrowableOfType(IllegalArgumentException.class, () -> XmlUtils.appendElement(null, "Hello"));
             assertThat(exception).hasMessage("The parent node to create child element cannot be null.");
         }
 
@@ -125,9 +127,8 @@ public class XmlUtilsTest {
         @DisplayName("ParentNode is not null, tagName is '', output is exception")
         void givenEmptyParentNodeAndEmptyTagNameThenThrowException() {
             Document createdDocument = XmlUtils.createDocument();
-            IllegalArgumentException exception =
-                    catchThrowableOfType(() -> XmlUtils.appendElement(createdDocument, StringUtils.EMPTY),
-                            IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> XmlUtils.appendElement(createdDocument, StringUtils.EMPTY));
             assertThat(exception).hasMessage("The name of child tag to create cannot be blank.");
         }
 
@@ -151,7 +152,7 @@ public class XmlUtilsTest {
         @DisplayName("ParentNode is null, text is 'Hello', output is exception")
         void givenParentNodeNullThenThrowException() {
             IllegalArgumentException exception =
-                    catchThrowableOfType(() -> XmlUtils.appendText(null, "Hello"), IllegalArgumentException.class);
+                    catchThrowableOfType(IllegalArgumentException.class, () -> XmlUtils.appendText(null, "Hello"));
             assertThat(exception).hasMessage("The parent node to append text cannot be null.");
         }
 
@@ -236,10 +237,10 @@ public class XmlUtilsTest {
                 doThrow(new ParserConfigurationException()).when(factory).setFeature(eq(feature), eq(true));
                 mocked.when(DocumentBuilderFactory::newInstance).thenReturn(factory);
                 IllegalStateException exception =
-                        catchThrowableOfType(XmlUtils::createDocument, IllegalStateException.class);
+                        catchThrowableOfType(IllegalStateException.class, XmlUtils::createDocument);
                 assertThat(exception).hasMessage(StringUtils.format(
                         "Failed to enable feature for document builder factory. [feature={0}]",
-                        feature)).getCause().isInstanceOf(ParserConfigurationException.class);
+                        feature)).cause().isInstanceOf(ParserConfigurationException.class);
             }
         }
 
@@ -254,10 +255,10 @@ public class XmlUtilsTest {
                 doThrow(new ParserConfigurationException()).when(factory).setFeature(eq(feature), eq(false));
                 mocked.when(DocumentBuilderFactory::newInstance).thenReturn(factory);
                 IllegalStateException exception =
-                        catchThrowableOfType(XmlUtils::createDocument, IllegalStateException.class);
+                        catchThrowableOfType(IllegalStateException.class, XmlUtils::createDocument);
                 assertThat(exception).hasMessage(StringUtils.format(
                         "Failed to disable feature for document builder factory. [feature={0}]",
-                        feature)).getCause().isInstanceOf(ParserConfigurationException.class);
+                        feature)).cause().isInstanceOf(ParserConfigurationException.class);
             }
         }
 
@@ -270,9 +271,9 @@ public class XmlUtilsTest {
                 doThrow(new ParserConfigurationException()).when(factory).newDocumentBuilder();
                 mocked.when(DocumentBuilderFactory::newInstance).thenReturn(factory);
                 IllegalStateException exception =
-                        catchThrowableOfType(XmlUtils::createDocument, IllegalStateException.class);
+                        catchThrowableOfType(IllegalStateException.class, XmlUtils::createDocument);
                 assertThat(exception).hasMessage("Failed to create document builder.")
-                        .getCause()
+                        .cause()
                         .isInstanceOf(ParserConfigurationException.class);
             }
         }
@@ -479,9 +480,9 @@ public class XmlUtilsTest {
         void givenNotXmlInputStreamThenThrowException() throws IOException {
             try (InputStream in = new ByteArrayInputStream(new byte[0])) {
                 IllegalStateException exception =
-                        catchThrowableOfType(() -> XmlUtils.load(in), IllegalStateException.class);
+                        catchThrowableOfType(IllegalStateException.class, () -> XmlUtils.load(in));
                 assertThat(exception).hasMessage("Failed to parse XML from the input stream.")
-                        .getCause()
+                        .cause()
                         .isInstanceOf(SAXException.class);
             }
         }
@@ -494,7 +495,7 @@ public class XmlUtilsTest {
         @DisplayName("给定传入参数为 null，输出抛出异常")
         void givenEmptyXmlOutputStreamThenThrowException() {
             IllegalArgumentException exception =
-                    catchThrowableOfType(() -> XmlUtils.writer(null), IllegalArgumentException.class);
+                    catchThrowableOfType(IllegalArgumentException.class, () -> XmlUtils.writer(null));
             assertThat(exception).hasMessage("The output stream of writer cannot be null.")
                     .isInstanceOf(IllegalArgumentException.class);
         }
@@ -512,10 +513,8 @@ public class XmlUtilsTest {
             @DisplayName("给定传入文件参数为 null，输出抛出异常")
             void givenEmptyXmlDocumentThenThrowException() throws IOException {
                 try (ByteArrayOutputStream temporary = new ByteArrayOutputStream()) {
-                    IllegalArgumentException exception = catchThrowableOfType(() -> XmlUtils.writer(temporary)
-                            .enableIndent()
-                            .indentWidth(4)
-                            .write(null), IllegalArgumentException.class);
+                    IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                            () -> XmlUtils.writer(temporary).enableIndent().indentWidth(4).write(null));
                     assertThat(exception).hasMessage("The XML document to save cannot be null.")
                             .isInstanceOf(IllegalArgumentException.class);
                 }
@@ -577,7 +576,7 @@ public class XmlUtilsTest {
                 XmlUtils.Writer writer = XmlUtils.writer(temporary);
                 final XmlUtils.Writer writerWithIndent = writer.enableIndent().indentWidth(FOUR_BLANK.length());
                 writerWithIndent.write(doc);
-                final String content = new String(temporary.toByteArray());
+                final String content = temporary.toString();
                 assertThat(content).contains(FOUR_BLANK);
             }
         }
@@ -598,7 +597,7 @@ public class XmlUtilsTest {
                 XmlUtils.NodeHolder actual = holder.accept(rootNode);
                 assertThat(actual.ready()).isTrue();
                 assertThat(actual.toString()).isEqualTo(name);
-                IllegalStateException exception = catchThrowableOfType(actual::intValue, IllegalStateException.class);
+                IllegalStateException exception = catchThrowableOfType(IllegalStateException.class, actual::intValue);
                 assertThat(exception).hasMessage(StringUtils.format(
                         "Content of node {0} is not a 32-bit integer. [value={1}]",
                         name,
@@ -613,7 +612,7 @@ public class XmlUtilsTest {
             @DisplayName("给定不存在的 Node 值，抛出异常")
             void givenNotExistNodeValueThenThrowException() {
                 XmlUtils.NodeHolder actual = holder.accept(rootNode.getChildNodes());
-                IllegalStateException exception = catchThrowableOfType(actual::intValue, IllegalStateException.class);
+                IllegalStateException exception = catchThrowableOfType(IllegalStateException.class, actual::intValue);
                 assertThat(exception).hasMessage(StringUtils.format("Node {0} not found.", name))
                         .isInstanceOf(IllegalStateException.class);
             }
@@ -770,7 +769,7 @@ public class XmlUtilsTest {
                 try (InputStream in = getClass().getResourceAsStream("/security-test-file/external.xml")) {
                     assertThatThrownBy(() -> XmlUtils.load(in)).isInstanceOf(IllegalStateException.class)
                             .hasMessage("Failed to parse XML from the input stream.")
-                            .getCause()
+                            .cause()
                             .isInstanceOf(SAXException.class);
                 }
             }
@@ -814,7 +813,9 @@ public class XmlUtilsTest {
             @Test
             @DisplayName("测试 FEATURE_ALLOW_LOAD_EXTERNAL_DTD 设置的启用，即启用加载外部 DTD")
             void testLoadExternalDTD() throws Exception {
-                String dtdFilePath = XmlUtilsTest.class.getResource("/security-test-file/external.dtd").getFile();
+                String dtdFilePath =
+                        Objects.requireNonNull(XmlUtilsTest.class.getResource("/security-test-file/external.dtd"))
+                                .getFile();
                 String maliciousXml =
                         "<?xml version=\"1.0\"?>\n" + "<!DOCTYPE root SYSTEM \"file://" + dtdFilePath + "\">\n"
                                 + "<root>&demoEntity;</root>\n";

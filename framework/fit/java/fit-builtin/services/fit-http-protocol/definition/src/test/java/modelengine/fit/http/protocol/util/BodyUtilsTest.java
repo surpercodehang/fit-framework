@@ -71,7 +71,7 @@ public class BodyUtilsTest {
                             StandardCharsets.UTF_8)));
             MessageHeaders headers = ConfigurableMessageHeaders.create().add("Content-Length", "18");
             IllegalStateException illegalStateException =
-                    catchThrowableOfType(() -> BodyUtils.readBody(body, headers), IllegalStateException.class);
+                    catchThrowableOfType(IllegalStateException.class, () -> BodyUtils.readBody(body, headers));
             assertThat(illegalStateException).hasMessage(StringUtils.format(
                     "Failed to read enough message body by Content-Length. [read={0}]",
                     "readBodyByChunked".length()));

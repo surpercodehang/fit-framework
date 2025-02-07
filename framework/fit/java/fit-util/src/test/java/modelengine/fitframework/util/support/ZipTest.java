@@ -59,7 +59,7 @@ public class ZipTest {
             zipFile.deleteOnExit();
             Zip zip = new Zip(zipFile, null).override(false).add(new File("src/test/resources/zip"));
             zip.start();
-            IOException exception = catchThrowableOfType(zip::start, IOException.class);
+            IOException exception = catchThrowableOfType(IOException.class, zip::start);
             assertThat(exception).isNotNull()
                     .hasMessage("The output file of zip already exists. [name=zip-exception-tmp1.zip]");
         }

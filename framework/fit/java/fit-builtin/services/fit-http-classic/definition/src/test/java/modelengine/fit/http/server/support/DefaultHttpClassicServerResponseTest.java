@@ -110,7 +110,7 @@ class DefaultHttpClassicServerResponseTest {
                 new DefaultHttpClassicServerResponse(httpResource, serverResponse);
         actualResponse.entity(mockedEntity);
         InternalServerErrorException cause =
-                catchThrowableOfType(actualResponse::send, InternalServerErrorException.class);
-        assertThat(cause).isNotNull().getCause().isNotNull().hasMessage("Error");
+                catchThrowableOfType(InternalServerErrorException.class, actualResponse::send);
+        assertThat(cause).isNotNull().cause().isNotNull().hasMessage("Error");
     }
 }

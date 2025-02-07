@@ -80,13 +80,14 @@ class DefaultBeanContainerTest extends AbstractBeanContainerTest {
         private String name;
         private String value;
         private boolean initialized = false;
+        @SuppressWarnings("FieldCanBeLocal")
         private boolean destroyed = false;
 
         Bean(Long id) {
             this.id = id;
         }
 
-        void setValue(String value) {
+        void setValue(@SuppressWarnings("SameParameterValue") String value) {
             this.value = value;
         }
 
@@ -261,9 +262,8 @@ class DefaultBeanContainerTest extends AbstractBeanContainerTest {
                         DefaultBeanContainerTest.this.emptySet,
                         BeanApplicableScope.ANYWHERE,
                         DefaultBeanContainerTest.this.properties);
-                IllegalArgumentException illegalArgumentException =
-                        catchThrowableOfType(() -> DefaultBeanContainerTest.this.container.register(beanDefinition),
-                                IllegalArgumentException.class);
+                IllegalArgumentException illegalArgumentException = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> DefaultBeanContainerTest.this.container.register(beanDefinition));
                 assertThat(illegalArgumentException).hasMessage(StringUtils.format(
                         "The type of bean to register must be a class. [type={0}]",
                         type.getTypeName()));
@@ -362,9 +362,8 @@ class DefaultBeanContainerTest extends AbstractBeanContainerTest {
         @Test
         @DisplayName("当注册的两个 Bean 均不为首选，抛出异常")
         void givenBothBeanNotPreferredThenThrowException() {
-            AmbiguousBeanException ambiguousBeanException =
-                    catchThrowableOfType(() -> DefaultBeanContainerTest.this.container.factory(String.class),
-                            AmbiguousBeanException.class);
+            AmbiguousBeanException ambiguousBeanException = catchThrowableOfType(AmbiguousBeanException.class,
+                    () -> DefaultBeanContainerTest.this.container.factory(String.class));
             assertThat(ambiguousBeanException).hasMessageStartingWith("Ambiguous bean of specific type found.");
         }
 
@@ -413,9 +412,8 @@ class DefaultBeanContainerTest extends AbstractBeanContainerTest {
                     BeanApplicableScope.ANYWHERE,
                     DefaultBeanContainerTest.this.properties);
             DefaultBeanContainerTest.this.container.register(beanDefinition);
-            AmbiguousBeanException ambiguousBeanException =
-                    catchThrowableOfType(() -> DefaultBeanContainerTest.this.container.factory(String.class),
-                            AmbiguousBeanException.class);
+            AmbiguousBeanException ambiguousBeanException = catchThrowableOfType(AmbiguousBeanException.class,
+                    () -> DefaultBeanContainerTest.this.container.factory(String.class));
             assertThat(ambiguousBeanException).hasMessageStartingWith(
                     "Ambiguous preferred bean of specific type " + "found.");
         }

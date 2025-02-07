@@ -62,9 +62,8 @@ public class DefaultHttpDispatcherTest {
     void throwExceptionWhenDispatching() {
         when(this.request.method()).thenReturn(HttpRequestMethod.GET);
         when(this.request.path()).thenReturn("/a");
-        HttpHandlerNotFoundException exception =
-                catchThrowableOfType(() -> this.dispatcher.dispatch(this.request, null),
-                        HttpHandlerNotFoundException.class);
+        HttpHandlerNotFoundException exception = catchThrowableOfType(HttpHandlerNotFoundException.class,
+                () -> this.dispatcher.dispatch(this.request, null));
         assertThat(exception).isNotNull().hasMessage("No http handler for http request. [method=GET, path=/a]");
     }
 
@@ -98,18 +97,17 @@ public class DefaultHttpDispatcherTest {
         void throwExceptionWhenDispatchingNonRootPath() {
             when(DefaultHttpDispatcherTest.this.request.method()).thenReturn(HttpRequestMethod.GET);
             when(DefaultHttpDispatcherTest.this.request.path()).thenReturn("/b");
-            HttpHandlerNotFoundException exception =
-                    catchThrowableOfType(() -> this.dispatcher().dispatch(DefaultHttpDispatcherTest.this.request, null),
-                            HttpHandlerNotFoundException.class);
+            HttpHandlerNotFoundException exception = catchThrowableOfType(HttpHandlerNotFoundException.class,
+                    () -> this.dispatcher().dispatch(DefaultHttpDispatcherTest.this.request, null));
             assertThat(exception).isNotNull().hasMessage("No http handler for http request. [method=GET, path=/b]");
         }
 
         @Test
         @DisplayName("当再注册一个根路径的处理器时，抛出 RegisterHttpHandlerException")
         void throwExceptionWhenRegisteringRootPathPatternHandler() {
-            RegisterHttpHandlerException exception = catchThrowableOfType(() -> this.dispatcher()
-                            .register(HttpRequestMethod.GET.name(), DefaultHttpDispatcherTest.this.handler),
-                    RegisterHttpHandlerException.class);
+            RegisterHttpHandlerException exception = catchThrowableOfType(RegisterHttpHandlerException.class,
+                    () -> this.dispatcher()
+                            .register(HttpRequestMethod.GET.name(), DefaultHttpDispatcherTest.this.handler));
             assertThat(exception).isNotNull().hasMessage("Http handler has been registered. [method=GET, pattern=/]");
         }
 
@@ -149,9 +147,8 @@ public class DefaultHttpDispatcherTest {
         void throwExceptionWhenDispatchingNotMatchedPath() {
             when(DefaultHttpDispatcherTest.this.request.method()).thenReturn(HttpRequestMethod.GET);
             when(DefaultHttpDispatcherTest.this.request.path()).thenReturn("/b");
-            HttpHandlerNotFoundException exception =
-                    catchThrowableOfType(() -> this.dispatcher().dispatch(DefaultHttpDispatcherTest.this.request, null),
-                            HttpHandlerNotFoundException.class);
+            HttpHandlerNotFoundException exception = catchThrowableOfType(HttpHandlerNotFoundException.class,
+                    () -> this.dispatcher().dispatch(DefaultHttpDispatcherTest.this.request, null));
             assertThat(exception).isNotNull().hasMessage("No http handler for http request. [method=GET, path=/b]");
         }
 
@@ -191,18 +188,17 @@ public class DefaultHttpDispatcherTest {
         void throwExceptionWhenDispatchingNotMatchedPath() {
             when(DefaultHttpDispatcherTest.this.request.method()).thenReturn(HttpRequestMethod.GET);
             when(DefaultHttpDispatcherTest.this.request.path()).thenReturn("/a/b");
-            HttpHandlerNotFoundException exception =
-                    catchThrowableOfType(() -> this.dispatcher().dispatch(DefaultHttpDispatcherTest.this.request, null),
-                            HttpHandlerNotFoundException.class);
+            HttpHandlerNotFoundException exception = catchThrowableOfType(HttpHandlerNotFoundException.class,
+                    () -> this.dispatcher().dispatch(DefaultHttpDispatcherTest.this.request, null));
             assertThat(exception).isNotNull().hasMessage("No http handler for http request. [method=GET, path=/a/b]");
         }
 
         @Test
         @DisplayName("当再注册一个相同的有路径变量的处理器时，抛出 RegisterHttpHandlerException")
         void throwExceptionWhenRegisteringAnotherSamePathPatternHandler() {
-            RegisterHttpHandlerException exception = catchThrowableOfType(() -> this.dispatcher()
-                            .register(HttpRequestMethod.GET.name(), DefaultHttpDispatcherTest.this.handler),
-                    RegisterHttpHandlerException.class);
+            RegisterHttpHandlerException exception = catchThrowableOfType(RegisterHttpHandlerException.class,
+                    () -> this.dispatcher()
+                            .register(HttpRequestMethod.GET.name(), DefaultHttpDispatcherTest.this.handler));
             assertThat(exception).isNotNull().hasMessage("Http handler has been registered. [method=GET, pattern=/*]");
         }
 
@@ -242,18 +238,17 @@ public class DefaultHttpDispatcherTest {
         void throwExceptionWhenDispatchingNotMatchedPath() {
             when(DefaultHttpDispatcherTest.this.request.method()).thenReturn(HttpRequestMethod.GET);
             when(DefaultHttpDispatcherTest.this.request.path()).thenReturn("/b/b/c");
-            HttpHandlerNotFoundException exception =
-                    catchThrowableOfType(() -> this.dispatcher().dispatch(DefaultHttpDispatcherTest.this.request, null),
-                            HttpHandlerNotFoundException.class);
+            HttpHandlerNotFoundException exception = catchThrowableOfType(HttpHandlerNotFoundException.class,
+                    () -> this.dispatcher().dispatch(DefaultHttpDispatcherTest.this.request, null));
             assertThat(exception).isNotNull().hasMessage("No http handler for http request. [method=GET, path=/b/b/c]");
         }
 
         @Test
         @DisplayName("当再注册一个相同的有路径变量的处理器时，抛出 RegisterHttpHandlerException")
         void throwExceptionWhenRegisteringAnotherSamePathPatternHandler() {
-            RegisterHttpHandlerException exception = catchThrowableOfType(() -> this.dispatcher()
-                            .register(HttpRequestMethod.GET.name(), DefaultHttpDispatcherTest.this.handler),
-                    RegisterHttpHandlerException.class);
+            RegisterHttpHandlerException exception = catchThrowableOfType(RegisterHttpHandlerException.class,
+                    () -> this.dispatcher()
+                            .register(HttpRequestMethod.GET.name(), DefaultHttpDispatcherTest.this.handler));
             assertThat(exception).isNotNull()
                     .hasMessage("Http handler has been registered. [method=GET, pattern=/a/**]");
         }
@@ -295,18 +290,17 @@ public class DefaultHttpDispatcherTest {
         void throwExceptionWhenDispatchingNotMatchedPath() {
             when(DefaultHttpDispatcherTest.this.request.method()).thenReturn(HttpRequestMethod.GET);
             when(DefaultHttpDispatcherTest.this.request.path()).thenReturn("/b/b/c");
-            HttpHandlerNotFoundException exception =
-                    catchThrowableOfType(() -> this.dispatcher().dispatch(DefaultHttpDispatcherTest.this.request, null),
-                            HttpHandlerNotFoundException.class);
+            HttpHandlerNotFoundException exception = catchThrowableOfType(HttpHandlerNotFoundException.class,
+                    () -> this.dispatcher().dispatch(DefaultHttpDispatcherTest.this.request, null));
             assertThat(exception).isNotNull().hasMessage("No http handler for http request. [method=GET, path=/b/b/c]");
         }
 
         @Test
         @DisplayName("当再注册一个相同的有路径变量的处理器时，抛出 RegisterHttpHandlerException")
         void throwExceptionWhenRegisteringAnotherSamePathPatternHandler() {
-            RegisterHttpHandlerException exception = catchThrowableOfType(() -> this.dispatcher()
-                            .register(HttpRequestMethod.GET.name(), DefaultHttpDispatcherTest.this.handler),
-                    RegisterHttpHandlerException.class);
+            RegisterHttpHandlerException exception = catchThrowableOfType(RegisterHttpHandlerException.class,
+                    () -> this.dispatcher()
+                            .register(HttpRequestMethod.GET.name(), DefaultHttpDispatcherTest.this.handler));
             assertThat(exception).isNotNull()
                     .hasMessage("Http handler has been registered. [method=GET, pattern=/a/ \"#%&()+,/:;<=>?@\\|]");
         }

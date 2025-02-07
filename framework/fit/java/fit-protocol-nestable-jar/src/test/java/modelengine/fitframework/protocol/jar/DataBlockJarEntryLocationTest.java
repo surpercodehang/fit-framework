@@ -68,10 +68,11 @@ public class DataBlockJarEntryLocationTest {
         @Test
         @DisplayName("实例化时，给定空的条目值，抛出异常")
         void givenEmptyEntryWhenInitializeThenThrowException() {
-            IllegalArgumentException illegalArgumentException = catchThrowableOfType(() -> JarEntryLocation.custom()
-                    .jar(JarLocation.custom().file(this.file).nests(this.nests).build())
-                    .entry("")
-                    .build(), IllegalArgumentException.class);
+            IllegalArgumentException illegalArgumentException = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> JarEntryLocation.custom()
+                            .jar(JarLocation.custom().file(this.file).nests(this.nests).build())
+                            .entry("")
+                            .build());
             assertThat(illegalArgumentException).isNotNull();
         }
 
@@ -248,7 +249,7 @@ public class DataBlockJarEntryLocationTest {
             void givenEmptyValueWhenBuildNewInstanceThenThrowException() {
                 JarLocation.Builder custom = JarLocation.custom();
                 IllegalArgumentException illegalArgumentException =
-                        AssertionsForClassTypes.catchThrowableOfType(custom::build, IllegalArgumentException.class);
+                        AssertionsForClassTypes.catchThrowableOfType(IllegalArgumentException.class, custom::build);
                 assertThat(illegalArgumentException).hasMessage("The file of a JAR location cannot be null.");
             }
 

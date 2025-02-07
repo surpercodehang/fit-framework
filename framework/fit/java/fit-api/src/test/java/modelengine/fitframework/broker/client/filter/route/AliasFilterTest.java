@@ -46,7 +46,7 @@ public class AliasFilterTest {
             @DisplayName("当参数为 Null 时，抛出参数异常")
             void givenNullThenThrowIllegalArgumentException() {
                 IllegalArgumentException exception =
-                        catchThrowableOfType(() -> new AliasFilter((String[]) null), IllegalArgumentException.class);
+                        catchThrowableOfType(IllegalArgumentException.class, () -> new AliasFilter((String[]) null));
                 assertThat(exception).isNotNull().hasMessage("No valid alias to instantiate AliasFilter.");
             }
 
@@ -65,8 +65,8 @@ public class AliasFilterTest {
             @Test
             @DisplayName("当参数为 Null 时，抛出参数异常")
             void givenNullThenThrowIllegalArgumentException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> new AliasFilter((List<String>) null),
-                        IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> new AliasFilter((List<String>) null));
                 assertThat(exception).isNotNull().hasMessage("No valid alias to instantiate AliasFilter.");
             }
 
@@ -146,9 +146,8 @@ public class AliasFilterTest {
         @Test
         @DisplayName("当待过滤的泛服务实现列表为 Null 时，抛出参数异常")
         void givenToFilterFitablesNullThenThrowIllegalArgumentException() {
-            IllegalArgumentException exception =
-                    catchThrowableOfType(() -> this.filter.filter(this.genericable, null, null, new HashMap<>()),
-                            IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> this.filter.filter(this.genericable, null, null, new HashMap<>()));
             assertThat(exception).isNotNull().hasMessage("The metadata of fitables to filter cannot be null.");
         }
     }

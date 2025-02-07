@@ -28,18 +28,16 @@ public class JarLocationParserCompositeTest {
     @Test
     @DisplayName("当解析 JAR 的位置信息，包含不支持的子协议类型时，抛出异常")
     void givenNoSupportedParserWhenParseJarThenThrowException() {
-        UnsupportedOperationException cause =
-                catchThrowableOfType(() -> JarLocationParser.instance().parseJar("jar:test:/a!/"),
-                        UnsupportedOperationException.class);
+        UnsupportedOperationException cause = catchThrowableOfType(UnsupportedOperationException.class,
+                () -> JarLocationParser.instance().parseJar("jar:test:/a!/"));
         assertThat(cause).hasMessage("No supported parser to parse JAR. [url=jar:test:/a!/]");
     }
 
     @Test
     @DisplayName("当解析 JAR 中记录的位置信息，包含不支持的子协议类型时，抛出异常")
     void givenNoSupportedParserWhenParseEntryThenThrowException() {
-        UnsupportedOperationException cause =
-                catchThrowableOfType(() -> JarLocationParser.instance().parseEntry("jar:test:/a!/"),
-                        UnsupportedOperationException.class);
+        UnsupportedOperationException cause = catchThrowableOfType(UnsupportedOperationException.class,
+                () -> JarLocationParser.instance().parseEntry("jar:test:/a!/"));
         assertThat(cause).hasMessage("No supported parser to parse JAR entry. [url=jar:test:/a!/]");
     }
 

@@ -106,9 +106,8 @@ public class DefaultHttpExceptionHandlerTest {
         this.initializeRequest();
         this.initializeResponse();
         Throwable cause = new Exception();
-        MethodInvocationException methodInvocationException =
-                catchThrowableOfType(() -> this.defaultHttpExceptionHandler.handle(this.request, this.response, cause),
-                        MethodInvocationException.class);
+        MethodInvocationException methodInvocationException = catchThrowableOfType(MethodInvocationException.class,
+                () -> this.defaultHttpExceptionHandler.handle(this.request, this.response, cause));
         assertThat(methodInvocationException).isNotNull();
     }
 }

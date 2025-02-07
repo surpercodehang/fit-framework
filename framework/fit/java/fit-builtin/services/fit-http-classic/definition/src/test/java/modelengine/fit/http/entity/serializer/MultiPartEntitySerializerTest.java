@@ -67,9 +67,8 @@ public class MultiPartEntitySerializerTest {
     void invokeSerializeEntityMethodThenThrowException() {
         List<NamedEntity> list = new ArrayList<>();
         this.entity = new DefaultPartitionedEntity(this.httpMessage, list);
-        EntityWriteException entityWriteException =
-                catchThrowableOfType(() -> this.multiPartEntitySerializer.serializeEntity(this.entity, this.charset),
-                        EntityWriteException.class);
+        EntityWriteException entityWriteException = catchThrowableOfType(EntityWriteException.class,
+                () -> this.multiPartEntitySerializer.serializeEntity(this.entity, this.charset));
         assertThat(entityWriteException).hasMessage("Unsupported to serialize entity of Content-Type 'multipart/*'.");
     }
 
@@ -80,13 +79,15 @@ public class MultiPartEntitySerializerTest {
             return MultiPartEntitySerializerTest.this.multiPartEntitySerializer;
         }
 
+        @SuppressWarnings("resource")
         @Test
         @DisplayName("未指定分隔符，抛出异常")
         void givenNoBoundaryThenThrowException() {
-            EntityReadException entityReadException = catchThrowableOfType(() -> this.getSerializer()
-                    .deserializeEntity("testEntity".getBytes(StandardCharsets.UTF_8),
-                            MultiPartEntitySerializerTest.this.charset,
-                            MultiPartEntitySerializerTest.this.httpMessage), EntityReadException.class);
+            EntityReadException entityReadException = catchThrowableOfType(EntityReadException.class,
+                    () -> this.getSerializer()
+                            .deserializeEntity("testEntity".getBytes(StandardCharsets.UTF_8),
+                                    MultiPartEntitySerializerTest.this.charset,
+                                    MultiPartEntitySerializerTest.this.httpMessage));
             assertThat(entityReadException).hasMessage("The boundary is not present.");
         }
 
@@ -107,90 +108,100 @@ public class MultiPartEntitySerializerTest {
                 when(MultiPartEntitySerializerTest.this.httpMessage.contentType()).thenReturn(optionalContentType);
             }
 
+            @SuppressWarnings("resource")
             @Test
             @DisplayName("给定参数中没有任何内容，抛出异常")
             void givenNoAnyDataThenThrowException() {
                 String content = "";
-                EntityReadException entityReadException = catchThrowableOfType(() -> this.getSerializer()
-                        .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
-                                MultiPartEntitySerializerTest.this.charset,
-                                MultiPartEntitySerializerTest.this.httpMessage), EntityReadException.class);
+                EntityReadException entityReadException = catchThrowableOfType(EntityReadException.class,
+                        () -> this.getSerializer()
+                                .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
+                                        MultiPartEntitySerializerTest.this.charset,
+                                        MultiPartEntitySerializerTest.this.httpMessage));
                 assertThat(entityReadException).hasMessage(
                         "Failed to deserialize message body. [mimeType='multipart/*']");
             }
 
+            @SuppressWarnings("resource")
             @Test
             @DisplayName("给定参数中仅包含一个字节，抛出异常")
             void givenOnly1ByteThenThrowException() {
                 String content = "1";
-                EntityReadException entityReadException = catchThrowableOfType(() -> this.getSerializer()
-                        .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
-                                MultiPartEntitySerializerTest.this.charset,
-                                MultiPartEntitySerializerTest.this.httpMessage), EntityReadException.class);
+                EntityReadException entityReadException = catchThrowableOfType(EntityReadException.class,
+                        () -> this.getSerializer()
+                                .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
+                                        MultiPartEntitySerializerTest.this.charset,
+                                        MultiPartEntitySerializerTest.this.httpMessage));
                 assertThat(entityReadException).hasMessage(
                         "Failed to deserialize message body. [mimeType='multipart/*']");
             }
 
+            @SuppressWarnings("resource")
             @Test
             @DisplayName("给定参数中不包含第一个分隔符，抛出异常")
             void givenNoFirstBoundaryThenThrowException() {
                 String content = "Content";
-                EntityReadException entityReadException = catchThrowableOfType(() -> this.getSerializer()
-                        .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
-                                MultiPartEntitySerializerTest.this.charset,
-                                MultiPartEntitySerializerTest.this.httpMessage), EntityReadException.class);
+                EntityReadException entityReadException = catchThrowableOfType(EntityReadException.class,
+                        () -> this.getSerializer()
+                                .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
+                                        MultiPartEntitySerializerTest.this.charset,
+                                        MultiPartEntitySerializerTest.this.httpMessage));
                 assertThat(entityReadException).hasMessage(
                         "Failed to deserialize message body. [mimeType='multipart/*']");
             }
 
+            @SuppressWarnings("resource")
             @Test
             @DisplayName("给定参数中不包含终止分隔符，抛出异常")
             void givenNoEndBoundaryThenThrowException() {
                 String content = "----token\r\n" + "Content";
-                EntityReadException entityReadException = catchThrowableOfType(() -> this.getSerializer()
-                        .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
-                                MultiPartEntitySerializerTest.this.charset,
-                                MultiPartEntitySerializerTest.this.httpMessage), EntityReadException.class);
+                EntityReadException entityReadException = catchThrowableOfType(EntityReadException.class,
+                        () -> this.getSerializer()
+                                .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
+                                        MultiPartEntitySerializerTest.this.charset,
+                                        MultiPartEntitySerializerTest.this.httpMessage));
                 assertThat(entityReadException).hasMessage(
                         "Failed to deserialize message body. [mimeType='multipart/*']");
             }
 
+            @SuppressWarnings("resource")
             @Test
             @DisplayName("给定参数中分隔符后包含2字符后意外终止，抛出异常")
             void given2ExtraBytesAfterBoundaryThenThrowException() {
                 String content = "----token  ";
-                EntityReadException entityReadException = catchThrowableOfType(() -> this.getSerializer()
-                        .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
-                                MultiPartEntitySerializerTest.this.charset,
-                                MultiPartEntitySerializerTest.this.httpMessage), EntityReadException.class);
+                EntityReadException entityReadException = catchThrowableOfType(EntityReadException.class,
+                        () -> this.getSerializer()
+                                .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
+                                        MultiPartEntitySerializerTest.this.charset,
+                                        MultiPartEntitySerializerTest.this.httpMessage));
                 assertThat(entityReadException).hasMessage(
                         "Failed to deserialize message body. [mimeType='multipart/*']");
             }
 
+            @SuppressWarnings("resource")
             @Test
             @DisplayName("给定参数中不包含回车换行符，抛出异常")
             void givenNoCrlfThenThrowException() {
                 String content = "----tokenContent----token--";
-                EntityReadException entityReadException = catchThrowableOfType(() -> this.getSerializer()
-                        .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
-                                MultiPartEntitySerializerTest.this.charset,
-                                MultiPartEntitySerializerTest.this.httpMessage), EntityReadException.class);
+                EntityReadException entityReadException = catchThrowableOfType(EntityReadException.class,
+                        () -> this.getSerializer()
+                                .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
+                                        MultiPartEntitySerializerTest.this.charset,
+                                        MultiPartEntitySerializerTest.this.httpMessage));
                 assertThat(entityReadException).hasMessage(
                         "Failed to deserialize message body. [mimeType='multipart/*']");
             }
 
+            @SuppressWarnings("resource")
             @Test
             @DisplayName("给定参数中包含小型缓冲大小的元数据头，然后异常中断，抛出异常")
             void givenSmallBufferHeaderAndExitThenThrowException() {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < MultiPartEntitySerializer.SMALL_BUFFER; i++) {
-                    sb.append("1");
-                }
-                String content = "----token\r\n" + sb;
-                EntityReadException entityReadException = catchThrowableOfType(() -> this.getSerializer()
-                        .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
-                                MultiPartEntitySerializerTest.this.charset,
-                                MultiPartEntitySerializerTest.this.httpMessage), EntityReadException.class);
+                String content = "----token\r\n" + "1".repeat(MultiPartEntitySerializer.SMALL_BUFFER);
+                EntityReadException entityReadException = catchThrowableOfType(EntityReadException.class,
+                        () -> this.getSerializer()
+                                .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
+                                        MultiPartEntitySerializerTest.this.charset,
+                                        MultiPartEntitySerializerTest.this.httpMessage));
                 assertThat(entityReadException).hasMessage(
                         "Failed to deserialize message body. [mimeType='multipart/*']");
             }
@@ -216,8 +227,13 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中包含前置信息，返回忽略前置信息的文本")
                 void givenPreambleThenReturnActualText() {
-                    String content = "Preamble\r\n" + "----token\r\n" + "Content-Disposition: form-data\r\n" + "\r\n"
-                            + "Content\r\n" + "----token--";
+                    String content = """
+                            Preamble\r
+                            ----token\r
+                            Content-Disposition: form-data\r
+                            \r
+                            Content\r
+                            ----token--""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,
@@ -232,11 +248,14 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中包含超长前置信息，返回忽略前置信息的文本")
                 void givenLongPreambleThenReturnActualText() {
-                    String content =
-                            "This is the preamble. It is to be ignored, though it is a handy place for composition "
-                                    + "agents to include an explanatory note to non-MIME conformant readers.\r\n"
-                                    + "----token\r\n" + "Content-Disposition: form-data\r\n" + "\r\n" + "Content\r\n"
-                                    + "----token--";
+                    String content = """
+                            This is the preamble. It is to be ignored, though it is a handy place for composition \
+                            agents to include an explanatory note to non-MIME conformant readers.\r
+                            ----token\r
+                            Content-Disposition: form-data\r
+                            \r
+                            Content\r
+                            ----token--""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,
@@ -251,8 +270,13 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中包含后置信息，返回忽略后置信息的文本")
                 void givenEpilogueThenReturnActualText() {
-                    String content = "----token\r\n" + "Content-Disposition: form-data\r\n" + "\r\n" + "Content\r\n"
-                            + "----token--\r\n" + "epilogue";
+                    String content = """
+                            ----token\r
+                            Content-Disposition: form-data\r
+                            \r
+                            Content\r
+                            ----token--\r
+                            epilogue""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,
@@ -267,8 +291,12 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中的分隔符后包含空白信息，返回忽略空白信息的文本")
                 void givenExtraTextAfterBoundaryThenReturnActualText() {
-                    String content = "----token  \r\n" + "Content-Disposition: form-data\r\n" + "\r\n" + "Content\r\n"
-                            + "----token--";
+                    String content = """
+                            ----token  \r
+                            Content-Disposition: form-data\r
+                            \r
+                            Content\r
+                            ----token--""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,
@@ -283,8 +311,12 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中不包含变量名信息，返回对应的文本")
                 void givenNoNameThenReturnActualText() {
-                    String content = "----token\r\n" + "Content-Disposition: form-data\r\n" + "\r\n" + "Content\r\n"
-                            + "----token--";
+                    String content = """
+                            ----token\r
+                            Content-Disposition: form-data\r
+                            \r
+                            Content\r
+                            ----token--""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,
@@ -299,8 +331,13 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中包含类似分隔符的内容，返回对应的文本")
                 void givenLikeBoundaryThenReturnActualText() {
-                    String content = "----token\r\n" + "Content-Disposition: form-data\r\n" + "\r\n" + "----tokem\r\n"
-                            + "Content\r\n" + "----token--";
+                    String content = """
+                            ----token\r
+                            Content-Disposition: form-data\r
+                            \r
+                            ----tokem\r
+                            Content\r
+                            ----token--""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,
@@ -315,7 +352,11 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中不存在显示位置，返回对应的文本")
                 void givenNoContentDispositionThenReturnActualText() {
-                    String content = "----token\r\n" + "\r\n" + "Content\r\n" + "----token--";
+                    String content = """
+                            ----token\r
+                            \r
+                            Content\r
+                            ----token--""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,
@@ -330,8 +371,12 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中文件信息为空，返回对应的文本")
                 void givenNoFileNameThenReturnActualText() {
-                    String content = "----token\r\n" + "Content-disposition: form-data; name=\"key\"\r\n" + "\r\n"
-                            + "Content\r\n" + "----token--";
+                    String content = """
+                            ----token\r
+                            Content-disposition: form-data; name="key"\r
+                            \r
+                            Content\r
+                            ----token--""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,
@@ -345,9 +390,13 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中包含错误格式的头，忽略，返回对应的文本")
                 void givenWrongHeaderThenReturnActualText() {
-                    String content =
-                            "----token\r\n" + "Wrong\r\n" + "Content-disposition: form-data; name=\"key\"\r\n" + "\r\n"
-                                    + "Content\r\n" + "----token--";
+                    String content = """
+                            ----token\r
+                            Wrong\r
+                            Content-disposition: form-data; name="key"\r
+                            \r
+                            Content\r
+                            ----token--""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,
@@ -361,9 +410,13 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中包含无用的头，忽略，返回对应的文本")
                 void givenUnusedHeaderThenReturnActualText() {
-                    String content =
-                            "----token\r\n" + "Unused: value\r\n" + "Content-disposition: form-data; name=\"key\"\r\n"
-                                    + "\r\n" + "Content\r\n" + "----token--";
+                    String content = """
+                            ----token\r
+                            Unused: value\r
+                            Content-disposition: form-data; name="key"\r
+                            \r
+                            Content\r
+                            ----token--""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,
@@ -385,9 +438,12 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中包含文件名，返回对应的文件流")
                 void givenFileNameThenReturnActualFile() throws IOException {
-                    String content =
-                            "----token\r\n" + "Content-Disposition: form-data; name=\"key\"; filename=\"test.txt\"\r\n"
-                                    + "\r\n" + "Content\r\n" + "----token--";
+                    String content = """
+                            ----token\r
+                            Content-Disposition: form-data; name="key"; filename="test.txt"\r
+                            \r
+                            Content\r
+                            ----token--""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,
@@ -421,9 +477,12 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中换行符处于缓存边界，返回对应的文件流")
                 void givenNewlineCharAtCacheBoundaryThenReturnActualFile() throws IOException {
-                    String content =
-                            "----token\r\n" + "Content-Disposition: form-data; name=\"key\"; filename=\"test.txt\"\r\n"
-                                    + "\r\n" + "1234567890\r\n" + "----token--";
+                    String content = """
+                            ----token\r
+                            Content-Disposition: form-data; name="key"; filename="test.txt"\r
+                            \r
+                            1234567890\r
+                            ----token--""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,
@@ -447,11 +506,16 @@ public class MultiPartEntitySerializerTest {
                 @Test
                 @DisplayName("给定参数中包含文件名和文本，返回对应的文件和文本")
                 void givenFileNameThenReturnActualFile() throws IOException {
-                    String content =
-                            "----token\r\n" + "Content-Disposition: form-data; name=\"key\"; filename=\"test.txt\"\r\n"
-                                    + "\r\n" + "Content\r\n" + "----token\r\n"
-                                    + "Content-Disposition: form-data; name=\"another\"\r\n" + "\r\n" + "Content\r\n"
-                                    + "----token--";
+                    String content = """
+                            ----token\r
+                            Content-Disposition: form-data; name="key"; filename="test.txt"\r
+                            \r
+                            Content\r
+                            ----token\r
+                            Content-Disposition: form-data; name="another"\r
+                            \r
+                            Content\r
+                            ----token--""";
                     MultiPartEntitySerializerTest.this.entity = this.getSerializer()
                             .deserializeEntity(content.getBytes(StandardCharsets.UTF_8),
                                     MultiPartEntitySerializerTest.this.charset,

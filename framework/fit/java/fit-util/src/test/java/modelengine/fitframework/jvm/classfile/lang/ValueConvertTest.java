@@ -47,15 +47,15 @@ class ValueConvertTest {
         @DisplayName("当提供 int 参数太小时，返回转换后的 byte 数值")
         void givenIntValueTooSmallThenThrowException() {
             ValueOverflowException cause =
-                    catchThrowableOfType(() -> ValueConvert.byteValue(LOWER_ZERO_NUMBER), ValueOverflowException.class);
+                    catchThrowableOfType(ValueOverflowException.class, () -> ValueConvert.byteValue(LOWER_ZERO_NUMBER));
             assertThat(cause).isNotNull();
         }
 
         @Test
         @DisplayName("当提供 int 参数太大时，返回转换后的 byte 数值")
         void givenIntValueTooLargeThenThrowException() {
-            ValueOverflowException cause = catchThrowableOfType(() -> ValueConvert.byteValue(GREATER_0XFF_NUMBER),
-                    ValueOverflowException.class);
+            ValueOverflowException cause = catchThrowableOfType(ValueOverflowException.class,
+                    () -> ValueConvert.byteValue(GREATER_0XFF_NUMBER));
             assertThat(cause).isNotNull();
         }
 
@@ -95,8 +95,8 @@ class ValueConvertTest {
             @Test
             @DisplayName("当提供 int 参数太小时，返回转换后的 byte 数值")
             void givenIntValueTooSmallThenThrowException() {
-                ValueOverflowException cause = catchThrowableOfType(() -> ValueConvert.shortValue(LOWER_ZERO_NUMBER),
-                        ValueOverflowException.class);
+                ValueOverflowException cause = catchThrowableOfType(ValueOverflowException.class,
+                        () -> ValueConvert.shortValue(LOWER_ZERO_NUMBER));
                 assertThat(cause).isNotNull();
             }
 
@@ -130,8 +130,8 @@ class ValueConvertTest {
             @Test
             @DisplayName("当提供 long 参数太小时，返回转换后的 byte 数值")
             void givenLongValueTooSmallThenThrowException() {
-                ValueOverflowException cause = catchThrowableOfType(() -> ValueConvert.intValue(LOWER_ZERO_NUMBER),
-                        ValueOverflowException.class);
+                ValueOverflowException cause = catchThrowableOfType(ValueOverflowException.class,
+                        () -> ValueConvert.intValue(LOWER_ZERO_NUMBER));
                 assertThat(cause).isNotNull();
             }
 

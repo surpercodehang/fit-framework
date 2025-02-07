@@ -6,6 +6,14 @@
 
 package modelengine.fitframework.protocol.jar.support;
 
+import static modelengine.fitframework.protocol.jar.location.Locations.path;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowableOfType;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import modelengine.fitframework.protocol.jar.FilesCache;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,14 +23,6 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.util.Map;
-
-import static modelengine.fitframework.protocol.jar.location.Locations.path;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowableOfType;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import modelengine.fitframework.protocol.jar.FilesCache;
 
 /**
  * 为 {@link WeakHashMapFilesCache} 提供单元测试。
@@ -68,7 +68,7 @@ class WeakHashMapFilesCacheTest {
         when(mockFile.getCanonicalFile()).thenThrow(new IOException("File does not exist"));
 
         IllegalArgumentException illegalArgumentException =
-                catchThrowableOfType(() -> this.filesCache.getCanonicalFile(mockFile), IllegalArgumentException.class);
+                catchThrowableOfType(IllegalArgumentException.class, () -> this.filesCache.getCanonicalFile(mockFile));
 
         String expectedMessage = String.format("The file of JAR location is not canonical. [path=%s]", path(mockFile));
         assertThat(illegalArgumentException.getMessage()).contains(expectedMessage);

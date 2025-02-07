@@ -48,6 +48,7 @@ public class FitableAnnotationResolverTest {
         this.registry = mock(LocalExecutorRepository.Registry.class);
     }
 
+    @SuppressWarnings("resource")
     @Test
     @DisplayName("校验 genericableId ，若 genericableId 不符合要求，抛出异常")
     void shouldThrowExceptionWhenGenericableIdIsNotAcceptable() throws NoSuchMethodException {
@@ -59,10 +60,11 @@ public class FitableAnnotationResolverTest {
         doNothing().when(this.registry).register(any(), any());
         FitableAnnotationResolver resolver = new FitableAnnotationResolver(container, registry);
         IllegalStateException exception =
-                catchThrowableOfType(() -> resolver.resolve(metadata, test1), IllegalStateException.class);
+                catchThrowableOfType(IllegalStateException.class, () -> resolver.resolve(metadata, test1));
         assertThat(exception).isNotNull().hasMessage(message);
     }
 
+    @SuppressWarnings("resource")
     @Test
     @DisplayName("校验 id ，若 id 不符合要求，抛出异常")
     void shouldThrowExceptionWhenIdIsNotAcceptable() throws NoSuchMethodException {
@@ -74,10 +76,11 @@ public class FitableAnnotationResolverTest {
         doNothing().when(this.registry).register(any(), any());
         FitableAnnotationResolver resolver = new FitableAnnotationResolver(container, registry);
         IllegalStateException exception =
-                catchThrowableOfType(() -> resolver.resolve(metadata, test2), IllegalStateException.class);
+                catchThrowableOfType(IllegalStateException.class, () -> resolver.resolve(metadata, test2));
         assertThat(exception).isNotNull().hasMessage(message);
     }
 
+    @SuppressWarnings("resource")
     @Test
     @DisplayName("校验 fitableId ，若 fitableId 不符合要求，抛出异常")
     void shouldThrowExceptionWhenFitableIdIsNotAcceptable() throws NoSuchMethodException {
@@ -89,10 +92,11 @@ public class FitableAnnotationResolverTest {
         doNothing().when(this.registry).register(any(), any());
         FitableAnnotationResolver resolver = new FitableAnnotationResolver(container, registry);
         IllegalStateException exception =
-                catchThrowableOfType(() -> resolver.resolve(metadata, test3), IllegalStateException.class);
+                catchThrowableOfType(IllegalStateException.class, () -> resolver.resolve(metadata, test3));
         assertThat(exception).isNotNull().hasMessage(message);
     }
 
+    @SuppressWarnings("resource")
     @Test
     @DisplayName("校验 id ，若其符合要求，程序正常运行")
     void shouldRunNormallyWhenIdIsAcceptable() throws NoSuchMethodException {
@@ -106,6 +110,7 @@ public class FitableAnnotationResolverTest {
         assertTrue(resolver.resolve(metadata, test4));
     }
 
+    @SuppressWarnings("resource")
     @Test
     @DisplayName("校验 fitableId ，若 fitableId 长度不符合要求，抛出异常")
     void shouldThrowExceptionWhenLengthIsNotAcceptable() throws NoSuchMethodException {
@@ -117,7 +122,7 @@ public class FitableAnnotationResolverTest {
         doNothing().when(this.registry).register(any(), any());
         FitableAnnotationResolver resolver = new FitableAnnotationResolver(container, registry);
         IllegalStateException exception =
-                catchThrowableOfType(() -> resolver.resolve(metadata, test5), IllegalStateException.class);
+                catchThrowableOfType(IllegalStateException.class, () -> resolver.resolve(metadata, test5));
         assertThat(exception).isNotNull().hasMessage(message);
     }
 

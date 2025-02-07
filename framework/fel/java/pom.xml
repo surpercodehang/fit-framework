@@ -33,7 +33,7 @@
         <jackson.version>2.18.2</jackson.version>
 
         <!-- Test framework versions -->
-        <assertj.version>3.24.2</assertj.version>
+        <assertj.version>3.27.3</assertj.version>
         <junit.version>5.11.4</junit.version>
         <mockito.version>5.15.2</mockito.version>
 

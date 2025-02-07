@@ -136,8 +136,8 @@ public class CollectionUtilsTest {
             @Test
             @DisplayName("List is null, output is exception")
             void givenListNullThenThrowException() {
-                IllegalArgumentException exception = catchThrowableOfType(() -> CollectionUtils.binarySearch(null, 1),
-                        IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> CollectionUtils.binarySearch(null, 1));
                 assertThat(exception).hasMessage("The list to binary search cannot be null.");
             }
 
@@ -166,9 +166,8 @@ public class CollectionUtilsTest {
             @Test
             @DisplayName("List is [], key is null, mapper is null, output is exception")
             void givenMapperIsNullThenThrowException() {
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> CollectionUtils.binarySearch(Collections.emptyList(), 1, null),
-                                IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> CollectionUtils.binarySearch(Collections.emptyList(), 1, null));
                 assertThat(exception).hasMessage("The mapper to map element cannot be null.");
             }
         }
@@ -184,11 +183,8 @@ public class CollectionUtilsTest {
                     "List is [], key is null, mapper is Function.identity(), comparator is null, output is exception")
             void givenComparatorIsNullThenThrowException() {
                 Function<Integer, Integer> mapper = Function.identity();
-                IllegalArgumentException exception =
-                        catchThrowableOfType(() -> CollectionUtils.binarySearch(Collections.emptyList(),
-                                1,
-                                mapper,
-                                null), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> CollectionUtils.binarySearch(Collections.emptyList(), 1, mapper, null));
                 assertThat(exception).hasMessage("The comparator to compare elements cannot be null.");
             }
         }
@@ -219,9 +215,8 @@ public class CollectionUtilsTest {
                         + "output is exception")
         void givenKeyMapperGenerateDuplicatedKeysThenThrowException() {
             Map<Integer, Integer> originalMap = MapBuilder.<Integer, Integer>get().put(1, 1).put(2, 2).build();
-            IllegalStateException exception = catchThrowableOfType(() -> CollectionUtils.cast(originalMap,
-                    value -> StringUtils.EMPTY,
-                    Function.identity()), IllegalStateException.class);
+            IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                    () -> CollectionUtils.cast(originalMap, value -> StringUtils.EMPTY, Function.identity()));
             assertThat(exception).isNotNull();
         }
 
@@ -236,18 +231,16 @@ public class CollectionUtilsTest {
         @Test
         @DisplayName("Map is null, keyMapper is null, valueMapper is Function.identity(), output is exception")
         void givenKeyMapperIsNullThenThrowException() {
-            IllegalArgumentException exception =
-                    catchThrowableOfType(() -> CollectionUtils.cast(null, null, Function.identity()),
-                            IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> CollectionUtils.cast(null, null, Function.identity()));
             assertThat(exception).hasMessage("The mapper to cast keys of map cannot be null.");
         }
 
         @Test
         @DisplayName("Map is null, keyMapper is Function.identity(), valueMapper is null, output is exception")
         void givenValueMapperIsNullThenThrowException() {
-            IllegalArgumentException exception =
-                    catchThrowableOfType(() -> CollectionUtils.cast(null, Function.identity(), null),
-                            IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> CollectionUtils.cast(null, Function.identity(), null));
             assertThat(exception).hasMessage("The mapper to cast values of map cannot be null.");
         }
     }
@@ -618,7 +611,7 @@ public class CollectionUtilsTest {
             @Test
             @DisplayName("当提供 [3] 和 [0, 1, 2] 时，返回合并后的列表 [3, 0, 1, 2]")
             void givenTwoNotIncludeSameElementListThenReturnMergedList() {
-                List<Integer> first = Arrays.asList(3);
+                List<Integer> first = List.of(3);
                 List<Integer> second = Arrays.asList(0, 1, 2);
                 final List<Integer> merge = CollectionUtils.merge(first, second);
                 assertThat(merge).isNotNull().hasSize(4);
@@ -699,17 +692,16 @@ public class CollectionUtilsTest {
         @Test
         @DisplayName("Input is null, class is String.class, output is exception")
         void givenCollectionIsNullThenThrowException() {
-            IllegalArgumentException exception = catchThrowableOfType(() -> CollectionUtils.toArray(null, String.class),
-                    IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> CollectionUtils.toArray(null, String.class));
             assertThat(exception).hasMessage("The collection to convert to array cannot be null.");
         }
 
         @Test
         @DisplayName("Input is [], class is null, output is exception")
         void givenClassIsNullThenThrowException() {
-            IllegalArgumentException exception =
-                    catchThrowableOfType(() -> CollectionUtils.toArray(Collections.emptyList(), null),
-                            IllegalArgumentException.class);
+            IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                    () -> CollectionUtils.toArray(Collections.emptyList(), null));
             assertThat(exception).hasMessage("Class of list elements cannot be null.");
         }
     }
@@ -735,9 +727,8 @@ public class CollectionUtilsTest {
             @DisplayName("Input is ['key1', 'key2'], keyMapper is String::length, output is exception")
             void givenListWithTheSameLengthValuesAndLengthMapperThenThrowException() {
                 List<String> collection = Arrays.asList("key1", "key2");
-                IllegalStateException exception =
-                        catchThrowableOfType(() -> CollectionUtils.toMap(collection, String::length),
-                                IllegalStateException.class);
+                IllegalStateException exception = catchThrowableOfType(IllegalStateException.class,
+                        () -> CollectionUtils.toMap(collection, String::length));
                 assertThat(exception).isNotNull();
             }
         }
@@ -766,12 +757,13 @@ public class CollectionUtilsTest {
             @DisplayName("Input is ['key1', 'key2'], keyMapper is String::length, output is exception")
             void givenListWithTheSameLengthValuesAndLengthMapperThenThrowException() {
                 List<String> collection = Arrays.asList("key1", "key2");
-                IllegalArgumentException exception = catchThrowableOfType(() -> CollectionUtils.toMap(collection,
-                        String::length,
-                        (v1, v2) -> new IllegalArgumentException(StringUtils.format(
-                                "Duplicated key with values: {0} vs {1}.",
-                                v1,
-                                v2))), IllegalArgumentException.class);
+                IllegalArgumentException exception = catchThrowableOfType(IllegalArgumentException.class,
+                        () -> CollectionUtils.toMap(collection,
+                                String::length,
+                                (v1, v2) -> new IllegalArgumentException(StringUtils.format(
+                                        "Duplicated key with values: {0} vs {1}.",
+                                        v1,
+                                        v2))));
                 assertThat(exception).hasMessage("Duplicated key with values: key1 vs key2.");
             }
         }

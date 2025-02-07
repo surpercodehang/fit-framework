@@ -14,6 +14,7 @@ import modelengine.fitframework.merge.ConflictResolverCollection;
 import modelengine.fitframework.merge.list.ListAppendConflictResolver;
 import modelengine.fitframework.merge.list.ListRemoveDuplicationConflictResolver;
 
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -238,7 +239,7 @@ public class MapUtilsTest {
 
                 // when
                 ConflictException exception =
-                        catchThrowableOfType(() -> MapUtils.merge(m1, m2), ConflictException.class);
+                        catchThrowableOfType(ConflictException.class, () -> MapUtils.merge(m1, m2));
 
                 // then
                 assertThat(exception).isNotNull()
@@ -256,7 +257,7 @@ public class MapUtilsTest {
 
                 // when
                 ConflictException exception =
-                        catchThrowableOfType(() -> MapUtils.merge(m1, m2), ConflictException.class);
+                        catchThrowableOfType(ConflictException.class, () -> MapUtils.merge(m1, m2));
 
                 // then
                 assertThat(exception).isNotNull().hasMessage("Conflict in merge map process. [key=a.b, v1=2, v2=2]");
@@ -292,7 +293,7 @@ public class MapUtilsTest {
                             .hasSize(1)
                             .extracting("a")
                             .isInstanceOf(List.class)
-                            .asList()
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
                             .containsSequence(1, 2, 2, 3);
                 }
             }
@@ -323,7 +324,7 @@ public class MapUtilsTest {
                             .hasSize(1)
                             .extracting("a")
                             .isInstanceOf(List.class)
-                            .asList()
+                            .asInstanceOf(InstanceOfAssertFactories.LIST)
                             .containsSequence(1, 2, 3);
                 }
             }

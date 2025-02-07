@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import modelengine.fit.http.server.handler.MockHttpClassicServerRequest;
 
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,6 +36,6 @@ class HeaderFetcherTest {
     void shouldReturnList() {
         final MockHttpClassicServerRequest serverRequest = new MockHttpClassicServerRequest();
         final Object obj = this.headerFetcher.get(serverRequest.getRequest(), null);
-        assertThat(obj).asList().hasSize(0);
+        assertThat(obj).asInstanceOf(InstanceOfAssertFactories.LIST).hasSize(0);
     }
 }

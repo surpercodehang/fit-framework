@@ -73,18 +73,16 @@ public class RegisterFitableServiceTest {
     @Test
     @DisplayName("given fitable metas when register fitables then register fitables successfully")
     void testOnlineFitables() {
-        Exception exception =
-                catchThrowableOfType(() -> this.registerFitableService.register(this.buildFitableProxies()),
-                        Exception.class);
+        Exception exception = catchThrowableOfType(Exception.class,
+                () -> this.registerFitableService.register(this.buildFitableProxies()));
         assertThat(exception).isNull();
     }
 
     @Test
     @DisplayName("given fitable metas when offline fitables then unregister fitables successfully")
     void testOfflineFitables() {
-        Exception exception =
-                catchThrowableOfType(() -> this.registerFitableService.unregister(this.buildFitableProxies()),
-                        Exception.class);
+        Exception exception = catchThrowableOfType(Exception.class,
+                () -> this.registerFitableService.unregister(this.buildFitableProxies()));
         assertThat(exception).isNull();
     }
 

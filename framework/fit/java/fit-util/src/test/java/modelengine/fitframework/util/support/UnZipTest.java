@@ -63,9 +63,8 @@ public class UnZipTest {
                     .filter(entry -> !entry.getName().endsWith(".out"))
                     .secure(Unzip.Security.DEFAULT);
             assertThatNoException().isThrownBy(unzip::start);
-            List<String> allSubFileNames = FileUtils.traverse(UnZipTest.this.unzipToFile)
-                    .map(File::getName)
-                    .collect(Collectors.toList());
+            List<String> allSubFileNames =
+                    FileUtils.traverse(UnZipTest.this.unzipToFile).map(File::getName).collect(Collectors.toList());
             assertThat(allSubFileNames).contains("file1.txt", "file2.txt", "file3.txt", "file4.txt")
                     .doesNotContain("file5.out");
         }
@@ -78,17 +77,19 @@ public class UnZipTest {
                     return Unzip.Redirect.unredirected();
                 } else if (entry.getName().endsWith(".out")) {
                     File absoluteFile = FileUtils.canonicalize(UnZipTest.this.unzipToFile);
-                    return Unzip.Redirect.redirected(
-                            new File(absoluteFile.getPath() + "/" + entry.getName() + ".redirect"));
+                    return Unzip.Redirect.redirected(new File(
+                            absoluteFile.getPath() + "/" + entry.getName() + ".redirect"));
                 } else {
                     return Unzip.Redirect.unredirected();
                 }
             });
             assertThatNoException().isThrownBy(unzip::start);
-            List<String> allSubFileNames = FileUtils.traverse(UnZipTest.this.unzipToFile)
-                    .map(File::getName)
-                    .collect(Collectors.toList());
-            assertThat(allSubFileNames).contains("file1.txt", "file2.txt", "file3.txt", "file4.txt",
+            List<String> allSubFileNames =
+                    FileUtils.traverse(UnZipTest.this.unzipToFile).map(File::getName).collect(Collectors.toList());
+            assertThat(allSubFileNames).contains("file1.txt",
+                    "file2.txt",
+                    "file3.txt",
+                    "file4.txt",
                     "file5.out.redirect");
         }
 
@@ -103,9 +104,8 @@ public class UnZipTest {
             boolean created = existFile.createNewFile();
             assertThat(created).isTrue();
             assertThatNoException().isThrownBy(unzip::start);
-            List<String> allSubFileNames = FileUtils.traverse(UnZipTest.this.unzipToFile)
-                    .map(File::getName)
-                    .collect(Collectors.toList());
+            List<String> allSubFileNames =
+                    FileUtils.traverse(UnZipTest.this.unzipToFile).map(File::getName).collect(Collectors.toList());
             assertThat(allSubFileNames).contains("file1.txt", "file2.txt", "file3.txt", "file4.txt", "file5.out");
         }
 
@@ -117,9 +117,8 @@ public class UnZipTest {
                     .resolveConflict(ConflictResolutionPolicy.OVERRIDE);
             unzip.start();
             assertThatNoException().isThrownBy(unzip::start);
-            List<String> allSubFileNames = FileUtils.traverse(UnZipTest.this.unzipToFile)
-                    .map(File::getName)
-                    .collect(Collectors.toList());
+            List<String> allSubFileNames =
+                    FileUtils.traverse(UnZipTest.this.unzipToFile).map(File::getName).collect(Collectors.toList());
             assertThat(allSubFileNames).contains("file1.txt", "file2.txt", "file3.txt", "file4.txt", "file5.out");
         }
     }
@@ -133,7 +132,7 @@ public class UnZipTest {
             Unzip unzip = new Unzip(UnZipTest.this.zipFile, null).target(UnZipTest.this.unzipToFile)
                     .resolveConflict(ConflictResolutionPolicy.ABORT);
             unzip.start();
-            IOException exception = catchThrowableOfType(unzip::start, IOException.class);
+            IOException exception = catchThrowableOfType(IOException.class, unzip::start);
             assertThat(exception).isNotNull().hasMessage("File already exists. Cannot unzip entry. [entry=zip/]");
         }
 
@@ -152,7 +151,7 @@ public class UnZipTest {
                         }
                     });
             unzip.start();
-            IOException exception = catchThrowableOfType(unzip::start, IOException.class);
+            IOException exception = catchThrowableOfType(IOException.class, unzip::start);
             assertThat(exception).isNotNull()
                     .hasMessage("File already exists. Cannot unzip entry. [entry=zip/folder1/file5.out]");
         }
@@ -168,7 +167,7 @@ public class UnZipTest {
                     .override(false)
                     .resolveConflict(ConflictResolutionPolicy.OVERRIDE);
             unzip.start();
-            IOException exception = catchThrowableOfType(unzip::start, IOException.class);
+            IOException exception = catchThrowableOfType(IOException.class, unzip::start);
             assertThat(exception).isNotNull().hasMessage("File already exists. Cannot unzip entry. [name=file1.txt]");
             FileUtils.delete(singleUnzipToFile);
             FileUtils.delete(singleZipFile);
@@ -179,7 +178,7 @@ public class UnZipTest {
         void givenMax1EntrySecurityThenThrowException() {
             Unzip unzip = new Unzip(UnZipTest.this.zipFile, null).target(UnZipTest.this.unzipToFile)
                     .secure(new Unzip.Security(100, 1, false));
-            SecurityException exception = catchThrowableOfType(unzip::start, SecurityException.class);
+            SecurityException exception = catchThrowableOfType(SecurityException.class, unzip::start);
             assertThat(exception).isNotNull()
                     .hasMessage("The file to unzip contains too many entries. [file=unzip-tmp.zip, max=1]");
         }
@@ -189,7 +188,7 @@ public class UnZipTest {
         void givenMax1ByteSecurityThenThrowException() {
             Unzip unzip = new Unzip(UnZipTest.this.zipFile, null).target(UnZipTest.this.unzipToFile)
                     .secure(new Unzip.Security(1, 1024, false));
-            SecurityException exception = catchThrowableOfType(unzip::start, SecurityException.class);
+            SecurityException exception = catchThrowableOfType(SecurityException.class, unzip::start);
             assertThat(exception).isNotNull().hasMessage("The file to unzip is too large. [file=unzip-tmp.zip, max=1]");
         }
 
@@ -206,7 +205,7 @@ public class UnZipTest {
             }
 
             Unzip unzip = FileUtils.unzip(testZipFile).secure(new Unzip.Security(100, 1024, false)).target(targetDir);
-            SecurityException securityException = catchThrowableOfType(unzip::start, SecurityException.class);
+            SecurityException securityException = catchThrowableOfType(SecurityException.class, unzip::start);
             assertThat(securityException.getMessage()).startsWith("Detected a potential path traversal attack. ");
             FileUtils.delete(testZipFile);
             FileUtils.delete(targetDir);
@@ -222,7 +221,7 @@ public class UnZipTest {
             FileUtils.ensureDirectory(UnZipTest.this.unzipToFile);
             boolean created = existFile.createNewFile();
             assertThat(created).isTrue();
-            IOException exception = catchThrowableOfType(unzip::start, IOException.class);
+            IOException exception = catchThrowableOfType(IOException.class, unzip::start);
             assertThat(exception).isNotNull().hasMessage("File already exists. Cannot create directory. [name=zip]");
         }
     }

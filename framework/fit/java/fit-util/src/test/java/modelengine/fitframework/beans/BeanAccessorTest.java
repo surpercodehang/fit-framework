@@ -56,11 +56,11 @@ public class BeanAccessorTest {
     @DisplayName("给定不存在的属性的名称，抛出异常")
     void givenNotExistPropertyThenThrowException() {
         String property = "notExistProperty";
-        IllegalStateException illegalStateException =
-                catchThrowableOfType(() -> this.beanAccessor.get(this.beanAccessor, property),
-                        IllegalStateException.class);
-        assertThat(illegalStateException).hasMessage(
-                StringUtils.format("Property with specific name not found. [bean={0}, property={1}]",
-                        this.actualClass.getName(), property));
+        IllegalStateException illegalStateException = catchThrowableOfType(IllegalStateException.class,
+                () -> this.beanAccessor.get(this.beanAccessor, property));
+        assertThat(illegalStateException).hasMessage(StringUtils.format(
+                "Property with specific name not found. [bean={0}, property={1}]",
+                this.actualClass.getName(),
+                property));
     }
 }
