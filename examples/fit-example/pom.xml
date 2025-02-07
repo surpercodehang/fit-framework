@@ -13,5 +13,6 @@
         <module>02-static-plugin</module>
         <module>03-dynamic-plugin</module>
         <module>04-complicated-apps</module>
+        <module>05-aop-log-plugin</module>
     </modules>
 </project>
