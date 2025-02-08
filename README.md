@@ -42,14 +42,22 @@ mvn clean install
  **输出目录**
 
 ```
-/target
+framework/fit/java/target
+```
+
+ **增加权限**
+
+```
+chmod +x framework/fit/java/target/bin/*
 ```
 
  **启动命令**
 
 ```
-/target/bin/fit start
+framework/fit/java/target/bin/fit start
 ```
+
+> 以上编译构建出的 `fit` 命令可以通过系统操作（别名或添加系统路径）来简化输入。 
 
  **配置系统环境变量及创建插件目录**
 - 首先用`maven`编译打包`./framework/fit/java`，将`target`目录内容存储在本地`fitframework`目录下，此目录为 FIT 核心框架目录地址。
