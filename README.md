@@ -92,7 +92,7 @@ framework/fit/java/target/bin/fit start
 
 1. 如果发现问题，可以在该项目的 `Issue` 模块内提出。
 2. 微信公众号：`FitFramework`。
+3. QQ技术交流群：`1029802553`。
 
 ![wechat-gh](docs/resources/qrcode_for_wechat_gh.png)
-
-
+![qq-01](docs/resources/qrcode_for_qq_01.png)
