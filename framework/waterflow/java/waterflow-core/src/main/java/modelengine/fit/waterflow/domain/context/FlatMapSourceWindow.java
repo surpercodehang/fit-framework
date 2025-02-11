@@ -72,7 +72,7 @@ public class FlatMapSourceWindow extends Window {
      * @param <I>    输入类型
      * @return FlatMapSourceWindow 实例
      */
-    public static <I> FlatMapSourceWindow from(Window window, FlowContextRepo repo) {
+    public static synchronized <I> FlatMapSourceWindow from(Window window, FlowContextRepo repo) {
         return all.stream()
                 .filter(existingWindow -> existingWindow.from == window)
                 .findAny()

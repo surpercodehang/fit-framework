@@ -459,8 +459,7 @@ class WaterFlowsTest {
         }
 
         @Test
-        @Disabled("暂不支持")
-        void should_return_one_result_when_reduce_given_multi_flatmap_data() {
+        void should_get_one_result_when_reduce_given_multi_flatmap_data() {
             AtomicInteger counter = new AtomicInteger();
             Flows.<Integer>create(repo, messenger, locks)
                     .flatMap(i -> {
@@ -478,6 +477,26 @@ class WaterFlowsTest {
             FlowsTestUtil.waitUntil(() -> counter.get() != 0);
 
             Assertions.assertEquals(62, counter.get());
+        }
+
+        @Test
+        void should_get_ordered_result_when_reduce_given_multi_flatmap_data_and_preserved() {
+            AtomicReference<String> result = new AtomicReference<>();
+            FlowSession flowSession = new FlowSession(true);
+            Window window = flowSession.begin();
+            Flows.<Integer>create(repo, messenger, locks)
+                    .flatMap(i -> Flows.flux(i * 10, i * 10 + 1))
+                    .reduce(() -> "", (acc, value) -> {
+                        System.out.println("reduce value=" + value + ", acc=" + (acc + value));
+                        return acc + value;
+                    })
+                    .close(r -> result.set(r.get().getData()))
+                    .offer(new Integer[] {1, 2, 3}, flowSession);
+            window.complete();;
+            FlowsTestUtil.waitUntil(() -> result.get() != null);
+
+            Assertions.assertNotNull(result.get());
+            Assertions.assertEquals("101120213031", result.get());
         }
 
         @Test

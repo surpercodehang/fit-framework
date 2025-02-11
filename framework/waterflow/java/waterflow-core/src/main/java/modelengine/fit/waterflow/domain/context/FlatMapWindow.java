@@ -105,4 +105,14 @@ public class FlatMapWindow extends Window {
     public void addTo(Window to) {
         this.from.addTo(to);
     }
+
+    @Override
+    public Object acc() {
+        return this.from.acc();
+    }
+
+    @Override
+    public void setAcc(Object acc) {
+        this.from.setAcc(acc);
+    }
 }
