@@ -35,7 +35,7 @@
         <!-- Test framework versions -->
         <assertj.version>3.24.2</assertj.version>
         <junit.version>5.11.4</junit.version>
-        <mockito.version>4.11.0</mockito.version>
+        <mockito.version>5.15.2</mockito.version>
 
         <!-- Jacoco version -->
         <jacoco.version>0.8.10</jacoco.version>
