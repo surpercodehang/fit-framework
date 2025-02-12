@@ -14,5 +14,6 @@
         <module>03-dynamic-plugin</module>
         <module>04-complicated-apps</module>
         <module>05-aop-log-plugin</module>
+        <module>06-spring-boot-starter</module>
     </modules>
 </project>
