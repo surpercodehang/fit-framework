@@ -50,7 +50,7 @@ public class FitToolTest {
         when(client.getRouter(eq("test"))
                 .route(any())
                 .communicationType(any())
-                .invoke(any())).thenAnswer(invocation -> {
+                .invoke(any(Object[].class))).thenAnswer(invocation -> {
             if (Objects.equals(invocation.getArgument(0), "1")) {
                 return "OK";
             }

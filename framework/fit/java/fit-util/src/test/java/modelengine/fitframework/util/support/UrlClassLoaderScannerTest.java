@@ -146,7 +146,7 @@ public class UrlClassLoaderScannerTest {
                 URLClassLoader classLoader = new URLClassLoader(urls);
                 UrlClassLoaderScanner actual = new UrlClassLoaderScanner(classLoader, null);
                 try (MockedStatic<Files> mocked = mockStatic(Files.class)) {
-                    mocked.when(() -> Files.walk(any(), anyInt(), any())).thenThrow(new IOException());
+                    mocked.when(() -> Files.walk(any(), anyInt())).thenThrow(new IOException());
                     IllegalStateException exception = catchThrowableOfType(actual::scan, IllegalStateException.class);
                     assertThat(exception).isNotNull()
                             .hasMessage("Failed to scan class directory. [directory=" + FileUtils.path(directory) + "]")

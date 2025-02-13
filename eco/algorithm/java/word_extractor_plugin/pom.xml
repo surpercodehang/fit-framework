@@ -16,6 +16,9 @@
         <fit.version>3.5.0-SNAPSHOT</fit.version>
         <fastjson.version>1.2.83</fastjson.version>
         <slf4j.version>1.7.36</slf4j.version>
+        <junit-jupiter.version>5.11.4</junit-jupiter.version>
+        <mockito.version>5.15.2</mockito.version>
+        <jsoup.version>1.17.2</jsoup.version>
     </properties>
 
     <dependencies>
@@ -63,19 +66,19 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.11.4</version>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-inline</artifactId>
-            <version>4.11.0</version>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.17.2</version>
+            <version>${jsoup.version}</version>
         </dependency>
     </dependencies>
 

@@ -57,7 +57,7 @@ public class DynamicRoutingInterceptorTest {
         when(invoker.timeout(anyLong(), any())).thenReturn(invoker);
         when(invoker.protocol(any())).thenReturn(invoker);
         when(invoker.format(any())).thenReturn(invoker);
-        when(invoker.invoke(any())).thenReturn("OK");
+        when(invoker.invoke()).thenReturn("OK");
         this.joinPoint = mock(MethodJoinPoint.class);
         this.invocation = mock(MethodInvocation.class);
         when(this.joinPoint.getProxiedInvocation()).thenReturn(this.invocation);
