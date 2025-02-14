@@ -6,6 +6,7 @@
 
 package modelengine.fitframework.protocol.jar.support;
 
+import modelengine.fitframework.protocol.jar.FilesCache;
 import modelengine.fitframework.protocol.jar.JarEntryLocation;
 import modelengine.fitframework.protocol.jar.JarLocation;
 
@@ -234,13 +235,7 @@ public final class Locations {
             if (file == null) {
                 throw new IllegalArgumentException("The file of a JAR location cannot be null.");
             }
-            try {
-                this.file = file.getCanonicalFile();
-            } catch (IOException ex) {
-                throw new IllegalArgumentException(String.format(Locale.ROOT,
-                        "The file of JAR location is not canonical. [path=%s]",
-                        path(file)));
-            }
+            this.file = FilesCache.instance().getCanonicalFile(file);
             this.nests = Optional.ofNullable(nests)
                     .map(Collection::stream)
                     .orElseGet(Stream::empty)
