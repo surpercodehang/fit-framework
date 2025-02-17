@@ -9,6 +9,7 @@ package modelengine.fit.waterflow.domain.states;
 import modelengine.fit.waterflow.domain.context.FlowContext;
 import modelengine.fit.waterflow.domain.context.FlowSession;
 import modelengine.fit.waterflow.domain.context.repo.flowcontext.FlowContextRepo;
+import modelengine.fit.waterflow.domain.context.repo.flowsession.FlowSessionRepo;
 import modelengine.fit.waterflow.domain.emitters.Emitter;
 import modelengine.fit.waterflow.domain.emitters.EmitterListener;
 import modelengine.fit.waterflow.domain.enums.FlowNodeStatus;
@@ -168,13 +169,7 @@ public class State<O, D, I, F extends Flow<D>> extends Start<O, D, I, F>
      * @return 表示对应的流对象的 {@link F}。
      */
     public F close(Operators.Just<Callback<FlowContext<O>>> callback) {
-        return this.close(input -> {
-            callback.process(input);
-            input.get().getWindow().peekAndConsume().finishConsume();
-            if (input.get().getWindow().isDone()) {
-                this.getFlow().completeSession(input.get().getSession().getId());
-            }
-        }, null, null);
+        return this.close(callback, null, null);
     }
 
     /**
@@ -186,13 +181,7 @@ public class State<O, D, I, F extends Flow<D>> extends Start<O, D, I, F>
      * @return 表示对应的流对象的 {@link F}。
      */
     public F close(Operators.Just<Callback<FlowContext<O>>> callback, Operators.ErrorHandler<Object> errHandler) {
-        return this.close(input -> {
-            callback.process(input);
-            input.get().getWindow().peekAndConsume().finishConsume();
-            if (input.get().getWindow().isDone()) {
-                this.getFlow().completeSession(input.get().getSession().getId());
-            }
-        }, null, errHandler);
+        return this.close(callback, null, errHandler);
     }
 
     /**
@@ -217,6 +206,11 @@ public class State<O, D, I, F extends Flow<D>> extends Start<O, D, I, F>
             FlowDebug.log(input.get().getSession(),
                     "[close] " + this.getFlow().end().getId() + ":" + "end. data:" + input.get().getData());
             callback.process(input);
+            input.get().getWindow().peekAndConsume().finishConsume();
+            if (input.get().getWindow().isDone()) {
+                FlowSessionRepo.release(input.get().getSession());
+                this.getFlow().completeSession(input.get().getSession().getId());
+            }
         });
         if (sessionComplete != null) {
             getFlow().end().onSessionComplete(session -> {
@@ -228,7 +222,9 @@ public class State<O, D, I, F extends Flow<D>> extends Start<O, D, I, F>
         this.getFlow()
                 .nodes()
                 .forEach(node -> node.onGlobalError(this.buildGlobalHandler(errHandler, node.getFlowContextRepo())));
-        getFlow().end().onGlobalError(this.buildGlobalHandler(errHandler, getFlow().end().getFlowContextRepo()));
+        this.getFlow()
+                .end()
+                .onGlobalError(this.buildGlobalHandler(errHandler, this.getFlow().end().getFlowContextRepo()));
         return this.getFlow();
     }
 
@@ -251,6 +247,7 @@ public class State<O, D, I, F extends Flow<D>> extends Start<O, D, I, F>
     private Operators.ErrorHandler<Object> buildGlobalHandler(Operators.ErrorHandler<Object> errHandler,
             FlowContextRepo repo) {
         return (exception, retryable, contexts) -> {
+            contexts.stream().findFirst().ifPresent(context -> FlowSessionRepo.release(context.getSession()));
             contexts.forEach(context -> context.setStatus(FlowNodeStatus.ERROR));
             repo.save(contexts);
             if (errHandler != null) {

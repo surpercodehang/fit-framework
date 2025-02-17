@@ -57,6 +57,7 @@ public class Window implements Completable {
     /**
      * from
      */
+    @Getter
     protected Window from = null;
 
     /**
