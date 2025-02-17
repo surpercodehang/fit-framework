@@ -46,10 +46,6 @@
             <groupId>modelengine.fit.service</groupId>
             <artifactId>fit-client</artifactId>
         </dependency>
-        <dependency>
-            <groupId>modelengine.fit.service</groupId>
-            <artifactId>fit-service-registry-and-discovery</artifactId>
-        </dependency>
 
         <!-- Test -->
         <dependency>
