@@ -9,6 +9,7 @@ package modelengine.fit.waterflow.domain.context;
 import lombok.Getter;
 import modelengine.fit.waterflow.domain.common.Constants;
 import modelengine.fit.waterflow.domain.context.repo.flowcontext.FlowContextRepo;
+import modelengine.fit.waterflow.domain.context.repo.flowsession.FlowSessionRepo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,9 +29,6 @@ import java.util.concurrent.atomic.AtomicLong;
  * @since 1.0
  */
 public class FlatMapSourceWindow extends Window {
-    // 存储所有 FlatMapSourceWindow 实例的列表
-    private static final List<FlatMapSourceWindow> all = new ArrayList<>();
-
     private final FlowContextRepo repo;
 
     /**
@@ -72,18 +70,8 @@ public class FlatMapSourceWindow extends Window {
      * @param <I>    输入类型
      * @return FlatMapSourceWindow 实例
      */
-    public static synchronized <I> FlatMapSourceWindow from(Window window, FlowContextRepo repo) {
-        return all.stream()
-                .filter(existingWindow -> existingWindow.from == window)
-                .findAny()
-                .orElseGet(() -> {
-                    FlatMapSourceWindow newWindow = new FlatMapSourceWindow(window, repo);
-                    newWindow.setSession(new FlowSession(window.getSession().preserved()));
-                    newWindow.getSession().setWindow(newWindow);
-                    newWindow.getSession().begin();
-                    all.add(newWindow);
-                    return newWindow;
-                });
+    public static <I> FlatMapSourceWindow from(Window window, FlowContextRepo repo) {
+        return FlowSessionRepo.getFlatMapSource(window, repo);
     }
 
     /**

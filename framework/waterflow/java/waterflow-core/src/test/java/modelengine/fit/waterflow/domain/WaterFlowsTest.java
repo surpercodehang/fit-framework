@@ -151,7 +151,7 @@ class WaterFlowsTest {
             //应该乱序
             ProcessFlow<Integer> flow = Flows.<Integer>create(repo, messenger, locks).id("start")
                     .map(i -> {
-                        SleepUtil.sleep((6 - i) * 20);
+                        SleepUtil.sleep((6 - i) * 20L);
                         return i * 10;
                     })
                     .map(i -> i + 10)
@@ -260,7 +260,7 @@ class WaterFlowsTest {
         void testFitStreamReduceComputation() {
             AtomicInteger counter = new AtomicInteger();
             ProcessFlow<Integer> flow = Flows.<Integer>create(repo, messenger, locks)
-                    .map(i -> i * 1)
+                    .map(i -> i)
                     .reduce(() -> 0, Integer::sum)
                     .just(i -> counter.set(counter.get() + 1))
                     .close();
@@ -365,7 +365,7 @@ class WaterFlowsTest {
                     .reduce(() -> ObjectUtils.<Tuple<String, Integer>>cast(Tuple.from("", 0)),
                             (acc, data) -> Tuple.from(data.first(), acc.second() + data.second().second()))
                     .just(data -> {
-                        reduced.add((Tuple<String, Integer>) data);
+                        reduced.add((Tuple<String, Integer>)data);
                     })
                     .close();
             FlowSession session = new FlowSession();
@@ -386,7 +386,7 @@ class WaterFlowsTest {
             StringBuilder result = new StringBuilder();
             ProcessFlow<Integer> flow = Flows.<Integer>create(repo, messenger, locks)
                     .map(i -> {
-                        SleepUtil.sleep((6 - i) * 20);
+                        SleepUtil.sleep((6 - i) * 20L);
                         return i * 10;
                     })
                     .reduce(() -> "", (acc, i) -> acc + "|" + i)
@@ -492,7 +492,7 @@ class WaterFlowsTest {
                     })
                     .close(r -> result.set(r.get().getData()))
                     .offer(new Integer[] {1, 2, 3}, flowSession);
-            window.complete();;
+            window.complete();
             FlowsTestUtil.waitUntil(() -> result.get() != null);
 
             Assertions.assertNotNull(result.get());
@@ -1026,6 +1026,109 @@ class WaterFlowsTest {
             FlowsTestUtil.waitFortyMillis(Collections::emptyList);
             assertEquals("flow test", flowTest.getId());
             assertEquals(0, testRepo.getContextsByTrace(traceId).size());
+        }
+
+        @Test
+        void test_flow_flat_map_with_reduce_under_cold_stream() {
+            List<Integer> result = new ArrayList<>();
+            ProcessFlow<Integer> flow = Flows.<Integer>create()
+                    .flatMap(num -> {
+                        Integer[] maps = new Integer[num];
+                        for (int i = 0; i < num; i++) {
+                            maps[i] = i * 10;
+                        }
+                        return Flows.flux(maps);
+                    })
+                    .map(i -> i * 10)
+                    .reduce(() -> 0, Integer::sum)
+                    .just(i -> result.add(i))
+                    .close();
+            flow.offer(new Integer[] {2, 3});
+            FlowsTestUtil.waitUntil(() -> result.size() == 1);
+            assertEquals(1, result.size());
+            assertEquals(400, result.get(0));
+        }
+
+        @Test
+        void test_flow_flat_map_with_reduce_under_hot_stream() throws InterruptedException {
+            List<Integer> result = new ArrayList<>();
+            ProcessFlow<Integer> flow = Flows.<Integer>create()
+                    .flatMap(num -> {
+                        Integer[] maps = new Integer[num];
+                        for (int i = 0; i < num; i++) {
+                            maps[i] = i * 10;
+                        }
+                        return Flows.flux(maps);
+                    })
+                    .map(i -> i * 10)
+                    .reduce(() -> 0, Integer::sum)
+                    .just(i -> result.add(i))
+                    .close();
+            FlowSession session = new FlowSession();
+            Window window = session.begin();
+            flow.offer(2, session);
+            Thread.sleep(10);
+            flow.offer(3, session);
+            Thread.sleep(400);
+
+            window.complete();
+            FlowsTestUtil.waitUntil(() -> result.size() == 1, 1000);
+            assertEquals(1, result.size());
+            assertEquals(400, result.get(0));
+        }
+
+        @Test
+        void test_flatMap_under_preserved_order() throws InterruptedException {
+            StringBuilder result = new StringBuilder();
+            final int count = 4;
+            final int flatmapSize = 2;
+            ProcessFlow<Integer> flow = Flows.<Integer>create(repo, messenger, locks)
+                    .flatMap(num -> {
+                        SleepUtil.sleep((count - num) * 20L);
+                        String[] maps = new String[flatmapSize];
+                        for (int i = 0; i < flatmapSize; i++) {
+                            maps[i] = num + "-" + i;
+                        }
+                        return Flows.flux(maps);
+                    })
+                    .map(s -> "|" + s)
+                    .reduce((acc, i) -> acc + i)
+                    .map(i -> result.append(i.substring(1)))
+                    .close();
+            FlowSession session = new FlowSession(true);
+            Window window = session.begin();
+            for (int i = 0; i < count; i++) {
+                flow.offer(i + 1, session);
+                Thread.sleep(10);
+            }
+            window.complete();
+
+            FlowsTestUtil.waitUntil(() -> !result.isEmpty(), 1000);
+            assertEquals("1-0|1-1|2-0|2-1|3-0|3-1|4-0|4-1", result.toString());
+        }
+
+        @Test
+        void try_a_complicated_map_reduce() throws InterruptedException {
+            List<String> result = new ArrayList<>();
+            ProcessFlow<Integer> flow = Flows.<Integer>create()
+                    .map(i -> i * 10)
+                    .reduce(Integer::sum)
+                    .map(i -> i + "unit")
+                    .just(i -> result.add(i))
+                    .close();
+            flow.offer(new Integer[] {1, 2, 3, 4, 5});
+
+            FlowSession session = new FlowSession();
+            Window window = session.begin();
+            for (int i = 5; i <= 6; i++) {
+                flow.offer(new Integer[] {i, i + 1}, session);
+            }
+            Thread.sleep(400);
+            window.complete();
+
+            FlowsTestUtil.waitUntil(() -> result.size() == 2, 1000);
+            assertEquals("150unit", result.get(0));
+            assertEquals("240unit", result.get(1));
         }
     }
 }

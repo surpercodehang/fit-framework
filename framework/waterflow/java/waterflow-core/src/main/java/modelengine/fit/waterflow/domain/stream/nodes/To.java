@@ -19,6 +19,7 @@ import modelengine.fit.waterflow.domain.context.WindowToken;
 import modelengine.fit.waterflow.domain.context.repo.flowcontext.FlowContextMessenger;
 import modelengine.fit.waterflow.domain.context.repo.flowcontext.FlowContextRepo;
 import modelengine.fit.waterflow.domain.context.repo.flowlock.FlowLocks;
+import modelengine.fit.waterflow.domain.context.repo.flowsession.FlowSessionRepo;
 import modelengine.fit.waterflow.domain.emitters.EmitterListener;
 import modelengine.fit.waterflow.domain.enums.FlowNodeStatus;
 import modelengine.fit.waterflow.domain.enums.FlowNodeType;
@@ -690,6 +691,10 @@ public class To<I, O> extends IdGenerator implements Subscriber<I, O> {
         this.listeners.forEach(listener -> listener.handle(data, trans));
     }
 
+    private FlowSession getNextSession(FlowSession session) {
+        return FlowSessionRepo.getNextSession(session);
+    }
+
     /**
      * ProcessMode
      *
@@ -725,17 +730,7 @@ public class To<I, O> extends IdGenerator implements Subscriber<I, O> {
                     // context.getSession() could be changed by processor
                     FlowSession session = context.getSession();
                     // create new session and window token for processed data
-                    FlowSession nextSession = to.nextSessions.get(session.getWindow().key());
-                    if (nextSession == null) {
-                        nextSession = new FlowSession(session);
-                        to.nextSessions.put(session.getWindow().key(), nextSession);
-                        Window nextWindow = nextSession.begin();
-                        // if the processor is not reduce, then inherit previous window condition
-                        if (!session.isAccumulator()) {
-                            nextWindow.setCondition(session.getWindow().getCondition());
-                        }
-                    }
-
+                    FlowSession nextSession = to.getNextSession(session);
                     // ignore reduce null, reduce null means reduce not finished
                     if (data != null) {
                         FlowContext<R1> clonedContext = context.generate(data, to.getId());
