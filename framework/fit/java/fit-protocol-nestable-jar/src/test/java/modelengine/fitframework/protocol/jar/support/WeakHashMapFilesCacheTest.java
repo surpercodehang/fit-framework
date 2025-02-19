@@ -16,7 +16,7 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-import static modelengine.fitframework.protocol.jar.support.Locations.path;
+import static modelengine.fitframework.protocol.jar.location.Locations.path;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowableOfType;
 import static org.mockito.Mockito.mock;
