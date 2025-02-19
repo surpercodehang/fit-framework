@@ -8,6 +8,7 @@ package modelengine.fitframework.starter.spring;
 
 import modelengine.fitframework.broker.client.BrokerClient;
 import modelengine.fitframework.ioc.BeanFactory;
+import modelengine.fitframework.protocol.jar.JarLocationParser;
 import modelengine.fitframework.runtime.FitRuntime;
 import modelengine.fitframework.runtime.FitStarter;
 
@@ -45,6 +46,7 @@ public class SpringBootAutoConfiguration {
      */
     @Bean
     public FitRuntime fitRuntime() {
+        JarLocationParser.register(SpringJarLocationParser.INSTANCE);
         return FitStarter.start(SpringBootAutoConfiguration.class, this.args.getSourceArgs());
     }
 

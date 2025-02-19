@@ -6,7 +6,7 @@
 
 package modelengine.fitframework.protocol.jar.support;
 
-import static modelengine.fitframework.protocol.jar.support.Locations.path;
+import static modelengine.fitframework.protocol.jar.location.Locations.path;
 
 import java.io.File;
 import java.io.FilePermission;

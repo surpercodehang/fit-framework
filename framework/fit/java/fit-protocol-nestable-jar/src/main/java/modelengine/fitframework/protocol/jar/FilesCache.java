@@ -26,9 +26,9 @@ public interface FilesCache {
     File getCanonicalFile(File file);
 
     /**
-     * 获取 File 文件的缓存。
+     * 获取文件缓存器的实例。
      *
-     * @return 表示 File 文件的缓存的 {@link FilesCache}。
+     * @return 表示文件缓存器实例的 {@link FilesCache}。
      */
     static FilesCache instance() {
         return WeakHashMapFilesCache.INSTANCE;

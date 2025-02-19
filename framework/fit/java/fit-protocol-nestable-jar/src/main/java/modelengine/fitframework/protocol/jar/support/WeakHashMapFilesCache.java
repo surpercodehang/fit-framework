@@ -15,7 +15,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import static modelengine.fitframework.protocol.jar.support.Locations.path;
+import static modelengine.fitframework.protocol.jar.location.Locations.path;
 
 /**
  * 表示弱引用的文件缓存器实现。

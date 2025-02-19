@@ -6,7 +6,7 @@
 
 package modelengine.fitframework.protocol.jar;
 
-import modelengine.fitframework.protocol.jar.support.Locations;
+import modelengine.fitframework.protocol.jar.location.Locations;
 
 import java.io.IOException;
 import java.io.InputStream;

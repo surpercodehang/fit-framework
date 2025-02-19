@@ -6,7 +6,7 @@
 
 package modelengine.fitframework.protocol.jar;
 
-import modelengine.fitframework.protocol.jar.support.Locations;
+import modelengine.fitframework.protocol.jar.location.Locations;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -79,18 +79,14 @@ public interface JarLocation {
     JarEntryLocation entry(String name);
 
     /**
-     * 从指定的文本中解析 JAR 的位置信息。
+     * 从指定的 URL 中解析 JAR 的位置信息。
      *
      * @param url 表示包含 JAR 的位置信息的 {@link URL}。
      * @return 表示解析到的 JAR 位置信息的 {@link JarLocation}。
-     * @throws IllegalArgumentException {@code url} 为 {@code null} 或未包含有效的 JAR 位置信息。
+     * @throws IllegalArgumentException 当 {@code url} 为 {@code null} 或未包含有效的 JAR 位置信息时。
      */
     static JarLocation parse(URL url) {
-        if (url == null) {
-            throw new IllegalArgumentException("The URL to parse JAR location cannot be null.");
-        } else {
-            return parse(url.toExternalForm());
-        }
+        return JarLocationParser.instance().parseJar(url);
     }
 
     /**
@@ -98,10 +94,10 @@ public interface JarLocation {
      *
      * @param url 表示包含 JAR 的位置信息的 URL 字符串的 {@link String}。
      * @return 表示解析到的 JAR 位置信息的 {@link JarLocation}。
-     * @throws IllegalArgumentException {@code url} 为 {@code null} 或未包含有效的 JAR 位置信息。
+     * @throws IllegalArgumentException 当 {@code url} 为空白字符串或未包含有效的 JAR 位置信息时。
      */
     static JarLocation parse(String url) {
-        return Locations.parseJar(url);
+        return JarLocationParser.instance().parseJar(url);
     }
 
     /**
