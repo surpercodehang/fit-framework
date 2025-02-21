@@ -28,62 +28,62 @@ HumanEval (代码生成测评数据集) 上的准确率也只有 67.0%，但经�
 ``` xml
 <dependencies>
     <dependency>
-        <groupId>modelengine.fit.starter</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fit-starter</artifactId>
         <version>${fit.version}</version>
     </dependency>
     <dependency>
-        <groupId>modelengine.fit.starter</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fit-plugins-starter-web</artifactId>
         <version>${fit.version}</version>
     </dependency>
     <dependency>
-        <groupId>modelengine.fit.plugin</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fit-http-client-okhttp</artifactId>
         <version>${fit.version}</version>
     </dependency>
     <dependency>
-        <groupId>modelengine.fit.jade.fel</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fel-core</artifactId>
         <version>${fel.version}</version>
     </dependency>
     <dependency>
-        <groupId>modelengine.fit.jade.fel</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fel-flow</artifactId>
         <version>${fel.version}</version>
     </dependency>
     <dependency>
-        <groupId>modelengine.fit.jade.community</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fel-model-openai-plugin</artifactId>
         <version>${fel.version}</version>
     </dependency>
     <!-- 工具自动发现服务 -->
     <dependency>
-        <groupId>modelengine.fit.jade.fel.plugin</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fel-tool-discoverer</artifactId>
         <version>${fel.version}</version>
     </dependency>
     <!-- 工具执行服务 -->
     <dependency>
-        <groupId>modelengine.fit.jade.fel.plugin</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fel-tool-executor</artifactId>
         <version>${fel.version}</version>
     </dependency>
     <!-- Fit 工具工厂 -->
     <dependency>
-        <groupId>modelengine.fit.jade.fel.plugin</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fel-tool-factory-fit</artifactId>
         <version>${fel.version}</version>
     </dependency>
     <!-- 工具工厂存储 -->
     <dependency>
-        <groupId>modelengine.fit.jade.fel.plugin</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fel-tool-factory-repository</artifactId>
         <version>${fel.version}</version>
     </dependency>
     <!-- 工具存储 -->
     <dependency>
-        <groupId>modelengine.fit.jade.fel.plugin</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fel-tool-repository-simple</artifactId>
         <version>${fel.version}</version>
     </dependency>
@@ -92,7 +92,7 @@ HumanEval (代码生成测评数据集) 上的准确率也只有 67.0%，但经�
 <plugins>
     <!-- 工具编译插件 -->
     <plugin>
-        <groupId>modelengine.fit.jade.maven.plugin</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>tool-maven-plugin</artifactId>
         <version>${fel.version}</version>
         <executions>

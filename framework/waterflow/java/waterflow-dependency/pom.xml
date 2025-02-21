@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>modelengine.fit.jade.waterflow</groupId>
+    <groupId>org.fitframework</groupId>
     <artifactId>waterflow-dependency</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -42,71 +42,71 @@
         <dependencies>
             <!-- FIT -->
             <dependency>
-                <groupId>modelengine.fitframework</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-api</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>modelengine.fit.service</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-data-repository-service</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>modelengine.fit.service</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-http-classic</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>modelengine.fit.integration</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-mybatis</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>modelengine.fitframework</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-reactor</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>modelengine.fitframework.extension</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-schedule</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>modelengine.fit.service</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-service-registry-and-discovery</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>modelengine.fitframework.extension</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-transaction</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>modelengine.fitframework</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-util</artifactId>
                 <version>${fit.version}</version>
             </dependency>
 
             <!-- WaterFlow -->
             <dependency>
-                <groupId>modelengine.fit.jade.waterflow</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>waterflow-bridge-fit-reactor</artifactId>
                 <version>${waterflow.version}</version>
             </dependency>
             <dependency>
-                <groupId>modelengine.fit.jade.waterflow</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>waterflow-core</artifactId>
                 <version>${waterflow.version}</version>
             </dependency>
             <dependency>
-                <groupId>modelengine.fit.jade.waterflow</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>waterflow-genericable</artifactId>
                 <version>${waterflow.version}</version>
             </dependency>
 
             <!-- Ohscript -->
             <dependency>
-                <groupId>modelengine.fit.ohscript</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>ohscript</artifactId>
                 <version>${ohscript.version}</version>
             </dependency>

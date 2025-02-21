@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>OhScript</name>
-    <groupId>modelengine.fit.ohscript</groupId>
+    <groupId>org.fitframework</groupId>
     <artifactId>ohscript</artifactId>
     <version>0.0.3.6-SNAPSHOT</version>
 
@@ -54,12 +54,12 @@
 
         <!-- Fit -->
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>
             <version>${fit.version}</version>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.service</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-http-classic</artifactId>
             <version>${fit.version}</version>
         </dependency>
@@ -86,7 +86,7 @@
 
         <!-- Test Fit Core -->
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-runtime</artifactId>
             <version>${fit.version}</version>
             <scope>test</scope>
@@ -94,49 +94,49 @@
 
         <!-- Test Plugin -->
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-value-fastjson</artifactId>
             <version>${fit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-message-serializer-cbor</artifactId>
             <version>${fit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-message-serializer-json-jackson</artifactId>
             <version>${fit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-http-server-netty</artifactId>
             <version>${fit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-server-http</artifactId>
             <version>${fit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-http-handler-registry</artifactId>
             <version>${fit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-client-http</artifactId>
             <version>${fit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-http-client-okhttp</artifactId>
             <version>${fit.version}</version>
             <scope>test</scope>

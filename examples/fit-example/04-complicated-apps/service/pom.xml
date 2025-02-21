@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>modelengine.fit.example</groupId>
-    <artifactId>weather</artifactId>
+    <groupId>org.fitframework</groupId>
+    <artifactId>weather-for-complicated</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -20,12 +20,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>
             <version>${fit.version}</version>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-util</artifactId>
             <version>${fit.version}</version>
         </dependency>
@@ -47,7 +47,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>modelengine.fitframework</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-build-maven-plugin</artifactId>
                 <version>${fit.version}</version>
                 <executions>

@@ -4,12 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>modelengine.fit.extension</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fit-test-parent</artifactId>
         <version>3.5.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>modelengine.fitframework</groupId>
     <artifactId>fit-service-test-util</artifactId>
 
     <properties>
@@ -19,7 +18,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-util</artifactId>
         </dependency>
 
@@ -44,7 +43,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>modelengine.fitframework</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-dependency-maven-plugin</artifactId>
                 <version>${fit.version}</version>
                 <executions>

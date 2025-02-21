@@ -10,8 +10,8 @@
         <relativePath/>
     </parent>
 
-    <groupId>modelengine.fit.example</groupId>
-    <artifactId>demo-app</artifactId>
+    <groupId>org.fitframework</groupId>
+    <artifactId>demo-spring-app</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -24,17 +24,17 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-spring-boot-starter</artifactId>
             <version>3.5.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-log-console</artifactId>
             <version>3.5.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.example</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>weather-for-spring</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

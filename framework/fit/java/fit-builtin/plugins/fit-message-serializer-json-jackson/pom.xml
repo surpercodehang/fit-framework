@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>modelengine.fit.plugin</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fit-plugin-parent</artifactId>
         <version>3.5.0-SNAPSHOT</version>
     </parent>
@@ -22,17 +22,17 @@
     <dependencies>
         <!-- FIT core -->
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-util</artifactId>
         </dependency>
 
         <!-- Micro genericables -->
         <dependency>
-            <groupId>modelengine.fit.service</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-message-serializer</artifactId>
         </dependency>
 
@@ -50,12 +50,12 @@
 
         <!-- Test -->
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-service-test-util</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.service</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-message-serializer-test</artifactId>
             <scope>test</scope>
         </dependency>
@@ -85,7 +85,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>modelengine.fitframework</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-build-maven-plugin</artifactId>
                 <version>${fit.version}</version>
             </plugin>

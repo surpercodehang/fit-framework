@@ -23,12 +23,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>
             <version>${fit.version}</version>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-util</artifactId>
             <version>${fit.version}</version>
         </dependency>
@@ -54,7 +54,7 @@
             <version>1.26.1</version>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.jade.waterflow</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>waterflow-genericable</artifactId>
             <version>${waterflow.version}</version>
         </dependency>
@@ -97,7 +97,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>modelengine.fitframework</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-build-maven-plugin</artifactId>
                 <version>${fit.version}</version>
                 <executions>

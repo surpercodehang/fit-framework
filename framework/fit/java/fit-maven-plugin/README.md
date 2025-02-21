@@ -12,7 +12,7 @@ FIT通过Maven插件提供FIT插件、应用的打包、发布等能力。
 
 ``` xml
 <plugin>
-    <groupId>modelengine.fitframework</groupId>
+    <groupId>org.fitframework</groupId>
     <artifactId>fit-build-maven-plugin</artifactId>
     <version>${fit.version}</version>
     <executions>
@@ -37,7 +37,7 @@ FIT通过Maven插件提供FIT插件、应用的打包、发布等能力。
 
 ``` xml
 <plugin>
-    <groupId>modelengine.fitframework</groupId>
+    <groupId>org.fitframework</groupId>
     <artifactId>fit-build-maven-plugin</artifactId>
     <version>${fit.version}</version>
     <executions>

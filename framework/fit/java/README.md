@@ -22,17 +22,17 @@ FIT 函数平台是一套支持多语言融合编程、插件化开发、聚散�
 ``` xml
 <dependencies>
     <dependency>
-        <groupId>modelengine.fit.starter</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fit-starter</artifactId>
         <version>${fit.version}</version>
     </dependency>
     <dependency>
-        <groupId>modelengine.fit.starter</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fit-plugins-starter-web</artifactId>
         <version>${fit.version}</version>
     </dependency>
     <dependency>
-        <groupId>modelengine.fitframework</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fit-api</artifactId>
         <version>${fit.version}</version>
     </dependency>

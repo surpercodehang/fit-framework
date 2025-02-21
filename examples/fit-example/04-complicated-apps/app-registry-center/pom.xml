@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>modelengine.fit.example</groupId>
-    <artifactId>registry-center</artifactId>
+    <groupId>org.fitframework</groupId>
+    <artifactId>registry-center-for-complicated</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -20,51 +20,51 @@
 
     <dependencies>
         <dependency>
-            <groupId>modelengine.fit.starter</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-starter</artifactId>
             <version>${fit.version}</version>
         </dependency>
 
         <!-- FIT plugins -->
         <dependency>
-            <groupId>modelengine.fit.starter</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-plugins-starter-web</artifactId>
             <version>${fit.version}</version>
         </dependency>
 
         <!-- 不在默认插件集合中的插件列表 -->
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-client-http</artifactId>
             <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-http-client-okhttp</artifactId>
             <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-heartbeat-client</artifactId>
             <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-service-registry</artifactId>
             <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-service-discovery</artifactId>
             <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-service-coordination-locator</artifactId>
             <version>${fit.version}</version>
             <scope>runtime</scope>
@@ -72,7 +72,7 @@
 
         <!-- 注册中心的内存版实现 -->
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-service-coordination-simple</artifactId>
             <version>${fit.version}</version>
             <scope>runtime</scope>
@@ -95,7 +95,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>modelengine.fitframework</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-build-maven-plugin</artifactId>
                 <version>${fit.version}</version>
                 <executions>

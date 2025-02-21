@@ -170,7 +170,7 @@ will.get() # 48
 ``` xml
 <!-- OhScript -->
 <dependency>
-    <groupId>modelengine.fit.ohscript</groupId>
+    <groupId>org.fitframework</groupId>
     <artifactId>ohscript</artifactId>
     <version>0.0.3.6-SNAPSHOT</version>
 </dependency>

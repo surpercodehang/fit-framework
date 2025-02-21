@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>modelengine.fit.jade.fel.plugin</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fel-plugin-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
@@ -14,23 +14,23 @@
     <dependencies>
         <!-- FIT -->
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-util</artifactId>
         </dependency>
 
         <!-- FEL -->
         <dependency>
-            <groupId>modelengine.fit.jade.fel.service</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>tool-service</artifactId>
         </dependency>
 
         <!-- Test Plugins -->
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-message-serializer-json-jackson</artifactId>
             <version>${fit.version}</version>
             <scope>test</scope>
@@ -54,7 +54,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>modelengine.fitframework</groupId>
+                <groupId>org.fitframework</groupId>
                 <artifactId>fit-build-maven-plugin</artifactId>
                 <version>${fit.version}</version>
                 <configuration>

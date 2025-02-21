@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>modelengine.fitframework</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>fitframework-parent</artifactId>
         <version>3.5.0-SNAPSHOT</version>
     </parent>
@@ -15,97 +15,97 @@
     <dependencies>
         <!-- FIT Maven Plugin -->
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-build-maven-plugin</artifactId>
         </dependency>
 
         <!-- FIT Core -->
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-aop</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-aop-aspect</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-aop-bytebuddy</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-broker</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-conf</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-conf-yaml</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-reactor</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-ioc</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-log-console</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-log-log4j2</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-plugin</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-protocol-nestable-jar</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-runtime</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-util</artifactId>
         </dependency>
 
         <!-- FIT Extension -->
         <dependency>
-            <groupId>modelengine.fitframework.extension</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-retry</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework.extension</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-schedule</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework.extension</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-transaction</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework.extension</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-validation</artifactId>
         </dependency>
 
         <!-- FIT Test -->
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-service-test-util</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-test-framework</artifactId>
         </dependency>
         <dependency>
@@ -116,111 +116,111 @@
 
         <!-- FIT Service -->
         <dependency>
-            <groupId>modelengine.fit.service</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.service</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-heartbeat</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.service</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-http-classic</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.service</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-http-protocol</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.service</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-message-serializer</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.service</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-security</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.service</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-server</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.service</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-service-registry-and-discovery</artifactId>
         </dependency>
 
         <!-- FIT Plugin -->
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-client-http</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-dynamic-plugin-directory</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-dynamic-plugin-mvn</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-heartbeat-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-http-client-okhttp</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-http-handler-registry</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-http-server-netty</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-message-serializer-cbor</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-message-serializer-json-jackson</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-server-http</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-service-coordination-locator</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-service-coordination-simple</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-service-registry</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-service-discovery</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.plugin</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-value-fastjson</artifactId>
         </dependency>
 
         <!-- FIT Integration -->
         <dependency>
-            <groupId>modelengine.fit.integration</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-druid</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.integration</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-mybatis</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fit.integration</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-mybatis-common</artifactId>
         </dependency>
     </dependencies>

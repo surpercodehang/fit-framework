@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>modelengine.fit.integration</groupId>
+        <groupId>org.fitframework</groupId>
         <artifactId>integration-parent</artifactId>
         <version>3.5.0-SNAPSHOT</version>
     </parent>
@@ -19,21 +19,21 @@
     <dependencies>
         <!-- FIT core -->
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-util</artifactId>
         </dependency>
         <dependency>
-            <groupId>modelengine.fitframework.extension</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-transaction</artifactId>
         </dependency>
 
         <!-- Mybatis -->
         <dependency>
-            <groupId>modelengine.fit.integration</groupId>
+            <groupId>org.fitframework</groupId>
             <artifactId>fit-mybatis-common</artifactId>
             <version>${fit.version}</version>
         </dependency>

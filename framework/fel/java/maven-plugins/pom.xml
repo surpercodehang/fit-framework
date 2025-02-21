@@ -4,12 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>modelengine.fit.jade</groupId>
-        <artifactId>jade-fel-parent</artifactId>
+        <groupId>org.fitframework</groupId>
+        <artifactId>fel-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>modelengine.fit.jade.maven.plugin</groupId>
     <artifactId>fel-maven-plugin-parent</artifactId>
     <packaging>pom</packaging>
 
