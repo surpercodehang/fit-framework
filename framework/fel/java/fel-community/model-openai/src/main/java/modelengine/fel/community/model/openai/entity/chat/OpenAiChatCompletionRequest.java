@@ -58,7 +58,7 @@ public class OpenAiChatCompletionRequest {
         this.temperature = chatOption.temperature();
         this.topP = chatOption.topP();
         if (CollectionUtils.isEmpty(chatOption.tools())) {
-            this.toolChoice = "none";
+            this.toolChoice = null;
             this.tools = null;
         } else {
             this.toolChoice = "auto";
