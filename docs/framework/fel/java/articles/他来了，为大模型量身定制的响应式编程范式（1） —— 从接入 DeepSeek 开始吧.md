@@ -1,4 +1,4 @@
-# 🚀 他来了，为大模型量身定制的响应式编程范式（1） —— 从接入 DeepSeek 开始吧🚀
+# 🚀 他来了，为大模型量身定制的响应式编程范式（1） —— 从接入 DeepSeek 开始吧 🚀
 
 哒哒哒，他来了！👋 今天我们要介绍一种新型的 Java 响应式大模型编程范式 —— **FEL**。你可能听说过 langchain，那么你暂且可以把 FEL 看作是 Java 版本的 langchain。😎 话不多说，今天我们就从接入当前热门的 **DeepSeek** 开始，带大家认识一下 FEL。通过 FEL，你可以轻松实现大模型应用的编排和运行，开启智能编程的新篇章！🎉
 
@@ -6,9 +6,9 @@
 
 ### 1. 准备环境
 
-首先，进入老生常谈的环节 —— 准备环境。进入 [FIT-Framework 项目地址](https://gitcode.com/ModelEngine/fit-framework)，下载项目代码。根据[入门指南](https://gitcode.com/ModelEngine/fit-framework)，你可以快速部署 FIT 环境，并参考 FEL 的指导手册，掌握 FEL 模块的强大功能。FEL 模块不仅支持 DeepSeek 的接入，还能支持任何符合 OpenAI API 标准的大模型。此外，它还提供了丰富的工具和大模型操作原语，帮助你快速构建智能应用。🛠️
+首先，进入老生常谈的环节 —— 准备环境。进入 [FIT-Framework 项目地址](https://github.com/ModelEngine-Group/fit-framework)，下载项目代码。根据[入门指南](https://github.com/ModelEngine-Group/fit-framework)，你可以快速部署 FIT 环境，并参考 FEL 的指导手册，掌握 FEL 模块的强大功能。FEL 模块不仅支持 DeepSeek 的接入，还能支持任何符合 OpenAI API 标准的大模型。此外，它还提供了丰富的工具和大模型操作原语，帮助你快速构建智能应用。🛠️
 
-以下示例地址为 [FEL 示例：01-model](https://gitcode.com/ModelEngine/fit-framework/tree/main/examples/fel-example/01-model)，你可以通过该代码快速上手。具体细节可以参考 [FEL 指导手册：聊天模型使用](https://gitcode.com/ModelEngine/fit-framework/blob/main/docs/framework/fel/java/quick-start-guide/01.%20%E6%A8%A1%E5%9E%8B.md)。
+以下示例地址为 [FEL 示例：01-model](https://github.com/ModelEngine-Group/fit-framework/tree/main/examples/fel-example/01-model)，你可以通过该代码快速上手。具体细节可以参考 [FEL 指导手册：聊天模型使用](https://github.com/ModelEngine-Group/fit-framework/blob/main/docs/framework/fel/java/quick-start-guide/01.%20%E6%A8%A1%E5%9E%8B.md)。
 
 ### 2. 启动运行
 
@@ -46,7 +46,7 @@ public Choir<ChatMessage> chatStream(@RequestParam("query") String query) {
 
 ```yaml
 fel:
-  deepseek:
+  openai:
     api-base: 'https://api.siliconflow.cn/v1'
     api-key: 'your-api-key'
 example:
@@ -66,17 +66,20 @@ example:
 
 ##### 普通调用
 
-在浏览器中输入示例请求地址，例如：`http://localhost:8080/ai/example/chat?query=%E4%BD%A0%E5%A5%BD%EF%BC%8CDeepSeek`。你可能看到类似如下的响应：
+在浏览器中输入示例请求地址，例如：`http://localhost:8080/ai/example/chat?query=你好，DeepSeek`。你可能看到类似如下的响应：
 
-```json
-{"content":"<think>\n\n</think>\n\n你好！我是DeepSeek-R1，一个由深度求索公司开发的智能助手，我会尽我所能为你提供帮助。请问有什么可以为你服务的？","toolCalls":[]}
+``` json
+{
+   "content": "<think>\n\n</think>\n\n你好！我是DeepSeek-R1，一个由深度求索公司开发的智能助手，我会尽我所能为你提供帮助。请问有什么可以为你服务的？",
+   "toolCalls": []
+}
 ```
 
 ##### 流式调用
 
-在浏览器中输入示例请求地址，例如：`http://localhost:8080/ai/example/chat-stream?query=%E4%BD%A0%E5%A5%BD,DeepSeek`。你可能看到类似如下的响应：
+在浏览器中输入示例请求地址，例如：`http://localhost:8080/ai/example/chat-stream?query=你好，DeepSeek`。你可能看到类似如下的响应：
 
-```json
+``` json
 data:{"content":"<think>","toolCalls":[]}
 
 data:{"content":"\n\n","toolCalls":[]}
@@ -141,3 +144,16 @@ FEL 框架设计灵活，我们的多种原语操作都是基于接口设计（�
 
 未来，FEL 框架将支持更多的大模型接入，提供更强大的编排能力，帮助你构建更加智能、高效的应用。无论是企业级解决方案，还是个人项目，FEL 都将为你提供全方位的支持。🌟
 
+---
+
+官方网站：[地址](http://fitframework.io)
+
+项目地址：[Github项目地址](https://github.com/ModelEngine-Group/fit-framework) [GitCode项目地址](https://gitcode.com/ModelEngine/fit-framework)
+
+期待你的到来！
+
+**技术人，用代码说话，用架构思考**
+
+关注我们，探索更多「优雅解耦」的工程实践！🛠️
+
+微信公众号：FitFramework
