@@ -9,6 +9,7 @@
         <version>3.5.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>org.fitframework.extension</groupId>
     <artifactId>fit-extension-parent</artifactId>
     <packaging>pom</packaging>
 

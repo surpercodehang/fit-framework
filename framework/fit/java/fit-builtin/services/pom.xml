@@ -9,6 +9,7 @@
         <version>3.5.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>org.fitframework.service</groupId>
     <artifactId>fit-service-parent</artifactId>
     <packaging>pom</packaging>
 

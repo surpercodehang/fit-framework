@@ -23,7 +23,7 @@
             <version>${fit.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.service</groupId>
             <artifactId>fit-http-classic</artifactId>
             <version>${fit.version}</version>
         </dependency>

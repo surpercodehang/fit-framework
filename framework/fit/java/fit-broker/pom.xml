@@ -31,19 +31,19 @@
 
         <!-- Genericables -->
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.service</groupId>
             <artifactId>fit-message-serializer</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.service</groupId>
             <artifactId>fit-service-registry-and-discovery</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.service</groupId>
             <artifactId>fit-server</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.service</groupId>
             <artifactId>fit-client</artifactId>
         </dependency>
 
@@ -94,7 +94,7 @@
                         </goals>
                         <configuration>
                             <outputDirectory>../target/shared/</outputDirectory>
-                            <includeGroupIds>modelengine.fit.service</includeGroupIds>
+                            <includeGroupIds>org.fitframework.service</includeGroupIds>
                             <includeScope>runtime</includeScope>
                         </configuration>
                     </execution>

@@ -54,7 +54,7 @@ public abstract class AbstractExecutor {
      * @return 如果指定依赖是 FIT 框架中的包，则返回 {@code true}，否则，返回 {@code false}。
      */
     protected static boolean isFramework(Artifact artifact) {
-        return StringUtils.equalsIgnoreCase(artifact.getGroupId(), "modelengine.fitframework");
+        return StringUtils.equalsIgnoreCase(artifact.getGroupId(), "org.fitframework");
     }
 
     /**

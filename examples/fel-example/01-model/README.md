@@ -35,7 +35,7 @@ public interface ChatModel {
             <version>${fit.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-http-client-okhttp</artifactId>
             <version>${fit.version}</version>
         </dependency>

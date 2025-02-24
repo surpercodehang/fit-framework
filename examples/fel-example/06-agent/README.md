@@ -38,7 +38,7 @@ HumanEval (代码生成测评数据集) 上的准确率也只有 67.0%，但经�
         <version>${fit.version}</version>
     </dependency>
     <dependency>
-        <groupId>org.fitframework</groupId>
+        <groupId>org.fitframework.plugin</groupId>
         <artifactId>fit-http-client-okhttp</artifactId>
         <version>${fit.version}</version>
     </dependency>

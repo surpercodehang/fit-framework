@@ -19,6 +19,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DemoApplication {
     /**
      * 表示启动主函数。
+     * <p>暂不支持通过 IDEA 直接启动，需要通过命令行启动。</p>
      *
      * @param args 表示启动参数的 {@link String}{@code []}。
      */

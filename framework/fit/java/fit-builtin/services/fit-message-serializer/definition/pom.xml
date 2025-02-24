@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.fitframework</groupId>
+        <groupId>org.fitframework.service</groupId>
         <artifactId>fit-message-serializer-parent</artifactId>
         <version>3.5.0-SNAPSHOT</version>
     </parent>
@@ -22,7 +22,7 @@
             <artifactId>fit-reactor</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.service</groupId>
             <artifactId>fit-http-classic</artifactId>
         </dependency>
 

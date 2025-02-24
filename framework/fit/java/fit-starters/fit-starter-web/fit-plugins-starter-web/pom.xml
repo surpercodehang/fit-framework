@@ -13,36 +13,36 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.service</groupId>
             <artifactId>fit-http-classic</artifactId>
             <version>${fit.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-http-handler-registry</artifactId>
             <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-server-http</artifactId>
             <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-http-server-netty</artifactId>
             <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-value-fastjson</artifactId>
             <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-message-serializer-json-jackson</artifactId>
             <version>${fit.version}</version>
             <scope>runtime</scope>

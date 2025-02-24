@@ -138,27 +138,27 @@
 
             <!-- FIT Extension -->
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.extension</groupId>
                 <artifactId>fit-retry</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.extension</groupId>
                 <artifactId>fit-schedule</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.extension</groupId>
                 <artifactId>fit-transaction</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.extension</groupId>
                 <artifactId>fit-validation</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.extension</groupId>
                 <artifactId>fit-validation-hibernate</artifactId>
                 <version>${fit.version}</version>
             </dependency>
@@ -203,141 +203,141 @@
 
             <!-- FIT Service -->
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.service</groupId>
                 <artifactId>fit-client</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.service</groupId>
                 <artifactId>fit-heartbeat</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.service</groupId>
                 <artifactId>fit-http-classic</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.service</groupId>
                 <artifactId>fit-http-protocol</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.service</groupId>
                 <artifactId>fit-message-serializer</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.service</groupId>
                 <artifactId>fit-message-serializer-test</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.service</groupId>
                 <artifactId>fit-security</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.service</groupId>
                 <artifactId>fit-server</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.service</groupId>
                 <artifactId>fit-service-registry-and-discovery</artifactId>
                 <version>${fit.version}</version>
             </dependency>
 
             <!-- FIT Plugin -->
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-client-http</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-dynamic-plugin-directory</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-dynamic-plugin-mvn</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-heartbeat-client</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-http-client-okhttp</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-http-handler-registry</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-http-server-netty</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-message-serializer-cbor</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-message-serializer-json-jackson</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-server-http</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-service-coordination-locator</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-service-coordination-simple</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-service-registry</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-service-discovery</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-value-fastjson</artifactId>
                 <version>${fit.version}</version>
             </dependency>
 
             <!-- FIT Integration -->
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.integration</groupId>
                 <artifactId>fit-druid</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.integration</groupId>
                 <artifactId>fit-mybatis</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.integration</groupId>
                 <artifactId>fit-mybatis-common</artifactId>
                 <version>${fit.version}</version>
             </dependency>

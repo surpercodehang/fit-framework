@@ -52,12 +52,12 @@
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.service</groupId>
                 <artifactId>fit-http-classic</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.integration</groupId>
                 <artifactId>fit-mybatis</artifactId>
                 <version>${fit.version}</version>
             </dependency>
@@ -67,17 +67,17 @@
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.extension</groupId>
                 <artifactId>fit-schedule</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.service</groupId>
                 <artifactId>fit-service-registry-and-discovery</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.extension</groupId>
                 <artifactId>fit-transaction</artifactId>
                 <version>${fit.version}</version>
             </dependency>

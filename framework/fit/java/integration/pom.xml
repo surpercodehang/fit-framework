@@ -9,6 +9,7 @@
         <version>3.5.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>org.fitframework.integration</groupId>
     <artifactId>integration-parent</artifactId>
     <packaging>pom</packaging>
 

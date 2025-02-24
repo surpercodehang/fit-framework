@@ -48,7 +48,7 @@
 
         <!-- Test Plugins -->
         <dependency>
-            <groupId>org.fitframework</groupId>
+            <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-message-serializer-json-jackson</artifactId>
             <version>${fit.version}</version>
             <scope>test</scope>
