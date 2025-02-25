@@ -92,7 +92,7 @@ HumanEval (代码生成测评数据集) 上的准确率也只有 67.0%，但经�
 <plugins>
     <!-- 工具编译插件 -->
     <plugin>
-        <groupId>org.fitframework</groupId>
+        <groupId>org.fitframework.fel</groupId>
         <artifactId>tool-maven-plugin</artifactId>
         <version>${fel.version}</version>
         <executions>

@@ -36,7 +36,7 @@
         </dependency>
         <dependency>
             <groupId>org.fitframework.example</groupId>
-            <artifactId>other-weather-for-static</artifactId>
+            <artifactId>default-weather-for-static</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

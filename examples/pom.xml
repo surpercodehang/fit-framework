@@ -9,6 +9,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>org.fitframework.example</groupId>
     <artifactId>example-parent</artifactId>
     <packaging>pom</packaging>
 

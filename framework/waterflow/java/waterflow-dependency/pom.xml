@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.fitframework</groupId>
+    <groupId>org.fitframework.waterflow</groupId>
     <artifactId>waterflow-dependency</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -89,24 +89,24 @@
 
             <!-- WaterFlow -->
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.waterflow</groupId>
                 <artifactId>waterflow-bridge-fit-reactor</artifactId>
                 <version>${waterflow.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.waterflow</groupId>
                 <artifactId>waterflow-core</artifactId>
                 <version>${waterflow.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.waterflow</groupId>
                 <artifactId>waterflow-genericable</artifactId>
                 <version>${waterflow.version}</version>
             </dependency>
 
             <!-- Ohscript -->
             <dependency>
-                <groupId>org.fitframework</groupId>
+                <groupId>org.fitframework.ohscript</groupId>
                 <artifactId>ohscript</artifactId>
                 <version>${ohscript.version}</version>
             </dependency>
