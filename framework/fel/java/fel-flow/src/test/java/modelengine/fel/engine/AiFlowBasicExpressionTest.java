@@ -127,7 +127,6 @@ public class AiFlowBasicExpressionTest {
         }
 
         @Test
-        @Disabled("暂不支持")
         @DisplayName("带有window的reduce数据聚合")
         void shouldOkWhenReduceWithWindow() {
             AiProcessFlow<Integer, Integer> flow = AiFlows.<Integer>create()
@@ -135,21 +134,19 @@ public class AiFlowBasicExpressionTest {
                     .reduce(() -> 0, Integer::sum)
                     .close();
 
-            checkInjectDataOneByOne(flow);
+            checkInjectDataOneBatch(flow);
         }
 
         @Test
-        @Disabled("暂不支持")
         @DisplayName("buffer数据聚合, 逐个注入数据")
         void shouldOkWhenGatherWithBuffer() {
             AiProcessFlow<Integer, Integer> flow =
                     AiFlows.<Integer>create().buffer(2).map(input -> input.stream().reduce(0, Integer::sum)).close();
 
-            checkInjectDataOneByOne(flow);
+            checkInjectDataOneBatch(flow);
         }
 
         @Test
-        @Disabled("暂不支持")
         @DisplayName("带有process节点的buffer数据聚合")
         void test_process_with_custom_state() {
             StringBuffer answer = new StringBuffer(512);
@@ -197,12 +194,10 @@ public class AiFlowBasicExpressionTest {
             assertThat(result.get()).isEqualTo("01");
         }
 
-        private void checkInjectDataOneByOne(AiProcessFlow<Integer, Integer> flow) {
+        private void checkInjectDataOneBatch(AiProcessFlow<Integer, Integer> flow) {
             // 逐个注入
             List<Integer> counters = Collections.synchronizedList(new ArrayList<>());
-            for (int i = 0; i < 4; i++) {
-                flow.converse().doOnConsume(counters::add).offer(i + 1);
-            }
+            flow.converse().doOnConsume(counters::add).offer(1, 2, 3, 4);
             FlowsTestUtils.waitUntil(() -> counters.size() == 2, 1000);
             assertEquals(2, counters.size());
         }
