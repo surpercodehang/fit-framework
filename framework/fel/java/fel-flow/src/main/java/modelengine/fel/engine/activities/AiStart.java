@@ -261,8 +261,7 @@ public class AiStart<O, D, I, RF extends Flow<D>, F extends AiFlow<D, RF>> exten
      */
     public AiState<List<O>, D, O, RF, F> buffer(int size) {
         Validation.isTrue(size > 0, "Buffer size must be greater than 0.");
-        return this.window(size).reduce(null, (acc, input) -> {
-            acc = ObjectUtils.getIfNull(acc, ArrayList::new);
+        return this.window(size).reduce(ArrayList::new, (acc, input) -> {
             acc.add(input);
             return acc;
         });
