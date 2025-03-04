@@ -6,7 +6,6 @@
 
 package modelengine.fit.http.protocol.support;
 
-import static modelengine.fitframework.inspection.Validation.notBlank;
 import static modelengine.fitframework.inspection.Validation.notNull;
 
 import modelengine.fit.http.protocol.HttpRequestMethod;
@@ -27,7 +26,7 @@ public class DefaultRequestLine implements RequestLine {
     public DefaultRequestLine(HttpVersion httpVersion, HttpRequestMethod method, String requestUri) {
         this.httpVersion = notNull(httpVersion, "The http version cannot be null.");
         this.method = notNull(method, "The request method cannot be null.");
-        this.requestUri = notBlank(requestUri, "The request uri cannot be blank.");
+        this.requestUri = notNull(requestUri, "The request uri cannot be null.");
     }
 
     @Override
