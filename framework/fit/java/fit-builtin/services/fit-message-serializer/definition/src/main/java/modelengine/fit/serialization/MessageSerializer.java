@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fit.serialization;
 
@@ -65,13 +65,12 @@ public interface MessageSerializer {
 
     /**
      * 获取当前序列化器的序列化格式代号。
-     * <p>支持的序列化格式代号如下：
+     * <p>支持的序列化格式代号如下：</p>
      * <ul>
      *     <li>ProtoBuf：0</li>
      *     <li>Json：1</li>
      *     <li>CBOR：2</li>
      * </ul>
-     * </p>
      *
      * @return 表示当前序列化器的序列化格式代号的 {@code int}。
      */

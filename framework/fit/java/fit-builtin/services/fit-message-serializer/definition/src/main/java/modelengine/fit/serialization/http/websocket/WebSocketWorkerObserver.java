@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fit.serialization.http.websocket;
 
@@ -32,6 +32,18 @@ public class WebSocketWorkerObserver implements WorkerObserver<Object> {
     private final int index;
     private final BiConsumer<Session, Integer> tryCloseFunction;
 
+    /**
+     * 使用指定的会话、消息序列化器、参数类型、参数索引和参数关闭方法初始化 {@link WebSocketWorkerObserver} 的新实例。
+     *
+     * @param session 表示会话的 {@link Session}。
+     * @param messageSerializer 表示消息序列化器的 {@link MessageSerializer}。
+     * @param type 表示参数类型的 {@link Type}。
+     * @param index 表示参数索引的 {@code int}。
+     * @param tryCloseFunction 表示对应参数的关闭方法的
+     * {@link BiConsumer}{@code <}{@link Session}{@code , }{@link Integer}{@code >}。
+     * @throws IllegalArgumentException 当 {@code session}、{@code messageSerializer}、{@code type} 或
+     * {@code tryCloseFunction} 为 {@code null} 时。
+     */
     public WebSocketWorkerObserver(Session session, MessageSerializer messageSerializer, Type type, int index,
             BiConsumer<Session, Integer> tryCloseFunction) {
         this.session = notNull(session, "The session cannot be null.");
