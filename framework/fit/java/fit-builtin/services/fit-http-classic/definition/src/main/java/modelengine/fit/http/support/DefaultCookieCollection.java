@@ -28,10 +28,19 @@ import java.util.stream.Collectors;
  * @since 2022-07-06
  */
 public class DefaultCookieCollection extends DefaultHeaderValue implements ConfigurableCookieCollection {
+    /**
+     * 初始化 {@link DefaultCookieCollection} 的新实例。
+     */
     public DefaultCookieCollection() {
         super(StringUtils.EMPTY, new DefaultParameterCollection());
     }
 
+    /**
+     * 使用指定的消息头初始化 {@link DefaultCookieCollection} 的新实例。
+     *
+     * @param headerValue 表示消息头的 {@link HeaderValue}。
+     * @throws IllegalArgumentException 当 {@code headerValue} 为 {@code null} 时。
+     */
     public DefaultCookieCollection(HeaderValue headerValue) {
         super(notNull(headerValue, "The header value cannot be null.").value(), headerValue.parameters());
     }

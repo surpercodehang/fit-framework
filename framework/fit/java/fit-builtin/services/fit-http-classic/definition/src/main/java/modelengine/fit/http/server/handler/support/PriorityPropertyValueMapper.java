@@ -27,6 +27,11 @@ import java.util.Objects;
 public class PriorityPropertyValueMapper implements PropertyValueMapper {
     private final List<PropertyValueMapper> propertyValueMappers;
 
+    /**
+     * 使用指定的属性值映射器列表初始化 {@link PriorityPropertyValueMapper} 的新实例。
+     *
+     * @param propertyValueMappers 表示属性值映射器列表的 {@link List}{@code <}{@link PropertyValueMapper}{@code >}。
+     */
     public PriorityPropertyValueMapper(List<PropertyValueMapper> propertyValueMappers) {
         this.propertyValueMappers = getIfNull(propertyValueMappers, Collections::emptyList);
     }

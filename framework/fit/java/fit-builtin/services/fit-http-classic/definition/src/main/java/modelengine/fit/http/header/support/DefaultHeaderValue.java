@@ -28,6 +28,12 @@ public class DefaultHeaderValue implements HeaderValue {
     private final String value;
     private final ParameterCollection parameterCollection;
 
+    /**
+     * 使用指定的值和参数集合初始化 {@link DefaultHeaderValue} 的新实例。
+     *
+     * @param value 表示值的 {@link String}。
+     * @param parameterCollection 表示参数集合的 {@link ParameterCollection}。
+     */
     public DefaultHeaderValue(String value, ParameterCollection parameterCollection) {
         this.value = ObjectUtils.nullIf(value, StringUtils.EMPTY);
         this.parameterCollection = getIfNull(parameterCollection, ParameterCollection::create);

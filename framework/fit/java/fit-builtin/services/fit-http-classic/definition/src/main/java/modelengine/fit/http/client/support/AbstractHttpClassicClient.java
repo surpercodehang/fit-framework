@@ -22,6 +22,13 @@ public abstract class AbstractHttpClassicClient implements HttpClassicClient {
     private final Serializers serializers;
     private final ValueFetcher valueFetcher;
 
+    /**
+     * 使用指定的序列化器和值获取器初始化 {@link AbstractHttpClassicClient} 的新实例。
+     *
+     * @param serializers 表示序列化器的 {@link Serializers}。
+     * @param valueFetcher 表示值获取器的 {@link ValueFetcher}。
+     * @throws IllegalArgumentException 当 {@code serializers} 或 {@code valueFetcher} 为 {@code null} 时。
+     */
     public AbstractHttpClassicClient(Serializers serializers, ValueFetcher valueFetcher) {
         this.serializers = notNull(serializers, "The serializers cannot be null.");
         this.valueFetcher = notNull(valueFetcher, "The value fetcher cannot be null.");

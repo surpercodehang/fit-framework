@@ -24,6 +24,12 @@ public class DefaultContentDisposition extends DefaultHeaderValue implements Con
     private static final String FILENAME = "filename";
     private static final String FILENAME_STAR = "filename*";
 
+    /**
+     * 使用指定的消息头初始化 {@link DefaultContentDisposition} 的新实例。
+     *
+     * @param headerValue 表示消息头的 {@link HeaderValue}。
+     * @throws IllegalArgumentException 当 {@code headerValue} 为 {@code null} 时。
+     */
     public DefaultContentDisposition(HeaderValue headerValue) {
         super(notNull(headerValue, "The header value cannot be null.").value(), headerValue.parameters());
     }

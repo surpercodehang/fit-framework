@@ -13,6 +13,7 @@ package modelengine.fit.http.server.handler;
  * @since 2023-08-28
  */
 public enum Source {
+    /** 表示查询参数位置。 */
     QUERY {
         @Override
         public boolean isInBody() {
@@ -20,6 +21,7 @@ public enum Source {
         }
     },
 
+    /** 表示请求头位置。 */
     HEADER {
         @Override
         public boolean isInBody() {
@@ -27,6 +29,7 @@ public enum Source {
         }
     },
 
+    /** 表示 Cookie 位置。 */
     COOKIE {
         @Override
         public boolean isInBody() {
@@ -34,6 +37,7 @@ public enum Source {
         }
     },
 
+    /** 表示路径变量位置。 */
     PATH {
         @Override
         public boolean isInBody() {
@@ -41,6 +45,7 @@ public enum Source {
         }
     },
 
+    /** 表示消息体位置。 */
     BODY {
         @Override
         public boolean isInBody() {
@@ -48,6 +53,7 @@ public enum Source {
         }
     },
 
+    /** 表示表单位置。 */
     FORM {
         @Override
         public boolean isInBody() {

@@ -26,6 +26,12 @@ public class ErrorMapper implements PropertyValueMapper {
 
     private final Class<Throwable> errorClass;
 
+    /**
+     * 使用指定的错误类初始化 {@link ErrorMapper} 的新实例。
+     *
+     * @param errorClass 表示错误类的 {@link Class}{@code <}{@link Throwable}{@code >}。
+     * @throws IllegalArgumentException 当 {@code errorClass} 为 {@code null} 时。
+     */
     public ErrorMapper(Class<Throwable> errorClass) {
         this.errorClass = notNull(errorClass, "The error class cannot be null.");
     }

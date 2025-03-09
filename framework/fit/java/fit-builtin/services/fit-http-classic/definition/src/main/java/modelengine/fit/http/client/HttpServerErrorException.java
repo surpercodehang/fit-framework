@@ -13,10 +13,23 @@ package modelengine.fit.http.client;
  * @since 2023-01-29
  */
 public class HttpServerErrorException extends HttpClientResponseException {
+    /**
+     * 使用指定的响应初始化 {@link HttpServerErrorException} 的新实例。
+     *
+     * @param response 表示响应的 {@link HttpClassicClientResponse}。
+     * @throws IllegalArgumentException 当 {@code response} 为 {@code null} 时。
+     */
     public HttpServerErrorException(HttpClassicClientResponse<?> response) {
         super(response);
     }
 
+    /**
+     * 使用指定的响应和原因初始化 {@link HttpServerErrorException} 的新实例。
+     *
+     * @param response 表示响应的 {@link HttpClassicClientResponse}。
+     * @param cause 表示异常原因的 {@link Throwable}。
+     * @throws IllegalArgumentException 当 {@code response} 为 {@code null} 时。
+     */
     public HttpServerErrorException(HttpClassicClientResponse<?> response, Throwable cause) {
         super(response, cause);
     }

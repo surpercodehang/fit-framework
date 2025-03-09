@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * 表示 {@link HttpClassicClient} 的工厂类。
- * <p>如果需要支持 Https，请查看相关配置，并将其在创建时通过 {@link Config} 传入：
+ * <p>如果需要支持 Https，请查看相关配置，并将其在创建时通过 {@link Config} 传入：</p>
  * <ul>
  *     <li>client.http.secure.ignore-trust。表示是否忽略安全检测，适用于 SSL 连接请求。</li>
  *     <li>client.http.secure.ignore-hostname。表示是否忽略主机名验证，适用于 SSL 连接请求。</li>
@@ -21,7 +21,7 @@ import java.util.Map;
  *     <li>client.http.secure.trust-store-password。表示客户端根证书密码，适用于 SSL 连接请求。</li>
  *     <li>client.http.secure.key-store-file。表示客户端证书路径，适用于 SSL 连接请求。</li>
  *     <li>client.http.secure.key-store-password。表示客户端证书密码，适用于 SSL 连接请求。</li>
- * </ul></p>
+ * </ul>
  *
  * @author 季聿阶
  * @since 2022-12-04

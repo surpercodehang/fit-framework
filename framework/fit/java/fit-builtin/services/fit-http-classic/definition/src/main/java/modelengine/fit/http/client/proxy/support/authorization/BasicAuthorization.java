@@ -37,6 +37,12 @@ public class BasicAuthorization extends AbstractAuthorization {
     private String username;
     private String password;
 
+    /**
+     * 使用指定的用户名和密码初始化 {@link BasicAuthorization} 的新实例。
+     *
+     * @param username 表示用户名的 {@link String}。
+     * @param password 表示密码的 {@link String}。
+     */
     public BasicAuthorization(String username, String password) {
         this.username = username;
         this.password = password;

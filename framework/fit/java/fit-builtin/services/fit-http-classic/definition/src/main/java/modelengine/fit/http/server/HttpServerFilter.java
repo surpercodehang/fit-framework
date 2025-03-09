@@ -38,7 +38,7 @@ public interface HttpServerFilter {
 
     /**
      * 获取过滤器的过滤路径样式列表。
-     * <p>只有 Http 请求的路径满足了过滤路径样式，才能进行过滤。例如：
+     * <p>只有 Http 请求的路径满足了过滤路径样式，才能进行过滤。例如：</p>
      * <ul>
      *     <li>当路径样式为 {@code '/a'} 时，只有完全匹配的请求 {@code '/a'} 才能过滤；</li>
      *     <li>当路径样式为 {@code '/a?'} 时，可以模糊匹配 1 个字符，如 {@code '/aa'} 或 {@code '/ab'} 这样的请求；</li>
@@ -47,7 +47,6 @@ public interface HttpServerFilter {
      *     <li>当路径样式为 {@code '/a**'} 时，可以在任意段路径内模糊匹配任意个字符，如 {@code '/a'} 或 {@code '/a/b/c'}
      *     这样的请求。</li>
      * </ul>
-     * </p>
      *
      * @return 表示过滤器的过滤路径样式列表的 {@link List}{@code <}{@link String}{@code >}。
      */

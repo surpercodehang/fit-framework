@@ -31,6 +31,11 @@ public class BearerAuthorization extends AbstractAuthorization {
 
     private String token;
 
+    /**
+     * 使用指定的令牌初始化 {@link BearerAuthorization} 的新实例。
+     *
+     * @param token 表示令牌的 {@link String}。
+     */
     public BearerAuthorization(String token) {
         this.token = token;
     }

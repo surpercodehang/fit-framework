@@ -25,6 +25,11 @@ import java.util.Optional;
 public class WebSocketBinaryMessageMapperResolver implements PropertyValueMapperResolver {
     private final AnnotationMetadataResolver annotationResolver;
 
+    /**
+     * 使用指定的注解解析器初始化 {@link WebSocketBinaryMessageMapperResolver} 的新实例。
+     *
+     * @param annotationResolver 表示注解解析器的 {@link AnnotationMetadataResolver}。
+     */
     public WebSocketBinaryMessageMapperResolver(AnnotationMetadataResolver annotationResolver) {
         this.annotationResolver = annotationResolver;
     }

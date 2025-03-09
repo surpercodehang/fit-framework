@@ -30,6 +30,13 @@ public class MultiDestinationsPropertyValueApplier implements PropertyValueAppli
     private final List<DestinationSetterInfo> setterInfos;
     private final ValueFetcher valueFetcher;
 
+    /**
+     * 使用指定的设置器信息列表和值获取器初始化 {@link MultiDestinationsPropertyValueApplier} 的新实例。
+     *
+     * @param setterInfos 表示设置器信息列表的 {@link List}{@code <}{@link DestinationSetterInfo}{@code >}。
+     * @param valueFetcher 表示值获取器的 {@link ValueFetcher}。
+     * @throws IllegalArgumentException 当 {@code setterInfos} 或 {@code valueFetcher} 为 {@code null} 时。
+     */
     public MultiDestinationsPropertyValueApplier(List<DestinationSetterInfo> setterInfos, ValueFetcher valueFetcher) {
         this.setterInfos = notNull(setterInfos, "The destination setter infos cannot be null.");
         this.valueFetcher = notNull(valueFetcher, "The value fetcher cannot be null.");

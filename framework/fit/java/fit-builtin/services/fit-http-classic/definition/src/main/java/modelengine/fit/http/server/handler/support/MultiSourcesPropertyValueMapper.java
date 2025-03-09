@@ -40,20 +40,18 @@ public class MultiSourcesPropertyValueMapper implements PropertyValueMapper {
     /**
      * 通过数据来源获取器信息对象来实例化 {@link MultiSourcesPropertyValueMapper}。
      * <p>每个数据来源获取器信息对象由数据来源获取器、目标数据名字和目标数据是否为数组的标记三部分组成。</p>
-     * <p>目标数据名字 {@code destinationName} 表示来源数据在目标参数中的位置：
+     * <p>目标数据名字 {@code destinationName} 表示来源数据在目标参数中的位置：</p>
      * <ul>
      *     <li>当目标数据是一个完整的参数时，其为 {@code null}；</li>
      *     <li>当目标数据是一个参数的一部分时，其为 Json 格式描述的路径（JsonPath，不支持数组和通配符的情况），如
      *     {@code a.b}，其代表的含义是来源数据只是目标数据的属性 {@code a} 的值的属性 {@code b} 的值。</li>
      * </ul>
-     * </p>
-     * <p>目标数据是否为数组的标记 {@code isDestinationArray} 表示来源数据在目标数据中是否为数组形式：
+     * <p>目标数据是否为数组的标记 {@code isDestinationArray} 表示来源数据在目标数据中是否为数组形式：</p>
      * <ul>
      *     <li>当数据来源为 {@link QueryFetcher}、{@link HeaderFetcher} 或 {@link FormUrlEncodedEntityFetcher}
      *     时，因为其获取到的数据默认为数组，需要根据实际参数的类型来决定来源数据是否需要为数组形式；</li>
      *     <li>当数据来源为其它情况时，默认在目标数据中不体现数组形式。</li>
      * </ul>
-     * </p>
      *
      * @param sourceFetcherInfos 表示数据来源获取器信息对象列表的 {@link List}{@code <}{@link SourceFetcherInfo}{@code >}。
      */

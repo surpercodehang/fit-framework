@@ -31,6 +31,13 @@ public class DefaultHttpHandlerGroup implements HttpHandlerGroup {
     private final String description;
     private final Map<Method, List<HttpHandler>> handlers = new HashMap<>();
 
+    /**
+     * 使用指定的名称和描述初始化 {@link DefaultHttpHandlerGroup} 的新实例。
+     *
+     * @param name 表示名称的 {@link String}。
+     * @param description 表示描述的 {@link String}。
+     * @throws IllegalArgumentException 当 {@code name} 为 {@code null} 或空白字符串时。
+     */
     public DefaultHttpHandlerGroup(String name, String description) {
         this.name = notBlank(name, "The group name cannot be blank.");
         this.description = description;

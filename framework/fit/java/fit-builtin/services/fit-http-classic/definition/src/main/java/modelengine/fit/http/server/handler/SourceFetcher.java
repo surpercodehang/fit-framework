@@ -20,7 +20,7 @@ import modelengine.fit.http.server.HttpClassicServerResponse;
 public interface SourceFetcher {
     /**
      * 判断来源数据的常用格式是否是数组。
-     * <p>例如：
+     * <p>例如：</p>
      * <ul>
      *     <li>来自查询参数、消息头参数以及 {@link
      *     MessageHeaderNames#CONTENT_TYPE} 为
@@ -30,7 +30,6 @@ public interface SourceFetcher {
      *     {@link MimeType#APPLICATION_JSON}
      *     的消息体参数虽然 Json 中有可能是一个数组，但我们认为其常用格式不是数组。</li>
      * </ul>
-     * </p>
      *
      * @return 如果可以，返回 {@code true}，否则，返回 {@code false}。
      */

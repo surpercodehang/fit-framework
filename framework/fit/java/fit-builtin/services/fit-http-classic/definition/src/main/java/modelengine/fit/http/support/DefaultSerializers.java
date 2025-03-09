@@ -39,6 +39,11 @@ public class DefaultSerializers implements Serializers {
             new LazyLoader<>(this::loadEntitySerializers);
     private final Map<String, ObjectSerializer> serializers;
 
+    /**
+     * 使用指定的序列化器映射初始化 {@link DefaultSerializers} 的新实例。
+     *
+     * @param serializers 表示序列化器映射的 {@link Map}{@code <}{@link String}{@code , }{@link ObjectSerializer}{@code >}。
+     */
     public DefaultSerializers(Map<String, ObjectSerializer> serializers) {
         this.serializers = ObjectUtils.getIfNull(serializers, HashMap::new);
     }

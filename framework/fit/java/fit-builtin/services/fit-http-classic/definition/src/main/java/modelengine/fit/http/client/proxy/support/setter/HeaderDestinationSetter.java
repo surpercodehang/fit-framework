@@ -20,6 +20,12 @@ import java.util.Objects;
  * @since 2024-06-07
  */
 public class HeaderDestinationSetter extends AbstractDestinationSetter {
+    /**
+     * 使用指定的键初始化 {@link HeaderDestinationSetter} 的新实例。
+     *
+     * @param key 表示键的 {@link String}。
+     * @throws IllegalArgumentException 当 {@code key} 为 {@code null} 时。
+     */
     public HeaderDestinationSetter(String key) {
         super(key);
     }

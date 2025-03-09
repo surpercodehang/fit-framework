@@ -31,6 +31,12 @@ public class DefaultContentType extends DefaultHeaderValue implements ContentTyp
     private static final Logger log = Logger.get(DefaultContentType.class);
     private static final String BOUNDARY = "boundary";
 
+    /**
+     * 使用指定的消息头初始化 {@link DefaultContentType} 的新实例。
+     *
+     * @param headerValue 表示消息头的 {@link HeaderValue}。
+     * @throws IllegalArgumentException 当 {@code headerValue} 为 {@code null} 时。
+     */
     public DefaultContentType(HeaderValue headerValue) {
         super(notNull(headerValue, "The header value cannot be null.").value(), headerValue.parameters());
     }

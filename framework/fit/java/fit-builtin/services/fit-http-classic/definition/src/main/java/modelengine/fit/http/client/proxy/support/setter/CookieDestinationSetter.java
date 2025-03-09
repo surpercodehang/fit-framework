@@ -16,6 +16,12 @@ import modelengine.fit.http.client.proxy.RequestBuilder;
  * @since 2024-06-07
  */
 public class CookieDestinationSetter extends AbstractDestinationSetter {
+    /**
+     * 使用指定的键初始化 {@link CookieDestinationSetter} 的新实例。
+     *
+     * @param key 表示键的 {@link String}。
+     * @throws IllegalArgumentException 当 {@code key} 为 {@code null} 时。
+     */
     public CookieDestinationSetter(String key) {
         super(key);
     }

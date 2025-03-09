@@ -22,6 +22,13 @@ public class DestinationSetterInfo {
     private final DestinationSetter destinationSetter;
     private final String sourcePath;
 
+    /**
+     * 使用指定的目标设置器和源路径初始化 {@link DestinationSetterInfo} 的新实例。
+     *
+     * @param destinationSetter 表示目标设置器的 {@link DestinationSetter}。
+     * @param sourcePath 表示源路径的 {@link String}。
+     * @throws IllegalArgumentException 当 {@code destinationSetter} 为 {@code null} 时。
+     */
     public DestinationSetterInfo(DestinationSetter destinationSetter, String sourcePath) {
         this.destinationSetter = notNull(destinationSetter, "The destination setter cannot be null.");
         this.sourcePath = ObjectUtils.nullIf(sourcePath, StringUtils.EMPTY);

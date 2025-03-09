@@ -34,6 +34,13 @@ public class ApiKeyAuthorization extends AbstractAuthorization {
     private String value;
     private final Source httpSource;
 
+    /**
+     * 使用指定的键、值和来源初始化 {@link ApiKeyAuthorization} 的新实例。
+     *
+     * @param key 表示键的 {@link String}。
+     * @param value 表示值的 {@link String}。
+     * @param httpSource 表示来源的 {@link Source}。
+     */
     public ApiKeyAuthorization(String key, String value, Source httpSource) {
         this.key = key;
         this.value = value;

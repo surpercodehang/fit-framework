@@ -38,6 +38,13 @@ public class JsonEntitySerializer<T> implements EntitySerializer<ObjectEntity<T>
     private final Type type;
     private final ObjectSerializer jsonSerializer;
 
+    /**
+     * 使用指定的类型和 JSON 序列化器初始化 {@link JsonEntitySerializer} 的新实例。
+     *
+     * @param type 表示类型的 {@link Type}。
+     * @param jsonSerializer 表示 JSON 序列化器的 {@link ObjectSerializer}。
+     * @throws IllegalArgumentException 当 {@code jsonSerializer} 为 {@code null} 时。
+     */
     public JsonEntitySerializer(Type type, ObjectSerializer jsonSerializer) {
         this.type = nullIf(type, Object.class);
         this.jsonSerializer = notNull(jsonSerializer, "The json serializer cannot be null.");

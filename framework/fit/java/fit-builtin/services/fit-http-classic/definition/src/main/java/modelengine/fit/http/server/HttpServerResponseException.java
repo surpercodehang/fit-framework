@@ -17,6 +17,7 @@ import modelengine.fit.http.protocol.HttpResponseStatus;
  * @since 2022-07-08
  */
 public class HttpServerResponseException extends HttpServerException {
+    /** 表示 Http 响应状态的 {@link HttpResponseStatus}。 */
     private final HttpResponseStatus status;
 
     /**

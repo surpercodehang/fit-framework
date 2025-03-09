@@ -15,6 +15,7 @@ import static modelengine.fitframework.inspection.Validation.notNull;
  * @since 2023-01-29
  */
 public class HttpClientResponseException extends HttpClientException {
+    /** 表示 Http 客户端响应的 {@link HttpClassicClientResponse}。 */
     private final HttpClassicClientResponse<?> response;
 
     /**

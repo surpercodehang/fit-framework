@@ -49,7 +49,7 @@ public interface FileEntity extends ReadableBinaryEntity {
     boolean isInline();
 
     /**
-     * 创建文件类型的消息体数据。创建出来的消息体数据是附件类型，适用于文件下载。</p>
+     * 创建文件类型的消息体数据。创建出来的消息体数据是附件类型，适用于文件下载。
      *
      * @param httpMessage 表示消息体数据所属的 Http 消息的 {@link HttpMessage}。
      * <p>{@link HttpMessage} 有很多子类，请仔细确认区分所属的消息是请求还是响应。</p>
@@ -63,7 +63,7 @@ public interface FileEntity extends ReadableBinaryEntity {
     }
 
     /**
-     * 创建文件类型的消息体数据。创建出来的消息体数据是内联类型，适用于页面预览。</p>
+     * 创建文件类型的消息体数据。创建出来的消息体数据是内联类型，适用于页面预览。
      *
      * @param httpMessage 表示消息体数据所属的 Http 消息的 {@link HttpMessage}。
      * <p>{@link HttpMessage} 有很多子类，请仔细确认区分所属的消息是请求还是响应。</p>

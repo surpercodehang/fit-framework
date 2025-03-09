@@ -24,6 +24,12 @@ import java.util.Collections;
 public class UniqueDestinationPropertyValueApplier implements PropertyValueApplier {
     private final PropertyValueApplier applier;
 
+    /**
+     * 使用指定的设置器和值获取器初始化 {@link UniqueDestinationPropertyValueApplier} 的新实例。
+     *
+     * @param setter 表示设置器的 {@link DestinationSetter}。
+     * @param valueFetcher 表示值获取器的 {@link ValueFetcher}。
+     */
     public UniqueDestinationPropertyValueApplier(DestinationSetter setter, ValueFetcher valueFetcher) {
         this.applier = new MultiDestinationsPropertyValueApplier(Collections.singletonList(new DestinationSetterInfo(
                 setter,

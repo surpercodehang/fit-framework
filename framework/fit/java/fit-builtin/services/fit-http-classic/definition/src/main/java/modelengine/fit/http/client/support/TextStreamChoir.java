@@ -41,6 +41,12 @@ public class TextStreamChoir<T> extends AbstractChoir<T> implements Choir<T> {
     private final HttpClassicClientRequest request;
     private final Type responseType;
 
+    /**
+     * 使用指定的请求和响应类型初始化 {@link TextStreamChoir} 的新实例。
+     *
+     * @param request 表示请求的 {@link HttpClassicClientRequest}。
+     * @param responseType 表示响应类型的 {@link Type}。
+     */
     public TextStreamChoir(HttpClassicClientRequest request, Type responseType) {
         this.request = request;
         this.responseType = responseType;
