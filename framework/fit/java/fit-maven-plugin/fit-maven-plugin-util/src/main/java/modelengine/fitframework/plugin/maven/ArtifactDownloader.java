@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.plugin.maven;
 
@@ -26,9 +26,9 @@ import java.util.List;
  */
 public interface ArtifactDownloader {
     /**
-     * 下载归档件。
+     * 下载指定的归档件。
      *
-     * @return List<Artifact> 返回的归档件内容。
+     * @return 表示下载的归档件的 {@link List}{@code <}{@link Artifact}{@code >}。
      */
     List<Artifact> download();
 
@@ -99,7 +99,7 @@ public interface ArtifactDownloader {
          * private MavenProject project;
          * ...
          * List&lt;ArtifactRepository&gt;
-         * remoteRepositories = </ArtifactRepository>this.project.getRemoteArtifactRepositories();
+         * remoteRepositories = this.project.getRemoteArtifactRepositories();
          * </pre>
          *
          * @param remoteRepositories 表示远端仓库列表的 {@link List}{@code <}{@link ArtifactRepository}{@code >}。

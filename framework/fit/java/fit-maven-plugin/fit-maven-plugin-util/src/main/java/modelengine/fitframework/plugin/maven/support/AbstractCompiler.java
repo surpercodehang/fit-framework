@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.plugin.maven.support;
 
@@ -20,6 +20,13 @@ import java.util.List;
  * @since 2023-07-23
  */
 public abstract class AbstractCompiler extends AbstractExecutor {
+    /**
+     * 使用指定的项目、日志和共享依赖初始化 {@link AbstractCompiler} 的新实例。
+     *
+     * @param project 表示项目的 {@link MavenProject}。
+     * @param log 表示日志的 {@link Log}。
+     * @param sharedDependencies 表示共享依赖的 {@link List}{@code <}{@link SharedDependency}{@code >}。
+     */
     public AbstractCompiler(MavenProject project, Log log, List<SharedDependency> sharedDependencies) {
         super(project, log, sharedDependencies);
     }

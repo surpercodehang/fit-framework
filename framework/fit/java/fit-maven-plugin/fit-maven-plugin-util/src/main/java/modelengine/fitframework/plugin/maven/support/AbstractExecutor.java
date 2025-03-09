@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.plugin.maven.support;
 
@@ -41,6 +41,14 @@ public abstract class AbstractExecutor {
     private final Log log;
     private final List<SharedDependency> sharedDependencies;
 
+    /**
+     * 使用指定的项目、日志和共享依赖初始化 {@link AbstractExecutor} 的新实例。
+     *
+     * @param project 表示项目的 {@link MavenProject}。
+     * @param log 表示日志的 {@link Log}。
+     * @param sharedDependencies 表示共享依赖的 {@link List}{@code <}{@link SharedDependency}{@code >}。
+     * @throws IllegalArgumentException 当 {@code project} 或 {@code log} 为 {@code null} 时。
+     */
     protected AbstractExecutor(MavenProject project, Log log, List<SharedDependency> sharedDependencies) {
         this.project = notNull(project, "The maven project cannot be null.");
         this.log = notNull(log, "The log cannot be null.");
