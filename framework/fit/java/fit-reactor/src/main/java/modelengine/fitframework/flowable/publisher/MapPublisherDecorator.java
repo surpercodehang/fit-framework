@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable.publisher;
 
@@ -27,6 +27,13 @@ public class MapPublisherDecorator<T, R> implements Publisher<R> {
     private final Publisher<T> decorated;
     private final Function<T, R> mapper;
 
+    /**
+     * 使用指定的发布者和映射函数初始化 {@link MapPublisherDecorator} 的新实例。
+     *
+     * @param decorated 表示被装饰的发布者的 {@link Publisher}{@code <}{@link T}{@code >}。
+     * @param mapper 表示映射函数的 {@link Function}{@code <}{@link T}{@code , }{@link R}{@code >}。
+     * @throws IllegalArgumentException 当 {@code decorated} 或 {@code mapper} 为 {@code null} 时。
+     */
     public MapPublisherDecorator(Publisher<T> decorated, Function<T, R> mapper) {
         this.decorated = notNull(decorated, "The decorated map publisher cannot be null.");
         this.mapper = notNull(mapper, "The mapper cannot be null.");

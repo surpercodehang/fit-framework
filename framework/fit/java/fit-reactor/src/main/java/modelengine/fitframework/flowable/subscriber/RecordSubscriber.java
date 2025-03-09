@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable.subscriber;
 
@@ -203,6 +203,12 @@ public class RecordSubscriber<T> extends EmptySubscriber<T> {
         private final long index;
         private final T data;
 
+        /**
+         * 使用指定的数据和索引初始化 {@link Record} 的新实例。
+         *
+         * @param data 表示数据的 {@link T}。
+         * @param index 表示索引的 {@code long}。
+         */
         protected Record(T data, long index) {
             this.data = data;
             this.index = index;

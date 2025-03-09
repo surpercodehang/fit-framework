@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable;
 
@@ -17,7 +17,6 @@ package modelengine.fitframework.flowable;
 public interface Subscription {
     /**
      * 请求指定数量的数据。
-     * <p>
      * <ul>
      *     <li>{@link Subscriber} 通过 {@link Publisher} 提供的本接口中的本方法请求指定数量的数据。</li>
      *     <li>在进行请求之前，{@link Publisher} 将不会发送任何数据给 {@link Subscriber}。</li>
@@ -25,7 +24,7 @@ public interface Subscription {
      *     所拥有的元素数量小于请求数量时，将不会有额外数据发送。</li>
      *     <li>{@link Subscriber} 可以随时通过该接口请求数据，并且每次请求的数量将会得到累加，但最多不超过 {@link Long#MAX_VALUE}
      *     个（请求 {@link Long#MAX_VALUE} 个元素视为请求无限数量的元素）。</li>
-     * </p>
+     * </ul>
      *
      * @param count 表示请求的数据的数量的 {@code long}。
      */

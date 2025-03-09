@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable;
 
@@ -18,12 +18,11 @@ import java.util.function.Consumer;
  * <p>在对于发布者进行订阅之后，其 {@link #onSubscribed(Subscription)} 方法将被调用，并通过该方法向发布者提供一个
  * {@link Subscription}，作为订阅者其通过发布者所提供的 {@link Subscription} 请求自己所需要数量的元素，而在未对于其订阅的发布者通过
  * {@link Subscription#request(long)} 方法请求数据前将不会收到任何数据。</p>
- * <p>在进行订阅后，发布者为其提供以下保证：
+ * <p>在进行订阅后，发布者为其提供以下保证：</p>
  * <ul>
  *     <li>发布者所发布元素数量不大于其通过 {@link Subscription} 所请求的元素数量。</li>
  *     <li>发布者最多发布一个异常或数据结束事件。</li>
  * </ul>
- * </p>
  *
  * @param <T> 表示订阅的数据类型的 {@link T}。
  * @author 季聿阶

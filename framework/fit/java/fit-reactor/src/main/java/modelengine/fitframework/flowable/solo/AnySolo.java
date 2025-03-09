@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable.solo;
 
@@ -25,6 +25,11 @@ import java.util.concurrent.atomic.AtomicLong;
 public class AnySolo<T> extends AbstractSolo<T> {
     private final T data;
 
+    /**
+     * 使用指定的数据初始化 {@link AnySolo} 的新实例。
+     *
+     * @param data 表示数据的 {@link T}。
+     */
     public AnySolo(T data) {
         this.data = data;
     }

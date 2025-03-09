@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable.choir;
 
@@ -29,6 +29,11 @@ import java.util.concurrent.locks.Lock;
 public class IterableChoir<T> extends AbstractChoir<T> {
     private final Iterable<T> iterable;
 
+    /**
+     * 使用指定的可迭代对象初始化 {@link IterableChoir} 的新实例。
+     *
+     * @param iterable 表示可迭代对象的 {@link Iterable}{@code <}{@link T}{@code >}。
+     */
     public IterableChoir(Iterable<T> iterable) {
         this.iterable = ObjectUtils.getIfNull(iterable, Collections::emptyList);
     }

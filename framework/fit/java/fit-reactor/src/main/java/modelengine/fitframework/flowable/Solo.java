@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable;
 
@@ -142,7 +142,7 @@ public interface Solo<T> extends Publisher<T> {
      *
      * @param onSubscribedAction 表示响应式流被订阅时的行为的 {@link Consumer}{@code <}{@link Subscription}{@code >}。
      * @param consumeAction 表示响应式流中的数据消费时的行为的
-     * {@link BiConsumer}{@code <}{@link Subscription}{@link , }{@link T}{@code >}。
+     * {@link BiConsumer}{@code <}{@link Subscription}{@code , }{@link T}{@code >}。
      * @param completeAction 表示响应式流正常终结时的行为的 {@link Consumer}{@code <}{@link Subscription}{@code >}。
      * @param failAction 表示响应式流异常终结时的行为的
      * {@link BiConsumer}{@code <}{@link Subscription}{@code , }{@link Exception}{@code >}。

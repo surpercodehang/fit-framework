@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable.publisher;
 
@@ -29,6 +29,13 @@ public class SubscribeOnPublisherDecorator<T> implements Publisher<T> {
     private final ThreadPoolExecutor executor;
     private final boolean requestOnSeparateThread;
 
+    /**
+     * 使用指定的发布者、线程池执行器和请求标志初始化 {@link SubscribeOnPublisherDecorator} 的新实例。
+     *
+     * @param decorated 表示被装饰的发布者的 {@link Publisher}{@code <}{@link T}{@code >}。
+     * @param executor 表示线程池执行器的 {@link ThreadPoolExecutor}。
+     * @param requestOnSeparateThread 表示是否在单独线程上执行请求的 {@code boolean}。
+     */
     public SubscribeOnPublisherDecorator(Publisher<T> decorated, ThreadPoolExecutor executor,
             boolean requestOnSeparateThread) {
         this.decorated = decorated;

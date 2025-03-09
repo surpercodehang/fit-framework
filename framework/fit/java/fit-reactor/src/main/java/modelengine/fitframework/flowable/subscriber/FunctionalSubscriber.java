@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable.subscriber;
 
@@ -47,6 +47,15 @@ public class FunctionalSubscriber<T> extends AbstractSubscriber<T> {
     private final Consumer<Subscription> completeAction;
     private final BiConsumer<Subscription, Exception> failAction;
 
+    /**
+     * 使用指定的订阅动作、消费动作、完成动作和失败动作初始化 {@link FunctionalSubscriber} 的新实例。
+     *
+     * @param onSubscribedAction 表示订阅动作的 {@link Consumer}{@code <}{@link Subscription}{@code >}。
+     * @param consumeAction 表示消费动作的 {@link BiConsumer}{@code <}{@link Subscription}{@code , }{@link T}{@code >}。
+     * @param completeAction 表示完成动作的 {@link Consumer}{@code <}{@link Subscription}{@code >}。
+     * @param failAction 表示失败动作的 {@link BiConsumer}{@code <}{@link Subscription}{@code , }{@link Exception}{@code >}。
+     * @throws IllegalArgumentException 当任一参数为 {@code null} 时。
+     */
     public FunctionalSubscriber(Consumer<Subscription> onSubscribedAction, BiConsumer<Subscription, T> consumeAction,
             Consumer<Subscription> completeAction, BiConsumer<Subscription, Exception> failAction) {
         this.onScribedAction = notNull(onSubscribedAction, "The action on subscribed cannot be null.");

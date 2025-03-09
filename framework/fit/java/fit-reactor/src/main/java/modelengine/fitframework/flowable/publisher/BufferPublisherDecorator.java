@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable.publisher;
 
@@ -30,6 +30,13 @@ public class BufferPublisherDecorator<T> implements Publisher<List<T>> {
     private final Publisher<T> decorated;
     private final int bufferSize;
 
+    /**
+     * 使用指定的发布者和缓冲区大小初始化 {@link BufferPublisherDecorator} 的新实例。
+     *
+     * @param decorated 表示被装饰的发布者的 {@link Publisher}{@code <}{@link T}{@code >}。
+     * @param bufferSize 表示缓冲区大小的 {@code int}。
+     * @throws IllegalArgumentException 当 {@code decorated} 为 {@code null} 或 {@code bufferSize} 小于等于 0 时。
+     */
     public BufferPublisherDecorator(Publisher<T> decorated, int bufferSize) {
         this.decorated = notNull(decorated, "The decorated buffer publisher cannot be null.");
         this.bufferSize = greaterThan(bufferSize, 0, "The buffer size must be positive. [bufferSize={0}]", bufferSize);

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable.publisher;
 
@@ -25,6 +25,12 @@ import java.util.concurrent.atomic.AtomicLong;
 public class CountPublisherDecorator<T> implements Publisher<Long> {
     private final Publisher<T> decorated;
 
+    /**
+     * 使用指定的发布者初始化 {@link CountPublisherDecorator} 的新实例。
+     *
+     * @param decorated 表示被装饰的发布者的 {@link Publisher}{@code <}{@link T}{@code >}。
+     * @throws IllegalArgumentException 当 {@code decorated} 为 {@code null} 时。
+     */
     public CountPublisherDecorator(Publisher<T> decorated) {
         this.decorated = notNull(decorated, "The decorated count publisher cannot be null.");
     }

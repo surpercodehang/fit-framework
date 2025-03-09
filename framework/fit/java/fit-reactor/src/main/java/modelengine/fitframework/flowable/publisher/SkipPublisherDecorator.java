@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable.publisher;
 
@@ -27,6 +27,13 @@ public class SkipPublisherDecorator<T> implements Publisher<T> {
     private final Publisher<T> decorated;
     private final int count;
 
+    /**
+     * 使用指定的发布者和跳过数量初始化 {@link SkipPublisherDecorator} 的新实例。
+     *
+     * @param decorated 表示被装饰的发布者的 {@link Publisher}{@code <}{@link T}{@code >}。
+     * @param count 表示跳过数量的 {@code int}。
+     * @throws IllegalArgumentException 当 {@code decorated} 为 {@code null} 或 {@code count} 小于 0 时。
+     */
     public SkipPublisherDecorator(Publisher<T> decorated, int count) {
         this.decorated = notNull(decorated, "The decorated count publisher cannot be null.");
         this.count = greaterThan(count, 0, "The count to skip must be positive. [count={0}]", count);

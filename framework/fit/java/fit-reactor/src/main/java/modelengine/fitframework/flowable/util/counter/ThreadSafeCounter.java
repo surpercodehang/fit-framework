@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.flowable.util.counter;
 
@@ -26,6 +26,12 @@ public class ThreadSafeCounter implements Counter {
     private final AtomicLong value;
     private final List<CounterValueChangedObserver> observers = new ArrayList<CounterValueChangedObserver>();
 
+    /**
+     * 使用指定的初始值初始化 {@link ThreadSafeCounter} 的新实例。
+     *
+     * @param initialValue 表示初始值的 {@code long}。
+     * @throws IllegalArgumentException 当 {@code initialValue} 小于 0 时。
+     */
     public ThreadSafeCounter(long initialValue) {
         this.value = new AtomicLong(initialValue);
     }
