@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.client.filter.route;
 
@@ -29,6 +29,12 @@ import java.util.stream.Stream;
 public class FitableIdFilter extends AbstractFilter {
     private final List<String> fitableIds;
 
+    /**
+     * 使用指定的服务实现标识数组初始化 {@link FitableIdFilter} 的新实例。
+     *
+     * @param fitableIds 表示服务实现标识的 {@link String} 数组。
+     * @throws IllegalArgumentException 当没有有效的服务实现标识时。
+     */
     public FitableIdFilter(String... fitableIds) {
         this(Stream.of(ObjectUtils.getIfNull(fitableIds, () -> new String[0])).collect(Collectors.toList()));
     }

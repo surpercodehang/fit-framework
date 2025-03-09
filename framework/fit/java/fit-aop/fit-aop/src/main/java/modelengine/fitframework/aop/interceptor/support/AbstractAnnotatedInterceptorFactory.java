@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.support;
 
@@ -25,6 +25,12 @@ import java.lang.reflect.Method;
 public abstract class AbstractAnnotatedInterceptorFactory implements MethodInterceptorFactory {
     private final Class<? extends Annotation> annotationClass;
 
+    /**
+     * 使用指定的注解类型初始化 {@link AbstractAnnotatedInterceptorFactory} 的新实例。
+     *
+     * @param annotationClass 表示注解类型的 {@link Class}{@code <? extends }{@link Annotation}{@code >}。
+     * @throws IllegalArgumentException 当 {@code annotationClass} 为 {@code null} 时。
+     */
     protected AbstractAnnotatedInterceptorFactory(Class<? extends Annotation> annotationClass) {
         this.annotationClass = notNull(annotationClass, "The annotation class cannot be null.");
     }

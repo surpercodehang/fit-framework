@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.util.support;
 
@@ -29,6 +29,12 @@ public abstract class AbstractZip<T extends AbstractZip<?>> {
 
     private boolean override;
 
+    /**
+     * 使用待处理的文件和打包文件字符集来初始化 {@link AbstractZip} 的新实例。
+     *
+     * @param zipFile 表示待处理的文件的 {@link File}。
+     * @param charset 表示打包文件的字符集的 {@link Charset}。
+     */
     public AbstractZip(File zipFile, Charset charset) {
         this.zipFile = Validation.notNull(zipFile, "The zip file to process cannot be null.");
         this.charset = ObjectUtils.nullIf(charset, FileUtils.DEFAULT_CHARSET);

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.resource.support;
 
@@ -24,6 +24,13 @@ public final class DefaultResource implements Resource {
     private final URL url;
     private final InputStreamSupplier inputStreamSupplier;
 
+    /**
+     * 使用指定的名称、URL 和输入流供应器来初始化 {@link DefaultResource} 的新实例。
+     *
+     * @param name 表示资源名称的 {@link String}。
+     * @param url 表示资源统一资源定位符的 {@link URL}。
+     * @param inputStreamSupplier 表示输入流供应器的 {@link InputStreamSupplier}。
+     */
     public DefaultResource(String name, URL url, InputStreamSupplier inputStreamSupplier) {
         this.name = name;
         this.url = url;

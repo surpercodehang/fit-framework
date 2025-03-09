@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.serialization;
 
@@ -43,6 +43,7 @@ public interface ByteSerializer<T> {
     /**
      * 将对象通过指定的序列化器，序列化为字节序列。
      *
+     * @param <T> 表示待序列化对象的类型的 {@link T}。
      * @param serializer 表示使用的序列化程序的 {@link ByteSerializer}{@code <}{@link T}{@code >}。
      * @param value 表示待序列化的对象的 {@link Object}。
      * @return 表示序列化后得到的包含源对象信息的字节序列的 {@code byte[]}。
@@ -80,6 +81,7 @@ public interface ByteSerializer<T> {
     /**
      * 将输入字节序列通过指定的序列化器，反序列化为对象。
      *
+     * @param <T> 表示反序列化后对象的类型的 {@link T}。
      * @param serializer 表示使用的序列化程序的 {@link ByteSerializer}{@code <}{@link T}{@code >}。
      * @param value 表示包含对象信息的字节序列的 {@code byte[]}。
      * @return 表示从字节序列中反序列化得到的对象的 {@link Object}。

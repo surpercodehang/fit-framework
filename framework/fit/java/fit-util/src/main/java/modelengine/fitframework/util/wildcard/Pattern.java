@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.util.wildcard;
 
@@ -137,7 +137,7 @@ public interface Pattern<S> extends SymbolSequence<S>, Result<S> {
 
     /**
      * 通过指定的路径样式和路径分隔符来创建一个路径匹配模式。
-     * <p>路径样式匹配举例：（假设路径分隔符为 '/'）
+     * <p>路径样式匹配举例：（假设路径分隔符为 '/'）</p>
      * <ul>
      *     <li>当路径样式为 {@code '/a'} 时，只有完全匹配的请求 {@code '/a'} 才能过滤；</li>
      *     <li>当路径样式为 {@code '/a?'} 时，可以模糊匹配 1 个字符，如 {@code '/aa'} 或 {@code '/ab'} 这样的请求；</li>
@@ -145,7 +145,7 @@ public interface Pattern<S> extends SymbolSequence<S>, Result<S> {
      *     这样的请求；</li>
      *     <li>当路径样式为 {@code '/a**'} 时，可以在任意段路径内模糊匹配任意个字符，如 {@code '/a'} 或 {@code '/a/b/c'}
      *     这样的请求。</li>
-     * </ul></p>
+     * </ul>
      *
      * @param pattern 表示指定的路径样式的 {@link String}。
      * @param pathSeparator 表示路径分隔符的 {@code char}。

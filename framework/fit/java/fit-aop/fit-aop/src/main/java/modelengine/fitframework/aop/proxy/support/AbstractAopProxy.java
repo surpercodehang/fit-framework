@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.proxy.support;
 
@@ -61,14 +61,13 @@ public abstract class AbstractAopProxy implements FitProxy {
 
     /**
      * AOP 调用核心逻辑。
-     * <p>调用过程如下：
+     * <p>调用过程如下：</p>
      * <ol>
      *     <li>根据调用方法，过滤被代理对象的所有方法拦截器，如果没有合适的方法拦截器，则直接调用被代理对象。</li>
      *     <li>在过滤后的方法拦截器列表最后，添加一个 {@link ProxiedInterceptor}，用于调用被代理对象。</li>
      *     <li>从最后一个方法拦截器开始，依次向前构造当前方法拦截器的参数。</li>
      *     <li>构造完所有方法拦截器的参数后，调用第一个方法拦截器。</li>
      * </ol>
-     * </p>
      *
      * @param proxy 表示代理对象的 {@link Object}。
      * @param method 表示调用方法的 {@link Method}。

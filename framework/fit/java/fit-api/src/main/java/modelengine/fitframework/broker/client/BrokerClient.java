@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.client;
 
@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 
 /**
  * 服务调用的代理客户端。
- * <p>所有的服务的定义需要遵循以下两种规范之一：
+ * <p>所有的服务的定义需要遵循以下两种规范之一：</p>
  * <ol>
  *     <li><b>单接口单方法规范：</b>接口类上存在 {@link modelengine.fitframework.annotation.Genericable}
  *     注解，且接口类中仅有一个方法，该方法的名字为
@@ -20,7 +20,6 @@ import java.lang.reflect.Method;
  *     <li><b>单接口多方法规范：</b>接口类中存在多个方法，每一个服务方法上存在 {@link modelengine.fitframework.annotation.Genericable}
  *     注解。</li>
  * </ol>
- * </p>
  *
  * @author 梁济时
  * @author 季聿阶
@@ -56,6 +55,8 @@ public interface BrokerClient {
      * @param genericableId 表示服务的唯一标识的 {@link String}。
      * @param genericableMethod 表示服务的方法的 {@link Method}。
      * @return 表示服务的自定义动态路由器的 {@link Router}。
+     * @throws RouterRetrievalFailureException 当 {@code genericableId} 为 {@code null} 或空白字符串时。
+     * @throws GenericableNotFoundException 当从服务仓库中找不到合适的服务时。
      */
     default Router getRouter(String genericableId, Method genericableMethod) {
         return this.getRouter(genericableId, false, genericableMethod);
@@ -68,6 +69,8 @@ public interface BrokerClient {
      * @param isMicro 表示服务是否为微观服务的标记的 {@code boolean}。
      * @param genericableMethod 表示服务的方法的 {@link Method}。
      * @return 表示服务的自定义动态路由器的 {@link Router}。
+     * @throws RouterRetrievalFailureException 当 {@code genericableId} 为 {@code null} 或空白字符串时。
+     * @throws GenericableNotFoundException 当从服务仓库中找不到合适的服务时。
      */
     Router getRouter(String genericableId, boolean isMicro, Method genericableMethod);
 
@@ -76,6 +79,8 @@ public interface BrokerClient {
      *
      * @param genericableId 表示服务的唯一标识的 {@link String}。
      * @return 表示服务的自定义动态路由器的 {@link Router}。
+     * @throws RouterRetrievalFailureException 当 {@code genericableId} 为 {@code null} 或空白字符串时。
+     * @throws GenericableNotFoundException 当从服务仓库中找不到合适的服务时。
      */
     default Router getRouter(String genericableId) {
         return this.getRouter(genericableId, false, null);

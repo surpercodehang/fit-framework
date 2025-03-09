@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.json.schema.support;
 
@@ -24,6 +24,11 @@ import java.util.stream.Stream;
  * @since 2024-03-31
  */
 public class StringSchema extends AbstractJsonSchema {
+    /**
+     * 使用指定的类型初始化 {@link StringSchema} 的新实例。
+     *
+     * @param type 表示字符串值类型的 {@link Type}。
+     */
     public StringSchema(Type type) {
         super(type);
     }

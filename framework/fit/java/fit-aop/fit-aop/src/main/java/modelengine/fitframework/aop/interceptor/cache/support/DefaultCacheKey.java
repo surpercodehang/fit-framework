@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.cache.support;
 
@@ -29,10 +29,22 @@ public class DefaultCacheKey implements CacheKey {
     private final Object[] keys;
     private final int hashcode;
 
+    /**
+     * 使用指定的键列表初始化 {@link DefaultCacheKey} 的新实例。
+     *
+     * @param keys 表示键列表的 {@link Object}{@code []}。
+     */
     public DefaultCacheKey(Object... keys) {
         this(null, null, keys);
     }
 
+    /**
+     * 使用指定的目标对象、目标方法和键列表初始化 {@link DefaultCacheKey} 的新实例。
+     *
+     * @param target 表示目标对象的 {@link Object}。
+     * @param method 表示目标方法的 {@link Method}。
+     * @param keys 表示键列表的 {@link Object}{@code []}。
+     */
     public DefaultCacheKey(Object target, Method method, Object... keys) {
         this.target = target;
         this.method = method;

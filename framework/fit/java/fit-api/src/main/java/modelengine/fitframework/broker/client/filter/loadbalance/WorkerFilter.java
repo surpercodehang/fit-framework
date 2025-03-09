@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.client.filter.loadbalance;
 
@@ -24,6 +24,12 @@ import java.util.Optional;
 public class WorkerFilter extends ChampionFilter {
     private final String workerId;
 
+    /**
+     * 使用指定的进程标识初始化 {@link WorkerFilter} 的新实例。
+     *
+     * @param workerId 表示进程标识的 {@link String}。
+     * @throws IllegalArgumentException 当 {@code workerId} 为 {@code null} 或空白时。
+     */
     public WorkerFilter(String workerId) {
         this.workerId = notBlank(workerId, "The target worker id to filter cannot be blank.");
     }

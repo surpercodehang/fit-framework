@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.pattern.builder;
 
@@ -23,6 +23,12 @@ public class ObjectInvocationHandler implements InvocationHandler {
     private final Class<?> objectClass;
     private final Map<String, Object> fields;
 
+    /**
+     * 使用指定的对象类型和字段映射来初始化 {@link ObjectInvocationHandler} 的新实例。
+     *
+     * @param objectClass 表示对象类型的 {@link Class}{@code <?>}。
+     * @param fields 表示对象字段映射的 {@link Map}{@code <}{@link String}{@code , }{@link Object}{@code >}。
+     */
     public ObjectInvocationHandler(Class<?> objectClass, Map<String, Object> fields) {
         this.objectClass = objectClass;
         this.fields = fields;

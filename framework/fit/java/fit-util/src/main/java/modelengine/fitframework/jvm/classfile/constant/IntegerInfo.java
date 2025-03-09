@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.jvm.classfile.constant;
 
@@ -38,13 +38,12 @@ public final class IntegerInfo extends Constant {
     private final U4 data;
 
     /**
-     * 使用所属的常量池及包含常量数据的输入流初始化 {@link IntegerInfo} 类的新实例。
+     * 使用指定的常量池和输入流来初始化 {@link IntegerInfo} 的新实例。
      *
      * @param pool 表示所属的常量池的 {@link ConstantPool}。
      * @param in 表示包含常量数据的输入流的 {@link InputStream}。
-     * @return 表示从输入流中读取到的32位整数常量的 {@link IntegerInfo CONSTANT_Integer_info}。
-     * @throws IllegalArgumentException {@code pool} 或 {@code in} 为 {@code null}。
-     * @throws IOException 读取过程发生输入输出异常。
+     * @throws IllegalArgumentException 当 {@code pool} 或 {@code in} 为 {@code null} 时。
+     * @throws IOException 当读取过程中发生输入输出异常时。
      */
     public IntegerInfo(ConstantPool pool, InputStream in) throws IOException {
         super(pool, TAG);

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.jvm.scan.support;
 
@@ -38,6 +38,12 @@ public class ClassLoaderPackageScanner implements PackageScanner {
     private final Callback callback;
     private final Set<String> scannedClassNames;
 
+    /**
+     * 使用指定的类加载器和回调函数来初始化 {@link ClassLoaderPackageScanner} 的新实例。
+     *
+     * @param loader 表示类加载器的 {@link ClassLoader}。
+     * @param callback 表示扫描回调函数的 {@link Callback}。
+     */
     public ClassLoaderPackageScanner(ClassLoader loader, Callback callback) {
         this.loader = loader;
         this.callback = callback;

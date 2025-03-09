@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.merge.map;
 
@@ -61,8 +61,9 @@ public interface MapConflict<K, V> extends Conflict<K> {
     /**
      * 获取 {@link MapConflict} 的构建器。
      *
-     * @return 表示 {@link MapConflict} 的构建器的 {@link Builder}{@code <}{@link K}{@code , }{@link
-     * V}{@code >}。
+     * @param <K> 表示键值对中冲突点的键的类型的 {@link K}。
+     * @param <V> 表示键值对中冲突点的值的类型的 {@link V}。
+     * @return 表示 {@link MapConflict} 的构建器的 {@link Builder}{@code <}{@link K}{@code , }{@link V}{@code >}。
      */
     static <K, V> Builder<K, V> builder() {
         return builder(null);
@@ -71,9 +72,10 @@ public interface MapConflict<K, V> extends Conflict<K> {
     /**
      * 获取 {@link MapConflict} 的构建器，同时将指定对象的值进行填充。
      *
-     * @param value 表示指定对象的 {@link MapConflict}。
-     * @return 表示 {@link MapConflict} 的构建器的 {@link Builder}{@code <}{@link K}{@code , }{@link
-     * V}{@code >}。
+     * @param value 表示指定对象的 {@link MapConflict}{@code <}{@link K}{@code , }{@link V}{@code >}。
+     * @param <K> 表示键值对中冲突点的键的类型的 {@link K}。
+     * @param <V> 表示键值对中冲突点的值的类型的 {@link V}。
+     * @return 表示 {@link MapConflict} 的构建器的 {@link Builder}{@code <}{@link K}{@code , }{@link V}{@code >}。
      */
     static <K, V> Builder<K, V> builder(MapConflict<K, V> value) {
         return ObjectUtils.cast(BuilderFactory.get(MapConflict.class, Builder.class).create(value));

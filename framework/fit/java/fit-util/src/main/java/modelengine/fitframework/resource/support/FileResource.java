@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.resource.support;
 
@@ -43,6 +43,11 @@ public class FileResource implements Resource {
         this.url = FileUtils.urlOf(this.file);
     }
 
+    /**
+     * 获取资源对应的文件。
+     *
+     * @return 表示资源对应文件的 {@link File}。
+     */
     public File file() {
         return this.file;
     }

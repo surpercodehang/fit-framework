@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.value.support;
 
@@ -24,6 +24,12 @@ import java.util.Optional;
 public class FieldValue implements PropertyValue {
     private final Field field;
 
+    /**
+     * 使用指定的字段初始化 {@link FieldValue} 的新实例。
+     *
+     * @param field 表示字段的 {@link Field}。
+     * @throws IllegalArgumentException 当 {@code field} 为 {@code null} 时。
+     */
     public FieldValue(Field field) {
         this.field = notNull(field, "The field cannot be null.");
     }

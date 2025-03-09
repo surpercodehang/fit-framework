@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.async;
 
@@ -31,6 +31,13 @@ public class AsyncInterceptor extends AbstractMethodInterceptor {
     private final LazyLoader<Executor> executorLoader;
     private final LazyLoader<ExceptionHandler> exceptionHandlerLoader;
 
+    /**
+     * 使用指定的执行器提供者和异常处理器提供者初始化 {@link AsyncInterceptor} 的新实例。
+     *
+     * @param executorSupplier 表示执行器提供者的 {@link Supplier}{@code <}{@link Executor}{@code >}。
+     * @param exceptionHandlerSupplier 表示异常处理器提供者的 {@link Supplier}{@code <}{@link ExceptionHandler}{@code >}。
+     * @throws IllegalArgumentException 当 {@code executorSupplier} 为 {@code null} 时。
+     */
     public AsyncInterceptor(Supplier<Executor> executorSupplier, Supplier<ExceptionHandler> exceptionHandlerSupplier) {
         this.executorLoader =
                 new LazyLoader<>(notNull(executorSupplier, "The async executor supplier cannot be null."));

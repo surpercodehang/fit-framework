@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.cache.support;
 
@@ -32,6 +32,16 @@ public class SpecifiedParamKeyGenerator implements KeyGenerator {
     private final int index;
 
     /**
+     * 使用指定的参数索引初始化 {@link SpecifiedParamKeyGenerator} 的新实例。
+     *
+     * @param index 表示参数索引的 {@code int}。
+     * @throws IllegalArgumentException 当 {@code index} 小于 0 时。
+     */
+    public SpecifiedParamKeyGenerator(int index) {
+        this.index = greaterThanOrEquals(index, 0, "The parameter index cannot be negative. [index={0}]", index);
+    }
+
+    /**
      * 创建指定参数的缓存键生成器。
      *
      * @param keyPattern 表示方法参数名字的样式的 {@link String}。
@@ -53,10 +63,6 @@ public class SpecifiedParamKeyGenerator implements KeyGenerator {
             }
         }
         this.index = greaterThanOrEquals(actualIndex, 0, "No param name matched. [key={0}]", keyPattern);
-    }
-
-    public SpecifiedParamKeyGenerator(int index) {
-        this.index = greaterThanOrEquals(index, 0, "The param index must be positive. [index={0}]", index);
     }
 
     @Override

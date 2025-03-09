@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.ioc.annotation;
 
@@ -18,7 +18,7 @@ import java.util.Optional;
  *     {@code modelengine.fitframework.ioc.annotation.AnnotationPropertyForwarder} 文件</li>
  *     <li>最后，将实现类的全名写入到该文件中，若存在多个实现类，每个实现类单独一行</li>
  * </ul>
- * <note>实现类所在的JAR需要与 {@code fit-ioc} 的JAR在相同的 {@link ClassLoader} 中被加载。</note>
+ * <p><b>实现类所在的JAR需要与 {@code fit-ioc} 的JAR在相同的 {@link ClassLoader} 中被加载。</b></p>
  *
  * @author 梁济时
  * @since 2022-05-03

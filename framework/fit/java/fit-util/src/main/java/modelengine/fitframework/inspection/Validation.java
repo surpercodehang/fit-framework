@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.inspection;
 
@@ -635,6 +635,7 @@ public final class Validation {
      *
      * @param value 表示待检查的值的 {@code long}。
      * @param exceptionSupplier 表示当入参不符合校验时抛出异常的 {@link Supplier}{@code <E>}{@code <}{@link E}{@code >}。
+     * @param <E> 表示异常类型的 {@link E}。
      * @return 表示符合校验逻辑的值的 {@code long}。
      * @throws E 当不符合校验逻辑时。
      * @throws IllegalArgumentException 当不符合校验逻辑且 {@code exceptionSupplier} 为 {@code null} 时。

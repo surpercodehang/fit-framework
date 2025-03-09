@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.value;
 
@@ -15,7 +15,7 @@ package modelengine.fitframework.value;
 public interface ValueSetter {
     /**
      * 在指定对象中按照属性的路径替换其值。
-     * <p>替换属性值的规则如下：
+     * <p>替换属性值的规则如下：</p>
      * <ol>
      *     <li>当 {@code object} 为 {@code null} 时，返回替换结果 {@code null}。</li>
      *     <li>当 {@code propertyPath} 为 {@code null} 或空白字符串时，替换自身为 {@code value}，返回 {@code value}。</li>
@@ -24,8 +24,8 @@ public interface ValueSetter {
      *     分。切割后的部分相当于是 {@code object} 对象内的逐级键，其值就是按照逐级键一层一层获取后的最后一部分值，将其替换为 {@code value}，
      *     然后返回替换后的 {@code object}。</li>
      * </ol>
-     * </p>
-     * <p>例如：
+     * 
+     * <p>例如：</p>
      * <pre>
      * +---------------------+--------------+-------+----------------------+
      * |        object       | propertyPath | value |    replaced object   |
@@ -41,8 +41,7 @@ public interface ValueSetter {
      * +---------------------+--------------+-------+----------------------+
      * </pre>
      * 任意输入对象都可以转换为键值对的形式。
-     * </p>
-     *
+     * 
      * @param object 表示指定对象的 {@link Object}。
      * @param propertyPath 表示待替换属性的路径的 {@link String}。
      * @param value 表示替换的值的 {@link Object}。

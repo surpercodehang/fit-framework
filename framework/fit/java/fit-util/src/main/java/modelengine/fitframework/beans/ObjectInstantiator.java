@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.beans;
 
@@ -26,8 +26,8 @@ public interface ObjectInstantiator<T> {
     /**
      * 创建一个标准的对象实例化器。
      *
-     * @param type 表示待实例化的对象的类型的 {@link class}{@code <}{@link T}{@code >}。
-     * @param <T> 表示对象类型的 {@link T}。
+     * @param type 表示待实例化的对象的类型的 {@link Class}{@code <}{@link T}{@code >}。
+     * @param <T> 表示待实例化对象的类型的 {@link T}。
      * @return 表示指定类型的标准对象实例化器的 {@link ObjectInstantiator}{@code <}{@link T}{@code >}。
      * @throws IllegalArgumentException 当 {@code type} 为 {@code null} 时。
      */

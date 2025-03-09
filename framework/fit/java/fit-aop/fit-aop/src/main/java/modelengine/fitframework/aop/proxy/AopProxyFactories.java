@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.proxy;
 
@@ -25,6 +25,10 @@ import java.util.ServiceLoader;
 public class AopProxyFactories {
     private final List<AopProxyFactory> orderedFactories;
 
+    /**
+     * 初始化 {@link AopProxyFactories} 的新实例。
+     * <p>实例化时会自动加载并排序所有可用的 {@link AopProxyFactory}。</p>
+     */
     public AopProxyFactories() {
         this.orderedFactories = all();
     }

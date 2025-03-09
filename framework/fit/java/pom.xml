@@ -47,6 +47,7 @@
         <maven.compiler.version>3.9.0</maven.compiler.version>
         <maven.dependency.version>3.6.1</maven.dependency.version>
         <maven.jar.version>3.3.0</maven.jar.version>
+        <maven.javadoc.version>3.11.2</maven.javadoc.version>
         <maven.surefire.version>3.2.5</maven.surefire.version>
         <maven.source.version>3.3.0</maven.source.version>
     </properties>
@@ -79,6 +80,19 @@
                         <arg>-parameters</arg>
                     </compilerArgs>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

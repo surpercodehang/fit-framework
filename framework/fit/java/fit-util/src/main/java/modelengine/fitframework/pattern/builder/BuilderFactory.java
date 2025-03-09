@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.pattern.builder;
 
@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 构建器的工厂。
- * <p>对指定的对象生成构建器的<b>推荐</b>做法如下：
+ * <p>对指定的对象生成构建器的<b>推荐</b>做法如下：</p>
  * <ul>
  *     <li>指定对象使用接口声明。</li>
  *     <li>在指定对象内部创建构建器接口。</li>
@@ -31,7 +31,6 @@ import java.util.concurrent.ConcurrentHashMap;
  *     <li>在构建器中，增加 {@code build} 方法，用于构建对象。</li>
  *     <li>在指定对象接口和构建器中，<b>禁止</b>使用 {@code default} 方法。</li>
  * </ul>
- * </p>
  * <p><b>推荐</b>的构建器模板如下：</p>
  * <pre>
  * /**

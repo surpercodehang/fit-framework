@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.schedule.support;
 
@@ -34,6 +34,15 @@ public abstract class AbstractThreadPool implements ThreadPool {
     private final long awaitTermination;
     private final TimeUnit awaitTerminationUnit;
 
+    /**
+     * 通过线程池名字、JDK 的线程池、是否立即关闭的标志、等待关闭时间和单位来初始化 {@link AbstractThreadPool} 的新实例。
+     *
+     * @param name 表示线程池名字的 {@link String}。
+     * @param threadPool 表示 JDK 的线程池的 {@link ExecutorService}。
+     * @param isImmediateShutdown 表示是否立即关闭标志的 {@code boolean}。
+     * @param awaitTermination 表示等待关闭时间的 {@code long}。
+     * @param awaitTerminationUnit 表示等待关闭时间单位的 {@link TimeUnit}。
+     */
     protected AbstractThreadPool(String name, ExecutorService threadPool, boolean isImmediateShutdown,
             long awaitTermination, TimeUnit awaitTerminationUnit) {
         this.name = notBlank(name, "The name cannot be blank.");

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.util;
 
@@ -322,13 +322,12 @@ public final class ReflectionUtils {
 
     /**
      * 获取指定方法所属的接口类。
-     * <p>指定方法可能存在以下几种情况：
+     * <p>指定方法可能存在以下几种情况：</p>
      * <ul>
      *     <li>当指定方法是接口中的方法时，则返回其所属的接口类。</li>
      *     <li>当指定方法覆盖了接口中的方法时，则返回其覆盖的接口类。</li>
      *     <li>当指定方法没有覆盖任何接口中的方式时，则返回 {@link Optional#empty()}。</li>
      * </ul>
-     * </p>
      *
      * @param method 表示指定方法的 {@link Method}。
      * @return 表示指定方法所属接口类的 {@link Optional}{@code <}{@link Class}{@code <}{@link Object}{@code >>}。
@@ -340,13 +339,12 @@ public final class ReflectionUtils {
 
     /**
      * 获取指定方法在所属接口类中的方法。
-     * <p>指定方法可能存在以下几种情况：
+     * <p>指定方法可能存在以下几种情况：</p>
      * <ul>
      *     <li>当指定方法是接口中的方法时，则返回其自身。</li>
      *     <li>当指定方法覆盖了接口中的方法时，则返回其覆盖的接口中的方法。</li>
      *     <li>当指定方法没有覆盖任何接口中的方式时，则返回 {@link Optional#empty()}。</li>
      * </ul>
-     * </p>
      *
      * @param method 表示指定方法的 {@link Method}。
      * @return 表示指定方法在所属接口类中的方法的 {@link Optional}{@code <}{@link Method}{@code >}。
@@ -771,6 +769,15 @@ public final class ReflectionUtils {
         private final boolean useLongReturnAndArgumentTypeName;
         private final boolean useLongTypeName;
 
+        /**
+         * 使用指定的格式选项来初始化 {@link Pattern} 的新实例。
+         *
+         * @param includeModifier 表示是否包含修饰符的 {@code boolean}。
+         * @param includeReturnTypeAndArguments 表示是否包含返回类型和参数的 {@code boolean}。
+         * @param includeType 表示是否包含类型的 {@code boolean}。
+         * @param useLongReturnAndArgumentTypeName 表示是否使用返回类型和参数的完整类名的 {@code boolean}。
+         * @param useLongTypeName 表示是否使用类型的完整类名的 {@code boolean}。
+         */
         public Pattern(boolean includeModifier, boolean includeReturnTypeAndArguments, boolean includeType,
                 boolean useLongReturnAndArgumentTypeName, boolean useLongTypeName) {
             this.includeModifier = includeModifier;

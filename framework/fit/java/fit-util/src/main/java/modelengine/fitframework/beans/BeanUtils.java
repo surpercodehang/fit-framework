@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.beans;
 
@@ -46,6 +46,7 @@ public class BeanUtils {
      *
      * @param source 表示来源对象的 {@link Object}。
      * @param type 表示目标对象的 {@link Class}。
+     * @param <T> 表示目标对象类型的 {@link T}。
      * @return 表示目标对象的实例。
      * @throws IllegalArgumentException 当 {@code source} 或 {@code target} 为 {@code null} 时。
      */

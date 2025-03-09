@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.ioc;
 
@@ -35,7 +35,8 @@ public interface BeanFactory extends Disposable {
      * 获取 Bean 实例。
      *
      * @param arguments 表示 Bean 的初始化参数的 {@link Object}{@code []}。
-     * @return 表示 Bean 实例的 {@link Object}。
+     * @param <T> 表示 Bean 实例的类型的 {@link T}。
+     * @return 表示 Bean 实例的 {@link T}。
      */
     <T> T get(Object... arguments);
 }

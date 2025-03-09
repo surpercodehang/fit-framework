@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.schedule.support;
 
@@ -24,6 +24,12 @@ import java.util.Optional;
 public class FixedRateExecutePolicy extends AbstractExecutePolicy {
     private final long periodMillis;
 
+    /**
+     * 使用指定的执行周期来初始化 {@link FixedRateExecutePolicy} 的新实例。
+     *
+     * @param periodMillis 表示执行周期的毫秒数的 {@code long}。
+     * @throws IllegalArgumentException 当 {@code periodMillis} 不是正数时。
+     */
     public FixedRateExecutePolicy(long periodMillis) {
         this.periodMillis =
                 greaterThan(periodMillis, 0, "The period millis must be positive. [period={0}]", periodMillis);

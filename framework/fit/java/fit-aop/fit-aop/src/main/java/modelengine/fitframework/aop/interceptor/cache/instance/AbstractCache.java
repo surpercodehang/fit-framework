@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.cache.instance;
 
@@ -24,6 +24,13 @@ public abstract class AbstractCache implements Cache {
     private final String name;
     private final boolean allowsNullValue;
 
+    /**
+     * 使用指定的名称和空值允许标志初始化 {@link AbstractCache} 的新实例。
+     *
+     * @param name 表示缓存实例名称的 {@link String}。
+     * @param allowsNullValue 表示是否允许存储 {@code null} 值的 {@code boolean}。
+     * @throws IllegalArgumentException 当 {@code name} 为 {@code null} 或空白时。
+     */
     protected AbstractCache(String name, boolean allowsNullValue) {
         this.name = notBlank(name, "The cache instance name cannot be blank.");
         this.allowsNullValue = allowsNullValue;

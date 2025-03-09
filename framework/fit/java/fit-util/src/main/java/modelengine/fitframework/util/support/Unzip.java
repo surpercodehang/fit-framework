@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.util.support;
 
@@ -393,15 +393,31 @@ public class Unzip extends AbstractZip<Unzip> {
         private final ZipEntry entry;
         private final File target;
 
+        /**
+         * 使用指定的压缩文件项和目标文件来初始化 {@link Conflict} 的新实例。
+         *
+         * @param entry 表示压缩文件中的项的 {@link ZipEntry}。
+         * @param target 表示目标文件的 {@link File}。
+         */
         public Conflict(ZipEntry entry, File target) {
             this.entry = entry;
             this.target = target;
         }
 
+        /**
+         * 获取压缩文件中的项。
+         *
+         * @return 表示压缩文件中的项的 {@link ZipEntry}。
+         */
         public ZipEntry getEntry() {
             return this.entry;
         }
 
+        /**
+         * 获取目标文件。
+         *
+         * @return 表示目标文件的 {@link File}。
+         */
         public File getTarget() {
             return this.target;
         }

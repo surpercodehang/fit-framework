@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.support;
 
@@ -17,12 +17,10 @@ import modelengine.fitframework.util.ObjectUtils;
 
 /**
  * {@link Order} 优先级解析器。
- * <p>
  * <ol>
  *     <li>首先从方法的 {@link Order} 注解中获取优先级，存在则返回解析结果。</li>
  *     <li>如果方法上没有注解，则从类上的 {@link Order} 注解获取优先级。若没有则解析失败。</li>
  * </ol>
- * </p>
  *
  * @author 詹高扬
  * @since 2022-08-01

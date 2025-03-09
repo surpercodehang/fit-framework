@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.schedule.cron;
 
@@ -31,10 +31,21 @@ public class CronExecutePolicy extends AbstractExecutePolicy {
     private final CronExpression expression;
     private final ZoneId zoneId;
 
+    /**
+     * 使用指定的 Cron 表达式来初始化 {@link CronExecutePolicy} 的新实例。
+     *
+     * @param expression 表示 Cron 表达式的 {@link String}。
+     */
     public CronExecutePolicy(String expression) {
         this(expression, ZoneId.systemDefault());
     }
 
+    /**
+     * 使用指定的 Cron 表达式和时区来初始化 {@link CronExecutePolicy} 的新实例。
+     *
+     * @param expression 表示 Cron 表达式的 {@link String}。
+     * @param timeZone 表示时区的 {@link TimeZone}。
+     */
     public CronExecutePolicy(String expression, TimeZone timeZone) {
         this(expression, notNull(timeZone, "The time zone cannot be null.").toZoneId());
     }

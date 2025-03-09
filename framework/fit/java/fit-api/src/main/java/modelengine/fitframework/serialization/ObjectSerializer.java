@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.serialization;
 
@@ -19,12 +19,11 @@ import java.util.Map;
 
 /**
  * 对象序列化器。
- * <p>目前支持的序列化方式有：
+ * <p>目前支持的序列化方式有：</p>
  * <ol>
  *     <li>Json，注入时的别名为：{@code json}。</li>
  *     <li>CBOR，注入时的别名为：{@code cbor}。</li>
  * </ol>
- * </p>
  *
  * @author 季聿阶
  * @since 2022-08-03
@@ -95,6 +94,7 @@ public interface ObjectSerializer {
      * 将指定对象按照 {@link StandardCharsets#UTF_8} 的编码方式序列化为字符串。
      *
      * @param object 表示指定对象的 {@link T}。
+     * @param <T> 表示序列化对象的类型的 {@link T}。
      * @return 表示序列化后的字符串 {@link String}。
      * @throws SerializationException 当序列化过程发生异常时。
      */

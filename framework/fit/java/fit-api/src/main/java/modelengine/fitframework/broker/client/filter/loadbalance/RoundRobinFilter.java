@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.client.filter.loadbalance;
 
@@ -17,11 +17,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 轮询的负载均衡策略。
- * <p>该轮询算法实现仅为简单实现：
- * <ul>限制条件：
- *      <li>假定相同的服务实现的待过滤地址列表都是排序的，这样在服务地址变化不大的情况下，其结果是趋近轮询的。</li>
+ * <p>该轮询算法实现仅为简单实现：</p>
+ * <p>限制条件：</p>
+ * <ul>
+ *     <li>假定相同的服务实现的待过滤地址列表都是排序的，这样在服务地址变化不大的情况下，其结果是趋近轮询的。</li>
  * </ul>
- * </p>
  *
  * @author 季聿阶
  * @since 2021-06-11

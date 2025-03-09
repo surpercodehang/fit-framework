@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.support;
 
@@ -23,6 +23,12 @@ import java.util.Objects;
 public class SpecifiedMethodMatcher implements MethodMatcher {
     private final Method method;
 
+    /**
+     * 使用指定的方法初始化 {@link SpecifiedMethodMatcher} 的新实例。
+     *
+     * @param method 表示指定方法的 {@link Method}。
+     * @throws IllegalArgumentException 当 {@code method} 为 {@code null} 时。
+     */
     public SpecifiedMethodMatcher(Method method) {
         this.method = notNull(method, "The specified method cannot be null.");
     }

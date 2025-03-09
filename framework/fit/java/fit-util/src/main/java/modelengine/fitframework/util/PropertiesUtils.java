@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.util;
 
@@ -82,7 +82,7 @@ public class PropertiesUtils {
      * 将指定的 {@code .properties} 文件的内容转换成深层嵌套的键值对的形式。
      * <p><b>注意：该键值对并非简单对 {@code .properties} 文件内容进行按 {@code =} 分隔，而是会将其中键的内容按照 {@code .}
      * 进行分隔，形成一个深层次的键值对。</b></p>
-     * <p>例如：
+     * 例如：
      * <pre>
      *     genericables[0].id=g1
      *     genericables[0].name=modelengine.fit.G1
@@ -116,7 +116,6 @@ public class PropertiesUtils {
      *     }
      * </pre>
      * 所有最终的值都是 {@code String}。
-     * </p>
      *
      * @param properties 表示指定的 {@code .properties} 文件的 {@link Properties}。
      * @return 表示转换后的键值对的 {@link Map}{@code <}{@link String}{@code , }{@link Object}{@code >}。

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.type.support;
 
@@ -38,6 +38,13 @@ public class TypeMatcherDispatcher implements TypeMatcher {
     private final Type currentType;
     private final TypeMatcher.Context context;
 
+    /**
+     * 使用指定的类型和上下文来初始化 {@link TypeMatcherDispatcher} 的新实例。
+     *
+     * @param currentType 表示待匹配的类型的 {@link Type}。
+     * @param context 表示类型匹配的上下文的 {@link TypeMatcher.Context}。
+     * @throws IllegalArgumentException 当 {@code currentType} 为 {@code null} 时。
+     */
     public TypeMatcherDispatcher(Type currentType, TypeMatcher.Context context) {
         this.currentType = Validation.notNull(currentType, "The object type to match cannot be null.");
         this.context = ObjectUtils.nullIf(context, TypeMatcher.Context.empty());

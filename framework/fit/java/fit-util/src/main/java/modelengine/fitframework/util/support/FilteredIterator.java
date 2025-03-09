@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.util.support;
 
@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 /**
  * 为 {@link Iterator} 提供带过滤器的实现。
  *
+ * @param <E> 表示迭代元素的类型的 {@link E}。
  * @author 梁济时
  * @since 2022-07-01
  */
@@ -24,6 +25,12 @@ public class FilteredIterator<E> implements Iterator<E> {
     private boolean hasNext;
     private E next;
 
+    /**
+     * 使用指定的原始迭代器和过滤器来初始化 {@link FilteredIterator} 的新实例。
+     *
+     * @param origin 表示原始迭代器的 {@link Iterator}{@code <}{@link E}{@code >}。
+     * @param filter 表示元素过滤器的 {@link Predicate}{@code <}{@link E}{@code >}。
+     */
     public FilteredIterator(Iterator<E> origin, Predicate<E> filter) {
         this.origin = notNull(origin, "The origin iterator to filter cannot be null.");
         this.filter = notNull(filter, "The filter of element in iterator cannot be null.");
@@ -31,6 +38,11 @@ public class FilteredIterator<E> implements Iterator<E> {
         this.moveNext();
     }
 
+    /**
+     * 获取原始迭代器。
+     *
+     * @return 表示原始迭代器的 {@link Iterator}{@code <}{@link E}{@code >}。
+     */
     protected final Iterator<E> origin() {
         return this.origin;
     }

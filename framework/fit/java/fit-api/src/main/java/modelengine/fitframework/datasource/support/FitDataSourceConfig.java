@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.datasource.support;
 
@@ -61,18 +61,38 @@ public class FitDataSourceConfig {
         return fitConfig;
     }
 
+    /**
+     * 获取数据源名称。
+     *
+     * @return 表示数据源名称的 {@link String}。
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * 设置数据源名称。
+     *
+     * @param name 表示数据源名称的 {@link String}。
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * 获取数据源访问模式。
+     *
+     * @return 表示数据源访问模式的 {@link AccessMode}。
+     */
     public AccessMode getMode() {
         return this.mode;
     }
 
+    /**
+     * 设置数据源访问模式。
+     *
+     * @param mode 表示数据源访问模式的 {@link AccessMode}。
+     */
     public void setMode(AccessMode mode) {
         this.mode = mode;
     }

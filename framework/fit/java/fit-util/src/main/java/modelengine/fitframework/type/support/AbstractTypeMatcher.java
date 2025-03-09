@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.type.support;
 
@@ -23,7 +23,6 @@ import java.util.List;
  */
 public abstract class AbstractTypeMatcher<C extends Type, E extends Type> implements TypeMatcher {
     private final C currentType;
-
     private final TypeMatcher.Context context;
 
     /**
@@ -37,10 +36,20 @@ public abstract class AbstractTypeMatcher<C extends Type, E extends Type> implem
         this.context = Validation.notNull(context, "The context to match cannot be null.");
     }
 
+    /**
+     * 获取对象类型。
+     *
+     * @return 表示对象类型的 {@link C}。
+     */
     public C getCurrentType() {
         return this.currentType;
     }
 
+    /**
+     * 获取上下文信息。
+     *
+     * @return 表示上下文信息的 {@link TypeMatcher.Context}。
+     */
     public Context getContext() {
         return this.context;
     }

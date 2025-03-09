@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.server;
 
@@ -46,7 +46,7 @@ public interface GenericableServerFilter {
 
     /**
      * 获取过滤器的过滤服务唯一标识样式列表。
-     * <p>只有服务唯一标识满足了过滤路径样式，才能进行过滤。例如：
+     * <p>只有服务唯一标识满足了过滤路径样式，才能进行过滤。例如：</p>
      * <ul>
      * <li>当服务唯一标识样式为 {@code 'a.bb.ccc'} 时，只有完全匹配的请求 {@code 'a.bb.ccc'} 才能过滤；</li>
      * <li>当服务唯一标识样式为 {@code 'a.bb.ccc?'} 时，可以模糊匹配 1 个字符，如 {@code 'a.bb.cccx'} 或 {@code 'a.bb.cccy'}
@@ -58,7 +58,6 @@ public interface GenericableServerFilter {
      *  或 {@code 'a.bb.ccc.xx.yy}
      *  这样的请求。</li>
      * </ul>
-     * </p>
      *
      * @return 表示过滤器的过滤服务唯一标识样式列表的 {@link List}{@code <}{@link String}{@code >}。
      */

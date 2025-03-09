@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.pattern.builder;
 
@@ -28,6 +28,13 @@ public class BuilderInvocationHandler implements InvocationHandler {
     private final Class<?> builderClass;
     private final Map<String, Object> fields;
 
+    /**
+     * 使用待构建的对象类、构建器类和字段映射来初始化 {@link BuilderInvocationHandler} 的新实例。
+     *
+     * @param objectClass 表示待构建的对象类的 {@link Class}{@code <?>}。
+     * @param builderClass 表示构建器类的 {@link Class}{@code <?>}。
+     * @param fields 表示存储字段值的映射的 {@link Map}{@code <}{@link String}{@code , }{@link Object}{@code >}。
+     */
     public BuilderInvocationHandler(Class<?> objectClass, Class<?> builderClass, Map<String, Object> fields) {
         this.objectClass = objectClass;
         this.builderClass = builderClass;

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.cache.support;
 
@@ -25,6 +25,12 @@ import java.util.stream.Stream;
  * @since 2022-12-13
  */
 public class CacheableInterceptorFactory extends AbstractCacheInterceptorFactory<Cacheable> {
+    /**
+     * 使用指定的容器初始化 {@link CacheableInterceptorFactory} 的新实例。
+     *
+     * @param container 表示容器的 {@link BeanContainer}。
+     * @throws IllegalArgumentException 当 {@code container} 为 {@code null} 时。
+     */
     public CacheableInterceptorFactory(BeanContainer container) {
         super(container, Cacheable.class);
     }

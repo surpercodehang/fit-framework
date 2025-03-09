@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.conf;
 
@@ -16,14 +16,14 @@ package modelengine.fitframework.conf;
 public interface ConfigValueSupplier {
     /**
      * 获取指定键的配置的值。
-     * <p>配置值类型的有效值域为：
+     * <p>配置值类型的有效值域为：</p>
      * <ul>
      *     <li>{@link java.math.BigInteger}</li>
      *     <li>{@link java.math.BigDecimal}</li>
      *     <li>{@link java.lang.Boolean}</li>
      *     <li>{@link java.lang.String}</li>
      *     <li>{@link java.util.Date}</li>
-     * </ul></p>
+     * </ul>
      *
      * @param key 表示配置的键的 {@link String}。
      * @return 若存在配置，则为配置的值的 {@link Object}，否则为 {@code null}。

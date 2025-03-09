@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.merge;
 
@@ -187,6 +187,7 @@ public interface ConflictResolver<K, V, C extends Conflict<K>> {
         /**
          * 获取 {@link Result} 的构建器。
          *
+         * @param <V> 表示处理完冲突的数据的类型的 {@link V}。
          * @return 表示 {@link Result} 的构建器的 {@link Builder}{@code <}{@link V}{@code >}。
          */
         static <V> Builder<V> builder() {
@@ -196,7 +197,8 @@ public interface ConflictResolver<K, V, C extends Conflict<K>> {
         /**
          * 获取 {@link Result} 的构建器，同时将指定对象的值进行填充。
          *
-         * @param value 表示指定对象的 {@link Result}。
+         * @param <V> 表示处理完冲突的数据的类型的 {@link V}。
+         * @param value 表示指定对象的 {@link Result}{@code <}{@link V}{@code >}。
          * @return 表示 {@link Result} 的构建器的 {@link Builder}{@code <}{@link V}{@code >}。
          */
         static <V> Builder<V> builder(Result<V> value) {

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.util;
 
@@ -15,10 +15,11 @@ import java.util.function.Supplier;
 /**
  * 为 {@link Map} 提供构建器。
  *
- * @param <K> 表示键的类型。
- * @param <V> 表示值的类型。
+ * @param <K> 表示键的类型的 {@link K}。
+ * @param <V> 表示值的类型的 {@link V}。
  * @author 梁济时
- * @since 1.0
+ * @author 季聿阶
+ * @since 2020-07-24
  */
 public class MapBuilder<K, V> {
     private final Map<K, V> map;
@@ -43,8 +44,8 @@ public class MapBuilder<K, V> {
     /**
      * 向构建器中增加一个键值对。
      *
-     * @param key 表示新元素的键的 {@link Object}。
-     * @param value 表示新元素的值的 {@link Object}。
+     * @param key 表示新元素的键的 {@link K}。
+     * @param value 表示新元素的值的 {@link V}。
      * @return 表示当前的构建器的 {@link MapBuilder}。
      */
     public MapBuilder<K, V> put(K key, V value) {
@@ -65,7 +66,7 @@ public class MapBuilder<K, V> {
     /**
      * 使用构建器中包含的元素构建一个映射的新实例。
      *
-     * @return 表示新构建的映射的实例的 {@link Map}。
+     * @return 表示新构建的映射的实例的 {@link Map}{@code <}{@link K}{@code , }{@link V}{@code >}。
      */
     public Map<K, V> build() {
         return this.build(null);
@@ -74,8 +75,9 @@ public class MapBuilder<K, V> {
     /**
      * 使用构建器中包含的元素构建一个指定映射的新实例。
      *
-     * @param factory 表示用以实例化映射实例的工厂的 {@link Supplier}。若未提供，则将使用 {@link HashMap} 作为默认映射类型。
-     * @return 表示新构建的映射的实例的 {@link Map}。
+     * @param factory 表示用以实例化映射实例的工厂的 {@link Supplier}{@code <}{@link Map}{@code <}{@link K}{@code , }{@link
+     * V}{@code >>}。若未提供，则将使用 {@link HashMap} 作为默认映射类型。
+     * @return 表示新构建的映射的实例的 {@link Map}{@code <}{@link K}{@code , }{@link V}{@code >}。
      */
     public Map<K, V> build(Supplier<Map<K, V>> factory) {
         Supplier<Map<K, V>> actualFactory = ObjectUtils.nullIf(factory, HashMap::new);
@@ -87,7 +89,9 @@ public class MapBuilder<K, V> {
     /**
      * 获取一个映射构建器的新实例。
      *
-     * @return 表示映射构建器的实例的 {@link MapBuilder}。
+     * @param <K> 表示映射键的类型的 {@link K}。
+     * @param <V> 表示映射值的类型的 {@link V}。
+     * @return 表示映射构建器的实例的 {@link MapBuilder}{@code <}{@link K}{@code , }{@link V}{@code >}。
      */
     public static <K, V> MapBuilder<K, V> get() {
         return new MapBuilder<>();
@@ -96,8 +100,11 @@ public class MapBuilder<K, V> {
     /**
      * 获取一个映射构建器的新实例。
      *
-     * @param supplier 表示用于提供指定映射类型的 {@link Supplier}{@code <}{@link Map}{@code <K, V>>}。
-     * @return 表示映射构建器的实例的 {@link MapBuilder}。
+     * @param supplier 表示用于提供指定映射类型的
+     * {@link Supplier}{@code <}{@link Map}{@code <}{@link K}{@code , }{@link V}{@code >>}。
+     * @param <K> 表示映射键的类型的 {@link K}。
+     * @param <V> 表示映射值的类型的 {@link V}。
+     * @return 表示映射构建器的实例的 {@link MapBuilder}{@code <}{@link K}{@code , }{@link V}{@code >}。
      */
     public static <K, V> MapBuilder<K, V> get(Supplier<Map<K, V>> supplier) {
         return new MapBuilder<>(supplier);

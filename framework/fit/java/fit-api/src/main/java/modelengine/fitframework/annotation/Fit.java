@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.annotation;
 
@@ -49,7 +49,7 @@ public @interface Fit {
     /**
      * 表示调用的泛服务实现的策略。
      * <p><b>注意：当用户设置别名且非空后，该值会被忽略。</b></p>
-     * <p>可选值范围如下：
+     * <p>可选值范围如下：</p>
      * <ul>
      *     <li>默认路由策略：{@code DEFAULT}，<b>该值为默认值</b>，即用户没有指定任何特定策略。
      *         <p>该策略会优先尝试寻找调用的泛服务的规则进行路由，没有规则的情况下再尝试默认路由，二者二选一。</p>
@@ -57,7 +57,7 @@ public @interface Fit {
      *             <li>如果有规则配置，则会使用规则进行路由，如规则路由失败，则报错。</li>
      *             <li>否则，会使用默认路由，如无默认路由配置，则报错。</li>
      *         </ol>
-     *         <p><b>注意：该策略生效的条件是用户没有指定别名，即别名必须是默认的空字符串。</b></p></p>
+     *         <p><b>注意：该策略生效的条件是用户没有指定别名，即别名必须是默认的空字符串。</b></p>
      *     </li>
      *     <li>别名路由策略：{@code ALIAS}。
      *         <p>该策略只会寻找用户指定的泛服务别名进行路由。</p>
@@ -66,7 +66,6 @@ public @interface Fit {
      *         <p>该策略只会寻找调用泛服务的规则进行路由。</p>
      *     </li>
      * </ul>
-     * </p>
      *
      * @return 表示调用的泛服务实现的策略的 {@link String}。
      * @see #POLICY_DEFAULT

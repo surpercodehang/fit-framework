@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.cache;
 
@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 
 /**
  * 表示缓存的键。
- * <p><b>注意：所有该接口的实现，必须实现合适的 {@link #equals(Object)} 和 {@link #hashCode()} 方法。</b></p>
+ * <p><b>注意：所有该接口的实现，必须实现合适的 {@link Object#equals(Object)} 和 {@link Object#hashCode()} 方法。</b></p>
  *
  * @author 季聿阶
  * @since 2022-12-13

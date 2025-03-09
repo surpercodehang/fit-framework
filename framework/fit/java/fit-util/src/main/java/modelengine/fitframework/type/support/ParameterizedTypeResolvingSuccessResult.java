@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.type.support;
 
@@ -22,6 +22,11 @@ import java.util.stream.Collectors;
 public class ParameterizedTypeResolvingSuccessResult implements ParameterizedTypeResolvingResult {
     private final List<Type> parameters;
 
+    /**
+     * 使用指定的类型参数列表来初始化 {@link ParameterizedTypeResolvingSuccessResult} 的新实例。
+     *
+     * @param parameters 表示类型参数列表的 {@link List}{@code <}{@link Type}{@code >}。
+     */
     public ParameterizedTypeResolvingSuccessResult(List<Type> parameters) {
         this.parameters = parameters;
     }

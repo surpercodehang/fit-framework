@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.schedule.cron.support;
 
@@ -26,6 +26,12 @@ public class DayCronFieldComposite extends AbstractCronField {
     private final DayOfMonthCronField dayOfMonthField;
     private final DayOfWeekCronField dayOfWeekField;
 
+    /**
+     * 使用指定的月中日期字段和星期中日期字段来初始化 {@link DayCronFieldComposite} 的新实例。
+     *
+     * @param dayOfMonthField 表示月中日期字段的 {@link DayOfMonthCronField}。
+     * @param dayOfWeekField 表示星期中日期字段的 {@link DayOfWeekCronField}。
+     */
     public DayCronFieldComposite(DayOfMonthCronField dayOfMonthField, DayOfWeekCronField dayOfWeekField) {
         this.dayOfMonthField = notNull(dayOfMonthField, "The day of month field cannot be null.");
         this.dayOfWeekField = notNull(dayOfWeekField, "The day of week field cannot be null.");

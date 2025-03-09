@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.value.support;
 
@@ -24,6 +24,12 @@ import java.util.Optional;
 public class ParameterValue implements PropertyValue {
     private final Parameter parameter;
 
+    /**
+     * 使用指定的参数初始化 {@link ParameterValue} 的新实例。
+     *
+     * @param parameter 表示参数的 {@link Parameter}。
+     * @throws IllegalArgumentException 当 {@code parameter} 为 {@code null} 时。
+     */
     public ParameterValue(Parameter parameter) {
         this.parameter = notNull(parameter, "The parameter cannot be null.");
     }

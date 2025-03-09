@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.pattern.composite;
 
@@ -30,6 +30,11 @@ public class IteratorComposite<T> implements Iterator<T> {
     private final List<Iterator<T>> iterators;
     private int index;
 
+    /**
+     * 使用指定的迭代器列表来初始化 {@link IteratorComposite} 的新实例。
+     *
+     * @param iterators 表示待组合的迭代器列表的 {@link List}{@code <}{@link Iterator}{@code <}{@link T}{@code >>}。
+     */
     public IteratorComposite(List<Iterator<T>> iterators) {
         this.iterators = iterators;
         this.index = 0;

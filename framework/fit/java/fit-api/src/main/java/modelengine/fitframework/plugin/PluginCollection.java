@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.plugin;
 
@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 public interface PluginCollection extends Iterable<Plugin> {
     /**
      * 表示 JAR 文件名的格式。
-     * <p>例如：
+     * <p>例如：</p>
      * <ul>
      *     <li>main-1.0.jar</li>
      *     <li>main-1.0.0.jar</li>
@@ -28,7 +28,6 @@ public interface PluginCollection extends Iterable<Plugin> {
      *     <li>main-1.0.0-SNAPSHOT-random.jar</li>
      * </ul>
      * <b>注意：随机字符串虽然允许存在，但是不影响插件名的判定，即上述的最后两个文件认为是同一个插件。</b>
-     * </p>
      */
     Pattern JAR_NAME_PATTERN = Pattern.compile("^([^.]+)-((\\d+(\\.\\d+)*)(-SNAPSHOT)?)(-.+)?\\.jar$");
 

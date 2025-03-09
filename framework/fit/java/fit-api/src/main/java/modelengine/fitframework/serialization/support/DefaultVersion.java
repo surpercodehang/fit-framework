@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.serialization.support;
 
@@ -29,6 +29,13 @@ public class DefaultVersion implements Version {
     private final byte minor;
     private final byte revision;
 
+    /**
+     * 使用主版本号、次版本号和修订版本号初始化 {@link DefaultVersion} 的新实例。
+     *
+     * @param major 表示主版本号的 {@code byte}。
+     * @param minor 表示次版本号的 {@code byte}。
+     * @param revision 表示修订版本号的 {@code byte}。
+     */
     public DefaultVersion(byte major, byte minor, byte revision) {
         this.major = major;
         this.minor = minor;

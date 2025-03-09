@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.util.support;
 
@@ -19,6 +19,11 @@ import java.util.Iterator;
 public class IteratorEnumerationAdapter<E, T extends E> implements Enumeration<E> {
     private final Iterator<T> iterator;
 
+    /**
+     * 使用指定的迭代器来初始化 {@link IteratorEnumerationAdapter} 的新实例。
+     *
+     * @param iterator 表示待适配的迭代器的 {@link Iterator}{@code <}{@link T}{@code >}。
+     */
     public IteratorEnumerationAdapter(Iterator<T> iterator) {
         this.iterator = iterator;
     }

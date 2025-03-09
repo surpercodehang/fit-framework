@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.conf.runtime;
 
@@ -102,7 +102,7 @@ public interface ServerConfig {
          * 获取秘钥库的文件地址。
          * <p>注意：当前约束输出文件的密码值与输入私钥文件的密码值均为相同内容。</p>
          *
-         * @return 表示秘钥库的文件地址的 {@link Optional}{@code <}{@link String}{@link >}。
+         * @return 表示秘钥库的文件地址的 {@link Optional}{@code <}{@link String}{@code >}。
          */
         Optional<String> keyStoreFile();
 
@@ -110,21 +110,21 @@ public interface ServerConfig {
          * 获取秘钥库的文件地址。
          * <p>注意：当前约束密钥库的密码值与输入私钥文件的密码值均为相同内容。</p>
          *
-         * @return 表示秘钥库的文件地址的 {@link Optional}{@code <}{@link String}{@link >}。
+         * @return 表示秘钥库的文件地址的 {@link Optional}{@code <}{@link String}{@code >}。
          */
         Optional<String> trustStoreFile();
 
         /**
          * 获取秘钥库的密码。
          *
-         * @return 表示秘钥库的秘钥的 {@link Optional}{@code <}{@link String}{@link >}。
+         * @return 表示秘钥库的秘钥的 {@link Optional}{@code <}{@link String}{@code >}。
          */
         Optional<String> trustStorePassword();
 
         /**
          * 获取秘钥库的秘钥项的密码。
          *
-         * @return 表示秘钥库的秘钥项的密码的 {@link Optional}{@code <}{@link String}{@link >}。
+         * @return 表示秘钥库的秘钥项的密码的 {@link Optional}{@code <}{@link String}{@code >}。
          */
         Optional<String> keyStorePassword();
 
@@ -138,7 +138,7 @@ public interface ServerConfig {
         /**
          * 获取安全通信协议。
          *
-         * @return 表示安全通信协议的 {@link Optional}{@code <}{@link String}{@link >}。
+         * @return 表示安全通信协议的 {@link Optional}{@code <}{@link String}{@code >}。
          */
         Optional<String> secureProtocol();
 

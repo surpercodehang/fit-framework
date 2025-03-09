@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.util.support;
 
@@ -37,8 +37,8 @@ public class PropertyKey {
      * <p>{@code key} 的格式必须满足 {@link #PATTERN} 的格式。</p>
      *
      * @param key 表示一个 {@code .properties} 文件的一行内容的键用 {@code .} 号拆分后的部分的 {@link String}。
-     * @throws IllegalArgumentException 当 {@code key} 为 {@code null} 或者空白字符串时。
-     * @throws IllegalArgumentException 当 {@code key} 不满足 {@link #PATTERN} 的格式要求时。
+     * @throws IllegalArgumentException 当 {@code key} 为 {@code null} 或者空白字符串时，或当 {@code key} 不满足
+     * {@link #PATTERN} 的格式要求时。
      */
     public PropertyKey(String key) {
         Validation.notBlank(key, "Property key cannot be blank.");
@@ -55,14 +55,29 @@ public class PropertyKey {
         }
     }
 
+    /**
+     * 获取实际的属性键。
+     *
+     * @return 表示实际属性键的 {@link String}。
+     */
     public String getActualKey() {
         return this.actualKey;
     }
 
+    /**
+     * 判断当前属性键是否为数组格式。
+     *
+     * @return 表示是否为数组格式的 {@code boolean}。
+     */
     public boolean isArray() {
         return this.isArray;
     }
 
+    /**
+     * 获取数组索引。
+     *
+     * @return 表示数组索引的 {@code int}，当不是数组格式时返回 -1。
+     */
     public int getArrayIndex() {
         return this.arrayIndex;
     }

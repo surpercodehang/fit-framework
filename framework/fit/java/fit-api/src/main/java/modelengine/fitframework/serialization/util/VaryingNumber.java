@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.serialization.util;
 
@@ -30,8 +30,17 @@ public class VaryingNumber extends Number implements Comparable<VaryingNumber> {
     private static final byte BYTE_DATA_MASK = 0x7F;
     private static final byte BYTE_MB_MASK = (byte) (~Byte.toUnsignedInt(BYTE_DATA_MASK));
 
+    /**
+     * 表示可变长数字的字节数组。
+     */
     private final byte[] bytes;
 
+    /**
+     * 使用指定的字节数组初始化 {@link VaryingNumber} 的新实例。
+     *
+     * @param bytes 表示可变长数字的字节数组。
+     * @throws IllegalArgumentException 当 {@code bytes} 为 {@code null} 或长度小于 1 时。
+     */
     private VaryingNumber(byte[] bytes) {
         this.bytes = Validation.notNull(bytes, "Bytes is null.");
         Validation.greaterThanOrEquals(this.bytes.length, 1, "Bytes is not enough.");
