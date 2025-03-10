@@ -1,17 +1,18 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.parser.support;
 
 import modelengine.fitframework.aop.interceptor.aspect.parser.model.PointcutSupportedType;
 
 /**
- * 解析切点表达式中运算符与 && 的解析器。
+ * 解析切点表达式中运算符与 &amp;&amp; 的解析器。
  *
  * @author 郭龙飞
+ * @author 季聿阶
  * @since 2023-03-14
  */
 public class AndParser extends BaseParser {

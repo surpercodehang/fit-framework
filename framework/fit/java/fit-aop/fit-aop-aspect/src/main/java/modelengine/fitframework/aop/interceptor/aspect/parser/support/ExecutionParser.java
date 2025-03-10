@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.parser.support;
 
@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 
 /**
  * 解析切点表达式中关键字 execution 的解析器。
- * <P>用于匹配方法执行的连接点，支持通配符，格式
+ * <p>用于匹配方法执行的连接点，支持通配符，格式
  * execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-pattern(param-pattern)throws-pattern?)
  * 用法如下：</p>
  * <ul>
@@ -40,6 +40,11 @@ import java.util.function.Supplier;
 public class ExecutionParser extends BaseParser {
     private final ClassLoader classLoader;
 
+    /**
+     * 使用指定的类加载器初始化 {@link ExecutionParser} 的新实例。
+     *
+     * @param classLoader 表示类加载器的 {@link ClassLoader}。
+     */
     public ExecutionParser(ClassLoader classLoader) {
         this.classLoader = classLoader;
     }

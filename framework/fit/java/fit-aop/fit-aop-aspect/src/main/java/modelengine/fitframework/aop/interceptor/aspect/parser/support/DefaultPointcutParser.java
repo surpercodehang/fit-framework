@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.parser.support;
 
@@ -32,6 +32,13 @@ public class DefaultPointcutParser implements PointcutParser {
     private final PointcutParameter[] parameters;
     private final List<ExpressionParser> expressionParsers;
 
+    /**
+     * 使用指定的切点表达式、切面类和切点参数初始化 {@link DefaultPointcutParser} 的新实例。
+     *
+     * @param pointcut 表示切点表达式的 {@link String}。
+     * @param aspectClass 表示切面类的 {@link Class}{@code <?>}。
+     * @param parameters 表示切点参数的 {@link PointcutParameter}{@code []}。
+     */
     public DefaultPointcutParser(String pointcut, Class<?> aspectClass, PointcutParameter[] parameters) {
         this.expressions = ExpressionUtils.expressionSplit(pointcut);
         this.aspectClass = aspectClass;

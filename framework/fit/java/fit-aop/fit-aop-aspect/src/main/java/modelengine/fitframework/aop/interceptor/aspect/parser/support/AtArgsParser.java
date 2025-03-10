@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.parser.support;
 
@@ -22,7 +22,7 @@ import java.util.Optional;
 
 /**
  * 解析切点表达式中关键字 @args 的解析器。
- * <P>用于匹配目标对象方法的参数类型所属类上有指定的注解，不支持通配符，不支持单独使用，支持嵌套注解查找，有以下 2 种用法：</p>
+ * <p>用于匹配目标对象方法的参数类型所属类上有指定的注解，不支持通配符，不支持单独使用，支持嵌套注解查找，有以下 2 种用法：</p>
  * <ul>
  *     <li>参数过滤：匹配的是参数类型和个数，个数在 @args 括号中以逗号分隔，类型是在 @args 括号中声明。</li>
  *     <li>参数绑定：匹配的是参数类型和个数，个数在 @args 括号中以逗号分隔，类型是在增强方法中定义，并且必须在 {@code argsName} 中声明。</li>
@@ -35,6 +35,12 @@ public class AtArgsParser extends BaseParser {
     private final PointcutParameter[] parameters;
     private final ClassLoader classLoader;
 
+    /**
+     * 使用指定的切点参数和类加载器初始化 {@link AtArgsParser} 的新实例。
+     *
+     * @param parameters 表示切点参数的 {@link PointcutParameter}{@code []}。
+     * @param classLoader 表示类加载器的 {@link ClassLoader}。
+     */
     public AtArgsParser(PointcutParameter[] parameters, ClassLoader classLoader) {
         this.parameters = nullIf(parameters, new PointcutParameter[0]);
         this.classLoader = classLoader;

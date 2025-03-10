@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fit.service;
 
@@ -58,7 +58,7 @@ import java.util.stream.Collectors;
 /**
  * 注册中心的监听器，用于接收注册中心回调。
  * <p>注册中心监听器有三种工作模式，分别为 {@link RegistryListenerMode#PULL 拉模式}、{@link RegistryListenerMode#PUSH
- * 推模式} 和 {@link RegistryListenerMode#PUSH_AND_PULL 推拉结合模式}。
+ * 推模式} 和 {@link RegistryListenerMode#PUSH_AND_PULL 推拉结合模式}。</p>
  * <ul>
  *     <li>拉模式：注册中心监听器会开启一个定时任务，用于定时调用 {@link RegistryService#queryFitables
  *     注册中心服务端的查询接口} 来获取本地缓存中的服务地址列表，并更新本地缓存。</li>
@@ -67,29 +67,29 @@ import java.util.stream.Collectors;
  *     RegistryService#queryFitables 注册中心服务端的查询接口}。</li>
  *     <li>推拉结合模式：以上两种特性会同时开启。</li>
  * </ul>
- * </p>
- * <p>注册中心监听器本地会缓存必要的 {@link #fitableInstancesCache 服务地址列表}，其缓存策略如下：
- * <ul><b>添加缓存的方法</b>
+ * <p>注册中心监听器本地会缓存必要的 {@link #fitableInstancesCache 服务地址列表}，其缓存策略如下：</p>
+ * <b>添加缓存的方法</b>
+ * <ul>
  *     <li>{@link Registry#subscribeFitables(List)}</li>
  *     <li>{@link Registry#getFitableTargets(UniqueFitableId)}</li>
  * </ul>
- * <ul><b>缓存的过期时间</b>
+ * <b>缓存的过期时间</b>
+ * <ul>
  *     <li>无（直到主动删除缓存为止）：在上述添加缓存的方法中，如果参数 {@link Genericable#type()} 不为
  *     {@code null} 时，表示该服务在当前进程中存在引用，需要<b>永久缓存</b>。</li>
  *     <li>指定缓存过期时间：相反，如果参数 {@link Genericable#type()} 为 {@code null}
  *     时，表示该服务实现为泛化调用的服务实现，其服务地址列表只需要临时缓存，因此可以超时删除缓存。</li>
  * </ul>
- * <ul><b>删除缓存的方法</b>
+ * <b>删除缓存的方法</b>
+ * <ul>
  *     <li>超时：开启一个定时任务，周期性地检测本地缓存中的过期时间，达到过期时间时需要调用 {@link
  *     RegistryService#unsubscribeFitables 注册中心服务端的注销接口}，同时删除本地缓存。</li>
  * </ul>
- * </p>
- * <p>注册中心监听器的本地服务缓存和工作模式的关系：
+ * <p>注册中心监听器的本地服务缓存和工作模式的关系：</p>
  * <ul>
  *     <li>拉模式：定时获取地址的服务信息来源于本地缓存，更新本地缓存时，如果本地缓存没有指定的服务，则忽略。</li>
  *     <li>推模式：本地缓存中没有指定服务时，代表是第一次查询，需要订阅注册中心服务端。</li>
  * </ul>
- * </p>
  *
  * @author 夏斐
  * @author 季聿阶

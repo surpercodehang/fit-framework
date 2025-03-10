@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.parser.support;
 
@@ -29,6 +29,11 @@ public class LeftBracketParser extends BaseParser {
      * 左括号解析结果类。
      */
     public class LeftBracketResult extends BaseParser.BaseResult {
+        /**
+         * 使用指定的表达式初始化 {@link LeftBracketResult} 的新实例。
+         *
+         * @param expression 表示表达式的 {@link String}。
+         */
         public LeftBracketResult(String expression) {
             super(expression, null);
         }

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.parser.support;
 
@@ -25,18 +25,24 @@ import java.util.Objects;
 
 /**
  * 解析切点 {@link Pointcut} 的解析器。
- * <P>表达式的组合，就是对应的表达式的逻辑运算，与、或、非。</p>
+ * <p>表达式的组合，就是对应的表达式的逻辑运算，与、或、非。</p>
  *
  * @author 白鹏坤
  * @since 2023-03-17
  */
 public class ReferenceParser extends BaseParser {
-    // 方法匹配正则 方法名(参数)
+    /** 方法签名的正则匹配：方法名(参数)。 */
     private static final String METHOD_REGEX = "[a-zA-Z0-9_$]*\\(.*\\)";
 
     private final Class<?> inScope;
     private final PointcutParameter[] parameters;
 
+    /**
+     * 使用指定的作用域类和切点参数初始化 {@link ReferenceParser} 的新实例。
+     *
+     * @param inScope 表示作用域类的 {@link Class}{@code <?>}。
+     * @param parameters 表示切点参数的 {@link PointcutParameter}{@code []}。
+     */
     public ReferenceParser(Class<?> inScope, PointcutParameter[] parameters) {
         this.inScope = inScope;
         this.parameters = nullIf(parameters, new PointcutParameter[0]);

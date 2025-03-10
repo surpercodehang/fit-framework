@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.parser.support;
 
@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 
 /**
  * 解析切点表达式中关键字 within 的解析器。
- * <P>用于匹配 within 表达式中包路径以及子包下任意类任意方法，支持通配符。</p>
+ * <p>用于匹配 within 表达式中包路径以及子包下任意类任意方法，支持通配符。</p>
  *
  * @author 郭龙飞
  * @since 2023-03-14

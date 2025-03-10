@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.parser.support;
 
@@ -68,6 +68,15 @@ public class ExecuteExpression {
         private final String methodName;
         private final String paramList;
 
+        /**
+         * 使用指定的访问修饰符、返回类型、类路径、方法名和参数列表初始化 {@link ExecutionModel} 的新实例。
+         *
+         * @param accessModifier 表示访问修饰符的 {@link String}。
+         * @param returnType 表示返回类型的 {@link String}。
+         * @param classPath 表示类路径的 {@link String}。
+         * @param methodName 表示方法名的 {@link String}。
+         * @param paramList 表示参数列表的 {@link String}。
+         */
         public ExecutionModel(String accessModifier, String returnType, String classPath, String methodName,
                 String paramList) {
             this.accessModifier = accessModifier;
@@ -77,22 +86,47 @@ public class ExecuteExpression {
             this.paramList = paramList;
         }
 
+        /**
+         * 获取访问修饰符。
+         *
+         * @return 表示访问修饰符的 {@link String}。
+         */
         public String getAccessModifier() {
             return this.accessModifier;
         }
 
+        /**
+         * 获取返回类型。
+         *
+         * @return 表示返回类型的 {@link String}。
+         */
         public String getReturnType() {
             return this.returnType;
         }
 
+        /**
+         * 获取类路径。
+         *
+         * @return 表示类路径的 {@link String}。
+         */
         public String getClassPath() {
             return this.classPath;
         }
 
+        /**
+         * 获取方法名。
+         *
+         * @return 表示方法名的 {@link String}。
+         */
         public String getMethodName() {
             return this.methodName;
         }
 
+        /**
+         * 获取参数列表。
+         *
+         * @return 表示参数列表的 {@link String}。
+         */
         public String getParamList() {
             return this.paramList;
         }

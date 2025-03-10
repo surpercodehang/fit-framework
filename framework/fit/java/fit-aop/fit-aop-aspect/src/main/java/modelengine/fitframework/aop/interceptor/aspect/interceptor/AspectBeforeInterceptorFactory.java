@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.interceptor;
 
@@ -21,6 +21,9 @@ import java.lang.reflect.Method;
  * @since 2023-03-08
  */
 public class AspectBeforeInterceptorFactory extends AbstractAspectInterceptorFactory {
+    /**
+     * 初始化 {@link AspectBeforeInterceptorFactory} 的新实例。
+     */
     public AspectBeforeInterceptorFactory() {
         super(Before.class);
     }

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fit.service.support;
 
@@ -43,6 +43,12 @@ public class DefaultLocalFitableCache
     private final Set<UniqueFitableId> localFitables = Collections.newSetFromMap(new ConcurrentHashMap<>());
     private final Object lock = LockUtils.newSynchronizedLock();
 
+    /**
+     * 使用指定的本地执行器工厂初始化 {@link DefaultLocalFitableCache} 的新实例。
+     *
+     * @param localExecutorFactory 表示本地执行器工厂的 {@link LocalExecutorFactory}。
+     * @throws IllegalArgumentException 当 {@code localExecutorFactory} 为 {@code null} 时。
+     */
     public DefaultLocalFitableCache(LocalExecutorFactory localExecutorFactory) {
         this.localExecutorFactory = notNull(localExecutorFactory, "The proxy manager cannot be null.");
     }

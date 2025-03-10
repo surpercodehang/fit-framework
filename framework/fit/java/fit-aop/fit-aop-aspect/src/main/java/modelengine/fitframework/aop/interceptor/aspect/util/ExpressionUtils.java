@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.util;
 
@@ -54,7 +54,7 @@ public class ExpressionUtils {
 
     /**
      * 使用特定逻辑运算符分隔切入点表达式。
-     * <p>特定逻辑运算符: '&&'，'||'，'！' 这三种。</p>
+     * <p>特定逻辑运算符: {@code &&}，{@code ||}，{@code !} 这三种。</p>
      * <ul>
      *      <li>输入为 {@code "@args(..) &&this(..)"}，输出为 {@code ["@args(..)", "&&", "this(..)"]}。</li>
      *      <li>输入为 {@code "@args(..)||target(..)"}，输出为  {@code ["@args(..)", "||", "target(..)"]}。</li>
@@ -89,7 +89,7 @@ public class ExpressionUtils {
     }
 
     /**
-     * 以正则表达式替换包含 "*" ".." "." 的字符串。
+     * 以正则表达式替换包含 {@code *}、{@code ..}、{@code .} 的字符串。
      *
      * @param origin 待替换的字符串。
      * @return 正则替换后的字符串。
@@ -108,8 +108,9 @@ public class ExpressionUtils {
 
     /**
      * 根据字符串获取相应的类型。
-     * <p>支持 8 种基本类型，void，java.lang 包下类型，多维数组，自定义类型。</p>
-     * <p>例：int, void, String, int[], {@link modelengine.fitframework.aop.AopInterceptor}。</p>
+     * <p>支持 8 种基本类型，{@code void}，{@code java.lang} 包下类型，多维数组，自定义类型。</p>
+     * <p>例：{@code int}，{@code void}，{@link String}，{@code int[]}，{@link
+     * modelengine.fitframework.aop.AopInterceptor}。</p>
      *
      * @param content 表示待解析的字符串，自定义类需写全路径的 {@link String}。
      * @param classLoader 表示类加载器的 {@link ClassLoader}。
@@ -164,8 +165,9 @@ public class ExpressionUtils {
      *      <li>输入为 {@code ["("，"true"，"&&"，"false"，")"]，输出为 false}。</li>
      * </ul>
      *
-     * @param boolExpression 表示输入包含 "!"，"&&"，"||"，"true"，"false"，"(", ")" 这 7 种字符串的 {@link List}。
-     * @return 表示布尔表达式计算结果的 {@code boolean}
+     * @param boolExpression 表示输入包含 {@code !}，{@code &&}，{@code ||}，{@code true}，{@code false}，{@code (}，{@code )} 这 7
+     * 种字符串的 {@link List}{@code <}{@link String}{@code >}。
+     * @return 表示布尔表达式计算结果的 {@code boolean}。
      */
     public static boolean computeBoolExpression(List<String> boolExpression) {
         notEmpty(boolExpression, "The List cannot be empty.");
@@ -200,7 +202,7 @@ public class ExpressionUtils {
      * 计算不包含括号的布尔表达式。
      * <p>调用前应当检查布尔表达式是否符合正确语法。</p>
      *
-     * @param boolExpression 表示布尔表达式的 {@link List}。
+     * @param boolExpression 表示布尔表达式的 {@link List}{@code <}{@link String}{@code >}。
      * @return 表示布尔值的 {@link String}。
      */
     private static String computeBoolExpressionWithoutBracket(List<String> boolExpression) {

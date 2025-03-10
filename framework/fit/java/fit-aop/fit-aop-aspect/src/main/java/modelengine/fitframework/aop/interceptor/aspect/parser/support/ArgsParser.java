@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.parser.support;
 
@@ -25,7 +25,7 @@ import java.util.function.BiPredicate;
 
 /**
  * 解析切点表达式中关键字 args 的解析器。
- * <P>用于匹配当前执行的方法传入的参数为指定类型的执行方法，支持通配符，有以下 2 种用法：</p>
+ * <p>用于匹配当前执行的方法传入的参数为指定类型的执行方法，支持通配符，有以下 2 种用法：</p>
  * <ul>
  *     <li>参数过滤：匹配的是参数类型和个数，个数在 args 括号中以逗号分隔，类型是在 args 括号中声明。</li>
  *     <li>参数绑定：匹配的是参数类型和个数，个数在 args 括号中以逗号分隔，类型是在增强方法中定义，并且必须在 {@code argsName} 中声明。</li>
@@ -42,6 +42,12 @@ public class ArgsParser extends BaseParser {
     private final PointcutParameter[] parameters;
     private final ClassLoader classLoader;
 
+    /**
+     * 使用指定的切点参数和类加载器初始化 {@link ArgsParser} 的新实例。
+     *
+     * @param parameters 表示切点参数的 {@link PointcutParameter}{@code []}。
+     * @param classLoader 表示类加载器的 {@link ClassLoader}。
+     */
     public ArgsParser(PointcutParameter[] parameters, ClassLoader classLoader) {
         this.parameters = nullIf(parameters, new PointcutParameter[0]);
         this.classLoader = classLoader;
@@ -63,6 +69,11 @@ public class ArgsParser extends BaseParser {
     public class ArgsResult extends BaseParser.BaseResult {
         private final Map<String, Integer> paramMapping = new HashMap<>();
 
+        /**
+         * 使用指定的内容初始化 {@link ArgsResult} 的新实例。
+         *
+         * @param content 表示内容的 {@link String}。
+         */
         public ArgsResult(String content) {
             super(content, ArgsParser.this.classLoader);
         }
@@ -95,7 +106,8 @@ public class ArgsParser extends BaseParser {
             if (types.length < parts.length - 1) {
                 return false;
             }
-            lessThan(Arrays.stream(parts).filter(MULTIPLE_ARGS_REGEX::equals).count(), 2,
+            lessThan(Arrays.stream(parts).filter(MULTIPLE_ARGS_REGEX::equals).count(),
+                    2,
                     "The args can only contains 1 '..'.");
             // '..' 的位置在开始位置。
             boolean isFirstPlace = MULTIPLE_ARGS_REGEX.equals(parts[0]);
@@ -138,7 +150,8 @@ public class ArgsParser extends BaseParser {
                     .filter(parameter -> Objects.equals(parameter.getName(), argsName))
                     .findFirst();
             isTrue(pointcutParameter.isPresent(),
-                    "The args params name can not be found in pointcut parameters. [name={0}]", argsName);
+                    "The args params name can not be found in pointcut parameters. [name={0}]",
+                    argsName);
             paramsClass[i] = pointcutParameter.get().getType();
             this.paramMapping.put(argsName, i);
         }
@@ -165,8 +178,9 @@ public class ArgsParser extends BaseParser {
                 predicate = Class::isAssignableFrom;
             } else {
                 // 根据 args(..) 字符串内容获取类型
-                paramClass = Arrays.stream(parts).map(item -> ExpressionUtils.getContentClass(item,
-                        ArgsParser.this.classLoader)).toArray(Class[]::new);
+                paramClass = Arrays.stream(parts)
+                        .map(item -> ExpressionUtils.getContentClass(item, ArgsParser.this.classLoader))
+                        .toArray(Class[]::new);
                 predicate = Class::equals;
             }
             return this.isClassMatched(types, paramClass, predicate);
@@ -191,19 +205,35 @@ public class ArgsParser extends BaseParser {
         /**
          * args 模型类。
          */
-        public class ArgsModel {
+        public static class ArgsModel {
             private final String expression;
             private final Map<String, Integer> paramMapping;
 
+            /**
+             * 使用指定的表达式和参数映射初始化 {@link ArgsModel} 的新实例。
+             *
+             * @param expression 表示表达式的 {@link String}。
+             * @param paramMapping 表示参数映射的 {@link Map}{@code <}{@link String}{@code , }{@link Integer}{@code >}。
+             */
             public ArgsModel(String expression, Map<String, Integer> paramMapping) {
                 this.expression = expression;
                 this.paramMapping = paramMapping;
             }
 
+            /**
+             * 获取表达式。
+             *
+             * @return 表示表达式的 {@link String}。
+             */
             public String getExpression() {
                 return this.expression;
             }
 
+            /**
+             * 获取参数映射。
+             *
+             * @return 表示参数映射的 {@link Map}{@code <}{@link String}, {@link Integer}{@code >}。
+             */
             public Map<String, Integer> getParamMapping() {
                 return this.paramMapping;
             }

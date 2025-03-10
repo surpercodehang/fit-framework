@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.interceptor;
 
@@ -38,6 +38,12 @@ public abstract class AbstractAspectInterceptorFactory extends AbstractAnnotated
     private static final PointcutParameter[] EMPTY_PARAMETERS = new PointcutParameter[0];
     private static final String[] EMPTY_STRING = new String[0];
 
+    /**
+     * 使用指定的注解类初始化 {@link AbstractAspectInterceptorFactory} 的新实例。
+     *
+     * @param annotationClass 表示注解类的 {@link Class}{@code <? extends }{@link Annotation}{@code >}。
+     * @throws IllegalArgumentException 当 {@code annotationClass} 为 {@code null} 时。
+     */
     protected AbstractAspectInterceptorFactory(Class<? extends Annotation> annotationClass) {
         super(annotationClass);
     }

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.aop.interceptor.aspect.interceptor.inject;
 
@@ -58,19 +58,17 @@ public class AspectParameterInjectionHelper {
      * @return 返回参数的 {@link String} {@code []}。
      */
     public static String[] toArgNames(String argNames) {
-        return Arrays.stream(StringUtils.split(argNames, ARG_NAMES_SEPARATOR))
-                .map(String::trim).toArray(String[]::new);
+        return Arrays.stream(StringUtils.split(argNames, ARG_NAMES_SEPARATOR)).map(String::trim).toArray(String[]::new);
     }
 
     /**
      * 判断指定类型是不是 Aspect 内置的注入类型。
-     * <p>Aspect 内置的注入类型有 3 种：
+     * <p>Aspect 内置的注入类型有 3 种：</p>
      * <ul>
      *     <li>{@link ProceedingJoinPoint}</li>
      *     <li>{@link JoinPoint}</li>
      *     <li>{@link JoinPoint.StaticPart}</li>
      * </ul>
-     * </p>
      *
      * @param clazz 表示指定类型的 {@link Class}{@code <}{@link Object}{@code >}。
      * @return 如果是 Aspect 内置的注入类型，则返回 {@code true}，否则，返回 {@code false}。
