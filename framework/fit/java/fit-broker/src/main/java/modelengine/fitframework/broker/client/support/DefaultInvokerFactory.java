@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.client.support;
 
@@ -73,13 +73,12 @@ public class DefaultInvokerFactory implements InvokerFactory, LocalExecutorFacto
 
     /**
      * 通过系统的 Bean 容器、泛服务工厂、泛服务实现工厂和系统配置来创建一个新的 {@link DefaultInvokerFactory} 的实例。
-     * <p>构造函数中主要会做两件事：
+     * <p>构造函数中主要会做两件事：</p>
      * <ol>
      *     <li>初始化本地的 {@link LocalExecutorRepository} 和 {@link GenericableRepository}。</li>
      *     <li>获取调用的相关配置。</li>
      * </ol>
-     * </p>
-     * <p>在初始化本地仓库中：
+     * <p>在初始化本地仓库中：</p>
      * <ol>
      *     <li>构建系统的 {@link LocalExecutorRepository} 的根仓库，并设置一个插件的 {@link LocalExecutorRepositoryComposite}
      *     仓库，允许后续插件安装及卸载过程中可以在插件仓库中进行。</li>
@@ -88,7 +87,6 @@ public class DefaultInvokerFactory implements InvokerFactory, LocalExecutorFacto
      *     <li>将两个根仓库进行关联，确保本地 {@link LocalExecutor} 注册之后，可以将其配置导入到 {@link GenericableRepository}
      *     中。</li>
      * </ol>
-     * </p>
      *
      * @param container 表示系统的 Bean 容器的 {@link BeanContainer}。
      * @param genericableFactory 表示泛服务工厂的 {@link GenericableFactory}。

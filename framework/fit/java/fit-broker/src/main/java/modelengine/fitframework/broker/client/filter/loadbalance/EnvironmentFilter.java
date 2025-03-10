@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.client.filter.loadbalance;
 
@@ -25,6 +25,12 @@ import java.util.stream.Collectors;
 public class EnvironmentFilter extends AbstractFilter {
     private final String environment;
 
+    /**
+     * 使用指定的环境初始化 {@link EnvironmentFilter} 的新实例。
+     *
+     * @param environment 表示环境的 {@link String}。
+     * @throws IllegalArgumentException 当 {@code environment} 为 {@code null} 或空白字符串时。
+     */
     public EnvironmentFilter(String environment) {
         this.environment = notBlank(environment, "The target environment to filter cannot be blank.");
     }

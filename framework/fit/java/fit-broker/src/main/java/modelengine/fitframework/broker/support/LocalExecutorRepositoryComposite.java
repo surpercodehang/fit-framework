@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.support;
 
@@ -40,6 +40,12 @@ public class LocalExecutorRepositoryComposite implements LocalExecutorRepository
     private final List<LocalExecutorRepository> pluginRepositories;
     private final ReadWriteLock lock;
 
+    /**
+     * 使用指定的根仓库初始化 {@link LocalExecutorRepositoryComposite} 的新实例。
+     *
+     * @param rootRepository 表示根仓库的 {@link LocalExecutorRepository}。
+     * @throws IllegalArgumentException 当 {@code rootRepository} 为 {@code null} 时。
+     */
     public LocalExecutorRepositoryComposite(LocalExecutorRepository rootRepository) {
         this.rootRepository = notNull(rootRepository, "The root repository of local executors cannot be null.");
         this.pluginRepositories = new ArrayList<>();

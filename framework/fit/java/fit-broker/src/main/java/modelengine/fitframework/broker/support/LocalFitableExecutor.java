@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.support;
 
@@ -47,6 +47,16 @@ public class LocalFitableExecutor extends AbstractUnicastFitableExecutor impleme
     private final LazyLoader<Object> targetLoader;
     private final Method method;
 
+    /**
+     * 使用指定的标识、微服务标志、元数据、实现所在 Bean 的提供者和方法初始化 {@link LocalFitableExecutor} 的新实例。
+     *
+     * @param id 表示标识的 {@link UniqueFitableId}。
+     * @param isMicro 表示是否为微服务的 {@code boolean}。
+     * @param metadata 表示元数据的 {@link BeanMetadata}。
+     * @param targetSupplier 表示实现所在 Bean 的提供者的 {@link Supplier}{@code <}{@link Object}{@code >}。
+     * @param method 表示方法的 {@link Method}。
+     * @throws IllegalArgumentException 当 {@code metadata}、{@code targetSupplier} 或 {@code method} 为 {@code null} 时。
+     */
     public LocalFitableExecutor(UniqueFitableId id, boolean isMicro, BeanMetadata metadata,
             Supplier<Object> targetSupplier, Method method) {
         this.id = id;

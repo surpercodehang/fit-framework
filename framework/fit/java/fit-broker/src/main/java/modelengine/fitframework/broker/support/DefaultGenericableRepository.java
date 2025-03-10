@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.support;
 
@@ -42,6 +42,15 @@ public class DefaultGenericableRepository implements GenericableRepository, Loca
     private final GenericableFactory genericableFactory;
     private final FitableFactory fitableFactory;
 
+    /**
+     * 使用指定的名称、泛服务工厂和实现工厂初始化 {@link DefaultGenericableRepository} 的新实例。
+     *
+     * @param name 表示名称的 {@link String}。
+     * @param genericableFactory 表示泛服务工厂的 {@link GenericableFactory}。
+     * @param fitableFactory 表示实现工厂的 {@link FitableFactory}。
+     * @throws IllegalArgumentException 当 {@code name}、{@code genericableFactory} 或 {@code fitableFactory} 为
+     * {@code null}，或 {@code name} 为空白字符串时。
+     */
     public DefaultGenericableRepository(String name, GenericableFactory genericableFactory,
             FitableFactory fitableFactory) {
         this.name = notBlank(name, "The genericable repository name cannot be blank.");

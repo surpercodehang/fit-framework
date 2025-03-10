@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.resolver;
 
@@ -38,12 +38,19 @@ public class FitableAnnotationResolver implements LocalExecutorResolver {
     /**
      * 该模式仅支持数字、大小写字母以及 '-'、'_'、'*'、'.' 字符且长度在128以内。
      */
-    private static final Pattern ID_PATTERN = Pattern.compile("^[\\w\\-\\.\\*]{1,128}+$");
+    private static final Pattern ID_PATTERN = Pattern.compile("^[\\w\\-.*]{1,128}$");
     private static final Logger LOG = Logger.get(FitableAnnotationResolver.class);
 
     private final BeanContainer container;
     private final LocalExecutorRepository.Registry registry;
 
+    /**
+     * 使用指定的容器和注册表初始化 {@link FitableAnnotationResolver} 的新实例。
+     *
+     * @param container 表示容器的 {@link BeanContainer}。
+     * @param registry 表示注册表的 {@link LocalExecutorRepository.Registry}。
+     * @throws IllegalArgumentException 当 {@code container} 或 {@code registry} 为 {@code null} 时。
+     */
     public FitableAnnotationResolver(BeanContainer container, LocalExecutorRepository.Registry registry) {
         this.container = notNull(container, "Container of a local proxy resolver cannot be null.");
         this.registry = notNull(registry, "The registry to register local proxy cannot be null.");

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.client.support;
 
@@ -32,6 +32,12 @@ import java.util.Objects;
 public class DefaultBrokerClient implements BrokerClient {
     private final RouterFactory routerFactory;
 
+    /**
+     * 使用指定的路由器工厂初始化 {@link DefaultBrokerClient} 的新实例。
+     *
+     * @param routerFactory 表示路由器工厂的 {@link RouterFactory}。
+     * @throws IllegalArgumentException 当 {@code routerFactory} 为 {@code null} 时。
+     */
     public DefaultBrokerClient(RouterFactory routerFactory) {
         this.routerFactory = notNull(routerFactory, "The router factory cannot be null.");
     }

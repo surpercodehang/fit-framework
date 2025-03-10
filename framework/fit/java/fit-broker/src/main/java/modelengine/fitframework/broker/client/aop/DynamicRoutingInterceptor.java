@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.client.aop;
 
@@ -47,6 +47,18 @@ public class DynamicRoutingInterceptor extends AbstractMethodInterceptor {
     private final SerializationFormat format;
     private final Map<Method, GenericableInfo> genericableInfos = new ConcurrentHashMap<>();
 
+    /**
+     * 使用指定的代理客户端延迟加载器、别名、重试次数、超时时间及单位、协议和序列化方式初始化 {@link DynamicRoutingInterceptor} 的新实例。
+     *
+     * @param brokerClientLazyLoader 表示代理客户端延迟加载器的 {@link LazyLoader}{@code <}{@link BrokerClient}{@code >}。
+     * @param alias 表示别名的 {@link String}。
+     * @param retry 表示重试次数的 {@code int}。
+     * @param timeout 表示超时时间的 {@code long}。
+     * @param timeoutUnit 表示超时时间单位的 {@link TimeUnit}。
+     * @param protocol 表示协议的 {@link CommunicationProtocol}。
+     * @param format 表示序列化方式的 {@link SerializationFormat}。
+     * @throws IllegalArgumentException 当 {@code brokerClientLazyLoader} 为 {@code null} 时。
+     */
     public DynamicRoutingInterceptor(LazyLoader<BrokerClient> brokerClientLazyLoader, String alias, int retry,
             int timeout, TimeUnit timeoutUnit, CommunicationProtocol protocol, SerializationFormat format) {
         this.brokerClientLazyLoader = notNull(brokerClientLazyLoader, "The broker client loader cannot be null.");

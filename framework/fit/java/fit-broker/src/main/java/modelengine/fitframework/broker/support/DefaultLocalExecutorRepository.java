@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.support;
 
@@ -55,6 +55,12 @@ public class DefaultLocalExecutorRepository implements LocalExecutorRepository {
 
     private final List<LocalExecutorRegisteredObserver> registeredObservers;
 
+    /**
+     * 使用指定的名称初始化 {@link DefaultLocalExecutorRepository} 的新实例。
+     *
+     * @param name 表示名称的 {@link String}。
+     * @throws IllegalArgumentException 当 {@code name} 为 {@code null} 或空白字符串时。
+     */
     public DefaultLocalExecutorRepository(String name) {
         this.name = notBlank(name, "The name of local fitable executor repository cannot be blank.");
         this.localExecutors = new HashMap<>();

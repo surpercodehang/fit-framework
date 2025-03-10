@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.client.support;
 
@@ -23,6 +23,12 @@ import java.lang.reflect.Method;
 public class DefaultRouterFactory implements RouterFactory {
     private final InvokerFactory invokerFactory;
 
+    /**
+     * 使用指定的调用器工厂初始化 {@link DefaultRouterFactory} 的新实例。
+     *
+     * @param invokerFactory 表示调用器工厂的 {@link InvokerFactory}。
+     * @throws IllegalArgumentException 当 {@code invokerFactory} 为 {@code null} 时。
+     */
     public DefaultRouterFactory(InvokerFactory invokerFactory) {
         this.invokerFactory = notNull(invokerFactory, "The invoker factory cannot be null.");
     }

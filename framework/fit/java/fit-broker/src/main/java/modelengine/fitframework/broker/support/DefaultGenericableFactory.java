@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.support;
 
@@ -22,6 +22,12 @@ import modelengine.fitframework.broker.UniqueGenericableId;
 public class DefaultGenericableFactory implements GenericableFactory {
     private final DynamicRouter dynamicRouter;
 
+    /**
+     * 使用指定的动态路由器初始化 {@link DefaultGenericableFactory} 的新实例。
+     *
+     * @param dynamicRouter 表示动态路由器的 {@link DynamicRouter}。
+     * @throws IllegalArgumentException 当 {@code dynamicRouter} 为 {@code null} 时。
+     */
     public DefaultGenericableFactory(DynamicRouter dynamicRouter) {
         this.dynamicRouter = notNull(dynamicRouter, "The dynamic router cannot be null.");
     }

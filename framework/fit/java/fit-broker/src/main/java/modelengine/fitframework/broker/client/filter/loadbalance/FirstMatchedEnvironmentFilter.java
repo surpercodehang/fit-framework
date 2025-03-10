@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.client.filter.loadbalance;
 
@@ -17,13 +17,12 @@ import java.util.stream.Collectors;
 
 /**
  * 最先满足的环境标调用链的负载均衡策略。
- * <p>该负载均衡策略具体的策略为：
+ * <p>该负载均衡策略具体的策略为：</p>
  * <ol>
  *     <li>指定环境标调用链。</li>
  *     <li>依次遍历环境标调用链中的所有环境标，如果待过滤地址中存在满足环境的地址，则直接返回（短路）。</li>
  *     <li>如果环境标调用链中没有环境标被满足，则返回空地址列表。</li>
  * </ol>
- * </p>
  *
  * @author 季聿阶
  * @since 2022-06-06
@@ -31,6 +30,11 @@ import java.util.stream.Collectors;
 public class FirstMatchedEnvironmentFilter extends AbstractFilter {
     private final List<String> environmentPrioritySequence;
 
+    /**
+     * 使用指定的环境优先级序列初始化 {@link FirstMatchedEnvironmentFilter} 的新实例。
+     *
+     * @param environmentPrioritySequence 表示环境优先级序列的 {@link List}{@code <}{@link String}{@code >}。
+     */
     public FirstMatchedEnvironmentFilter(List<String> environmentPrioritySequence) {
         this.environmentPrioritySequence = environmentPrioritySequence;
     }

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.client.filter.loadbalance;
 
@@ -41,6 +41,15 @@ public class ProtocolAndFormatSupportedFilter extends AbstractFilter {
     private final CommunicationProtocol specifiedProtocol;
     private final SerializationFormat specifiedFormat;
 
+    /**
+     * 使用指定的客户端列表、序列化服务、指定协议和序列化方式初始化 {@link ProtocolAndFormatSupportedFilter} 的新实例。
+     *
+     * @param clients 表示客户端列表的 {@link List}{@code <}{@link Client}{@code >}。
+     * @param serializationService 表示序列化服务的 {@link SerializationService}。
+     * @param specifiedProtocol 表示指定协议的 {@link CommunicationProtocol}。
+     * @param specifiedFormat 表示指定序列化方式的 {@link SerializationFormat}。
+     * @throws IllegalArgumentException 当 {@code clients} 或 {@code serializationService} 为 {@code null} 时。
+     */
     public ProtocolAndFormatSupportedFilter(List<Client> clients, SerializationService serializationService,
             CommunicationProtocol specifiedProtocol, SerializationFormat specifiedFormat) {
         this.clients = notNull(clients, "The clients cannot be null.");

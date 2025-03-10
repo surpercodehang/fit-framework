@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.serialization;
 
@@ -32,6 +32,12 @@ public class DefaultSerializationService implements SerializationService {
     private final BeanContainer container;
     private final Map<Method, List<Integer>> cachedSupportedFormatsMapping = new HashMap<>();
 
+    /**
+     * 使用指定的容器初始化 {@link DefaultSerializationService} 的新实例。
+     *
+     * @param container 表示容器的 {@link BeanContainer}。
+     * @throws IllegalArgumentException 当 {@code container} 为 {@code null} 时。
+     */
     public DefaultSerializationService(BeanContainer container) {
         this.container = notNull(container, "The bean container cannot be null.");
     }

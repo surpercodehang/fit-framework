@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.support;
 
@@ -50,6 +50,14 @@ public class DefaultLocalGenericableRepository implements LocalGenericableReposi
     private final List<GenericableRepository> pluginRepositories = new ArrayList<>();
     private final ReadWriteLock lock;
 
+    /**
+     * 使用指定的泛服务工厂、实现工厂和泛服务仓库初始化 {@link DefaultLocalGenericableRepository} 的新实例。
+     *
+     * @param genericableFactory 表示泛服务工厂的 {@link GenericableFactory}。
+     * @param fitableFactory 表示实现工厂的 {@link FitableFactory}。
+     * @param rootRepository 表示泛服务仓库的 {@link GenericableRepository}。
+     * @throws IllegalArgumentException 当 {@code genericableFactory} 或 {@code fitableFactory} 为 {@code null} 时。
+     */
     public DefaultLocalGenericableRepository(GenericableFactory genericableFactory, FitableFactory fitableFactory,
             GenericableRepository rootRepository) {
         this.genericableFactory = notNull(genericableFactory, "The genericable factory cannot be null.");

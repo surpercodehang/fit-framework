@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.support;
 
@@ -51,6 +51,14 @@ public class DefaultTargetLocator implements TargetLocator {
     private final WorkerConfig worker;
     private final List<MatataConfig.Registry.AvailableService> registryServices;
 
+    /**
+     * 使用指定的容器、工作进程配置和可直接调用服务列表初始化 {@link DefaultTargetLocator} 的新实例。
+     *
+     * @param container 表示容器的 {@link BeanContainer}。
+     * @param worker 表示工作进程配置的 {@link WorkerConfig}。
+     * @param services 表示可直接调用服务列表的 {@link List}{@code <}{@link MatataConfig.Registry.AvailableService}{@code >}。
+     * @throws IllegalArgumentException 当 {@code container}、{@code worker} 或 {@code services} 为 {@code null} 时。
+     */
     public DefaultTargetLocator(BeanContainer container, WorkerConfig worker,
             List<MatataConfig.Registry.AvailableService> services) {
         this.container = notNull(container, "The bean container cannot be null.");
@@ -89,10 +97,7 @@ public class DefaultTargetLocator implements TargetLocator {
                 .orElseThrow(() -> new IllegalStateException(StringUtils.format("No registry service. [id={0}]", id)));
         List<Format> availableFormats = availableService.formatCodes()
                 .stream()
-                .map(code -> Format.custom()
-                        .name(SerializationFormat.from(code).name())
-                        .code(code)
-                        .build())
+                .map(code -> Format.custom().name(SerializationFormat.from(code).name()).code(code).build())
                 .collect(Collectors.toList());
         return targets.stream()
                 .map(target -> Target.custom()

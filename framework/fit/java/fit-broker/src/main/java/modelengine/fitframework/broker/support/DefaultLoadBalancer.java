@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.broker.support;
 
@@ -46,6 +46,15 @@ public class DefaultLoadBalancer implements LoadBalancer {
     private final SerializationService serializationService;
     private final TargetLocator targetLocator;
 
+    /**
+     * 使用指定的容器、序列化服务和地址定位服务初始化 {@link DefaultLoadBalancer} 的新实例。
+     *
+     * @param container 表示容器的 {@link BeanContainer}。
+     * @param serializationService 表示序列化服务的 {@link SerializationService}。
+     * @param targetLocator 表示地址定位服务的 {@link TargetLocator}。
+     * @throws IllegalArgumentException 当 {@code container}、{@code serializationService} 或 {@code targetLocator} 为
+     * {@code null} 时。
+     */
     public DefaultLoadBalancer(BeanContainer container, SerializationService serializationService,
             TargetLocator targetLocator) {
         this.container = notNull(container, "The bean container cannot be null.");
