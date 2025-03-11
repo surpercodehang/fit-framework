@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fit.integration.druid;
 
@@ -25,15 +25,14 @@ import javax.sql.DataSource;
 
 /**
  * 框架数据源的实现。
- * <p>数据源的配置如下：
+ * <p>数据源的配置如下：</p>
  * <ol>
  *     <li>{@code primary} 指定所使用的数据源。</li>
  *     <li>{@code instances} 表示可选的多个数据源的信息。</li>
  *     <li>{@code mode} 指定某个数据源的模式。</li>
  *     <li>{@code druid} 指定某个数据源的具体配置。</li>
  * </ol>
- * </p>
- * <p>例如：
+ * <p>例如：</p>
  * <pre>
  * fit:
  *   datasource:
@@ -50,7 +49,6 @@ import javax.sql.DataSource;
  *           maxActive: ${maxActive} # 将 maxActive 替换为数据库连接池的最大活动连接数。
  *           ... # 可根据具体需求，添加连接池所需配置项。
  * </pre>
- * </p>
  *
  * @author 易文渊
  * @author 李金绪
@@ -58,6 +56,12 @@ import javax.sql.DataSource;
  */
 @Component
 public class FitDruidDataSource extends AbstractFitDataSource {
+    /**
+     * 使用指定的 Bean 容器和配置初始化 {@link FitDruidDataSource} 的新实例。
+     *
+     * @param beanContainer 表示 Bean 容器的 {@link BeanContainer}。
+     * @param config 表示配置的 {@link Config}。
+     */
     public FitDruidDataSource(BeanContainer beanContainer, Config config) {
         super(beanContainer, config);
     }
