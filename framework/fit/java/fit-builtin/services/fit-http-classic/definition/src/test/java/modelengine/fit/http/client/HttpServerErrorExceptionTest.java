@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fit.http.client;
 
@@ -33,12 +33,14 @@ import java.nio.charset.StandardCharsets;
  */
 @DisplayName("测试 HttpServerErrorException 类")
 public class HttpServerErrorExceptionTest {
-    private HttpClassicClientResponse<?> httpClassicClientResponse;
+    private HttpClassicClientRequest request;
+    private HttpClassicClientResponse<?> response;
     private int statusCode;
     private String reasonPhrase;
 
     @BeforeEach
     void setup() throws IOException {
+        this.request = mock(HttpClassicClientRequest.class);
         AbstractHttpClassicClient mock = mock(AbstractHttpClassicClient.class);
         this.statusCode = 200;
         this.reasonPhrase = "testHttpServerErrorException";
@@ -49,17 +51,16 @@ public class HttpServerErrorExceptionTest {
             ClientResponse clientResponse =
                     new DefaultClientResponse(this.statusCode, this.reasonPhrase, headers, responseStream);
             Class<?> responseType = String.class;
-            this.httpClassicClientResponse = new DefaultHttpClassicClientResponse<>(mock, clientResponse, responseType);
+            this.response = new DefaultHttpClassicClientResponse<>(mock, clientResponse, responseType);
         }
     }
 
     @Test
     @DisplayName("给定一个有效的 http 经典客户端响应，初始化对象成功")
     void givenValidHttpClassicClientResponseThenInitializedSuccessfully() {
-        HttpServerErrorException httpServerErrorException =
-                new HttpServerErrorException(this.httpClassicClientResponse);
+        HttpServerErrorException httpServerErrorException = new HttpServerErrorException(this.request, this.response);
         assertThat(httpServerErrorException.statusCode()).isEqualTo(this.statusCode);
-        assertThat(httpServerErrorException.getMessage()).isEqualTo(this.reasonPhrase);
+        assertThat(httpServerErrorException.getMessage()).isEqualTo(this.getExpectedReason());
     }
 
     @Test
@@ -67,8 +68,12 @@ public class HttpServerErrorExceptionTest {
     void givenValidHttpClassicClientResponseAndThrowableThenInitializedSuccessfully() {
         Throwable throwable = new Throwable("throwSomeThing");
         HttpServerErrorException httpServerErrorException =
-                new HttpServerErrorException(this.httpClassicClientResponse, throwable);
+                new HttpServerErrorException(this.request, this.response, throwable);
         assertThat(httpServerErrorException.statusCode()).isEqualTo(this.statusCode);
-        assertThat(httpServerErrorException.getMessage()).isEqualTo(this.reasonPhrase);
+        assertThat(httpServerErrorException.getMessage()).isEqualTo(this.getExpectedReason());
+    }
+
+    private String getExpectedReason() {
+        return this.statusCode + "(" + this.reasonPhrase + ")";
     }
 }

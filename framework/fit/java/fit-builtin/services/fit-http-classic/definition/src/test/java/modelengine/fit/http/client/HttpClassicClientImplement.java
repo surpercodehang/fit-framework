@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fit.http.client;
 
@@ -20,6 +20,7 @@ import modelengine.fitframework.flowable.Choir;
 import modelengine.fitframework.value.ValueFetcher;
 
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 /**
@@ -63,18 +64,19 @@ public class HttpClassicClientImplement implements HttpClassicClient {
     @Override
     public <T> HttpClassicClientResponse<T> exchange(HttpClassicClientRequest request, Type responseType) {
         notNull(request, "The http classic request to exchange cannot be null.");
-        HttpClassicClientResponse httpClassicClientResponse = mock(HttpClassicClientResponse.class);
+        HttpClassicClientResponse response = mock(HttpClassicClientResponse.class);
         ObjectEntity objectEntity = mock(ObjectEntity.class);
         when(objectEntity.object()).thenReturn(24);
         Optional<ObjectEntity> optionalObjectEntity = Optional.of(objectEntity);
-        when(httpClassicClientResponse.objectEntity()).thenReturn(optionalObjectEntity);
+        when(response.objectEntity()).thenReturn(optionalObjectEntity);
         TextEntity textEntity = mock(TextEntity.class);
         when(textEntity.content()).thenReturn("finishTextEntity");
         Optional<TextEntity> optionalTextEntity = Optional.of(textEntity);
-        when(httpClassicClientResponse.textEntity()).thenReturn(optionalTextEntity);
+        when(response.textEntity()).thenReturn(optionalTextEntity);
+        when(response.entityBytes()).thenReturn("finishTextEntity".getBytes(StandardCharsets.UTF_8));
         int statusCode = request.exchange(responseType).statusCode();
-        when(httpClassicClientResponse.statusCode()).thenReturn(statusCode);
-        return httpClassicClientResponse;
+        when(response.statusCode()).thenReturn(statusCode);
+        return response;
     }
 
     @Override

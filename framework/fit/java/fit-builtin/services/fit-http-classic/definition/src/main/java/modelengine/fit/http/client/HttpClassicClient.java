@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fit.http.client;
 
@@ -65,6 +65,7 @@ public interface HttpClassicClient extends HttpResource {
 
     /**
      * 发送 Http 请求，获取 Http 响应的数据内容。
+     * <p>可以通过捕获 {@link HttpClientResponseException} 来获取详细错误信息。</p>
      *
      * @param request 表示 Http 请求的 {@link HttpClassicClientRequest}。
      * @param responseType 表示期待的返回值类型的 {@link Type}。
@@ -79,11 +80,11 @@ public interface HttpClassicClient extends HttpResource {
                 }
                 return cast(response.objectEntity().map(ObjectEntity::object).orElse(null));
             } else if (response.statusCode() >= 400 && response.statusCode() < 500) {
-                throw new HttpClientErrorException(response);
+                throw new HttpClientErrorException(request, response);
             } else if (response.statusCode() >= 500 && response.statusCode() < 600) {
-                throw new HttpServerErrorException(response);
+                throw new HttpServerErrorException(request, response);
             } else {
-                throw new HttpClientResponseException(response);
+                throw new HttpClientResponseException(request, response);
             }
         } catch (IOException e) {
             throw new IllegalStateException("Failed to close http classic client response.", e);
