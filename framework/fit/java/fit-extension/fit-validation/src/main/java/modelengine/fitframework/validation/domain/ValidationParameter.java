@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.validation.domain;
 
@@ -23,12 +23,13 @@ public class ValidationParameter extends AbstractValidationMetadata {
     private final Parameter parameter;
 
     /**
-     * 构造校验参数元数据。
+     * 使用指定的参数、分组、值和验证方法初始化 {@link ValidationParameter} 的新实例。
      *
-     * @param parameter 表示参数的 {@lnk Parameter}。
-     * @param groups 表示分组的 {@link Class}{@code <?>}。
+     * @param parameter 表示参数的 {@link Parameter}。
+     * @param groups 表示分组的 {@link Class}{@code <?>[]}。
      * @param value 表示值的 {@link Object}。
      * @param validationMethod 表示校验方法的 {@link Method}。
+     * @throws IllegalArgumentException 当 {@code parameter}、{@code groups} 或 {@code validationMethod} 为 {@code null} 时。
      */
     public ValidationParameter(Parameter parameter, Class<?>[] groups, Object value, Method validationMethod) {
         super(groups, value, validationMethod);

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.validation;
 
@@ -45,12 +45,11 @@ import java.util.stream.Stream;
 
 /**
  * 校验入口类。
- * <p>当调用的方法参数包含 {@link Validated} 注解时，会对该方法进行校验处理。当前存在两种场景包含该场景：
+ * <p>当调用的方法参数包含 {@link Validated} 注解时，会对该方法进行校验处理。当前存在两种场景包含该场景：</p>
  * <ol>
  *     <li>方法参数直接包含 {@link Validated} 注解，此时校验的是该参数对象的字段。</li>
  *     <li>方法参数包含约束注解，如 {@link modelengine.fitframework.validation.constraints.NotEmpty}，此时校验的是该参数对象。</li>
  * </ol>
- * </p>
  *
  * @author 邬涨财
  * @since 2023-03-14
@@ -62,6 +61,12 @@ public class ValidationHandler {
     private final Map<ValidatorKey, List<ConstraintValidator<Annotation, Object>>> validatorMap =
             new ConcurrentHashMap<>();
 
+    /**
+     * 使用指定的 Bean 容器初始化 {@link ValidationHandler} 的新实例。
+     *
+     * @param container 表示 Bean 容器的 {@link BeanContainer}。
+     * @throws IllegalArgumentException 当 {@code container} 为 {@code null} 时。
+     */
     public ValidationHandler(BeanContainer container) {
         this.container =
                 Validation.notNull(container, "The bean container cannot be null when construct validation handle.");
