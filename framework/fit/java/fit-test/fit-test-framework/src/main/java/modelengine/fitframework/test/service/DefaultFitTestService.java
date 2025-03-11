@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.test.service;
 
@@ -40,14 +40,13 @@ public class DefaultFitTestService implements FitTestService {
 
     /**
      * 根据测试类构造 {@link DefaultFitTestService} 的实例。
-     * <p>构造流程如下：
+     * <p>构造流程如下：</p>
      * <ul>
      *     <li>初始化监听端口；</li>
      *     <li>注册所有的监听器；</li>
      *     <li>初始化运行时配置，调用所有监听器的配置接口；</li>
      *     <li>启动测试插件。</li>
      * </ul>
-     * </p>
      *
      * @param clazz 表示测试类的 {@link Class}。
      */

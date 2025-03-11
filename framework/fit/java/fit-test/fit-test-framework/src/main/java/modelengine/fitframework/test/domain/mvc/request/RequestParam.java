@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.test.domain.mvc.request;
 
@@ -20,6 +20,12 @@ public class RequestParam {
     private final Type responseType;
     private final HttpClassicClientRequest request;
 
+    /**
+     * 使用指定的响应类型和 HTTP 请求初始化 {@link RequestParam} 的新实例。
+     *
+     * @param responseType 表示响应类型的 {@link Type}。
+     * @param request 表示 HTTP 请求的 {@link HttpClassicClientRequest}。
+     */
     public RequestParam(Type responseType, HttpClassicClientRequest request) {
         this.responseType = responseType;
         this.request = request;

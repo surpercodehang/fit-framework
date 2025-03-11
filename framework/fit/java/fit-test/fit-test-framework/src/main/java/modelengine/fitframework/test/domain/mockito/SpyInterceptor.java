@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.test.domain.mockito;
 
@@ -28,6 +28,11 @@ import java.util.Set;
 public class SpyInterceptor implements BeanLifecycleInterceptor {
     private final Set<Class<?>> toSpyClasses;
 
+    /**
+     * 使用指定的待监视类集合初始化 {@link SpyInterceptor} 的新实例。
+     *
+     * @param toSpyClasses 表示待监视类集合的 {@link Set}{@code <}{@link Class}{@code <?>>}。
+     */
     public SpyInterceptor(Set<Class<?>> toSpyClasses) {
         this.toSpyClasses = ObjectUtils.nullIf(toSpyClasses, Collections.emptySet());
     }

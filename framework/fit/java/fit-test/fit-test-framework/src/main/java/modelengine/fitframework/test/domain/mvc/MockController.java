@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.test.domain.mvc;
 
@@ -23,6 +23,11 @@ public class MockController {
     /** 表示测试的正确返回值。 */
     public static final String OK = "OK";
 
+    /**
+     * 测试接口。
+     *
+     * @return 表示测试结果的 {@link String}。
+     */
     @GetMapping(path = PATH)
     public String test() {
         return OK;

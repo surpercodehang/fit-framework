@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.test.domain.db;
 
@@ -15,8 +15,13 @@ import modelengine.fitframework.util.StringUtils;
  * @since 2024-07-21
  */
 public enum DatabaseModel {
+    /** 表示未指定数据库类型。 */
     NONE(""),
+
+    /** 表示 MySQL 数据库。 */
     MYSQL("MySQL"),
+
+    /** 表示 PostgreSQL 数据库。 */
     POSTGRESQL("PostgreSQL");
 
     private final String model;

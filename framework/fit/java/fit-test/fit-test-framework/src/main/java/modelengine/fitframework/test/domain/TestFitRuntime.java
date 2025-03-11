@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fitframework.test.domain;
 
@@ -29,6 +29,13 @@ public class TestFitRuntime extends AbstractFitRuntime {
 
     private final TestContextConfiguration configuration;
 
+    /**
+     * 使用指定的测试类、测试上下文配置和端口号初始化 {@link TestFitRuntime} 的新实例。
+     *
+     * @param clazz 表示测试类的 {@link Class}{@code <?>}。
+     * @param configuration 表示测试上下文配置的 {@link TestContextConfiguration}。
+     * @param port 表示端口号的 {@code int}。
+     */
     public TestFitRuntime(Class<?> clazz, TestContextConfiguration configuration, int port) {
         super(clazz, new String[] {"server.http.port=" + port, "server.http.secure.enabled=false"});
         this.configuration = configuration;
