@@ -8,6 +8,34 @@
     <version>3.5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <description>A Plugin-Based Programming Framework</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Ji Yujie</name>
+            <email>codecaster365@outlook.com</email>
+            <roles>
+                <role>Maintainer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/ModelEngine-Group/fit-framework.git</connection>
+        <developerConnection>scm:git:ssh://github.com/ModelEngine-Group/fit-framework.git</developerConnection>
+        <url>https://github.com/ModelEngine-Group/fit-framework</url>
+    </scm>
+
+
     <modules>
         <module>fit-aop</module>
         <module>fit-api</module>
@@ -127,6 +155,29 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.7.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
             </plugin>
         </plugins>
     </build>
