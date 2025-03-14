@@ -84,7 +84,7 @@ public class HttpClientErrorExceptionTest {
         assertThat(cause.statusCode()).isEqualTo(this.statusCode);
         assertThat(cause.getMessage()).isEqualTo(this.getSimpleMessage());
         assertThat(cause.getSimpleMessage()).isEqualTo(this.getSimpleMessage());
-        assertThat(cause.getDetailMessage()).isEqualTo(DETAIL_MESSAGE);
+        assertThat(normalizeLineEndings(cause.getDetailMessage())).isEqualTo(DETAIL_MESSAGE);
     }
 
     @Test
@@ -95,10 +95,15 @@ public class HttpClientErrorExceptionTest {
         assertThat(cause.statusCode()).isEqualTo(this.statusCode);
         assertThat(cause.getMessage()).isEqualTo(this.getSimpleMessage());
         assertThat(cause.getSimpleMessage()).isEqualTo(this.getSimpleMessage());
-        assertThat(cause.getDetailMessage()).isEqualTo(DETAIL_MESSAGE);
+        assertThat(normalizeLineEndings(cause.getDetailMessage())).isEqualTo(DETAIL_MESSAGE);
     }
 
     private String getSimpleMessage() {
         return this.statusCode + "(" + this.reasonPhrase + ")";
+    }
+
+    private static String normalizeLineEndings(String str) {
+        // 将 CRLF 和 CR 替换为 LF。
+        return str.replaceAll("\\r\\n?", "\n");
     }
 }
