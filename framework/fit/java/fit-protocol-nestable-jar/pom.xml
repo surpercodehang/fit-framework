@@ -6,7 +6,7 @@
     <parent>
         <artifactId>fitframework-parent</artifactId>
         <groupId>org.fitframework</groupId>
-        <version>3.5.0-SNAPSHOT</version>
+        <version>3.5.0-M1</version>
     </parent>
 
     <!-- 该 artifactId 不可修改，在 fit-maven-plugin 中，根据该名字进行依赖重打包 -->

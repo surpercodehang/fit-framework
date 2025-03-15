@@ -5,7 +5,7 @@
 
     <groupId>org.fitframework</groupId>
     <artifactId>fitframework-parent</artifactId>
-    <version>3.5.0-SNAPSHOT</version>
+    <version>3.5.0-M1</version>
     <packaging>pom</packaging>
 
     <description>A Plugin-Based Programming Framework</description>
@@ -65,7 +65,7 @@
         <java.version>17</java.version>
 
         <!-- FIT version -->
-        <fit.version>3.5.0-SNAPSHOT</fit.version>
+        <fit.version>3.5.0-M1</fit.version>
 
         <!-- Jacoco version -->
         <jacoco.version>0.8.10</jacoco.version>

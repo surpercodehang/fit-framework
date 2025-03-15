@@ -14,7 +14,7 @@
         <java.version>17</java.version>
 
         <!-- FIT version -->
-        <fit.version>3.5.0-SNAPSHOT</fit.version>
+        <fit.version>3.5.0-M1</fit.version>
 
         <!-- Third-Party version -->
         <fastjson.version>1.2.83</fastjson.version>
