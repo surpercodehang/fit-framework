@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
     private final BrokerClient client;
+    private final PluginWeather pluginWeather;
 
-    public DemoController(BrokerClient client) {
+    public DemoController(BrokerClient client, PluginWeather pluginWeather) {
         this.client = client;
+        this.pluginWeather = pluginWeather;
     }
 
     /**
@@ -33,7 +35,7 @@ public class DemoController {
      */
     @GetMapping(path = "/weather/plugin")
     public String getPluginWeather() {
-        return this.client.getRouter(PluginWeather.class, "PluginWeather").route().invoke("fit");
+        return this.pluginWeather.get("fit");
     }
 
     /**
