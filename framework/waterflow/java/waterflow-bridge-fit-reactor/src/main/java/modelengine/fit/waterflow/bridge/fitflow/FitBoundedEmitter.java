@@ -25,6 +25,8 @@ public abstract class FitBoundedEmitter<O, D> extends FlowEmitter<D> {
 
     private boolean isError = false;
 
+    private Exception exception;
+
     /**
      * 通过数据发布者和有限流数据构造器初始化 {@link FitBoundedEmitter}{@code <}{@link O}{@code , }{@link D}{@code >}。
      *
@@ -36,6 +38,22 @@ public abstract class FitBoundedEmitter<O, D> extends FlowEmitter<D> {
         publisher.subscribe(new FitBoundedEmitter.EmitterSubscriber<>(this));
     }
 
+    @Override
+    public synchronized void start(FlowSession session) {
+        if (session != null) {
+            session.begin();
+        }
+        this.setFlowSession(session);
+        this.setStarted();
+        if (this.isError) {
+            this.notifyError();
+            return;
+        }
+        // 启动时先发射缓存的数据，此时可能先缓存了数据，所以开始时发射完数据就可能结束了。
+        this.fire();
+        this.tryCompleteWindow();
+    }
+
     private void doEmit(D data) {
         this.emit(data, this.flowSession);
     }
@@ -44,19 +62,19 @@ public abstract class FitBoundedEmitter<O, D> extends FlowEmitter<D> {
         this.complete();
     }
 
-    private void doError(Exception cause) {
+    private synchronized void doError(Exception cause) {
+        if (this.isError) {
+            return;
+        }
+        this.isError = true;
+        this.exception = cause;
+        this.notifyError();
     }
 
-    @Override
-    public synchronized void start(FlowSession session) {
-        if (session != null) {
-            session.begin();
+    private void notifyError() {
+        if (this.flowSession != null) {
+            this.flowSession.fail(this.exception);
         }
-        this.setFlowSession(session);
-        this.setStarted();
-        // 启动时先发射缓存的数据，此时可能先缓存了数据，所以开始时发射完数据就可能结束了。
-        this.fire();
-        this.tryCompleteWindow();
     }
 
     /**
@@ -100,7 +118,6 @@ public abstract class FitBoundedEmitter<O, D> extends FlowEmitter<D> {
 
         @Override
         public void fail(Exception cause) {
-            this.emitter.isError = true;
             this.emitter.doError(cause);
         }
 
