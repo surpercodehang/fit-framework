@@ -6,6 +6,8 @@
 
 package com.demo.spring;
 
+import modelengine.fitframework.starter.spring.annotation.EnableFitProxy;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,6 +18,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2025-02-12
  */
 @SpringBootApplication
+@EnableFitProxy(basePackages = {"modelengine.fit.example", "modelengine.fit.another"})
 public class DemoApplication {
     /**
      * 表示启动主函数。
