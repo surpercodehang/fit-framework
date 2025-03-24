@@ -22,7 +22,6 @@ import modelengine.fel.engine.operators.prompts.Prompts;
 import modelengine.fit.waterflow.domain.utils.SleepUtil;
 import modelengine.fitframework.flowable.Choir;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -72,7 +71,6 @@ public class ModelTest {
         }
 
         @Test
-        @Disabled("暂不支持")
         void shouldThrowWhenBlockModelWithException() {
             String expectedMsg = "test exception";
             ChatFlowModel exceptionModel = new ChatFlowModel((prompt, chatOption) -> Choir.create(emitter -> {
@@ -152,7 +150,6 @@ public class ModelTest {
         }
 
         @Test
-        @Disabled("暂不支持")
         void shouldThrowWhenStreamModelWithException() {
             String expectedMsg = "test exception";
             ChatFlowModel exceptionModel = new ChatFlowModel((prompt, chatOption) -> Choir.create(emitter -> {

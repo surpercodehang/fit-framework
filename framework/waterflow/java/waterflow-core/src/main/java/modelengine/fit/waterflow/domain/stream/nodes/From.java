@@ -38,6 +38,7 @@ import modelengine.fitframework.util.ObjectUtils;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -188,6 +189,9 @@ public class From<I> extends IdGenerator implements Publisher<I> {
 
             FlowSession startSession = new FlowSession();
             flatMapWindow.setSource(startSession.begin());
+            startSession.onError(exception -> {
+                processRef.get().fail(exception, Collections.singletonList(input));
+            });
             start.just(data -> {
                 processRef.get().offer(data, session);
             }).offer(startSession);
