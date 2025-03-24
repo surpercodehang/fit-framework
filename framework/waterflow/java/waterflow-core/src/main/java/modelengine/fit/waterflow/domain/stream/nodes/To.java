@@ -501,9 +501,7 @@ public class To<I, O> extends IdGenerator implements Subscriber<I, O> {
                     ex.getClass().getName());
             LOG.debug("Error, message: {}.", ex.getMessage());
             LOG.debug("Node process exception details: ", ex);
-            Retryable<I> retryable = new Retryable<>(this.getFlowContextRepo(), this);
-            Optional.ofNullable(this.errorHandler).ifPresent(handler -> handler.handle(ex, retryable, preList));
-            Optional.ofNullable(this.globalErrorHandler).ifPresent(handler -> handler.handle(ex, retryable, preList));
+            this.fail(ex, preList);
         } finally {
             updateConcurrency(-1);
             if (isInThread) {
@@ -511,6 +509,20 @@ public class To<I, O> extends IdGenerator implements Subscriber<I, O> {
             }
         }
     }
+
+    /**
+     * 触发节点失败的处理。
+     *
+     * @param exception 异常对象。
+     * @param preList 失败时处理的上下文数据。
+     */
+    protected void fail(Exception exception, List<FlowContext<I>> preList) {
+        Retryable<I> retryable = new Retryable<>(this.getFlowContextRepo(), this);
+        Optional.ofNullable(this.errorHandler).ifPresent(handler -> handler.handle(exception, retryable, preList));
+        Optional.ofNullable(this.globalErrorHandler)
+                .ifPresent(handler -> handler.handle(exception, retryable, preList));
+    }
+
 
     private List<FlowContext<I>> filterTerminate(List<FlowContext<I>> contexts) {
         if (CollectionUtils.isEmpty(contexts)) {

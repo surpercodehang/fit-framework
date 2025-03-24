@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 /**
  * FlowSession 类在数据流（flow）中充当数据边界的角色。
@@ -64,6 +65,11 @@ public class FlowSession extends IdGenerator implements StateContext {
      * 该数据在reduce操作符时赋值
      */
     private boolean isAccumulator;
+
+    /**
+     * session 失败时的通知回调。
+     */
+    private Consumer<Exception> errorHandler;
 
     /**
      * 构造方法，使用随机 UUID 作为 session ID，并设置保序标识。
@@ -231,6 +237,26 @@ public class FlowSession extends IdGenerator implements StateContext {
      */
     public void copySessionState(FlowSession session) {
         this.copyState(session);
+    }
+
+    /**
+     * 设置监听失败的回调，需要在 session 工作前设置。
+     *
+     * @param errorHandler 回调。
+     */
+    public void onError(Consumer<Exception> errorHandler) {
+        this.errorHandler = errorHandler;
+    }
+
+    /**
+     * 触发失败，通知回调。
+     *
+     * @param exception 异常对象。
+     */
+    public void fail(Exception exception) {
+        if (this.errorHandler != null) {
+            this.errorHandler.accept(exception);
+        }
     }
 
     /**
