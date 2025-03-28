@@ -1,0 +1,42 @@
+{
+  "schema": {
+    "name": "tool_unique_name",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "people": {
+          "type": "string",
+          "description": "This is the first parameter."
+        }
+      }
+    },
+    "order": [
+      "people"
+    ]
+  },
+  "runnables": {
+    "HTTP": {
+      "method": "GET",
+      "protocol": "http",
+      "domain": "127.0.0.1:{port}",
+      "pathPattern": "/authorization/basic",
+      "authorization": {
+        "type": "Basic",
+        "username": "testuser",
+        "password": "testpass"
+      },
+      "mappings": {
+        "people": {
+          "name": {
+            "key": "username",
+            "httpSource": "AUTHORIZATION"
+          },
+          "pwd": {
+            "key": "password",
+            "httpSource": "AUTHORIZATION"
+          }
+        }
+      }
+    }
+  }
+}

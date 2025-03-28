@@ -35,7 +35,7 @@ public class WeatherServiceImpl implements WeatherService {
 
     @Override
     @Fitable("default")
-    @ToolMethod(name = "get_rain_probability", description = "获取指定城市下雨的概率")
+    @ToolMethod(namespace = "example", name = "get_rain_probability", description = "获取指定城市下雨的概率")
     public String getRainProbability(@Property(description = "城市名称", required = true) String location) {
         return "0.06";
     }

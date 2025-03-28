@@ -1,0 +1,37 @@
+{
+  "schema": {
+    "name": "tool_unique_name",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "people": {
+          "type": "string",
+          "description": "This is the first parameter."
+        }
+      }
+    },
+    "order": [
+      "people"
+    ]
+  },
+  "runnables": {
+    "HTTP": {
+      "method": "GET",
+      "protocol": "http",
+      "domain": "127.0.0.1:{port}",
+      "pathPattern": "/authorization/bearer",
+      "authorization": {
+        "type": "Bearer",
+        "token":"test666666666"
+      },
+      "mappings": {
+        "people": {
+          "name": {
+            "key": "token",
+            "httpSource": "AUTHORIZATION"
+          }
+        }
+      }
+    }
+  }
+}

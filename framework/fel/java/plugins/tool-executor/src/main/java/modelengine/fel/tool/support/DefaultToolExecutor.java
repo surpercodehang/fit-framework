@@ -1,13 +1,12 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fel.tool.support;
 
 import static modelengine.fitframework.inspection.Validation.notNull;
-import static modelengine.fitframework.util.ObjectUtils.cast;
 
 import modelengine.fel.tool.Tool;
 import modelengine.fel.tool.ToolEntity;
@@ -68,6 +67,18 @@ public class DefaultToolExecutor implements ToolExecuteService {
         return this.convertOutput(group, tool.metadata().returnConverter(), output);
     }
 
+    @Override
+    @Fitable(id = "standard")
+    public String execute(String uniqueName, String jsonArgs) {
+        return this.execute("Common", uniqueName, jsonArgs);
+    }
+
+    @Override
+    @Fitable(id = "standard")
+    public String execute(String uniqueName, Map<String, Object> jsonObject) {
+        return this.execute("Common", uniqueName, jsonObject);
+    }
+
     private Tool getTool(String group, String toolName) {
         ToolEntity tool = notNull(toolRepository.getTool(group, toolName),
                 () -> new IllegalStateException(StringUtils.format("The tool cannot be found. [group={0}, tool={1}]",
@@ -75,11 +86,11 @@ public class DefaultToolExecutor implements ToolExecuteService {
                         toolName)));
         Set<String> runnables = tool.runnables().keySet();
         Optional<ToolFactory> factory = this.toolFactoryRepository.match(runnables);
-        if (!factory.isPresent()) {
+        if (factory.isEmpty()) {
             throw new IllegalStateException(StringUtils.format("No tool factory to create tool. [runnables={0}]",
                     runnables));
         }
-        Tool.Metadata metadata = Tool.Metadata.from(tool.schema());
+        Tool.Metadata metadata = Tool.Metadata.fromSchema(group, tool.schema());
         return factory.get().create(tool, metadata);
     }
 

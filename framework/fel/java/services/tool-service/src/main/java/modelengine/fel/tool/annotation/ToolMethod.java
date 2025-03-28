@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2025-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fel.tool.annotation;
 
@@ -41,7 +41,7 @@ public @interface ToolMethod {
      *
      * @return 表示工具方法的描述信息的 {@link String}。
      */
-    String description();
+    String description() default StringUtils.EMPTY;
 
     /**
      * 获取工具方法的额外参数名。

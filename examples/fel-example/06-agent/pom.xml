@@ -54,11 +54,6 @@
         </dependency>
         <dependency>
             <groupId>org.fitframework.fel</groupId>
-            <artifactId>fel-tool-factory-fit</artifactId>
-            <version>${fel.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.fitframework.fel</groupId>
             <artifactId>fel-tool-factory-repository</artifactId>
             <version>${fel.version}</version>
         </dependency>
