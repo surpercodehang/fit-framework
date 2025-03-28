@@ -1,0 +1,19 @@
+{
+  "schema": {
+    "name": "tool_unique_name",
+    "parameters": {
+    },
+    "order": [
+    ]
+  },
+  "runnables": {
+    "HTTP": {
+      "method": "POST",
+      "protocol": "http",
+      "domain": "localhost:{port}",
+      "pathPattern": "/test/return/void",
+      "mappings": {
+      }
+    }
+  }
+}

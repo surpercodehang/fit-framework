@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fel.tool;
 
@@ -10,6 +10,7 @@ import static modelengine.fitframework.inspection.Validation.notNull;
 import static modelengine.fitframework.util.ObjectUtils.cast;
 
 import modelengine.fitframework.inspection.Nonnull;
+import modelengine.fitframework.util.StringUtils;
 
 import java.util.Map;
 
@@ -77,6 +78,26 @@ public class ToolEntity implements Tool.Info {
     }
 
     @Override
+    public String uniqueName() {
+        return StringUtils.EMPTY;
+    }
+
+    @Override
+    public String groupName() {
+        return StringUtils.EMPTY;
+    }
+
+    @Override
+    public String definitionName() {
+        return StringUtils.EMPTY;
+    }
+
+    @Override
+    public String definitionGroupName() {
+        return StringUtils.EMPTY;
+    }
+
+    @Override
     public Map<String, Object> schema() {
         return this.schema;
     }
@@ -84,5 +105,25 @@ public class ToolEntity implements Tool.Info {
     @Override
     public Map<String, Object> runnables() {
         return this.runnables;
+    }
+
+    @Override
+    public String version() {
+        return "1.0.0";
+    }
+
+    @Override
+    public boolean isLatest() {
+        return true;
+    }
+
+    @Override
+    public String returnConverter() {
+        return StringUtils.EMPTY;
+    }
+
+    @Override
+    public Map<String, Object> defaultParameterValues() {
+        return Map.of();
     }
 }

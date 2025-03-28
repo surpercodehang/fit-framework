@@ -21,6 +21,10 @@
             <groupId>org.fitframework</groupId>
             <artifactId>fit-util</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.fitframework.service</groupId>
+            <artifactId>fit-http-classic</artifactId>
+        </dependency>
 
         <!-- FEL -->
         <dependency>
@@ -28,6 +32,49 @@
             <artifactId>fel-core</artifactId>
         </dependency>
 
+        <!-- Test Fit Core -->
+        <dependency>
+            <groupId>org.fitframework</groupId>
+            <artifactId>fit-runtime</artifactId>
+            <version>${fit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.fitframework.plugin</groupId>
+            <artifactId>fit-message-serializer-json-jackson</artifactId>
+            <version>${fit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.fitframework.plugin</groupId>
+            <artifactId>fit-value-fastjson</artifactId>
+            <version>${fit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.fitframework.plugin</groupId>
+            <artifactId>fit-http-server-netty</artifactId>
+            <version>${fit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.fitframework.plugin</groupId>
+            <artifactId>fit-server-http</artifactId>
+            <version>${fit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.fitframework.plugin</groupId>
+            <artifactId>fit-http-handler-registry</artifactId>
+            <version>${fit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.fitframework.plugin</groupId>
+            <artifactId>fit-http-client-okhttp</artifactId>
+            <version>${fit.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -39,12 +86,6 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.fitframework.plugin</groupId>
-            <artifactId>fit-message-serializer-json-jackson</artifactId>
-            <version>${fit.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

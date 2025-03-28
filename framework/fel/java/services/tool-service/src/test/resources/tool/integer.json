@@ -1,0 +1,33 @@
+{
+  "schema": {
+    "name": "tool_unique_name",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "string",
+          "description": "This is the first parameter."
+        }
+      }
+    },
+    "order": [
+      "values"
+    ]
+  },
+  "runnables": {
+    "HTTP": {
+      "method": "POST",
+      "protocol": "http",
+      "domain": "localhost:{port}",
+      "pathPattern": "/test/return/integer",
+      "mappings": {
+        "values": {
+          "$": {
+            "key": "values",
+            "httpSource": "QUERY"
+          }
+        }
+      }
+    }
+  }
+}

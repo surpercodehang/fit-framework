@@ -1,0 +1,81 @@
+{
+  "schema": {
+    "name": "tool_unique_name",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "This is the 1st parameter."
+        },
+        "age": {
+          "type": "string",
+          "description": "This is the 2nd parameter."
+        },
+        "address": {
+          "type": "string",
+          "description": "This is the 3rd parameter."
+        },
+        "education": {
+          "type": "string",
+          "description": "This is the 4th parameter."
+        },
+        "phoneNumbers": {
+          "type": "string",
+          "description": "This is the 5th parameter."
+        }
+      }
+    },
+    "order": [
+      "name",
+      "age",
+      "address",
+      "education",
+      "phoneNumbers"
+    ]
+  },
+  "runnables": {
+    "HTTP": {
+      "method": "POST",
+      "protocol": "http",
+      "domain": "localhost:{port}",
+      "pathPattern": "/test/return/map/{name}",
+      "mappings": {
+        "name": {
+          "$": {
+            "key": "name",
+            "httpSource": "PATH_VARIABLE"
+          }
+        },
+        "age": {
+          "$": {
+            "key": "age",
+            "httpSource": "HEADER"
+          }
+        },
+        "address": {
+          "$": {
+            "propertyPath": "",
+            "httpSource": "OBJECT_ENTITY"
+          }
+        },
+        "education": {
+          "bachelor": {
+            "key": "bachelor",
+            "httpSource": "HEADER"
+          },
+          "master": {
+            "key": "master",
+            "httpSource": "HEADER"
+          }
+        },
+        "phoneNumbers": {
+          "$": {
+            "key": "phoneNumbers",
+            "httpSource": "QUERY"
+          }
+        }
+      }
+    }
+  }
+}

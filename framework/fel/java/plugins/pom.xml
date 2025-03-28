@@ -15,7 +15,6 @@
     <modules>
         <module>tool-discoverer</module>
         <module>tool-executor</module>
-        <module>tool-factory-fit</module>
         <module>tool-factory-repository</module>
         <module>tool-repository-simple</module>
     </modules>
