@@ -1,0 +1,4 @@
+user_plugins_path: "custom_dynamic_plugins"
+cache_path: "cache_for_custom_dynamic_plugins"
+scan_period: 3
+python_interpreter_alias:
