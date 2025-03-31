@@ -1,0 +1,6 @@
+terminate-main:
+  protected-limit: 4294967296  # 内存占用位于该值之下不会终结自身，默认为 4GB
+  force-terminate-limit: 8053063680  # 内存占用位于该值之上强制终结自身，默认为 7.5GB
+  max-rest-time-when-empty: 10  # 缓存为空时允许的休息时间
+  max-rest-time-when-not-empty: 60  # 缓存不为空时允许的休息时间
+  max-not-success-time: 600  # 不成功的请求的响应的容许时间

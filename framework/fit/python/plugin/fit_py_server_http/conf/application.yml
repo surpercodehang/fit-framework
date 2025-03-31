@@ -1,0 +1,41 @@
+server-thread-count: 8
+http:
+  server:
+    enabled: true
+    address:
+      use-random-port: false
+      port: 9666
+      port-to-register:
+      protocol: 2
+      formats:
+        - 1
+        - 2
+https:
+  server:
+    enabled: false
+    ssl_enabled: true
+    address:
+      use-random-port: false
+      port: 9777
+      port-to-register:
+      protocol: 4
+      formats:
+        - 1
+        - 2
+    verify_enabled: false  # 是否需要校验客户端身份
+    ca_path: "plugin/fit_py_server_http/resources/ca.crt"
+    assert_host_name: false  # 是否在校验时校验主机名，仅当 verify_enabled 为 true 时有意义
+    # https 服务端是肯定需要 cert 的，因此不需要 cert_enabled 配置项
+    crt_path: "plugin/fit_py_server_http/resources/global.crt"
+    key_path: "plugin/fit_py_server_http/resources/global.key"
+    key_file_encrypted: false  # 私钥是否被加密
+    key_file_password: ""  # 私钥的密码，仅当 key_file_encrypted 为 true 时有意义
+    key_file_password_scc_encrypted: false  # 私钥的密码是否被加密，仅当 key_file_encrypted 为 true 时有意义
+    tls_protocol: ""
+    ciphers:
+
+
+async:
+  task-count-limit: 1000
+  result-save-duration: 300
+  polling-wait-time: 60

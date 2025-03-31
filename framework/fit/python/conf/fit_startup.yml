@@ -1,0 +1,26 @@
+# Folders for fitframework core. For local debug only
+framework_folder: fitframework
+share_paths:
+  - "shared"
+# `plugins`配置消费方：
+#  1) 引擎作为主体应用，-m模式启动时寻找插件
+#  2) 引擎作为三方包组件，被import时寻找插件
+#  3) 打包脚本（package_to_py_pi.py_）遍历插件，用于打包
+# -6 -5 -4 -3 -2 -1 0
+bootstrap: # Fit底座启动引导所需的插件目录 # 注意该名字需和PluginType枚举值保持一致，下同
+  - name: fit_py_bootstrap
+    location: bootstrap/fit_py_bootstrap
+    absolutely: True
+    level:
+  - name: fit_py_configuration_repo
+    location: bootstrap/fit_py_configuration_repo
+    absolutely: True
+    level:
+  - name: fit_py_runtime
+    location: bootstrap/fit_py_runtime
+    absolutely: True
+    level:
+  - name: fit_py_service_db
+    location: bootstrap/fit_py_service_db
+    absolutely: True
+    level:

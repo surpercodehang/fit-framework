@@ -1,0 +1,7 @@
+heart-beat:
+  client:
+    sceneType: 'fit_registry'
+    interval: 3000
+    aliveTime: 18000
+    initDelay: 3000
+
