@@ -1,0 +1,32 @@
+# -- encoding: utf-8 --
+# Copyright (c) 2024 Huawei Technologies Co., Ltd. All Rights Reserved.
+# This file is a part of the ModelEngine Project.
+# Licensed under the MIT License. See License.txt in the project root for license information.
+# ======================================================================================================================
+"""
+功 能：泛服务元数据查询相关功能。
+"""
+from typing import List
+
+from fit_common_struct.core import Genericable
+from fitframework import fitable, const, fit
+from .entity import FitableMetaInstance, GenericableInfo
+
+
+@fit(const.QUERY_FITABLE_METAS_GEN_ID)
+def query_fitable_metas(genericable_infos: List[GenericableInfo]) -> List[FitableMetaInstance]:
+    """
+    注册中心所提供接口，用于查询泛服务的元数据。
+
+    @param genericable_infos: 泛服务信息列表。
+    @return: 所查询到的泛服务元数据列表。
+    """
+    pass
+
+
+@fitable(const.GET_FITABLES_OF_GENERICABLE_GEN_ID, const.GET_FITABLES_OF_GENERICABLE_FIT_ID)
+def get_all_fitables_from_registry(genericable: Genericable) -> List[str]:
+    fitable_meta_instances: List[FitableMetaInstance] = query_fitable_metas(
+        [GenericableInfo(genericable.genericable_id, genericable.genericable_version)])
+    return [instance.meta.fitable.fitableId for instance in fitable_meta_instances if
+            instance.meta.fitable.genericableId == genericable.genericable_id]

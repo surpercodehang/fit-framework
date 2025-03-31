@@ -1,0 +1,20 @@
+app:
+  name: 'FIT Hakuna Python'
+worker:
+  id: "FIT Hakuna Python App"  # 默认的进程唯一标识，此配置项需要覆盖，避免 workerId 相同导致注册服务混乱
+  protocol-priorities: # protocol:format
+    - 'HTTPS:CBOR'
+    - 'HTTP:CBOR'
+    - 'HTTPS:JSON'
+    - 'HTTP:JSON'
+worker-environment:
+  env: 'local'  # 本地的环境标
+  env-seq: 'local,debug,alpha,beta,prod'   # 本地支持的环境链
+  default-envs: 'debug,alpha,beta,gamma,prod'   # FIT默认已有的环境标，用戶无法使用
+  reserved-env: 'debug'   # 本地备用的环境标，目前主要用于用户本地调试时使用了自定义环境标，
+  # 导致其无法拉取任何配置的情形在无法获取配置时，使用备用环境的配置
+debug-console: true
+terminate-main:
+  enabled: false
+local_ip: "localhost"
+context-path: ""
