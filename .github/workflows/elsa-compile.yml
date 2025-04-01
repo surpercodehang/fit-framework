@@ -1,0 +1,38 @@
+name: Elsa Compile
+
+on:
+  push:
+    branches:
+      - 'main'
+      - '[0-9]+.[0-9]+.x'  # 匹配 x.x.x 格式且最后一位为 x（如 1.2.x、22.1.x）
+    paths:
+      - 'framework/elsa/**'
+  pull_request:
+    branches:
+      - 'main'
+      - '[0-9]+.[0-9]+.x'
+    paths:
+      - 'framework/elsa/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 20.16
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.16'
+
+      - name: Build fit-elsa
+        working-directory: ./framework/elsa/fit-elsa
+        run: |
+          npm install
+          npm run build
+
+      - name: Build fit-elsa-react
+        working-directory: ./framework/elsa/fit-elsa-react
+        run: |
+          npm install
+          npm run build
