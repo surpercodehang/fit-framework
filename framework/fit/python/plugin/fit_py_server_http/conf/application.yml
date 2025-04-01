@@ -30,7 +30,7 @@ https:
     key_path: "plugin/fit_py_server_http/resources/global.key"
     key_file_encrypted: false  # 私钥是否被加密
     key_file_password: ""  # 私钥的密码，仅当 key_file_encrypted 为 true 时有意义
-    key_file_password_scc_encrypted: false  # 私钥的密码是否被加密，仅当 key_file_encrypted 为 true 时有意义
+    key_file_password_encrypted: false  # 私钥的密码是否被加密，仅当 key_file_encrypted 为 true 时有意义
     tls_protocol: ""
     ciphers:
 

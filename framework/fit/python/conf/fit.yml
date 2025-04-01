@@ -464,24 +464,6 @@ fit.public.genericables.modelengine.fit.get.all.plugins.ready:
   tags:
     - 'localOnly'
     - 'nonTraceable'
-fit.public.genericables.modelengine.fit.security.decrypt:
-  name: 'modelengine.fit.security.decrypt'
-  fitables:
-    modelengine.fit.security.scc.decrypt:
-  route:
-    default: 'modelengine.fit.security.kmc.decrypt'
-  tags:
-    - 'localOnly'
-    - 'nonTraceable'
-fit.public.genericables.modelengine.fit.security.encrypt:
-  name: 'modelengine.fit.security.encrypt'
-  fitables:
-    modelengine.fit.security.scc.encrypt:
-  route:
-    default: 'modelengine.fit.security.kmc.encrypt'
-  tags:
-    - 'localOnly'
-    - 'nonTraceable'
 fit.public.genericables.modelengine.fit.get.running.async.task.count:
   name: 'modelengine.fit.get.running.async.task.count'
   fitables:
