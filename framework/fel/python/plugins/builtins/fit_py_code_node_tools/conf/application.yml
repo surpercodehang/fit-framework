@@ -1,0 +1,22 @@
+user:
+  function:
+    entrypoint: 'main'
+
+code:
+  import:
+    whitelist:
+      - 'asyncio'
+      - 'json'
+      - 'typing'
+    blacklist:
+      - 'os'
+      - 'sys'
+      - 'cmd'
+      - 'subprocess'
+      - 'multiprocessing'
+      - 'timeit'
+      - 'platform'
+  timeout: 10
+  max_pool: 4
+  mem_limit: 189792256 # 181*1024*1024
+  verbose: False
