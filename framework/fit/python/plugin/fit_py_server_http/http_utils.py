@@ -157,8 +157,8 @@ def get_server_key_file_password_env():
     pass
 
 
-@value('https.server.key_file_password_scc_encrypted')
-def get_server_key_file_password_scc_encrypted():
+@value('https.server.key_file_password_encrypted')
+def get_server_key_file_password_encrypted():
     pass
 
 
@@ -300,7 +300,7 @@ def get_decrypted_key_file_password():
     # 对于 https 服务端，不存在不需要客户端验证自身的情况。
     if not get_server_key_file_encrypted():  # 如果私钥未被加密
         return None
-    if not get_server_key_file_password_scc_encrypted():  # 如果私钥密码没有被加密
+    if not get_server_key_file_password_encrypted():  # 如果私钥密码没有被加密
         return _get_sever_password()
 
     return decrypt(_get_sever_password())

@@ -60,8 +60,8 @@ def get_client_key_file_password_env():
     pass
 
 
-@value('https.client.key_file_password_scc_encrypted')
-def get_client_key_file_password_scc_encrypted():
+@value('https.client.key_file_password_encrypted')
+def get_client_key_file_password_encrypted():
     pass
 
 
@@ -97,7 +97,7 @@ def get_decrypted_key_file_password():
         return None
     if not get_client_key_encrypted():  # 如果私钥未被加密
         return None
-    if not get_client_key_file_password_scc_encrypted():  # 如果私钥密码未被加密
+    if not get_client_key_file_password_encrypted():  # 如果私钥密码未被加密
         return _get_client_password()
 
     return decrypt(_get_client_password())
