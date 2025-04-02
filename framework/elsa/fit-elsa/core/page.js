@@ -2370,9 +2370,6 @@ const setMouseActions = (pageVal) => {
 
   pageVal.onMouseUp = position => {
     pageVal.setCursor();
-    if (pageVal.operationMode === PAGE_OPERATION_MODE.DRAG) {
-      return;
-    }
     let rect = {};
     rect.x = (pageVal.mousedownx < pageVal.mousex ? pageVal.mousedownx : pageVal.mousex);
     rect.y = (pageVal.mousedowny < pageVal.mousey ? pageVal.mousedowny : pageVal.mousey);
@@ -2404,20 +2401,19 @@ const setMouseActions = (pageVal) => {
     pageVal.invalidateInteraction(position);
   };
 
+  const shouldParentFocusFirst = (parent) => {
+    return parent.containerFocusFirst && !parent.hasChildFocused();
+  }
+
   /**
    * 鼠标点击时，得到的最符合条件的shape，没有condition，只要在坐标内，就可以得到
    */
   pageVal.switchMouseInShape = (x, y, condition) => {
-    let found;
-    if (pageVal.operationMode === PAGE_OPERATION_MODE.DRAG) {
-      found = pageVal;
-    } else {
-      found = pageVal.find(x, y, condition ? condition : s => true);
-      const parent = found.getContainer();
-      const isNotFocused = !parent.isFocused && !found.isFocused;
-      if (parent.containerFocusFirst && isNotFocused && !parent.hasChildFocused()) {
-        found = parent;
-      }
+    let found = pageVal.find(x, y, condition ? condition : s => true);
+    const parent = found.getContainer();
+    const isNotFocused = !parent.isFocused && !found.isFocused;
+    if (isNotFocused && shouldParentFocusFirst(parent)) {
+      found = parent;
     }
     if (pageVal.mouseInShape !== found) {
       const pre = pageVal.mouseInShape;
@@ -2527,10 +2523,6 @@ const setKeyActions = (pageVal) => {
     pageVal.shiftKeyPressed = false;
     pageVal.invalidateInteraction();
     pageVal.isKeyDown = false;
-    if (e.code === 'Space' && pageVal.moveAble && pageVal.canvasMoveAble) {
-      pageVal.operationMode = PAGE_OPERATION_MODE.SELECTION;
-      return false;
-    }
     const focused = pageVal.getFocusedShapes();
     const isDirectionKey = e.key.indexOf('Left') >= 0 ||
       e.key.indexOf('Right') >= 0 ||
@@ -2562,10 +2554,6 @@ const setKeyActions = (pageVal) => {
     pageVal.graph.getHistory().clearBatchNo();
     if (document.activeElement !== document.body) {
       return true;
-    }
-    if (e.code === 'Space' && pageVal.moveAble && pageVal.canvasMoveAble) {
-      pageVal.operationMode = PAGE_OPERATION_MODE.DRAG;
-      return false;
     }
 
     let focused = pageVal.getFocusedShapes();
