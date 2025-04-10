@@ -2523,6 +2523,11 @@ const setKeyActions = (pageVal) => {
     pageVal.shiftKeyPressed = false;
     pageVal.invalidateInteraction();
     pageVal.isKeyDown = false;
+    if (e.code === 'Space' && pageVal.moveAble && pageVal.canvasMoveAble) {
+      pageVal.operationMode = pageVal.preOperationMode ? pageVal.preOperationMode : PAGE_OPERATION_MODE.DRAG;
+      pageVal.preOperationMode = undefined;
+      return false;
+    }
     const focused = pageVal.getFocusedShapes();
     const isDirectionKey = e.key.indexOf('Left') >= 0 ||
       e.key.indexOf('Right') >= 0 ||
@@ -2555,7 +2560,13 @@ const setKeyActions = (pageVal) => {
     if (document.activeElement !== document.body) {
       return true;
     }
-
+    if (e.code === 'Space' && pageVal.moveAble && pageVal.canvasMoveAble) {
+      if (pageVal.operationMode !== PAGE_OPERATION_MODE.DRAG) {
+        pageVal.preOperationMode = pageVal.operationMode;
+      }
+      pageVal.operationMode = PAGE_OPERATION_MODE.DRAG;
+      return false;
+    }
     let focused = pageVal.getFocusedShapes();
     pageVal.ctrlKeyPressed = e.ctrlKey || e.metaKey;
     pageVal.shiftKeyPressed = e.shiftKey;
