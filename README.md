@@ -8,6 +8,7 @@ Spring 双模运行，支持插件热插拔与智能聚散部署，无缝统一�
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/license/MIT)
 [![JDK](https://img.shields.io/badge/JDK-17-green.svg)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+[![JDK](https://img.shields.io/badge/JDK-21-green.svg)](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
 </div>
 
 ----------
