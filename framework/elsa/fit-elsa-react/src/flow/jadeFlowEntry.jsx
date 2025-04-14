@@ -453,6 +453,7 @@ export const JadeFlow = (() => {
             const newGraphDom = document.createElement('div');
             newGraphDom.style.width = `${parentDom.clientWidth}px`;
             newGraphDom.style.height = `${parentDom.clientHeight}px`;
+            newGraphDom.style.position = 'relative';
             newGraphDom.id = 'elsa-graph';
             parentDom.appendChild(newGraphDom);
             return newGraphDom;

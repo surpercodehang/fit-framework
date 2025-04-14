@@ -30,6 +30,7 @@ export const noteNode = (id, x, y, width, height, parent, drawer) => {
   self.focusBackColor = 'rgb(234, 243, 255)';
   self.borderColor = 'rgb(171, 203, 249)';
   self.mouseInBorderColor = 'rgb(171, 203, 249)';
+  self.allowConfig = false;
 
   /**
    * 删除所有连接点

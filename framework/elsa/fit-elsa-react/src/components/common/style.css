@@ -688,3 +688,39 @@
 .intelligent-form-right-select .ant-select-selector{
     border-radius: 0 8px 8px 0 !important;
 }
+.jade-form-drawer {
+    position: absolute;
+    top: 100px;
+    right: 30px;
+    width: 360px;
+    height: calc(100% - 110px);
+    background-color: #ffffff;
+    z-index: 999;
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 12px;
+    overflow: auto;
+}
+.jade-form-drawer-content {
+    padding: 0 16px 16px 16px;
+}
+.jade-form-drawer .jade-form-drawer-close {
+    position: absolute;
+    top: 16px;
+    right: 25px;
+    cursor: pointer;
+}
+.jade-form-drawer .jade-menus {
+    margin-right: 50px;
+}
+.jade-form-drawer.hidden {
+    display: none;
+}
+.sticky-header {
+    padding: 16px 16px 0 16px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+}

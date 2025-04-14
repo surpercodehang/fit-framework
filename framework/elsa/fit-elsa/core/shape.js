@@ -1997,6 +1997,7 @@ const setMouseActions = (shapeVal) => {
     }
     shapeVal.runCode('mouseUpCode');
   };
+
   shapeVal.onMouseMove = position => {
     shapeVal.runCode('mouseMoveCode');
     if (shapeVal.page.cursor === CURSORS.PEN) {

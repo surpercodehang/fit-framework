@@ -19,19 +19,19 @@ const {Panel} = Collapse;
 /**
  * 问题分类面板
  *
- * @param disabled
- * @param shapeId
- * @param questionTypeList
+ * @param disabled 是否禁用.
+ * @param questionTypeList 问题类型列表.
+ * @param isConfig 是否配置界面.
  * @returns {React.JSX.Element}
  * @private
  */
-const _QuestionClassificationPanel = ({disabled, shapeId, questionTypeList}) => {
+const _QuestionClassificationPanel = ({disabled, questionTypeList, isConfig}) => {
   const dispatch = useDispatch();
   const {t} = useTranslation();
 
   const content = (<>
     <div className={'jade-font-size'} style={{lineHeight: '1.2'}}>
-      <Trans i18nKey='classificationPopover' components={{p: <p/>}}/>
+      <Trans i18nKey="classificationPopover" components={{p: <p/>}}/>
     </div>
   </>);
 
@@ -45,38 +45,69 @@ const _QuestionClassificationPanel = ({disabled, shapeId, questionTypeList}) => 
       const questionId = question.value.find(item => item.name === 'id');
       const isLastIndex = index === questionTypeList.length - 1;
       if (!isLastIndex) {
-        return (<ConnectorProvider key={`dynamic-${isLastIndex ? `999` : questionId.value}`}
-                                   name={`dynamic-${isLastIndex ? `999` : `${index}|`}${questionId.value}`}>
-          <QuestionClassificationItem question={question} index={index} disabled={disabled} isLastIndex={isLastIndex}/>
-        </ConnectorProvider>);
+        return isConfig ? (
+          <QuestionClassificationItem
+            question={question}
+            index={index}
+            disabled={disabled}
+            isLastIndex={isLastIndex}
+          />
+        ) : (
+          <ConnectorProvider
+            key={`dynamic-${isLastIndex ? '999' : questionId.value}`}
+            name={`dynamic-${isLastIndex ? '999' : `${index}|`}${questionId.value}`}
+          >
+            <QuestionClassificationItem
+              question={question}
+              index={index}
+              disabled={disabled}
+              isLastIndex={isLastIndex}
+            />
+          </ConnectorProvider>
+        );
       }
     })}
-    {<ConnectorProvider key={`dynamic-999`} name={`dynamic-999`}>
-      <QuestionClassificationItem question={questionTypeList[questionTypeList.length - 1]} index={questionTypeList.length - 1} disabled={disabled}
-                                  isLastIndex={true}/>
-    </ConnectorProvider>}
+    {
+      isConfig ? (
+        <QuestionClassificationItem
+          question={questionTypeList[questionTypeList.length - 1]}
+          index={questionTypeList.length - 1}
+          disabled={disabled}
+          isLastIndex={true}
+        />
+      ) : (
+        <ConnectorProvider key="dynamic-999" name="dynamic-999">
+          <QuestionClassificationItem
+            question={questionTypeList[questionTypeList.length - 1]}
+            index={questionTypeList.length - 1}
+            disabled={disabled}
+            isLastIndex={true}
+          />
+        </ConnectorProvider>
+      )
+    }
   </>;
 
   return (<>
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        marginBottom: '8px',
-        paddingLeft: '8px',
-        paddingRight: '4px',
-        height: '32px',
-      }}>
-        <span className='jade-panel-header-font'>{t('classification')}</span>
-        <Popover
-          content={content}
-          align={{offset: [0, 3]}}
-          overlayClassName={'jade-custom-popover'}
-        >
-          <QuestionCircleOutlined className='jade-panel-header-popover-content'/>
-        </Popover>
-      </div>
-      {renderQuestionItem()}
-      <AddQuestionClassification disabled={disabled} dispatch={dispatch} t={t}/>
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      marginBottom: '8px',
+      paddingLeft: '8px',
+      paddingRight: '4px',
+      height: '32px',
+    }}>
+      <span className="jade-panel-header-font">{t('classification')}</span>
+      <Popover
+        content={content}
+        align={{offset: [0, 3]}}
+        overlayClassName={'jade-custom-popover'}
+      >
+        <QuestionCircleOutlined className="jade-panel-header-popover-content"/>
+      </Popover>
+    </div>
+    {renderQuestionItem()}
+    <AddQuestionClassification disabled={disabled} dispatch={dispatch} t={t}/>
   </>);
 };
 
@@ -114,7 +145,7 @@ const AddQuestionClassification = ({disabled, dispatch, t}) => {
   return (<>
     <div className={'add-question-classification-wrapper'}>
       <Button disabled={disabled}
-              type='text' className='icon-button add-question-classification-button-style'
+              type="text" className="icon-button add-question-classification-button-style"
               onClick={(event) => {
                 onAddQuestionClassificationClick(event);
               }}>
@@ -194,30 +225,30 @@ const QuestionClassificationItem = ({disabled, question, index, isLastIndex}) =>
   };
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse'
+    <Collapse bordered={false} className="jade-custom-collapse"
               defaultActiveKey={[`questionClassificationPanel${shapeId}-${questionId.value}`]}>
       {<Panel
         key={`questionClassificationPanel${shapeId}-${questionId.value}`}
         header={
           <div className={'classification-title-row'}>
-            <span className='classification-title-text'>{getQuestionTitle()}</span>
+            <span className="classification-title-text">{getQuestionTitle()}</span>
             {type === 'if' && <Button
               disabled={disabled}
-              type='text'
+              type="text"
               icon={<DeleteItem/>}
-              className='classification-title-delete-btn'
+              className="classification-title-delete-btn"
               onClick={() => handleDelete(question.id)}/>}
           </div>
         }
-        className='jade-panel'
+        className="jade-panel"
       >
         <div className={'classification-component'}>
           <Form.Item
-            className='jade-form-item'
+            className="jade-form-item"
             name={`question-${shapeId}-${questionId.value}`}
             id={`question-${shapeId}-${questionId.value}`}
             initialValue={questionDesc.value}
-            validateTrigger='onBlur'
+            validateTrigger="onBlur"
           >
             <TextArea
               disabled={disabled || type === 'else'}

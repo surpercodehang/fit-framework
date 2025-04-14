@@ -69,10 +69,10 @@ export const conditionComponent = (jadeConfig) => {
     };
 
     /**
-     * 必须.
+     * @Override
      */
-    self.getReactComponents = (shapeStatus, data) => {
-        return (<><ConditionFormWrapper data={data} shapeStatus={shapeStatus}/></>);
+    self.getReactComponents = (shapeStatus, data, isConfig) => {
+        return (<><ConditionFormWrapper data={data} shapeStatus={shapeStatus} isConfig={isConfig}/></>);
     };
 
     /**
