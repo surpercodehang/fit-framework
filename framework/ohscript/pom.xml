@@ -8,6 +8,34 @@
     <artifactId>ohscript</artifactId>
     <version>0.0.3.6-SNAPSHOT</version>
 
+    <description>A Lightweight Java-Based Scripting Language</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Ji Yujie</name>
+            <email>codecaster365@outlook.com</email>
+            <roles>
+                <role>Maintainer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Song Yongtan</name>
+            <email>271667068.qq.com</email>
+            <roles>
+                <role>Maintainer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

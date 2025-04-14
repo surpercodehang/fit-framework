@@ -8,6 +8,27 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <description>A Reactive Process Engine combining Traditional BPM Capabilities</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Song Yongtan</name>
+            <email>271667068.qq.com</email>
+            <roles>
+                <role>Maintainer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <modules>
         <module>waterflow-bridge-fit-reactor</module>
         <module>waterflow-core</module>
