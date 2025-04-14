@@ -72,9 +72,10 @@ const inputDescription = (<>
  *
  * @param data 数据.
  * @param shapeStatus 图形状态集合.
+ * @param isConfig 是否配置界面.
  * @returns {JSX.Element} 大模型表单Wrapper的DOM
  */
-const _QuestionClassificationWrapper = ({data, shapeStatus}) => {
+const _QuestionClassificationWrapper = ({data, shapeStatus, isConfig}) => {
   const dispatch = useDispatch();
   const shape = useShapeContext();
   let config;
@@ -129,14 +130,12 @@ const _QuestionClassificationWrapper = ({data, shapeStatus}) => {
       dispatch={dispatch}
       memoryConfig={memoryConfig}
       memorySwitch={memorySwitch}/>
-    <QuestionClassificationPanel
-      shapeId={shape.id} disabled={shapeStatus.disabled}
-      questionTypeList={questionTypeList}/>
+    <QuestionClassificationPanel disabled={shapeStatus.disabled} questionTypeList={questionTypeList} isConfig={isConfig}/>
   </>);
 };
 
 _QuestionClassificationWrapper.propTypes = {
-  data: PropTypes.object.isRequired, shapeStatus: PropTypes.object,
+  data: PropTypes.object.isRequired, shapeStatus: PropTypes.object, isConfig: PropTypes.bool
 };
 
 export const QuestionClassificationWrapper = React.memo(_QuestionClassificationWrapper);

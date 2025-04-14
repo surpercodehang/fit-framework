@@ -206,13 +206,10 @@ export const questionClassificationComponent = (jadeConfig, shape) => {
   };
 
   /**
-   * 必须.
-   *
-   * @param shapeStatus 图形状态集合.
-   * @param data 数据.
+   * @Override
    */
-  self.getReactComponents = (shapeStatus, data) => {
-    return (<><QuestionClassificationWrapper shapeStatus={shapeStatus} data={data}/></>);
+  self.getReactComponents = (shapeStatus, data, isConfig) => {
+    return (<><QuestionClassificationWrapper shapeStatus={shapeStatus} data={data} isConfig={isConfig}/></>);
   };
 
   /**

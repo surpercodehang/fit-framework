@@ -76,6 +76,7 @@ export const jadeNode = (id, x, y, width, height, parent, drawer) => {
   self.referenceDisabled = false;
   self.statusManager = statusManager(self);
   self.isActiveInFlow = false;
+  self.allowConfig = true;
 
   overrideMethods(self);
   referenceDecorate(self);
@@ -486,6 +487,18 @@ export const jadeNode = (id, x, y, width, height, parent, drawer) => {
     self.outlineColor = 'rgba(74, 147, 255, 0.12)';
     self.hasError = false;
     self.invalidateAlone();
+  };
+
+  /**
+   * @override
+   */
+  const select = self.select;
+  self.select = (xVal, yVal) => {
+    select.apply(self, [xVal, yVal]);
+    const focusedShapes = self.page.getFocusedShapes();
+    if (focusedShapes.length === 1 && focusedShapes.includes(self)) {
+      self.page.onConfigShape = self.allowConfig ? self.id : undefined;
+    }
   };
 
   return self;
