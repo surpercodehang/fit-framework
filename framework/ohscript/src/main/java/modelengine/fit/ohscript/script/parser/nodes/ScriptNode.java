@@ -174,8 +174,19 @@ public class ScriptNode extends NonTerminalNode {
         return (ObjectUtils.<Number>cast(Math.round(host.doubleValue() * base))).doubleValue() / base;
     };
 
+    /**
+     * 系统方法映射表
+     * 这是一个嵌套的Map结构:
+     * - 外层Map的key是节点类型(如String、Number等)
+     * - 内层Map的key是方法名
+     * - 值是对应的方法声明节点
+     */
     private final Map<String, Map<String, DoubleFunctionDeclareNode>> methods = new HashMap<>();
 
+    /**
+     * 脚本源代码
+     * 存储完整的脚本源代码文本内容
+     */
     private String source;
 
     /**

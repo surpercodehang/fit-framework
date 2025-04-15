@@ -26,6 +26,10 @@ public class OhScript {
 
     private Serializer<AST> serializer;
 
+    /**
+     * 构造函数，创建一个新的OhScript实例
+     * 初始化解析器构建器
+     */
     public OhScript() {
         this.parserBuilder = new ParserBuilder();
     }
@@ -102,6 +106,7 @@ public class OhScript {
      *
      * @param object 要扩展的对象
      * @param code ohscript代码
+     * @param <T> 表示要扩展的对象的类型的 {@link T}。
      * @return 扩展后的对象
      * @throws Exception 异常
      */
@@ -115,6 +120,7 @@ public class OhScript {
      *
      * @param clazz 要实现的类
      * @param code ohscript代码
+     * @param <T> 表示实现的类型的 {@link T}。
      * @return 一个实现类的对象
      * @throws Exception 异常
      */

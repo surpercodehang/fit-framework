@@ -29,6 +29,11 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 public class ExprTypeExpr extends AbstractTypeExpr {
+    /**
+     * 表达式中包含的类型列表
+     * 用于存储表达式中所有子节点的类型信息
+     * 在构造函数中初始化并填充
+     */
     private List<TypeExpr> types = new ArrayList<>();
 
     /**

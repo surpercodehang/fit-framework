@@ -96,10 +96,21 @@ public class AST implements Serializable {
      */
     private final SymbolTable symbolTable;
 
+    /**
+     * 存储外部包装器的映射
+     * key: 外部对象的名称
+     * value: 对应的ExternalWrapper对象,用于包装外部Java对象
+     */
     private final Map<String, ExternalWrapper> externalWrappers = new HashMap<>();
 
+    /**
+     * ASF对象,用于管理脚本函数
+     */
     private ASF asf;
 
+    /**
+     * 存储所有oh脚本节点的列表
+     */
     private List<SyntaxNode> ohs = null;
 
     /**
@@ -107,6 +118,9 @@ public class AST implements Serializable {
      */
     private boolean panicEnabled = true;
 
+    /**
+     * AST是否已经完成初始化
+     */
     private boolean initialized = false;
 
     private final transient OhFunction<Pair<Object, Method>, Object> externalFunction = (host, args, env, current) -> {

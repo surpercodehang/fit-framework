@@ -15,6 +15,9 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class MapDeclareNode extends ArrayDeclareNode {
+    /**
+     * Map声明节点的构造函数
+     */
     public MapDeclareNode() {
         super(NonTerminal.MAP_DECLARE);
     }

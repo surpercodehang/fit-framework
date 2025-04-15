@@ -29,12 +29,27 @@ import java.util.Set;
 public class Constraints implements Serializable {
     private static final long serialVersionUID = 931997351260008366L;
 
+    /**
+     * 语法节点，用于在类型不匹配时报告错误
+     */
     private final SyntaxNode node;
 
+    /**
+     * 存储"应该是"的类型约束列表
+     * 用于左值的类型约束检查
+     */
     private final List<TypeExpr> shouldBe = new ArrayList<>();
 
+    /**
+     * 存储"必须是"的类型约束列表
+     * 用于右值的类型约束检查
+     */
     private final List<TypeExpr> hasTodBe = new ArrayList<>();
 
+    /**
+     * 存储"假定是"的类型约束集合
+     * 用于类型推导过程中的临时假设
+     */
     private final Set<TypeExpr> supposedToBe = new HashSet<>();
 
     /**

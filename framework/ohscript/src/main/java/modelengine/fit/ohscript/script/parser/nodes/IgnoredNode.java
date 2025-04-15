@@ -14,6 +14,9 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class IgnoredNode extends NonTerminalNode {
+    /**
+     * 节点名称
+     */
     private String name;
 
     /**

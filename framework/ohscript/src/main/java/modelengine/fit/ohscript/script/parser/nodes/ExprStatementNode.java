@@ -16,6 +16,9 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class ExprStatementNode extends NonTerminalNode {
+    /**
+     * 初始化 {@link ExprStatementNode} 的新实例。
+     */
     public ExprStatementNode() {
         super(NonTerminal.EXPRESSION_STATEMENT);
     }

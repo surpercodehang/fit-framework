@@ -15,18 +15,28 @@ import modelengine.fitframework.util.ObjectUtils;
  * @since 1.0
  */
 public class ForNode extends NonTerminalNode {
+    /**
+     * for循环的索引节点，表示循环变量
+     */
     private TerminalNode index;
 
+    /**
+     * for循环的初始化语句节点，用于初始化循环变量
+     */
     private SyntaxNode initial;
 
+    /**
+     * for循环的条件判断节点，用于判断是否继续循环
+     */
     private SyntaxNode condition;
 
+    /**
+     * for循环的迭代表达式节点，用于更新循环变量
+     */
     private SyntaxNode expression;
 
     /**
-     * 构造函数
-     *
-     * @param node 非终端节点
+     * 初始化 {@link ForNode} 的新实例。
      */
     public ForNode() {
         super(NonTerminal.FOR_STATEMENT);

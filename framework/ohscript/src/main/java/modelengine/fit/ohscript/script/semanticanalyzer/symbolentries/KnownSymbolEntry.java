@@ -22,6 +22,10 @@ public class KnownSymbolEntry<T extends TypeExpr> extends SymbolEntry {
      */
     protected T typeExpr;
 
+    /**
+     * 作用域
+     * 符号所在的作用域标识符
+     */
     private final long scope;
 
     /**

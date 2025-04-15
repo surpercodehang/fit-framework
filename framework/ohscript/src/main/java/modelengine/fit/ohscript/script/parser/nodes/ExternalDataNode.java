@@ -14,6 +14,9 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class ExternalDataNode extends NonTerminalNode {
+    /**
+     * 持有的external对象数据
+     */
     private final Object data;
 
     /**

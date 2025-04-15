@@ -25,6 +25,11 @@ public class SymbolTable implements Serializable {
 
     private static final Logger log = Logger.get(SymbolTable.class);
 
+    /**
+     * 符号作用域映射表
+     * key: 作用域ID
+     * value: 符号作用域对象
+     */
     private final Map<Long, SymbolScope> scopes = new HashMap<>();
 
     /**

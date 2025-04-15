@@ -15,8 +15,15 @@ import modelengine.fitframework.util.ObjectUtils;
  * @since 1.0
  */
 public class SafeBlockNode extends NonTerminalNode {
+    /**
+     * 块节点，用于存储safe块的内容
+     */
     private BlockNode block;
 
+    /**
+     * 构造函数
+     * 创建一个新的SafeBlockNode实例，并将其类型设置为SAFE_BLOCK
+     */
     public SafeBlockNode() {
         super(NonTerminal.SAFE_BLOCK);
     }

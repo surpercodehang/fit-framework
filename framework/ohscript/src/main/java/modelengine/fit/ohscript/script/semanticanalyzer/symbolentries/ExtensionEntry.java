@@ -15,6 +15,13 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.concret
  * @since 1.0
  */
 public class ExtensionEntry extends EntityEntry {
+    /**
+     * 通过终结节点、作用域和类型表达式来初始化 {@link ExtensionEntry} 的新实例。
+     *
+     * @param node 表示终结节点的 {@link TerminalNode}。
+     * @param scope 表示作用域的 {@code long}。
+     * @param typeExpr 表示类型表达式的 {@link ExtensionTypeExpr}。
+     */
     public ExtensionEntry(TerminalNode node, long scope, ExtensionTypeExpr typeExpr) {
         super(node, scope, typeExpr);
     }

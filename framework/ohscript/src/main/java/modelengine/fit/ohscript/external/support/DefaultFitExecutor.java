@@ -61,6 +61,12 @@ public class DefaultFitExecutor implements FitExecutor {
 
     private final BrokerClient brokerClient;
 
+    /**
+     * 通过 Bean 容器和 FIT 调用代理来初始化 {@link DefaultFitExecutor} 的新实例。
+     *
+     * @param container 表示 Bean 容器的 {@link BeanContainer}。
+     * @param brokerClient 表示 FIT 调用代理的 {@link BrokerClient}。
+     */
     public DefaultFitExecutor(BeanContainer container, BrokerClient brokerClient) {
         this.beanContainer = notNull(container, "The bean container cannot be null.");
         this.brokerClient = notNull(brokerClient, "The fit broker client cannot be null.");

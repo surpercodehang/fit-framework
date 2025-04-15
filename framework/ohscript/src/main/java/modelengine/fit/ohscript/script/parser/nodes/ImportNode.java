@@ -20,10 +20,21 @@ import java.util.List;
  * @since 1.0
  */
 public class ImportNode extends NonTerminalNode {
+    /**
+     * 导入符号列表，每个元素是一个键值对
+     * first: 被导入的AST变量节点
+     * second: 当前AST变量节点
+     */
     private final List<Pair<TerminalNode, TerminalNode>> symbols = new ArrayList<>();
 
+    /**
+     * 导入源节点
+     */
     private TerminalNode source;
 
+    /**
+     * 构造一个导入节点
+     */
     public ImportNode() {
         super(NonTerminal.IMPORT_DECLARE);
     }

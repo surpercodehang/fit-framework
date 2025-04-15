@@ -18,6 +18,9 @@ import java.util.List;
  * @since 1.0
  */
 public class TupleDeclareNode extends EntityDeclareNode {
+    /**
+     * 元组声明节点的构造函数
+     */
     public TupleDeclareNode() {
         super(NonTerminal.TUPLE_DECLARE);
     }

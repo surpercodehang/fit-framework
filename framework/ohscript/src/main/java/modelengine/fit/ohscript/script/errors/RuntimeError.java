@@ -12,6 +12,10 @@ package modelengine.fit.ohscript.script.errors;
  * @since 1.0
  */
 public enum RuntimeError {
+    /**
+     * 类型不匹配错误
+     * 当操作或赋值涉及的数据类型不兼容时抛出此错误
+     */
     TYPE_MISMATCH {
         @Override
         protected Integer code() {
@@ -23,6 +27,10 @@ public enum RuntimeError {
             return "type is not matched";
         }
     },
+    /**
+     * 变量未初始化错误
+     * 当尝试访问一个未经初始化的变量时抛出此错误
+     */
     NOT_INITIALIZED {
         @Override
         protected Integer code() {
@@ -34,6 +42,10 @@ public enum RuntimeError {
             return "variable is not initialized";
         }
     },
+    /**
+     * 变量不可赋值错误
+     * 当尝试修改一个只读变量的值时抛出此错误
+     */
     NOT_ASSIGNABLE {
         @Override
         protected Integer code() {
@@ -45,6 +57,10 @@ public enum RuntimeError {
             return "readonly variable can not be assigned";
         }
     },
+    /**
+     * 字段未找到错误
+     * 当访问实体对象中不存在的字段时抛出此错误
+     */
     FIELD_NOT_FOUND {
         @Override
         protected Integer code() {
@@ -56,6 +72,10 @@ public enum RuntimeError {
             return "entity field is not found";
         }
     },
+    /**
+     * 非映射或数组类型错误
+     * 当对非映射或数组类型的变量进行映射或数组操作时抛出此错误
+     */
     NOT_MAP_OR_ARRAY {
         @Override
         protected Integer code() {
@@ -67,6 +87,10 @@ public enum RuntimeError {
             return "variable is not map or array";
         }
     },
+    /**
+     * 变量未找到错误
+     * 当访问未定义的变量时抛出此错误
+     */
     VAR_NOT_FOUND {
         @Override
         protected Integer code() {

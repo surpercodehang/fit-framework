@@ -19,6 +19,12 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.base.Ty
 public class ArgumentEntry extends KnownSymbolEntry {
     private static final ArgumentEntry UNIT = new ArgumentEntry(TerminalNode.unit(), 1);
 
+    /**
+     * 通过终端节点和作用域来初始化 {@link ArgumentEntry} 的新实例。
+     *
+     * @param node 表示终端节点的 {@link TerminalNode}。
+     * @param scope 表示作用域的 {@code long}。
+     */
     public ArgumentEntry(TerminalNode node, long scope) {
         super(node, scope, Category.ARGUMENT, TypeExprFactory.createGeneric(node));
     }

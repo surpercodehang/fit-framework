@@ -108,6 +108,11 @@ public class TypeExprFactory {
         return NULL_INSTANCE;
     }
 
+    /**
+     * 创建一个未定义类型表达式
+     *
+     * @return 未定义类型表达式实例
+     */
     public static UndefinedTypeExpr createUndefined() {
         return UNDEFINED_INSTANCE;
     }

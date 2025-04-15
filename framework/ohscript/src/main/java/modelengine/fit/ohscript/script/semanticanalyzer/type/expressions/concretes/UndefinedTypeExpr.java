@@ -18,10 +18,18 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.base.Ty
  * @since 1.0
  */
 public class UndefinedTypeExpr extends SimpleTypeExpr {
+    /**
+     * 无参构造函数，创建一个未定义类型表达式
+     */
     public UndefinedTypeExpr() {
         super(null);
     }
 
+    /**
+     * 带语法节点的构造函数
+     * 
+     * @param node 语法节点
+     */
     public UndefinedTypeExpr(SyntaxNode node) {
         super(node);
     }

@@ -69,6 +69,15 @@ import java.util.function.Function;
  * @since 1.0
  */
 public enum SemanticAnalyzer implements SemanticAble {
+    /**
+     * 导入声明语义分析。
+     * <p>处理 {@code import} 语句的符号解析，完成以下功能：</p>
+     * <ul>
+     *   <li>验证导入源文件存在性</li>
+     *   <li>建立符号表与目标模块的映射关系</li>
+     *   <li>处理通配符导入（*）的特殊逻辑</li>
+     * </ul>
+     */
     IMPORT_DECLARE {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -104,6 +113,16 @@ public enum SemanticAnalyzer implements SemanticAble {
             return super.typeInfer(node);
         }
     },
+
+    /**
+     * 变量声明语义分析。
+     * <p>处理 {@code var} 声明的符号解析，包含以下逻辑：</p>
+     * <ul>
+     *   <li>将变量注册到当前作用域</li>
+     *   <li>验证可变性约束</li>
+     *   <li>处理元组解包声明</li>
+     * </ul>
+     */
     VAR_STATEMENT {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -123,12 +142,31 @@ public enum SemanticAnalyzer implements SemanticAble {
             });
         }
     },
+
+    /**
+     * 常量声明语义分析。
+     * <p>处理 {@code let} 声明的符号解析，包含以下逻辑：</p>
+     * <ul>
+     *   <li>将常量注册到当前作用域</li>
+     *   <li>验证常量的可变性</li>
+     * </ul>
+     */
     LET_STATEMENT {
         @Override
         public void symbolize(SyntaxNode node) {
             VAR_STATEMENT.symbolize(node);
         }
     },
+    
+    /**
+     * 初始化赋值语义分析
+     * <p>处理变量初始化赋值的类型推导，包含以下逻辑：
+     * <ul>
+     *   <li>验证变量是否已定义</li>
+     *   <li>处理元组解包的类型匹配</li>
+     *   <li>支持右值到左值的类型传播</li>
+     * </ul>
+     */
     INITIAL_ASSIGNMENT {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -220,6 +258,16 @@ public enum SemanticAnalyzer implements SemanticAble {
             }
         }
     },
+    
+    /**
+     * 复合赋值语义分析
+     * <p>处理复合赋值运算符（+=、-=等）的类型检查：
+     * <ul>
+     *   <li>继承自 {@code INITIAL_ASSIGNMENT} 基础逻辑</li>
+     *   <li>支持数值类型自动提升</li>
+     *   <li>验证操作数类型兼容性</li>
+     * </ul>
+     */
     VAR_ASSIGNMENT {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
@@ -254,6 +302,15 @@ public enum SemanticAnalyzer implements SemanticAble {
             }
         }
     },
+    
+    /**
+     * 函数参数语义分析
+     * <p>处理函数参数的符号注册：
+     * <ul>
+     *   <li>将参数注册到函数作用域</li>
+     *   <li>支持参数类型推导</li>
+     * </ul>
+     */
     ARGUMENT {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -266,6 +323,15 @@ public enum SemanticAnalyzer implements SemanticAble {
             return ID.typeInfer(node);
         }
     },
+    
+    /**
+     * 系统扩展语义分析
+     * <p>处理系统级类型扩展声明：
+     * <ul>
+     *   <li>验证并注册系统类型（如数组）</li>
+     *   <li>添加系统类型的成员方法</li>
+     * </ul>
+     */
     SYSTEM_EXTENSION {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -290,6 +356,16 @@ public enum SemanticAnalyzer implements SemanticAble {
             return node.declaredName().typeExpr();
         }
     },
+    
+    /**
+     * 实体声明语义分析
+     * <p>处理类/实体定义：
+     * <ul>
+     *   <li>注册实体符号到父作用域</li>
+     *   <li>创建实体成员符号表</li>
+     *   <li>支持继承关系处理</li>
+     * </ul>
+     */
     ENTITY_DECLARE {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -302,6 +378,15 @@ public enum SemanticAnalyzer implements SemanticAble {
             return me.declaredName().typeExpr();
         }
     },
+    
+    /**
+     * 实体扩展语义分析
+     * <p>处理类继承和组合：
+     * <ul>
+     *   <li>建立基类类型关联</li>
+     *   <li>支持多级继承关系推导</li>
+     * </ul>
+     */
     ENTITY_EXTENSION {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -321,6 +406,15 @@ public enum SemanticAnalyzer implements SemanticAble {
             return ENTITY_DECLARE.typeInfer(node);
         }
     },
+    
+    /**
+     * 实体主体语义分析
+     * <p>处理类成员声明：
+     * <ul>
+     *   <li>注册成员变量到实体作用域</li>
+     *   <li>处理类型扩展时的成员合并</li>
+     * </ul>
+     */
     ENTITY_BODY {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -362,6 +456,15 @@ public enum SemanticAnalyzer implements SemanticAble {
             return extendExpr;
         }
     },
+    
+    /**
+     * 元组声明语义分析
+     * <p>继承实体声明逻辑并添加：
+     * <ul>
+     *   <li>位置索引成员的特殊处理</li>
+     *   <li>不可变类型标记</li>
+     * </ul>
+     */
     TUPLE_DECLARE {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -373,6 +476,16 @@ public enum SemanticAnalyzer implements SemanticAble {
             return ENTITY_DECLARE.typeInfer(node);
         }
     },
+    
+    /**
+     * 函数声明语义分析
+     * <p>处理函数定义：
+     * <ul>
+     *   <li>注册函数符号到当前作用域</li>
+     *   <li>推导参数和返回类型</li>
+     *   <li>支持闭包变量捕获</li>
+     * </ul>
+     */
     FUNC_DECLARE {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -400,6 +513,15 @@ public enum SemanticAnalyzer implements SemanticAble {
             return funcExpr;
         }
     },
+    
+    /**
+     * 数组声明语义分析
+     * <p>处理数组类型定义：
+     * <ul>
+     *   <li>注册数组符号到作用域</li>
+     *   <li>同步数组项类型表达式</li>
+     * </ul>
+     */
     ARRAY_DECLARE {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -424,6 +546,15 @@ public enum SemanticAnalyzer implements SemanticAble {
             return expr;
         }
     },
+    
+    /**
+     * 映射声明语义分析
+     * <p>处理键值对集合定义：
+     * <ul>
+     *   <li>注册映射符号到作用域</li>
+     *   <li>推导键值类型关系</li>
+     * </ul>
+     */
     MAP_DECLARE {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -438,12 +569,31 @@ public enum SemanticAnalyzer implements SemanticAble {
             return map.declaredName().typeExpr();
         }
     },
+    
+    /**
+     * 返回语句语义分析
+     * <p>处理函数返回值的类型推导：
+     * <ul>
+     *   <li>直接返回子节点类型表达式</li>
+     *   <li>支持多返回路径类型一致性检查</li>
+     * </ul>
+     */
     RETURN_STATEMENT {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
             return node.child(0).typeExpr();
         }
     },
+    
+    /**
+     * 函数调用语义分析
+     * <p>处理函数调用表达式：
+     * <ul>
+     *   <li>验证参数类型匹配</li>
+     *   <li>支持泛型函数类型推导</li>
+     *   <li>处理系统函数特殊逻辑</li>
+     * </ul>
+     */
     FUNC_CALL {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
@@ -522,6 +672,15 @@ public enum SemanticAnalyzer implements SemanticAble {
             return expr;
         }
     },
+
+    /**
+     * 异步代码块语义分析。
+     * <p>处理 {@code async} 块的符号解析，创建：</p>
+     * <ul>
+     *   <li>Promise 类型环境上下文</li>
+     *   <li>.await 方法签名注册</li>
+     * </ul>
+     */
     ASYNC_BLOCK {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -548,6 +707,15 @@ public enum SemanticAnalyzer implements SemanticAble {
             return node.ast().symbolTable().getSymbol(Constants.ASYNC, 0).typeExpr();
         }
     },
+
+    /**
+     * 实体方法调用语义分析。
+     * <p>处理对象方法调用的类型推导，包含：</p>
+     * <ul>
+     *   <li>成员可见性检查（private/public）</li>
+     *   <li>基于宿主类型的成员方法查找</li>
+     * </ul>
+     */
     ENTITY_CALL {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
@@ -591,6 +759,16 @@ public enum SemanticAnalyzer implements SemanticAble {
             return expr;
         }
     },
+
+    /**
+     * 数组访问语义分析
+     * <p>处理数组元素访问操作的类型推导：</p>
+     * <ul>
+     *   <li>验证数组类型有效性（原生数组/泛型数组）</li>
+     *   <li>推导数组元素类型表达式</li>
+     *   <li>支持泛型数组反向类型推导</li>
+     * </ul>
+     */
     ARRAY_ACCESS {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
@@ -616,12 +794,31 @@ public enum SemanticAnalyzer implements SemanticAble {
             return shouldBe.itemTypeExpr();
         }
     },
+
+    /**
+     * 关系条件语义分析。
+     * <p>处理比较运算符（&gt;, &lt;, &gt;=, &lt;=）的类型检查：</p>
+     * <ul>
+     *   <li>操作数类型兼容性验证</li>
+     *   <li>返回布尔类型推导</li>
+     * </ul>
+     */
     RELATIONAL_CONDITION {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
             return TypeExprFactory.createBool(node);
         }
     },
+
+    /**
+     * 逻辑非语义分析
+     * <p>处理逻辑非运算符的类型检查：</p>
+     * <ul>
+     *   <li>验证操作数为布尔类型</li>
+     *   <li>返回布尔类型表达式</li>
+     *   <li>支持抽象类型反向约束</li>
+     * </ul>
+     */
     NEGATION {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
@@ -636,6 +833,15 @@ public enum SemanticAnalyzer implements SemanticAble {
             return TypeExprFactory.createBool(node);
         }
     },
+
+    /**
+     * 数值表达式语义分析。
+     * <p>处理算术运算的类型推导，确保：</p>
+     * <ul>
+     *   <li>操作数类型一致性检查</li>
+     *   <li>自动类型提升（int → double）</li>
+     * </ul>
+     */
     NUMERIC_EXPRESSION {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
@@ -691,6 +897,16 @@ public enum SemanticAnalyzer implements SemanticAble {
                     || c.nodeType() == Terminal.SLASH_EQUAL;
         }
     },
+
+    /**
+     * 乘除运算语义分析
+     * <p>处理乘除运算符的严格类型检查：</p>
+     * <ul>
+     *   <li>强制操作数为数值类型</li>
+     *   <li>禁止自动类型提升到字符串</li>
+     *   <li>返回数值类型表达式</li>
+     * </ul>
+     */
     TERM_EXPRESSION {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
@@ -711,12 +927,31 @@ public enum SemanticAnalyzer implements SemanticAble {
             return TypeExprFactory.createNumber(node);
         }
     },
+
+    /**
+     * 一元运算语义分析
+     * <p>处理自增/自减运算符类型推导：</p>
+     * <ul>
+     *   <li>继承乘除运算类型检查规则</li>
+     *   <li>支持前缀/后缀表达式差异处理</li>
+     * </ul>
+     */
     UNARY_EXPRESSION {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
             return TERM_EXPRESSION.typeInfer(node);
         }
     },
+
+    /**
+     * 迭代语句语义分析
+     * <p>处理 {@code each} 循环类型推导：</p>
+     * <ul>
+     *   <li>注册迭代变量到循环作用域</li>
+     *   <li>验证可迭代对象为数组类型</li>
+     *   <li>推导迭代项类型表达式</li>
+     * </ul>
+     */
     EACH_STATEMENT {
         @Override
         public void symbolize(SyntaxNode node) {
@@ -744,6 +979,15 @@ public enum SemanticAnalyzer implements SemanticAble {
             return TypeExprFactory.createIgnore();
         }
     },
+
+    /**
+     * 标识符类型推导
+     * <p>处理变量引用类型推导：</p>
+     * <ul>
+     *   <li>直接从符号表获取预定义类型</li>
+     *   <li>支持闭包变量捕获推导</li>
+     * </ul>
+     */
     ID {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
@@ -751,42 +995,101 @@ public enum SemanticAnalyzer implements SemanticAble {
             return symbolEntry.typeExpr();
         }
     },
+
+    /**
+     * 数值字面量推导
+     * <p>处理数字常量类型推导：</p>
+     * <ul>
+     *   <li>返回数值类型表达式</li>
+     *   <li>支持整型和浮点型自动区分</li>
+     * </ul>
+     */
     NUMBER {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
             return TypeExprFactory.createNumber(node);
         }
     },
+
+    /**
+     * 布尔真值推导
+     * <p>处理 {@code true} 关键字类型推导：</p>
+     * <ul>
+     *   <li>返回布尔类型表达式</li>
+     * </ul>
+     */
     TRUE {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
             return TypeExprFactory.createBool(node);
         }
     },
+
+    /**
+     * 布尔假值推导
+     * <p>处理 {@code false} 关键字类型推导：</p>
+     * <ul>
+     *   <li>继承真值推导逻辑</li>
+     * </ul>
+     */
     FALSE {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
             return TRUE.typeInfer(node);
         }
     },
+
+    /**
+     * 字符串字面量推导
+     * <p>处理字符串常量类型推导：</p>
+     * <ul>
+     *   <li>返回字符串类型表达式</li>
+     * </ul>
+     */
     STRING {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
             return TypeExprFactory.createString(node);
         }
     },
+
+    /**
+     * 空值类型推导
+     * <p>处理无返回值类型推导：</p>
+     * <ul>
+     *   <li>返回空单元类型表达式</li>
+     * </ul>
+     */
     UNIT {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
             return TypeExprFactory.createUnit();
         }
     },
+
+    /**
+     * 系统方法类型推导
+     * <p>处理内置系统方法调用：</p>
+     * <ul>
+     *   <li>委托给独立类型推导器处理</li>
+     *   <li>支持IO/类型转换等系统方法</li>
+     * </ul>
+     */
     SYS_METHOD {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {
             return SystemMethodInfer.infer(node);
         }
     },
+
+    /**
+     * 外部数据类型推导
+     * <p>处理外部数据源类型推导：</p>
+     * <ul>
+     *   <li>返回外部类型包装表达式</li>
+     *   <li>支持数据库连接等外部对象</li>
+     * </ul>
+     */
     EXTERNAL_DATA {
         @Override
         public TypeExpr typeInfer(SyntaxNode node) {

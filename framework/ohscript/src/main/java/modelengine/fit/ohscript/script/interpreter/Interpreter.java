@@ -75,6 +75,10 @@ import java.util.function.Consumer;
  * @since 1.0
  */
 public enum Interpreter {
+    /**
+     * 脚本入口解释器。
+     * <p>处理脚本根节点的解析，初始化顶层作用域并执行整个脚本块。</p>
+     */
     SCRIPT {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -82,6 +86,11 @@ public enum Interpreter {
             return Interpreter.BLOCK_STATEMENT.interpret(node, env, newCurrent);
         }
     },
+
+    /**
+     * 外部类标识符处理。
+     * <p>用于加载外部 Java 类并创建对应的静态方法映射。</p>
+     */
     UPPER_ID {
         private Map<String, ReturnValue> classes = new HashMap<>();
 
@@ -110,6 +119,16 @@ public enum Interpreter {
             return value;
         }
     },
+
+    /**
+     * 变量标识符解析。
+     * <p>处理变量查找逻辑，支持以下场景：
+     * <ul>
+     *   <li>普通变量查找</li>
+     *   <li>空值处理</li>
+     *   <li>元编程类型操作符（如 {@code typeof}）</li>
+     * </ul>
+     */
     ID {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -180,6 +199,11 @@ public enum Interpreter {
             return null;
         }
     },
+
+    /**
+     * 字符串字面量解析。
+     * <p>处理带引号的字符串值，自动去除外围引号。</p>
+     */
     STRING {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) {
@@ -188,30 +212,55 @@ public enum Interpreter {
                     lexeme.substring(1, lexeme.length() - 1));
         }
     },
+
+    /**
+     * 数字字面量解析器。
+     * <p>处理整数和浮点数字面值，自动进行BigDecimal到基本数值类型的转换。</p>
+     */
     NUMBER {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) {
             return createNumberValue(new BigDecimal(node.lexeme()), node, env, current);
         }
     },
+
+    /**
+     * 布尔真值解析器。
+     * <p>处理 {@code true} 关键字，创建布尔类型返回值。</p>
+     */
     TRUE {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) {
             return createBoolValue(true, node, env, current);
         }
     },
+
+    /**
+     * 布尔假值解析器。
+     * <p>处理 {@code false} 关键字，创建布尔类型返回值。</p>
+     */
     FALSE {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) {
             return createBoolValue(false, node, env, current);
         }
     },
+
+    /**
+     * 默认解释器占位符。
+     * <p>用于未实现具体解释逻辑的语法节点，抛出未实现异常。</p>
+     */
     DEFAULT {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) {
             throw new IllegalStateException("ast interpreter of " + node.name() + " is not implemented");
         }
     },
+
+    /**
+     * 导入声明解释器。
+     * <p>处理 {@code import} 语句，加载外部模块并注册到当前作用域。</p>
+     */
     IMPORT_DECLARE {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -235,6 +284,11 @@ public enum Interpreter {
             return ReturnValue.IGNORE;
         }
     },
+
+    /**
+     * 导出声明解释器。
+     * <p>处理 {@code export} 语句，将指定符号注册到模块导出表。</p>
+     */
     EXPORT_DECLARE {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -244,6 +298,11 @@ public enum Interpreter {
             return ReturnValue.IGNORE;
         }
     },
+
+    /**
+     * 通用语句解释器。
+     * <p>按顺序执行子节点，返回第一个非 {@code IGNORE} 的返回值。</p>
+     */
     GENERAL {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -256,12 +315,22 @@ public enum Interpreter {
             return ReturnValue.IGNORE;
         }
     },
+
+    /**
+     * 数值表达式解释器。
+     * <p>处理加减运算，支持三地址码形式的中间表达式求值。</p>
+     */
     NUMERIC_EXPRESSION {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
             return threeAddressOp(node, env, new NumericOp(), current);
         }
     },
+
+    /**
+     * 乘除表达式解释器。
+     * <p>处理乘除运算，自动进行整型与浮点型运算的类型转换。</p>
+     */
     TERM_EXPRESSION {
         private ReturnValue termOp(ReturnValue x, Terminal op, ReturnValue y) {
             boolean hasDouble = x.value() instanceof Double || y.value() instanceof Double;
@@ -292,6 +361,11 @@ public enum Interpreter {
             return threeAddressOp(node, env, this::termOp, current);
         }
     },
+
+    /**
+     * 三元表达式解释器。
+     * <p>处理 {@code condition ? trueValue : falseValue} 语法结构。</p>
+     */
     TERNARY_EXPRESSION {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -303,6 +377,11 @@ public enum Interpreter {
             }
         }
     },
+
+    /**
+     * 逻辑非表达式解释器。
+     * <p>处理 {@code !} 运算符，支持布尔值和数值类型的隐式转换。</p>
+     */
     NEGATION {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -318,6 +397,11 @@ public enum Interpreter {
             }
         }
     },
+
+    /**
+     * 一元表达式解释器。
+     * <p>处理自增/自减运算符，支持前缀和后缀两种形式。</p>
+     */
     UNARY_EXPRESSION {
         boolean isOperator(SyntaxNode node) {
             return (node.nodeType() == Terminal.PLUS_PLUS || node.nodeType() == Terminal.MINUS_MINUS);
@@ -377,6 +461,11 @@ public enum Interpreter {
             return value;
         }
     },
+
+    /**
+     * 复合条件表达式解释器。
+     * <p>处理 {@code &&} 和 {@code ||} 运算符，采用短路求值策略。</p>
+     */
     CONDITION_EXPRESSION {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -420,6 +509,11 @@ public enum Interpreter {
             return new ReturnValue(current, TypeExprFactory.createNumber(node), bool);
         }
     },
+
+    /**
+     * 关系运算解释器。
+     * <p>处理比较运算符(&gt;, &lt;, &gt;=, &lt;=），支持类型检查和数值比较。</p>
+     */
     RELATIONAL_CONDITION {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -589,6 +683,11 @@ public enum Interpreter {
             return new ReturnValue(current, TypeExprFactory.createBool(node), bool);
         }
     },
+
+    /**
+     * 函数调用解释器。
+     * <p>执行函数调用操作，包含参数准备、上下文切换和返回值处理。</p>
+     */
     FUNC_CALL {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -613,6 +712,11 @@ public enum Interpreter {
             return Tool.interpretFunction(ObjectUtils.cast(function.value()), argValues, funcContext);
         }
     },
+
+    /**
+     * 函数声明解释器。
+     * <p>注册函数定义到当前作用域，支持闭包捕获上下文变量。</p>
+     */
     FUNC_DECLARE {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -622,12 +726,22 @@ public enum Interpreter {
             return value;
         }
     },
+
+    /**
+     * 模式匹配语句解释器。
+     * <p>处理 {@code match} 语句的入口，执行模式分支选择。</p>
+     */
     MATCH_STATEMENT {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
             return BLOCK_STATEMENT.interpret(node, env, current);
         }
     },
+
+    /**
+     * 模式变量绑定解释器。
+     * <p>处理模式匹配中的变量绑定和解构操作。</p>
+     */
     MATCH_VAR {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -684,6 +798,11 @@ public enum Interpreter {
             return new ReturnValue(current, bool, false);
         }
     },
+
+    /**
+     * 条件分支解释器。
+     * <p>处理 {@code if} 和 {@code else if} 分支的条件判断和执行。</p>
+     */
     IF_STATEMENT {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -701,6 +820,11 @@ public enum Interpreter {
             return ReturnValue.IGNORE;
         }
     },
+
+    /**
+     * 条件分支解释器。
+     * <p>处理 {@code if} 语句中的单个条件分支逻辑。</p>
+     */
     IF_BRANCH {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -720,6 +844,11 @@ public enum Interpreter {
             });
         }
     },
+
+    /**
+     * 迭代循环解释器。
+     * <p>处理 {@code each} 语句，支持数组/集合的迭代和索引绑定。</p>
+     */
     EACH_STATEMENT {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -750,6 +879,11 @@ public enum Interpreter {
             return ReturnValue.IGNORE;
         }
     },
+
+    /**
+     * for循环解释器。
+     * <p>处理C风格 {@code for} 循环，支持初始化、条件检测和迭代表达式。</p>
+     */
     FOR_STATEMENT {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -773,6 +907,11 @@ public enum Interpreter {
             return ReturnValue.IGNORE;
         }
     },
+
+    /**
+     * while循环解释器。
+     * <p>处理前置条件循环，先检查条件再执行循环体。</p>
+     */
     WHILE_STATEMENT {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -794,6 +933,11 @@ public enum Interpreter {
             return ReturnValue.IGNORE;
         }
     },
+
+    /**
+     * do-while循环解释器。
+     * <p>处理后置条件循环，先执行循环体再检查条件。</p>
+     */
     DO_STATEMENT {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -815,6 +959,11 @@ public enum Interpreter {
             return ReturnValue.IGNORE;
         }
     },
+
+    /**
+     * 循环控制解释器。
+     * <p>处理 {@code break} 和 {@code continue} 语句，改变循环控制流。</p>
+     */
     LOOP_CONTROL {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) {
@@ -826,12 +975,22 @@ public enum Interpreter {
             }
         }
     },
+
+    /**
+     * 语句集合解释器。
+     * <p>按顺序执行多个语句，返回最后一个非忽略值的结果。</p>
+     */
     STATEMENTS {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
             return BLOCK_STATEMENT.interpret(node, env, current);
         }
     },
+
+    /**
+     * 代码块解释器。
+     * <p>创建独立作用域，按顺序执行块内语句并返回结果。</p>
+     */
     BLOCK_STATEMENT {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -848,6 +1007,15 @@ public enum Interpreter {
             });
         }
     },
+
+    /**
+     * 锁同步代码块解释器。
+     * <p>通过 {@code ReentrantLock} 实现线程同步，保证：
+     * <ul>
+     *   <li>同一代码块的原子性执行</li>
+     *   <li>避免竞态条件</li>
+     * </ul>
+     */
     LOCK_BLOCK {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) {
@@ -869,6 +1037,15 @@ public enum Interpreter {
             }
         }
     },
+
+    /**
+     * 异步代码块解释器。
+     * <p>使用 {@code CompletableFuture} 实现异步执行，提供以下功能：
+     * <ul>
+     *   <li>.await() 方法同步获取结果</li>
+     *   <li>.then() 方法注册回调函数</li>
+     * </ul>
+     */
     ASYNC_BLOCK {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) {
@@ -934,6 +1111,15 @@ public enum Interpreter {
             };
         }
     },
+
+    /**
+     * 安全代码块解释器。
+     * <p>提供异常安全执行环境，自动捕获 panic 并记录错误码，包含：
+     * <ul>
+     *   <li>.get() 方法获取执行结果</li>
+     *   <li>.panic_code 属性记录错误代码</li>
+     * </ul>
+     */
     SAFE_BLOCK {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) {
@@ -970,6 +1156,11 @@ public enum Interpreter {
             result.put(".get", new ReturnValue(current, get.typeExpr(), get));
         }
     },
+
+    /**
+     * 系统扩展解释器。
+     * <p>处理内置系统功能的扩展，注册全局可用的工具方法。</p>
+     */
     SYSTEM_EXTENSION {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -980,6 +1171,11 @@ public enum Interpreter {
             return value;
         }
     },
+
+    /**
+     * 实体扩展解释器。
+     * <p>处理类继承和接口实现，支持基类成员的复用和扩展。</p>
+     */
     ENTITY_EXTENSION {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -999,6 +1195,11 @@ public enum Interpreter {
             return value;
         }
     },
+
+    /**
+     * 实体声明解释器。
+     * <p>处理类/实体的定义，创建包含成员方法和属性的上下文环境。</p>
+     */
     ENTITY_DECLARE {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -1009,12 +1210,27 @@ public enum Interpreter {
             return value;
         }
     },
+
+    /**
+     * 元组声明解释器。
+     * <p>处理多值组合结构，创建不可变的数据集合。</p>
+     */
     TUPLE_DECLARE {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
             return ENTITY_DECLARE.interpret(node, env, current);
         }
     },
+
+    /**
+     * 元组解包解释器。
+     * <p>支持以下解包模式：
+     * <ul>
+     *   <li>普通元组解包：{@code (a, b) = tuple}</li>
+     *   <li>扩展模式匹配：{@code (head, ..tail) = list}</li>
+     *   <li>忽略占位符：{@code _}</li>
+     * </ul>
+     */
     TUPLE_UNPACKER {
         @Override
         public void assignValue(SyntaxNode node, ReturnValue value, ASTEnv env, ActivationContext current)
@@ -1060,6 +1276,15 @@ public enum Interpreter {
             return DEFAULT.interpret(node, env, current);
         }
     },
+
+    /**
+     * 实体方法调用解释器。
+     * <p>处理对象方法的调用，支持以下特性：
+     * <ul>
+     *   <li>通过 {@code this} 上下文传递对象实例</li>
+     *   <li>支持链式方法调用</li>
+     * </ul>
+     */
     ENTITY_CALL {
         @Override
         public void assignValue(SyntaxNode node, ReturnValue value, ASTEnv env, ActivationContext current)
@@ -1084,6 +1309,11 @@ public enum Interpreter {
             return value;
         }
     },
+
+    /**
+     * 映射声明解释器。
+     * <p>处理键值对集合的初始化，支持 {@code "key": value} 语法。</p>
+     */
     MAP_DECLARE {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -1101,6 +1331,11 @@ public enum Interpreter {
             return value;
         }
     },
+
+    /**
+     * 数组声明解释器。
+     * <p>处理元素列表初始化，支持多类型元素混合存储。</p>
+     */
     ARRAY_DECLARE {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -1115,6 +1350,11 @@ public enum Interpreter {
             return value;
         }
     },
+
+    /**
+     * 数组访问解释器。
+     * <p>处理下标访问操作，支持数组越界异常检测。</p>
+     */
     ARRAY_ACCESS {
         @Override
         public void assignValue(SyntaxNode node, ReturnValue value, ASTEnv env, ActivationContext current)
@@ -1160,6 +1400,11 @@ public enum Interpreter {
             return null;
         }
     },
+
+    /**
+     * 实体主体解释器。
+     * <p>处理类/实体的成员声明，支持继承和组合基类值。</p>
+     */
     ENTITY_BODY {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -1185,6 +1430,15 @@ public enum Interpreter {
             return newValue;
         }
     },
+
+    /**
+     * Java 对象创建解释器
+     * <p>通过反射机制实例化外部 Java 类，并完成以下操作：
+     * <ul>
+     *   <li>自动匹配脚本字段与 Java 类字段</li>
+     *   <li>支持方法覆盖和扩展</li>
+     * </ul>
+     */
     JAVA_NEW {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -1213,6 +1467,11 @@ public enum Interpreter {
             });
         }
     },
+
+    /**
+     * Java 静态调用解释器。
+     * <p>通过反射调用外部Java类的静态方法。</p>
+     */
     JAVA_STATIC_CALL {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) {
@@ -1220,6 +1479,11 @@ public enum Interpreter {
             return null;
         }
     },
+
+    /**
+     * 返回语句解释器。
+     * <p>处理 {@code return} 关键字，终止当前函数执行并返回值。</p>
+     */
     RETURN_STATEMENT {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -1230,12 +1494,22 @@ public enum Interpreter {
             }
         }
     },
+
+    /**
+     * 变量赋值解释器。
+     * <p>处理复合赋值操作（+=、-=等），支持类型自动提升。</p>
+     */
     VAR_ASSIGNMENT {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
             return INITIAL_ASSIGNMENT.interpret(node, env, current);
         }
     },
+
+    /**
+     * 外部数据解释器。
+     * <p>加载外部数据源连接，返回特定格式的数据包装对象。</p>
+     */
     EXTERNAL_DATA {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) {
@@ -1243,6 +1517,11 @@ public enum Interpreter {
                     (ObjectUtils.<ExternalDataNode>cast(node)).getData());
         }
     },
+
+    /**
+     * 初始化赋值解释器。
+     * <p>处理变量声明时的初始化赋值，支持延迟求值。</p>
+     */
     INITIAL_ASSIGNMENT {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
@@ -1274,12 +1553,22 @@ public enum Interpreter {
             return ReturnValue.IGNORE;
         }
     },
+
+    /**
+     * 系统方法解释器。
+     * <p>处理内置系统方法的调用，如类型转换、IO操作等。</p>
+     */
     SYS_METHOD {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {
             return SystemMethodInterpreters.interpret(node, env, current);
         }
     },
+
+    /**
+     * 忽略未找到错误解释器。
+     * <p>安全忽略符号查找失败的情况，返回忽略标记。</p>
+     */
     ERROR_NOT_FOUND_IGNORE {
         @Override
         public ReturnValue interpret(SyntaxNode node, ASTEnv env, ActivationContext current) throws OhPanic {

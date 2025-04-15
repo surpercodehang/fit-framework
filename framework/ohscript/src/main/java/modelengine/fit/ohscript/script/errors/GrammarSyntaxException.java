@@ -12,6 +12,11 @@ package modelengine.fit.ohscript.script.errors;
  * @since 1.0
  */
 public class GrammarSyntaxException extends IllegalArgumentException {
+    /**
+     * 语法错误异常构造函数
+     * 
+     * @param info 错误信息
+     */
     public GrammarSyntaxException(String info) {
         super(info);
     }

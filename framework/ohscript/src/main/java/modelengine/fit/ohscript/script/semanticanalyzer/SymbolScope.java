@@ -38,10 +38,19 @@ import java.util.Map;
 public class SymbolScope implements Serializable {
     private static final long serialVersionUID = -6911172423493910959L;
 
+    /**
+     * 符号范围的唯一标识符
+     */
     private final long id;
 
+    /**
+     * 存储符号表的映射，键为符号名称，值为符号入口
+     */
     private final Map<String, SymbolEntry> symbols = new HashMap<>();
 
+    /**
+     * 父符号范围的标识符
+     */
     private long parentId;
 
     /**

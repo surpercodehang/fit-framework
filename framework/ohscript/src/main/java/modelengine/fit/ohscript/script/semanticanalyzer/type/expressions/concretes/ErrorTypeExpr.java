@@ -18,6 +18,11 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.base.Ty
  * @since 1.0
  */
 public class ErrorTypeExpr extends SimpleTypeExpr {
+    /**
+     * 通过语法节点构造 {@link ErrorTypeExpr} 的新实例。
+     *
+     * @param node 表示语法节点的 {@link SyntaxNode}。
+     */
     public ErrorTypeExpr(SyntaxNode node) {
         super(node);
     }

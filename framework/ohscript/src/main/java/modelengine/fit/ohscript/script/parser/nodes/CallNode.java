@@ -14,6 +14,11 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public abstract class CallNode extends NonTerminalNode {
+    /**
+     * 通过非终结节点初始化 {@link CallNode} 的新实例。
+     *
+     * @param nodeType 表示非终结节点的枚举值的 {@link NonTerminal}。
+     */
     protected CallNode(NonTerminal nodeType) {
         super(nodeType);
     }

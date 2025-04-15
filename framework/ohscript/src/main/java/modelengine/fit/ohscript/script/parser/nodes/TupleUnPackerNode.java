@@ -19,8 +19,15 @@ import java.util.List;
  * @since 1.0
  */
 public class TupleUnPackerNode extends NonTerminalNode {
+    /**
+     * 用于存储元组解构的成员节点列表
+     */
     private final List<SyntaxNode> members = new ArrayList<>();
 
+    /**
+     * 构造函数
+     * 创建一个新的元组解构节点实例
+     */
     public TupleUnPackerNode() {
         super(NonTerminal.TUPLE_UNPACKER);
     }

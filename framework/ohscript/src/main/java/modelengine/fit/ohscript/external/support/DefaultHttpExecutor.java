@@ -46,6 +46,11 @@ public class DefaultHttpExecutor implements HttpExecutor {
 
     private final HttpClassicClient httpClient;
 
+    /**
+     * 通过 Http 客户端来初始化 {@link DefaultHttpExecutor} 的新实例。
+     *
+     * @param httpClient 表示 Http 客户端的 {@link HttpClassicClient}。
+     */
     public DefaultHttpExecutor(HttpClassicClient httpClient) {
         this.httpClient = notNull(httpClient, "The http classic client cannot be null.");
     }

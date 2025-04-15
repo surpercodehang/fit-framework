@@ -15,6 +15,9 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class ArrayOrMapDeclareNode extends NonTerminalNode {
+    /**
+     * 初始化 {@link ArrayOrMapDeclareNode} 的新实例。
+     */
     public ArrayOrMapDeclareNode() {
         super(NonTerminal.ARRAY_MAP_DECLARE);
     }

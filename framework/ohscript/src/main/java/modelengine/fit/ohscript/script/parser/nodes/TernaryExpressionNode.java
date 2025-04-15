@@ -14,6 +14,9 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class TernaryExpressionNode extends NonTerminalNode {
+    /**
+     * 三元表达式节点的构造函数
+     */
     public TernaryExpressionNode() {
         super(NonTerminal.TERNARY_EXPRESSION);
     }

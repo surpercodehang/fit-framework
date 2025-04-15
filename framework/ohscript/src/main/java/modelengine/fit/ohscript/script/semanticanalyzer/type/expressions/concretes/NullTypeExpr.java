@@ -17,6 +17,9 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.base.Ty
  * @since 1.0
  */
 public class NullTypeExpr extends SimpleTypeExpr {
+    /**
+     * 空类型表达式的默认构造函数
+     */
     public NullTypeExpr() {
         super(null);
     }

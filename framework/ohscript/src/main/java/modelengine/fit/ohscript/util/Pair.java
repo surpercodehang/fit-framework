@@ -18,8 +18,14 @@ import java.io.Serializable;
 public class Pair<K, V> implements Serializable {
     private static final long serialVersionUID = 758503529547984748L;
 
+    /**
+     * 键对象
+     */
     private final K first;
 
+    /**
+     * 值对象
+     */
     private final V second;
 
     /**

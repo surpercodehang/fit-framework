@@ -19,6 +19,12 @@ import modelengine.fitframework.util.ObjectUtils;
  * @since 1.0
  */
 public class GenericFunctionTypeExpr extends FunctionTypeExpr {
+    /**
+     * 构造通用函数类型表达式
+     * 
+     * @param node 函数声明节点
+     * @param child 子语法节点
+     */
     public GenericFunctionTypeExpr(FunctionDeclareNode node, SyntaxNode child) {
         super(node, new GenericTypeExpr(child), new GenericTypeExpr(null));
     }

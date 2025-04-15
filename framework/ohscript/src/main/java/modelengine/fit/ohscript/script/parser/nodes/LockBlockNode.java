@@ -14,6 +14,10 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class LockBlockNode extends NonTerminalNode {
+    /**
+     * 构造函数
+     * 创建一个新的锁代码块节点
+     */
     public LockBlockNode() {
         super(NonTerminal.LOCK_BLOCK);
     }

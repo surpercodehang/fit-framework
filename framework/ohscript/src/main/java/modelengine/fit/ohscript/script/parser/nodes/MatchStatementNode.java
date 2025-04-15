@@ -22,6 +22,10 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 public class MatchStatementNode extends NonTerminalNode {
+    /**
+     * 匹配器节点，用于存储匹配表达式的终结符节点
+     * 初始值为null，在优化过程中会被赋值
+     */
     private TerminalNode matcher = null;
 
     /**

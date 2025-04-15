@@ -48,10 +48,19 @@ public class DoubleFunctionDeclareNode<V, T, R> extends FunctionDeclareNode {
     private static Map<String, Triple<OhFunction, Object, Function<FunctionCallNode, FunctionTypeExpr>>> transients
             = new HashMap<>();
 
+    /**
+     * 序列化ID，用于在序列化和反序列化过程中唯一标识对象
+     */
     private final String serializedId = UUID.randomUUID().toString();
 
+    /**
+     * 函数体节点，包含函数的具体实现逻辑
+     */
     private final BlockNode body;
 
+    /**
+     * 函数参数节点，用于存储函数的参数信息
+     */
     private final ArgumentNode argument;
 
     private transient OhFunction<V, R> handler;
@@ -135,12 +144,26 @@ public class DoubleFunctionDeclareNode<V, T, R> extends FunctionDeclareNode {
         return DoubleFunctionDeclareNode.transients.get(serializedId);
     }
 
+    /**
+     * 自定义序列化方法
+     * 将transient字段缓存到静态Map中以便反序列化时恢复
+     * 
+     * @param out 序列化输出流
+     * @throws IOException IO异常
+     */
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
         DoubleFunctionDeclareNode.cacheTransient(this.serializedId, this.handler, this.hostValue, this.projectFunction);
     }
 
-    // 自定义反序列化方法
+    /**
+     * 自定义反序列化方法
+     * 从静态Map中恢复transient字段的值
+     * 
+     * @param in 反序列化输入流
+     * @throws IOException IO异常
+     * @throws ClassNotFoundException 类未找到异常
+     */
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         Triple<OhFunction, Object, Function<FunctionCallNode, FunctionTypeExpr>> transientsTriple

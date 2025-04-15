@@ -14,6 +14,9 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class NamespaceDeclareNode extends NonTerminalNode {
+    /**
+     * 命名空间声明节点的构造函数
+     */
     public NamespaceDeclareNode() {
         super(NonTerminal.NAMESPACE_DECLARE);
     }

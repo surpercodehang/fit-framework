@@ -52,7 +52,7 @@ public interface HttpExecutor {
 
     /**
      * 使用 Http 客户端，向指定地址发送请求。
-     * <p>参数中可能出现的参数如下：
+     * <p>参数中可能出现的参数如下：</p>
      * <ul>
      *     <li>{@link #REQUEST_HEADERS}：表示消息头</li>
      *     <li>{@link #REQUEST_ENTITY}：表示消息体</li>
@@ -74,7 +74,6 @@ public interface HttpExecutor {
      *         };
      *     };
      * </pre>
-     * </p>
      *
      * @param method 表示 Http 调用的方法的 {@link String}。
      * @param url 表示 Http 调用地址的 {@link String}。

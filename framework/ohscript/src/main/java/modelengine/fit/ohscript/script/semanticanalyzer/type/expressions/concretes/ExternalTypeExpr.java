@@ -18,6 +18,11 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.base.Ty
  * @since 1.0
  */
 public class ExternalTypeExpr extends SimpleTypeExpr {
+    /**
+     * 通过语法节点来初始化 {@link ExternalTypeExpr} 的新实例。
+     *
+     * @param node 表示语法节点的 {@link SyntaxNode}。
+     */
     public ExternalTypeExpr(SyntaxNode node) {
         super(node);
     }

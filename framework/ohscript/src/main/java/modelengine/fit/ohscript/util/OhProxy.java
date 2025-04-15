@@ -40,6 +40,13 @@ public class OhProxy {
 
     private final ASTEnv env;
 
+    /**
+     * OhProxy的构造函数
+     *
+     * @param value 存储ReturnValue的映射表
+     * @param base 基础对象
+     * @param env AST环境
+     */
     public OhProxy(Map<String, ReturnValue> value, Object base, ASTEnv env) {
         this.value = value;
         this.base = base;

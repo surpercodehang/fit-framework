@@ -15,6 +15,9 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class ExpressBlockNode extends NonTerminalNode {
+    /**
+     * 初始化 {@link ExpressBlockNode} 的新实例。
+     */
     public ExpressBlockNode() {
         super(NonTerminal.EXPRESS_BLOCK_STATEMENT);
     }

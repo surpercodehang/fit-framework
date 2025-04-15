@@ -17,6 +17,9 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.base.Ty
  * @since 1.0
  */
 public class UnitTypeExpr extends SimpleTypeExpr {
+    /**
+     * 无参构造函数，创建一个UNIT类型表达式
+     */
     public UnitTypeExpr() {
         super(null);
     }

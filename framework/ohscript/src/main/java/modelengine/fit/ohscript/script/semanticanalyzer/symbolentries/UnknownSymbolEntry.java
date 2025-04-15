@@ -17,6 +17,11 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.base.Ty
  * @since 1.0
  */
 public class UnknownSymbolEntry extends SymbolEntry {
+    /**
+     * 构造一个未知符号条目
+     * 
+     * @param node 终结符节点
+     */
     public UnknownSymbolEntry(TerminalNode node) {
         super(node, Category.VARIABLE);
     }

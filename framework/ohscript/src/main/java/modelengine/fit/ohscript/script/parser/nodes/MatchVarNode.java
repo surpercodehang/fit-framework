@@ -14,6 +14,9 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class MatchVarNode extends NonTerminalNode {
+    /**
+     * 构造一个匹配变量的节点
+     */
     public MatchVarNode() {
         super(NonTerminal.MATCH_VAR);
     }

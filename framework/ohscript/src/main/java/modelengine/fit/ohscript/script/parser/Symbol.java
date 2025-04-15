@@ -21,9 +21,7 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.base.No
  */
 public class Symbol<T extends NodeType> {
     /**
-     * 符号
-     *
-     * @param symbol 符号
+     * 表示符号。
      */
     protected final T symbol;
 

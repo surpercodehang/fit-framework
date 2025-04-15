@@ -16,6 +16,9 @@ import modelengine.fitframework.util.ObjectUtils;
  * @since 1.0
  */
 public class JsonEntityBodyNode extends NonTerminalNode {
+    /**
+     * JSON实体内容节点的构造函数
+     */
     public JsonEntityBodyNode() {
         super(NonTerminal.JSON_ENTITY_BODY);
     }

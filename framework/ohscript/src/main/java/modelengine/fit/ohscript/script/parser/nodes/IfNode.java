@@ -19,6 +19,9 @@ import java.util.List;
  * @since 1.0
  */
 public class IfNode extends NonTerminalNode {
+    /**
+     * if语句的分支列表
+     */
     private final List<IfBranch> branches = new ArrayList<>();
 
     /**

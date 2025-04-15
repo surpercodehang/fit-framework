@@ -18,6 +18,7 @@ import modelengine.fitframework.util.ObjectUtils;
 public class AsyncBlockNode extends NonTerminalNode {
     private static TypeExpr asyncTypeExpr = null;
 
+    /** 异步代码块 */
     private BlockNode block;
 
     /**

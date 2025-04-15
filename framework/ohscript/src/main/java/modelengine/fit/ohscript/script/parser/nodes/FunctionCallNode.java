@@ -19,8 +19,17 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 public class FunctionCallNode extends CallNode {
+    /**
+     * 函数名称节点
+     * 在语法分析过程中用于存储函数调用的名称
+     * 初始为null，在optimizeGama()方法中被赋值
+     */
     private SyntaxNode functionName = null;
 
+    /**
+     * 构造函数
+     * 创建一个新的函数调用节点实例
+     */
     public FunctionCallNode() {
         super(NonTerminal.FUNC_CALL);
     }

@@ -16,12 +16,24 @@ import java.io.Serializable;
 public class Location implements Serializable {
     private static final long serialVersionUID = -8804467929479718489L;
 
+    /**
+     * 源代码的起始行号
+     */
     private final int startLine;
 
+    /**
+     * 源代码的结束行号
+     */
     private final int endLine;
 
+    /**
+     * 源代码的起始字符位置
+     */
     private final int startPosition;
 
+    /**
+     * 源代码的结束字符位置
+     */
     private final int endPosition;
 
     /**

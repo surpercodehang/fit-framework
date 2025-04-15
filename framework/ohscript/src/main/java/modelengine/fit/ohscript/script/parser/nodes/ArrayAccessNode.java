@@ -15,8 +15,14 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class ArrayAccessNode extends CallNode {
+    /**
+     * 数组访问的索引节点
+     */
     private SyntaxNode index;
 
+    /**
+     * 数组访问的数组节点
+     */
     private SyntaxNode array;
 
     /**

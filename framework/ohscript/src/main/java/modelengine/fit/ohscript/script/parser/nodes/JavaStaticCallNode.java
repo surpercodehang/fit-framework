@@ -14,6 +14,9 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class JavaStaticCallNode extends NonTerminalNode {
+    /**
+     * Java静态调用节点的构造函数
+     */
     public JavaStaticCallNode() {
         super(NonTerminal.JAVA_STATIC_CALL);
     }

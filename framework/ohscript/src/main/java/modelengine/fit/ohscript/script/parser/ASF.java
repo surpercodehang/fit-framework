@@ -27,6 +27,10 @@ import java.util.Optional;
 public class ASF implements Serializable {
     private static final long serialVersionUID = -8932995151261532460L;
 
+    /**
+     * 存储抽象语法树的列表
+     * 每个AST代表一种可能的语法解析结果
+     */
     private final List<AST> asts = new ArrayList<>();
 
     /**
@@ -44,8 +48,16 @@ public class ASF implements Serializable {
      */
     private final Map<String, Pair<String, String>> httpOhs = new HashMap<>();
 
+    /**
+     * 符号作用域，用于管理变量和函数的作用域
+     */
     private final SymbolScope scope;
 
+    /**
+     * 外部可访问的类的映射表
+     * key: 类的别名
+     * value: 对应的Class对象
+     */
     private Map<String, Class<?>> externalClasses = new HashMap<>();
 
     /**
@@ -69,6 +81,11 @@ public class ASF implements Serializable {
         return ast;
     }
 
+    /**
+     * 获取 ASF 的根作用域。
+     *
+     * @return 表示 ASF 的根作用域的 {@link SymbolScope}。
+     */
     public SymbolScope scope() {
         return this.scope;
     }
@@ -116,10 +133,20 @@ public class ASF implements Serializable {
         this.externalClasses.put(key.substring(0, 1).toUpperCase(Locale.ROOT) + key.substring(1), clazz);
     }
 
+    /**
+     * 获取外部可访问的 Ohscript 对象的映射。
+     *
+     * @return 表示外部可访问的 Ohscript 对象的映射的 {@link Map}{@code <}{@link String}{@code , }{@link Object}{@code >}。
+     */
     public Map<String, Object> externalOhs() {
         return this.externalOhs;
     }
 
+    /**
+     * 获取外部可访问的类的映射。
+     *
+     * @return 表示外部可访问的类的映射的 {@link Map}{@code <}{@link String}{@code, }{@link Class}{@code <?>>}。
+     */
     public Map<String, Class<?>> externalClasses() {
         return this.externalClasses;
     }
@@ -136,6 +163,11 @@ public class ASF implements Serializable {
         this.fitOhs.put(alias, new Pair<>(fitGenericableId, argNum));
     }
 
+    /**
+     * 获取 fit 函数的 Ohscript 对象的映射。
+     *
+     * @return 表示 fit 函数的 Ohscript 对象映射的 {@link Map}{@code <}{@link String}{@code, }{@link Pair}{@code <}{@link String}{@code, }{@link Integer}{@code >>}。
+     */
     public Map<String, Pair<String, Integer>> fitOhs() {
         return this.fitOhs;
     }
@@ -152,6 +184,11 @@ public class ASF implements Serializable {
         this.httpOhs.put(alias, new Pair<>(url, method));
     }
 
+    /**
+     * 获取 http 调用的 Ohscript 对象的映射。
+     *
+     * @return 表示 http 调用的 Ohscript 对象映射的 {@link Map}{@code <}{@link String}{@code, }{@link Pair}{@code <}{@link String}{@code, }{@link String}{@code >>}。
+     */
     public Map<String, Pair<String, String>> httpOhs() {
         return this.httpOhs;
     }

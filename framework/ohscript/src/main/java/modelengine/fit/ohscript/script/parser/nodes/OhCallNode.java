@@ -18,10 +18,20 @@ import modelengine.fitframework.util.ObjectUtils;
  * @since 1.0
  */
 public class OhCallNode extends NonTerminalNode {
+    /**
+     * oh调用来源
+     */
     private OhFrom from;
 
+    /**
+     * 调用源节点
+     */
     private TerminalNode source;
 
+    /**
+     * 构造函数
+     * 初始化为OH_CALL类型的非终结符节点
+     */
     public OhCallNode() {
         super(NonTerminal.OH_CALL);
     }
