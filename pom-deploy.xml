@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.fitframework</groupId>
-    <artifactId>fitframework-parent</artifactId>
-    <version>3.5.0-SNAPSHOT</version>
+    <artifactId>parent</artifactId>
+    <version>3.5.0-M2</version>
     <packaging>pom</packaging>
 
-    <description>A Plugin-Based Programming Framework</description>
+    <description>FIT Framework</description>
     <url>https://github.com/ModelEngine-Group/fit-framework</url>
 
     <licenses>
@@ -27,6 +27,13 @@
                 <role>Maintainer</role>
             </roles>
         </developer>
+        <developer>
+            <name>Song Yongtan</name>
+            <email>271667068.qq.com</email>
+            <roles>
+                <role>Maintainer</role>
+            </roles>
+        </developer>
     </developers>
 
     <scm>
@@ -36,26 +43,7 @@
     </scm>
 
     <modules>
-        <module>fit-aop</module>
-        <module>fit-api</module>
-        <module>fit-broker</module>
-        <module>fit-builtin</module>
-        <module>fit-conf</module>
-        <module>fit-dependency</module>
-        <module>fit-extension</module>
-        <module>fit-reactor</module>
-        <module>fit-ioc</module>
-        <module>fit-launcher</module>
-        <module>fit-log</module>
-        <module>fit-maven-plugin</module>
-        <module>fit-plugin</module>
-        <module>fit-protocol-nestable-jar</module>
-        <module>fit-runtime</module>
-        <module>fit-starters</module>
-        <module>fit-test</module>
-        <module>fit-util</module>
-        <module>integration</module>
-        <module>jacoco-aggregator</module>
+        <module>framework</module>
     </modules>
 
     <properties>
@@ -64,32 +52,19 @@
         <java.version>17</java.version>
 
         <!-- FIT version -->
-        <fit.version>3.5.0-SNAPSHOT</fit.version>
+        <fit.version>3.5.0-M2</fit.version>
 
         <!-- Jacoco version -->
         <jacoco.version>0.8.10</jacoco.version>
 
         <!-- Maven plugin versions -->
         <maven.antrun.version>3.1.0</maven.antrun.version>
-        <maven.compiler.version>3.9.0</maven.compiler.version>
-        <maven.dependency.version>3.6.1</maven.dependency.version>
+        <maven.compiler.version>3.11.0</maven.compiler.version>
+        <maven.dependency.version>3.6.0</maven.dependency.version>
         <maven.jar.version>3.3.0</maven.jar.version>
-        <maven.javadoc.version>3.11.2</maven.javadoc.version>
-        <maven.surefire.version>3.2.5</maven.surefire.version>
+        <maven.surefire.version>3.1.2</maven.surefire.version>
         <maven.source.version>3.3.0</maven.source.version>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.fitframework</groupId>
-                <artifactId>fit-dependency</artifactId>
-                <version>${fit.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <plugins>
@@ -107,19 +82,6 @@
                         <arg>-parameters</arg>
                     </compilerArgs>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven.javadoc.version}</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -144,28 +106,24 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
                 <executions>
+                    <!--生成jacoco.exec-->
                     <execution>
                         <id>jacoco-initialize</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
-                        <configuration>
-                            <propertyName>argLine</propertyName>
-                        </configuration>
                     </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
+                    <!--配置jacoco的插件，用于生成 html报告-->
                     <execution>
-                        <id>sign-artifacts</id>
-                        <phase>deploy</phase>
+                        <id>default-report</id>
                         <goals>
-                            <goal>sign</goal>
+                            <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <includes>
+                                <include>modelengine/*</include>
+                            </includes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
