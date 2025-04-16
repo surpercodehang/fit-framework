@@ -14,6 +14,7 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class EntityExtensionNode extends EntityDeclareNode {
+    /** 宿主节点 */
     private SyntaxNode host;
 
     /**

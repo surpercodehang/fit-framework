@@ -18,6 +18,9 @@ import modelengine.fitframework.util.ObjectUtils;
  * @since 1.0
  */
 public class FunctionEntry extends KnownSymbolEntry {
+    /**
+     * 函数声明节点
+     */
     private final FunctionDeclareNode function;
 
     /**

@@ -20,10 +20,19 @@ import modelengine.fitframework.util.ObjectUtils;
  * @since 1.0
  */
 public class EntityBodyNode extends NonTerminalNode {
+    /**
+     * 宿主对象节点，用于存储Entity的宿主对象
+     */
     private SyntaxNode host = null;
 
+    /**
+     * 实体名称节点，用于存储Entity的声明名称
+     */
     private TerminalNode name;
 
+    /**
+     * 初始化 {@link EntityBodyNode} 的新实例。
+     */
     public EntityBodyNode() {
         super(NonTerminal.ENTITY_BODY);
     }

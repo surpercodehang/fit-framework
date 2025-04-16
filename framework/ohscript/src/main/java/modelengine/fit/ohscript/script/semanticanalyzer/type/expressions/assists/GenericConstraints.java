@@ -16,6 +16,11 @@ import modelengine.fit.ohscript.script.parser.nodes.SyntaxNode;
  * @since 1.0
  */
 public class GenericConstraints extends Constraints {
+    /**
+     * 泛型约束的构造函数
+     * 
+     * @param node 语法节点
+     */
     public GenericConstraints(SyntaxNode node) {
         super(node);
     }

@@ -20,6 +20,9 @@ import java.util.List;
  * @since 1.0
  */
 public class BlockNode extends NonTerminalNode {
+    /**
+     * 初始化 {@link BlockNode} 的新实例。
+     */
     public BlockNode() {
         super(NonTerminal.BLOCK_STATEMENT);
     }

@@ -15,8 +15,14 @@ import modelengine.fitframework.util.ObjectUtils;
  * @since 1.0
  */
 public class SystemExtensionNode extends NonTerminalNode {
+    /**
+     * 系统扩展节点名称
+     */
     private TerminalNode name;
 
+    /**
+     * 系统扩展节点构造函数
+     */
     public SystemExtensionNode() {
         super(NonTerminal.SYSTEM_EXTENSION);
     }

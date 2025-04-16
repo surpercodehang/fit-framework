@@ -16,14 +16,33 @@ import modelengine.fitframework.util.StringUtils;
  * @since 2023-12-18
  */
 public class FitExecutionException extends ScriptExecutionException {
+    /**
+     * 表示泛服务的唯一标识。
+     */
     private final String genericableId;
 
+    /**
+     * 表示泛服务实现的唯一标识。
+     */
     private final String fitableId;
 
+    /**
+     * 通过泛服务唯一标识和错误信息来初始化 {@link FitExecutionException} 的新实例。
+     *
+     * @param genericableId 表示泛服务的唯一标识的 {@link String}。
+     * @param message 表示错误信息的 {@link String}。
+     */
     public FitExecutionException(String genericableId, String message) {
         this(genericableId, StringUtils.EMPTY, message);
     }
 
+    /**
+     * 通过泛服务唯一标识、错误信息和异常原因来初始化 {@link FitExecutionException} 的新实例。
+     *
+     * @param genericableId 表示泛服务的唯一标识的 {@link String}。
+     * @param message 表示错误信息的 {@link String}。
+     * @param cause 表示异常原因的 {@link Throwable}。
+     */
     public FitExecutionException(String genericableId, String message, Throwable cause) {
         this(genericableId, StringUtils.EMPTY, message, cause);
     }

@@ -29,6 +29,12 @@
         </developer>
     </developers>
 
+    <scm>
+        <connection>scm:git:git://github.com/ModelEngine-Group/fit-framework.git</connection>
+        <developerConnection>scm:git:ssh://github.com/ModelEngine-Group/fit-framework.git</developerConnection>
+        <url>https://github.com/ModelEngine-Group/fit-framework</url>
+    </scm>
+
     <modules>
         <module>waterflow-bridge-fit-reactor</module>
         <module>waterflow-core</module>
@@ -119,6 +125,15 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.7.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
             </plugin>
         </plugins>
     </build>

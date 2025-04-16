@@ -14,6 +14,11 @@ import modelengine.fit.ohscript.script.parser.nodes.SyntaxNode;
  * @since 1.0
  */
 public abstract class ComplexTypeExpr extends ConcreteTypeExpr {
+    /**
+     * 通过语法树节点构造 {@link ComplexTypeExpr} 的新实例。
+     *
+     * @param node 表示语法树节点的 {@link SyntaxNode}。
+     */
     public ComplexTypeExpr(SyntaxNode node) {
         super(node);
     }

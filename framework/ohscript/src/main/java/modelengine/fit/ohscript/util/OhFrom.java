@@ -12,9 +12,24 @@ package modelengine.fit.ohscript.util;
  * @since 1.0
  */
 public enum OhFrom {
+    /**
+     * 外部扩展对象来源
+     */
     EXT("ext::"),
+
+    /**
+     * HTTP请求对象来源
+     */
     HTTP("http::"),
+
+    /**
+     * FIT框架对象来源
+     */
     FIT("fit::"),
+
+    /**
+     * 默认对象来源
+     */
     OH("");
 
     private final String name;

@@ -70,6 +70,12 @@ public class ASTEnv {
      */
     private List<SyntaxNode> runtimeNodes = new ArrayList<>();
 
+    /**
+     * 通过抽象语法树（AST）和抽象语法森林（ASF）环境初始化 {@link ASTEnv} 的新实例。
+     * 
+     * @param ast 表示抽象语法树（AST）的 {@link AST}。
+     * @param asfEnv 表示抽象语法森林（ASF）的环境的 {@link ASFEnv}。
+     */
     public ASTEnv(AST ast, ASFEnv asfEnv) {
         this.ast = ast;
         this.asfEnv = asfEnv;

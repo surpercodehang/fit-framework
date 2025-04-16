@@ -14,6 +14,11 @@ import modelengine.fit.ohscript.script.parser.nodes.SyntaxNode;
  * @since 1.0
  */
 public abstract class SimpleTypeExpr extends ConcreteTypeExpr {
+    /**
+     * 简单类型表达式的构造函数
+     * 
+     * @param node 语法节点
+     */
     public SimpleTypeExpr(SyntaxNode node) {
         super("simple", node);
     }

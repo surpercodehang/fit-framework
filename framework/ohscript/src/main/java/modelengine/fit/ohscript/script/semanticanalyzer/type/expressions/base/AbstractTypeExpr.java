@@ -27,10 +27,19 @@ public abstract class AbstractTypeExpr extends TypeExpr implements Projectable {
      */
     protected TypeExpr exactBe = null;
 
+    /**
+     * 类型约束对象，用于存储和管理类型相关的约束条件
+     */
     private final Constraints constraints;
 
+    /**
+     * 可能的类型集合，存储当前表达式可能的所有类型
+     */
     private final Set<TypeExpr> couldBe = new HashSet<>();
 
+    /**
+     * 类型投影，用于存储类型投影后的结果
+     */
     private TypeExpr projection;
 
     /**

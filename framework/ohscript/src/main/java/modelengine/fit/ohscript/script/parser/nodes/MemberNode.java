@@ -12,6 +12,9 @@ package modelengine.fit.ohscript.script.parser.nodes;
  * @since 1.0
  */
 public class MemberNode extends TerminalNode {
+    /**
+     * 原始终端节点
+     */
     private final TerminalNode origin;
 
     /**

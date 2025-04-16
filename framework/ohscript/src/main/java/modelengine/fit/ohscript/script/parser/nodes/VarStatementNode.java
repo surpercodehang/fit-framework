@@ -17,10 +17,18 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 public class VarStatementNode extends NonTerminalNode {
+    /**
+     * 构造函数，创建一个变量声明语句节点
+     */
     public VarStatementNode() {
         super(NonTerminal.VAR_STATEMENT);
     }
 
+    /**
+     * 判断变量是否可变
+     * 
+     * @return 返回true表示变量可变
+     */
     public boolean mutable() {
         return true;
     }

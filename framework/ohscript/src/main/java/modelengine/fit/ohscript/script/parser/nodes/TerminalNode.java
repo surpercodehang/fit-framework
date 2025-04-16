@@ -48,8 +48,14 @@ public class TerminalNode extends SyntaxNode implements Serializable {
      */
     protected Location location;
 
+    /**
+     * 终结节点的类型
+     */
     private final Terminal nodeType;
 
+    /**
+     * 终结节点对应的词法单元
+     */
     private Token token;
 
     /**

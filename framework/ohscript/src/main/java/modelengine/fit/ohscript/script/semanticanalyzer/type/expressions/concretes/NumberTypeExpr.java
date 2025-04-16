@@ -18,6 +18,11 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.base.Ty
  * @since 1.0
  */
 public class NumberTypeExpr extends SimpleTypeExpr {
+    /**
+     * 构造数值类型表达式
+     * 
+     * @param node 语法节点
+     */
     public NumberTypeExpr(SyntaxNode node) {
         super(node);
     }

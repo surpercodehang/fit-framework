@@ -39,6 +39,9 @@ public abstract class NonTerminalNode extends SyntaxNode {
      */
     private CommentsNode comments = null;
 
+    /**
+     * 位置信息
+     */
     private Location location = null;
 
     /**

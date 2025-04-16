@@ -18,6 +18,11 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.base.Ty
  * @since 1.0
  */
 public class BoolTypeExpr extends SimpleTypeExpr {
+    /**
+     * 通过语法节点初始化 {@link BoolTypeExpr} 的新实例。
+     *
+     * @param node 表示语法节点的 {@link SyntaxNode}。
+     */
     public BoolTypeExpr(SyntaxNode node) {
         super(node);
     }

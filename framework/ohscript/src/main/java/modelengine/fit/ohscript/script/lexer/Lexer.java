@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 词法分析器
- * </p>
- * 将源代码转换为一系列标记（tokens），这些标记是代码的基本组成单位
+ * 词法分析器。
+ * <p>将源代码转换为一系列标记（tokens），这些标记是代码的基本组成单位。</p>
  *
- * @since 1.0
+ * @author 张群辉
+ * @since 2023-05-01
  */
 public class Lexer {
     /**

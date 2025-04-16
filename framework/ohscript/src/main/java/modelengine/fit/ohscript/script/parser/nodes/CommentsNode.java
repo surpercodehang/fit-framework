@@ -16,6 +16,9 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class CommentsNode extends NonTerminalNode {
+    /**
+     * 初始化 {@link CommentsNode} 的新实例。
+     */
     public CommentsNode() {
         super(NonTerminal.COMMENT_STATEMENT);
     }

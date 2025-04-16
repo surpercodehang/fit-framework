@@ -18,6 +18,11 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.base.Ty
  * @since 1.0
  */
 public class MapTypeExpr extends ComplexTypeExpr {
+    /**
+     * 构造Map类型表达式
+     * 
+     * @param node 语法节点
+     */
     public MapTypeExpr(SyntaxNode node) {
         super(node);
     }

@@ -17,6 +17,9 @@ import java.util.List;
  * @since 1.0
  */
 public class ArgumentsNode extends NonTerminalNode {
+    /**
+     * 初始化 {@link ArgumentsNode} 的新实例。
+     */
     public ArgumentsNode() {
         super(NonTerminal.ARGUMENTS);
     }

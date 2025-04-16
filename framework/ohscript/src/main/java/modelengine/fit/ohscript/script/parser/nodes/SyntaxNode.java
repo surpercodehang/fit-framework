@@ -67,10 +67,22 @@ public abstract class SyntaxNode implements Interpretable, Serializable {
      */
     protected TypeExpr typeExpr = null;
 
+    /**
+     * 节点的唯一标识符，用于在语法树中唯一标识一个节点
+     * 通过Tool.newId()方法生成一个新的唯一ID
+     */
     private final long id = Tool.newId();
 
+    /**
+     * 存储当前节点的语法错误信息，包含错误类型和错误消息。
+     * 如果节点没有错误，则为null
+     */
     private Pair<SyntaxError, String> error = null;
 
+    /**
+     * 指向该节点所属的抽象语法树(AST)对象。
+     * 用于在语法分析和语义分析阶段访问整个语法树的信息
+     */
     private AST ast = null;
 
     /**
@@ -144,6 +156,7 @@ public abstract class SyntaxNode implements Interpretable, Serializable {
     /**
      * 获取当前节点的类型，这通常用于在语义分析阶段进行类型检查。
      *
+     * @param <T> 表示节点类型的 {@link NodeType}。
      * @return 当前节点的类型
      */
     public abstract <T extends NodeType> T nodeType();

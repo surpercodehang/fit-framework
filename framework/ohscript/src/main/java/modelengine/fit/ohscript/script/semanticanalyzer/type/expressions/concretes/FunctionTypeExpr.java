@@ -25,8 +25,14 @@ import modelengine.fitframework.util.ObjectUtils;
  * @since 1.0
  */
 public class FunctionTypeExpr extends ComplexTypeExpr implements Projectable {
+    /**
+     * 返回类型表达式
+     */
     private TypeExpr returnType;
 
+    /**
+     * 参数类型表达式
+     */
     private TypeExpr argumentType;
 
     /**

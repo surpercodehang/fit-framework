@@ -18,8 +18,14 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 public class EntityCallNode extends CallNode {
+    /**
+     * 成员节点，用于存储实体调用的成员信息
+     */
     private MemberNode member;
 
+    /**
+     * 初始化 {@link EntityCallNode} 的新实例。
+     */
     public EntityCallNode() {
         super(NonTerminal.ENTITY_CALL);
     }

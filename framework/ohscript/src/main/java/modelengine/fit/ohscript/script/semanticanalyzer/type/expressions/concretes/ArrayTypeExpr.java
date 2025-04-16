@@ -24,6 +24,9 @@ import modelengine.fitframework.util.ObjectUtils;
  * @since 1.0
  */
 public class ArrayTypeExpr extends ComplexTypeExpr implements Projectable {
+    /**
+     * 数组项的类型表达式
+     */
     private TypeExpr itemTypeExpr;
 
     /**

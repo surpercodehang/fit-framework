@@ -23,16 +23,40 @@ import java.io.Serializable;
 public class Token implements Serializable {
     private static final long serialVersionUID = 4293840596528932667L;
 
+    /**
+     * 终结符类型
+     */
     private final Terminal terminal;
 
+    /**
+     * 词素，即源代码中的实际字符串
+     */
     private final String lexeme;
 
+    /**
+     * 在源代码中的行号
+     */
     private final int line;
 
+    /**
+     * 在源代码行中的起始列位置
+     */
     private final int start;
 
+    /**
+     * 在源代码行中的结束列位置
+     */
     private final int end;
 
+    /**
+     * 构造函数
+     * 
+     * @param terminal 终结符类型
+     * @param lexeme 词素，源代码中的实际字符串
+     * @param line 源代码中的行号
+     * @param start 在源代码行中的起始列位置
+     * @param end 在源代码行中的结束列位置
+     */
     public Token(Terminal terminal, String lexeme, int line, int start, int end) {
         this.terminal = terminal;
         this.lexeme = lexeme;
@@ -41,6 +65,11 @@ public class Token implements Serializable {
         this.end = end;
     }
 
+    /**
+     * 获取token的终结符类型
+     * 
+     * @return 终结符类型
+     */
     public Terminal tokenType() {
         return this.terminal;
     }

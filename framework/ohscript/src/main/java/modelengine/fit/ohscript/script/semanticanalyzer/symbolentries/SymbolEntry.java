@@ -26,6 +26,10 @@ public abstract class SymbolEntry implements Serializable {
      */
     protected Category category;
 
+    /**
+     * 符号对应的终结符节点
+     * 用于存储符号在源代码中的位置信息和作用域信息
+     */
     private final TerminalNode node;
 
     /**

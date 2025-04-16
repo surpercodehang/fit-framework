@@ -47,10 +47,21 @@ public abstract class TypeExpr implements Serializable {
      */
     protected TypeExpr base = null;
 
+    /**
+     * 类型表达式的唯一标识符
+     */
     private final String key;
 
+    /**
+     * 存储类型表达式的成员变量映射
+     * 键为成员名称，值为对应的类型表达式
+     */
     private final Map<String, TypeExpr> members = new HashMap<>();
 
+    /**
+     * 存储系统预定义的成员方法
+     * 键为方法名称，值为对应的类型表达式
+     */
     private Map<String, TypeExpr> sysMembers;
 
     /**

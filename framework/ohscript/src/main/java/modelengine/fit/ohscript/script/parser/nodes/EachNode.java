@@ -15,8 +15,14 @@ import modelengine.fitframework.util.ObjectUtils;
  * @since 1.0
  */
 public class EachNode extends NonTerminalNode {
+    /**
+     * 迭代项参数节点
+     */
     private ArgumentNode itemArg;
 
+    /**
+     * 迭代索引参数节点
+     */
     private ArgumentNode indexArg;
 
     /**

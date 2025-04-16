@@ -15,6 +15,10 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  * @since 1.0
  */
 public class PipeForwardNode extends NonTerminalNode {
+    /**
+     * 管道前向节点的构造函数
+     * 用于创建一个新的管道前向节点实例
+     */
     public PipeForwardNode() {
         super(NonTerminal.PIPE_FORWARD);
     }

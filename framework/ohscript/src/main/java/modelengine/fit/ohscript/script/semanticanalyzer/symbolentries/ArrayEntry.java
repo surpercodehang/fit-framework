@@ -17,6 +17,12 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.concret
  * @since 1.0
  */
 public class ArrayEntry extends KnownSymbolEntry<ArrayTypeExpr> {
+    /**
+     * 通过终端节点和作用域来初始化 {@link ArrayEntry} 的新实例。
+     *
+     * @param node 表示终端节点的 {@link TerminalNode}。
+     * @param scope 表示作用域的 {@code long}。
+     */
     public ArrayEntry(TerminalNode node, long scope) {
         super(node, scope, Category.VARIABLE, TypeExprFactory.createArray(node.parent()));
     }

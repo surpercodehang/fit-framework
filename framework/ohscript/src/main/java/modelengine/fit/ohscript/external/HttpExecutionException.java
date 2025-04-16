@@ -15,8 +15,14 @@ import modelengine.fit.ohscript.script.errors.ScriptExecutionException;
  * @since 2023-12-21
  */
 public class HttpExecutionException extends ScriptExecutionException {
+    /**
+     * 表示 Http 调用的方法。
+     */
     private final String method;
 
+    /**
+     * 表示 Http 调用的地址。
+     */
     private final String url;
 
     /**

@@ -14,8 +14,14 @@ import modelengine.fit.ohscript.script.parser.nodes.SyntaxNode;
  * @since 1.0
  */
 public class OhPanic extends Exception {
+    /**
+     * 语法节点，表示错误发生的位置
+     */
     private final SyntaxNode node;
 
+    /**
+     * 错误代码，用于标识不同类型的错误
+     */
     private final Integer code;
 
     /**

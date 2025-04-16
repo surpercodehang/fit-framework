@@ -16,10 +16,21 @@ import modelengine.fit.ohscript.script.parser.nodes.SyntaxNode;
  * @since 1.0
  */
 public abstract class ConcreteTypeExpr extends TypeExpr {
+    /**
+     * 通过语法节点初始化 {@link ConcreteTypeExpr} 的新实例。
+     *
+     * @param node 表示语法节点的 {@link SyntaxNode}。
+     */
     public ConcreteTypeExpr(SyntaxNode node) {
         super(node);
     }
 
+    /**
+     * 通过键和语法节点初始化 {@link ConcreteTypeExpr} 的新实例。
+     *
+     * @param key 表示键的 {@link String}。
+     * @param node 表示语法节点的 {@link SyntaxNode}。
+     */
     public ConcreteTypeExpr(String key, SyntaxNode node) {
         super(key, node);
     }

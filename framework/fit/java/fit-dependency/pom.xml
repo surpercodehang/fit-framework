@@ -8,7 +8,7 @@
     <version>3.6.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <description>Dependency Management Of The Plugin-Based Programming Framework</description>
+    <description>Dependency Management of The Plugin-Based Programming Framework</description>
     <url>https://github.com/ModelEngine-Group/fit-framework</url>
 
     <licenses>

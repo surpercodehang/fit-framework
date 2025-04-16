@@ -34,6 +34,7 @@ public class Serializer<I> {
      * 序列化方法
      *
      * @param obj 待序列化的对象
+     * @param <T> 表示待序列化的对象类型的 {@link T}。
      * @return 序列化后的对象
      * @throws IOException 如果发生I/O错误
      */

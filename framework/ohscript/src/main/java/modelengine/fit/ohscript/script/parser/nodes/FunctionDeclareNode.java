@@ -34,8 +34,14 @@ public class FunctionDeclareNode extends NonTerminalNode {
      */
     protected TerminalNode funcName = null;
 
+    /**
+     * 闭包函数节点
+     */
     private FunctionDeclareNode closure;
 
+    /**
+     * 是否为匿名函数
+     */
     private Boolean isAnonymous = null;
 
     /**

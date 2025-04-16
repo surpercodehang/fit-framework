@@ -19,6 +19,9 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.base.Ty
  * @since 1.0
  */
 public class IgnoreTypeExpr extends SimpleTypeExpr implements VainTypeExpr {
+    /**
+     * 无参构造函数，创建一个忽略类型表达式
+     */
     public IgnoreTypeExpr() {
         super(null);
     }

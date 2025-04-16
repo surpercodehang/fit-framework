@@ -17,6 +17,9 @@ import modelengine.fit.ohscript.script.parser.nodes.SyntaxNode;
  * @since 2023-12-15
  */
 public class ScriptExecutionException extends RuntimeException {
+    /**
+     * 存储引发异常的语法节点
+     */
     private final SyntaxNode node;
 
     /**

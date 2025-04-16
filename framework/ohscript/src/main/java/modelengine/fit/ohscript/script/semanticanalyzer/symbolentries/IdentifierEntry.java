@@ -19,8 +19,14 @@ import modelengine.fit.ohscript.script.semanticanalyzer.type.expressions.concret
  * @since 1.0
  */
 public class IdentifierEntry extends KnownSymbolEntry {
+    /**
+     * 标识符是否可变
+     */
     private final boolean mutable;
 
+    /**
+     * 标识符所在的语法节点
+     */
     private final SyntaxNode host;
 
     /**

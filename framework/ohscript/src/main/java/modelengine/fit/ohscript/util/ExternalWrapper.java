@@ -18,10 +18,22 @@ import java.io.Serializable;
 public class ExternalWrapper implements Serializable {
     private static final long serialVersionUID = 4727900091448954885L;
 
+    /**
+     * 用于存储外部对象的键
+     */
     private final String key;
 
+    /**
+     * 存储被包装的外部对象
+     */
     private Object object;
 
+    /**
+     * 通过键和值来初始化 {@link ExternalWrapper} 的新实例。
+     *
+     * @param key 表示键的 {@link String}。
+     * @param object 表示值的 {@link Object}。
+     */
     public ExternalWrapper(String key, Object object) {
         this.object = object;
         this.key = key;

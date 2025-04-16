@@ -108,6 +108,7 @@ public class Tool {
      * 通过反射和Unsafe类创建一个新的实例，无需调用构造方法
      *
      * @param clazz 类型
+     * @param <T> 表示实际类型的 {@link T}。
      * @return 返回创建的实例
      */
     public static <T> T createInstance(Class<T> clazz) {
@@ -120,6 +121,7 @@ public class Tool {
      * @param clazz 类型
      * @param agent 该Java对象的ohscript扩展代理
      * @param env astEnv
+     * @param <T> 表示实际类型的 {@link T}。
      * @return 返回创建的代理对象
      * @throws Exception 抛出的异常
      */
@@ -134,6 +136,7 @@ public class Tool {
      * @param origin 待扩展Java对象
      * @param agent 该Java对象的ohscript扩展代理
      * @param env astEnv
+     * @param <T> 表示实际类型的 {@link T}。
      * @return 返回创建的代理对象
      * @throws Exception 抛出的异常
      */

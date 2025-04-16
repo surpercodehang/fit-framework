@@ -18,9 +18,7 @@ import modelengine.fit.ohscript.script.parser.NonTerminal;
  */
 public class VarAssignmentNode extends InitialAssignmentNode {
     /**
-     * 构造函数
-     *
-     * @param nodeType 节点类型
+     * 初始化 {@link VarAssignmentNode} 的新实例。
      */
     public VarAssignmentNode() {
         super();
