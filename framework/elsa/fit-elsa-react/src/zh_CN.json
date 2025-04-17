@@ -403,7 +403,6 @@
   "llmOutputPopover": "大模型运行完成后生成的内容。",
   "modeSelect": "模式选择",
   "directlyOutputTheResult": "直接输出结果",
-  "endOutputPopover": "<p>这些变量将在机器人完成工作流调用后输出。</p>\n<p>在“返回变量”模式下，这些变量将由机器人汇总并回复给用户；</p>\n<p>在“直接回答”模式下，机器人将只回复配置卡时可以使用的变量。</p>",
   "conditionBranch": "条件分支",
   "addBranch": "添加分支",
   "variable": "变量",

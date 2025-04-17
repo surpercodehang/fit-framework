@@ -4,15 +4,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import {Col, Collapse, Form, Popover, Row} from "antd";
-import React from "react";
-import {QuestionCircleOutlined} from '@ant-design/icons';
-import "./style.css";
-import {OutputVariableRow} from "@/components/end/OutputVariableRow.jsx";
-import {useDispatch} from "@/components/DefaultRoot.jsx";
-import PropTypes from "prop-types";
-import ArrayUtil from "@/components/util/ArrayUtil.js";
-import {Trans, useTranslation} from "react-i18next";
+import {Col, Collapse, Form, Row} from 'antd';
+import React from 'react';
+import './style.css';
+import {OutputVariableRow} from '@/components/end/OutputVariableRow.jsx';
+import {useDispatch} from '@/components/DefaultRoot.jsx';
+import PropTypes from 'prop-types';
+import ArrayUtil from '@/components/util/ArrayUtil.js';
+import {useTranslation} from 'react-i18next';
 
 const {Panel} = Collapse;
 
@@ -38,12 +37,6 @@ const _OutputVariable = ({inputParams, shapeStatus}) => {
         dispatch({type: "editOutputVariable", id: id, changes: changes});
     };
 
-
-    const tips =
-        <div className={"jade-font-size"} style={{lineHeight: "1.2"}}>
-            <Trans i18nKey="endOutputPopover" components={{p: <p/>}}/>
-        </div>;
-
     return (
         <div>
             <Collapse bordered={false} className="jade-custom-collapse"
@@ -55,13 +48,6 @@ const _OutputVariable = ({inputParams, shapeStatus}) => {
                         <div
                             style={{display: 'flex', alignItems: 'center', justifyContent: "flex-start"}}>
                             <span className="jade-panel-header-font">{t('output')}</span>
-                            <Popover
-                              content={tips}
-                              align={{offset: [0, 3]}}
-                              overlayClassName={'jade-custom-popover'}
-                            >
-                                <QuestionCircleOutlined className="jade-panel-header-popover-content"/>
-                            </Popover>
                         </div>
                     }
                     className="jade-panel"

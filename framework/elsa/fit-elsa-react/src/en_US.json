@@ -111,7 +111,6 @@
   "llmOutputPopover": "Content generated after the foundation model is executed.",
   "modeSelect": "Mode",
   "directlyOutputTheResult": "Directly output result",
-  "endOutputPopover": "<p>These variables will be output after the bot calls the workflow. </p>\n<p>In variable return mode, the bot summarizes these variables and replies to the user.</p>\n<p> In direct answer mode, the bot replies only variables that can be used when the card is configured.</p>",
   "conditionBranch": "Condition Branch",
   "addBranch": "Add Branch",
   "compareObject": "Compared Object",
