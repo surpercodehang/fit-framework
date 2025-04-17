@@ -4,7 +4,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import {copyPasteHelper, ElsaCopyHandler, page, shapeDataHelper, sleep, uuid, PAGE_OPERATION_MODE} from '@fit-elsa/elsa-core';
+import {copyPasteHelper, ElsaCopyHandler, page, PAGE_OPERATION_MODE, shapeDataHelper, sleep, uuid} from '@fit-elsa/elsa-core';
 import {SYSTEM_ACTION, VIRTUAL_CONTEXT_NODE} from '@/common/Consts.js';
 import {conditionRunner, inactiveNodeRunner, standardRunner} from '@/flow/runners.js';
 import {message} from 'antd';
@@ -615,6 +615,22 @@ export const jadeFlowPage = (div, graph, name, id) => {
       },
     });
     return beDeletedShapes;
+  };
+
+  /**
+   * @override
+   */
+  const reorganizeNodes = self.reorganizeNodes;
+  self.reorganizeNodes = (scale, nodes = self.sm.getShapes(s => s.isTypeof('jadeNode')), lines = self.sm.getShapes(s => s.isTypeof('jadeEvent'))) => {
+    lines.sort((a, b) => {
+      if (a.fromShape !== b.fromShape) {
+        return 0;
+      }
+      const aFromConnector = a.definedFromConnector;
+      const bFromConnector = b.definedFromConnector;
+      return aFromConnector.localeCompare(bFromConnector);
+    });
+    reorganizeNodes.apply(self, [scale, nodes, lines]);
   };
 
   return self;
