@@ -27,13 +27,14 @@ export const JadePanelHeader = ({text, tips, shapeStatus, onClick, editable = tr
     return (<>
         <div className='panel-header'>
             <span className='jade-panel-header-font'>{t(text)}</span>
-            <Popover
+            {tips && <Popover
               content={tips}
               align={{offset: [0, 3]}}
               overlayClassName={'jade-custom-popover'}
             >
-                <QuestionCircleOutlined className='jade-panel-header-popover-content'/>
+                <QuestionCircleOutlined className="jade-panel-header-popover-content"/>
             </Popover>
+            }
             {
                 editable ? (<>
                     <Button disabled={shapeStatus.disabled}
@@ -52,7 +53,7 @@ export const JadePanelHeader = ({text, tips, shapeStatus, onClick, editable = tr
 
 JadePanelHeader.propTypes = {
     text: PropTypes.string.isRequired,
-    tips: PropTypes.object.isRequired,
+    tips: PropTypes.object,
     shapeStatus: PropTypes.object.isRequired,
     onClick: PropTypes.func,
     editable: PropTypes.bool,

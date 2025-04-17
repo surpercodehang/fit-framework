@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ArrayUtil from '@/components/util/ArrayUtil.js';
 import {Checkbox, Collapse, Form} from 'antd';
-import {Trans, useTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {useDispatch} from '@/components/DefaultRoot.jsx';
 import {JadePanelHeader} from '@/components/common/JadePanelHeader.jsx';
 
@@ -26,10 +26,6 @@ const {Panel} = Collapse;
 const _EndInputForm = ({inputParams, shapeStatus}) => {
     const dispatch = useDispatch();
     const {t} = useTranslation();
-    const tips =
-        <div className={'jade-font-size'} style={{lineHeight: '1.2'}}>
-            <Trans i18nKey='endOutputPopover' components={{p: <p/>}}/>
-        </div>;
     const enableLog = inputParams.find(item => item.name === 'enableLog');
 
     // item被修改.
@@ -52,7 +48,7 @@ const _EndInputForm = ({inputParams, shapeStatus}) => {
     return (<>
         <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['Output variable']}>
             <Panel
-              header={<JadePanelHeader text={'output'} tips={tips} shapeStatus={shapeStatus} onClick={addItem}/>}
+              header={<JadePanelHeader text={'output'} shapeStatus={shapeStatus} onClick={addItem}/>}
               className='jade-panel'
               key='Output variable'
             >
