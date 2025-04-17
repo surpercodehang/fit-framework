@@ -33,6 +33,7 @@ import {addCommand, deleteCommand, positionCommand} from './commands.js';
 import {guideLineUtil} from '../common/guideLineUtil.js';
 import {copyPasteHelper} from '../actions/copyPasteHelper.js';
 import {shapeManager} from './shapeManager.js';
+import {getLayoutByDagre} from '../common/layoutUtil';
 
 /**
  * 最顶层容器，代表了一页画
@@ -778,6 +779,27 @@ const page = (div, graph, name, id, iDrawer = interactDrawer, pDrawer = pageDraw
     let scale = Math.min(xScale, yScale, maxScale ?? PAGE_SCALE_MAX);
     scale = Math.max(minScale ?? PAGE_SCALE_MIN, scale);
     self.toScreenCenter(scale, scale);
+  };
+
+  /**
+   * 调整节点布局。
+   *
+   * @param scale 页面缩放比。
+   * @param nodes 需要调整的节点列表。
+   * @param lines 需要调整的线列表。
+   */
+  self.reorganizeNodes = (scale, nodes = self.sm.getShapes(s => s.isTypeof('jadeNode')), lines = self.sm.getShapes(s => s.isTypeof('jadeEvent'))) => {
+    const DEFAULT_REORGANIZE_PADDING = 40;
+    const layout = getLayoutByDagre(nodes, lines);
+    nodes.forEach(node => {
+      const nodeWithLayoutPos = layout.node(node.id);
+      node.moveTo(nodeWithLayoutPos.x - (node.width / 2), nodeWithLayoutPos.y - (node.height / 2));
+    });
+    lines.forEach(line => {
+      line.onEffect();
+    });
+    self.toScreenCenter(scale, scale);
+    self.moveTo(DEFAULT_REORGANIZE_PADDING, DEFAULT_REORGANIZE_PADDING);
   };
 
   self.resize = () => {
@@ -2403,7 +2425,7 @@ const setMouseActions = (pageVal) => {
 
   const shouldParentFocusFirst = (parent) => {
     return parent.containerFocusFirst && !parent.hasChildFocused();
-  }
+  };
 
   /**
    * 鼠标点击时，得到的最符合条件的shape，没有condition，只要在坐标内，就可以得到
