@@ -26,7 +26,7 @@
             <artifactId>fit-reactor</artifactId>
         </dependency>
 
-        <!-- Micro genericables -->
+        <!-- Services -->
         <dependency>
             <groupId>org.fitframework.service</groupId>
             <artifactId>fit-client</artifactId>
@@ -38,7 +38,6 @@
         <dependency>
             <groupId>org.fitframework.service</groupId>
             <artifactId>fit-security</artifactId>
-            <version>${fit.version}</version>
         </dependency>
 
         <!-- Test -->
@@ -64,7 +63,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <version>${maven.antrun.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>

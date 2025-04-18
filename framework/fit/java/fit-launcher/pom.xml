@@ -29,7 +29,6 @@
             <plugin>
                 <groupId>org.fitframework</groupId>
                 <artifactId>fit-build-maven-plugin</artifactId>
-                <version>${fit.version}</version>
                 <executions>
                     <execution>
                         <id>package-launcher</id>
@@ -42,7 +41,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven.jar.version}</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -58,7 +56,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <version>${maven.antrun.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>

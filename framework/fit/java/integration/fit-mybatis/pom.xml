@@ -48,7 +48,6 @@
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-test-framework</artifactId>
-            <version>${fit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

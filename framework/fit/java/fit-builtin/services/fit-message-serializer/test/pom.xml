@@ -12,6 +12,7 @@
     <artifactId>fit-message-serializer-test</artifactId>
 
     <dependencies>
+        <!-- FIT core -->
         <dependency>
             <groupId>org.fitframework.service</groupId>
             <artifactId>fit-message-serializer</artifactId>

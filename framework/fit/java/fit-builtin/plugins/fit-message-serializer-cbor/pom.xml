@@ -11,11 +11,6 @@
 
     <artifactId>fit-message-serializer-cbor</artifactId>
 
-    <properties>
-        <!-- Test versions -->
-        <lombok.version>1.18.36</lombok.version>
-    </properties>
-
     <dependencies>
         <!-- FIT core -->
         <dependency>
@@ -27,7 +22,7 @@
             <artifactId>fit-util</artifactId>
         </dependency>
 
-        <!-- Micro genericables -->
+        <!-- Services -->
         <dependency>
             <groupId>org.fitframework.service</groupId>
             <artifactId>fit-message-serializer</artifactId>
@@ -62,7 +57,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -75,14 +69,8 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.fitframework</groupId>
-                <artifactId>fit-build-maven-plugin</artifactId>
-                <version>${fit.version}</version>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <version>${maven.antrun.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>

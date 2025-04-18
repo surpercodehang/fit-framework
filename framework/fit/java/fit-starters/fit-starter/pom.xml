@@ -15,51 +15,42 @@
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-runtime</artifactId>
-            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-conf</artifactId>
-            <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-conf-yaml</artifactId>
-            <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-ioc</artifactId>
-            <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-plugin</artifactId>
-            <version>${fit.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>
-            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-util</artifactId>
-            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-log-console</artifactId>
-            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-reactor</artifactId>
-            <version>${fit.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -3,6 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <name>FIT Dependency Management</name>
     <groupId>org.fitframework</groupId>
     <artifactId>fit-dependency</artifactId>
     <version>3.5.0-SNAPSHOT</version>
@@ -50,8 +51,10 @@
         <h2.version>2.3.232</h2.version>
 
         <!-- Maven plugin versions -->
+        <maven.gpg.version>3.0.1</maven.gpg.version>
         <maven.javadoc.version>3.11.2</maven.javadoc.version>
         <maven.source.version>3.3.0</maven.source.version>
+        <central-publishing.maven-plugin.version>0.7.0</central-publishing.maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -327,6 +330,11 @@
             </dependency>
             <dependency>
                 <groupId>org.fitframework.plugin</groupId>
+                <artifactId>fit-security-simple</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-server-http</artifactId>
                 <version>${fit.version}</version>
             </dependency>
@@ -406,7 +414,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>${maven.gpg.version}</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -420,7 +428,7 @@
             <plugin>
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>0.7.0</version>
+                <version>${central-publishing.maven-plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <publishingServerId>central</publishingServerId>

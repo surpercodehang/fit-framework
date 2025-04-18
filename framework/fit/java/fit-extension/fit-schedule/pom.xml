@@ -12,6 +12,7 @@
     <artifactId>fit-schedule</artifactId>
 
     <dependencies>
+        <!-- FIT core -->
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>

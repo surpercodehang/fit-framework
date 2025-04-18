@@ -14,7 +14,6 @@
     <properties>
         <!-- Third-party versions -->
         <druid.version>1.2.20</druid.version>
-        <h2.version>2.3.232</h2.version>
     </properties>
 
     <dependencies>
@@ -45,7 +44,6 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
