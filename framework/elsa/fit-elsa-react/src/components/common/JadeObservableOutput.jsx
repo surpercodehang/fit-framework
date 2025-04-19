@@ -18,6 +18,7 @@ import PropTypes from 'prop-types';
 import {Trans, useTranslation} from 'react-i18next';
 import {convertToTreeData, findChildIds} from '@/components/util/JadeConfigUtils.js';
 import {removeFirstLevelLine} from '@/components/util/CssUtil.js';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -93,7 +94,7 @@ function _JadeObservableOutput({disabled, output}) {
   };
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['codeOutputPanel']}>
+    <JadeCollapse defaultActiveKey={['codeOutputPanel']}>
       {<Panel key={'codeOutputPanel'}
               header={<div className='panel-header'>
                 <span className='jade-panel-header-font'>{t('output')}</span>
@@ -115,7 +116,7 @@ function _JadeObservableOutput({disabled, output}) {
               titleRender={renderTreeNode}
         />
       </Panel>}
-    </Collapse>
+    </JadeCollapse>
   </>);
 }
 

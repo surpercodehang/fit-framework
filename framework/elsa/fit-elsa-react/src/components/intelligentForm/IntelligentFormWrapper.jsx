@@ -7,12 +7,13 @@
 import {useLayoutEffect, useState} from 'react';
 import {Button, Collapse} from 'antd';
 import {DeleteOutlined, PlusOutlined} from '@ant-design/icons';
-import {useDispatch, useShapeContext} from '@/components/DefaultRoot.jsx';
+import {useConfigContext, useDispatch, useShapeContext} from '@/components/DefaultRoot.jsx';
 import {v4 as uuidv4} from 'uuid';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
 import {InvokeOutput} from '@/components/common/InvokeOutput.jsx';
 import {IntelligentInputFormItem} from '@/components/intelligentForm/IntelligentInputFormItem.jsx';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -32,6 +33,7 @@ export default function IntelligentFormWrapper({data, shapeStatus}) {
   const {t} = useTranslation();
   const dispatch = useDispatch();
   const shape = useShapeContext();
+  const isConfig = useConfigContext();
   const items = data.converter.entity.inputParams.find(
     (item) => item.name === 'schema'
   )?.value.parameters;
@@ -39,7 +41,7 @@ export default function IntelligentFormWrapper({data, shapeStatus}) {
 
   // items中所有初始都为打开状态
   const [openItems, setOpenItems] = useState(() => {
-    return items.map(item => item.id);
+    return isConfig ? items.map(item => item.id) : [];
   });
 
   // 智能表单节点使用JadeInput，但输出的地方外层需要套一个output，在此处把output注册
@@ -67,7 +69,9 @@ export default function IntelligentFormWrapper({data, shapeStatus}) {
     // 智能表单节点入参最大数量为30
     if (items.length < 30) {
       const newItemId = 'input_' + uuidv4();
-      setOpenItems([...openItems, newItemId]); // 将新元素 key 添加到 openItems 数组中
+      if (isConfig) {
+        setOpenItems([...openItems, newItemId]); // 将新元素 key 添加到 openItems 数组中
+      }
       dispatch({type: 'addParam', id: newItemId});
     }
   };
@@ -101,29 +105,16 @@ export default function IntelligentFormWrapper({data, shapeStatus}) {
     dispatch({type: 'deleteParam', id: itemId});
   };
 
-  const content = (<div className={'jade-font-size'} style={{lineHeight: '1.2'}}>
-    {/*Todo 修改为intelligentFormItemPopover*/}
-    {/*<Trans i18nKey="startNodeInputPopover" components={{p: <p/>}}/>*/}
-  </div>);
-
   return (<>
     <div>
       <div style={{display: 'flex', alignItems: 'center', marginBottom: '8px', paddingLeft: '8px', paddingRight: '4px', height: '32px'}}>
         <div className='jade-panel-header-font'>{t('formItem')}</div>
-        {/*<Popover*/}
-        {/*  content={content}*/}
-        {/*  align={{offset: [0, 3]}}*/}
-        {/*  overlayClassName={'jade-custom-popover'}*/}
-        {/*>*/}
-        {/*  <QuestionCircleOutlined className="jade-panel-header-popover-content"/>*/}
-        {/*</Popover>*/}
         {renderAddInputIcon()}
       </div>
-      <Collapse bordered={false}
-                activeKey={openItems}
-                onChange={(keys) => setOpenItems(keys)}
-                style={{backgroundColor: 'transparent'}}
-                className="jade-custom-collapse">
+      <JadeCollapse
+        activeKey={openItems}
+        onChange={(keys) => setOpenItems(keys)}
+        style={{backgroundColor: 'transparent'}}>
         {
           items.map((item) => (
             <Panel
@@ -143,7 +134,7 @@ export default function IntelligentFormWrapper({data, shapeStatus}) {
             </Panel>
           ))
         }
-      </Collapse>
+      </JadeCollapse>
       <InvokeOutput outputData={outputDataConvert(items)} isObservableTree={false}/>
     </div>
   </>);

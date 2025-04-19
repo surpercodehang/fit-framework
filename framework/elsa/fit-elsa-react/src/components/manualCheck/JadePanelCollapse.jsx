@@ -7,6 +7,7 @@
 import React from 'react';
 import {Button, Collapse, Popover} from 'antd';
 import {PlusOutlined, QuestionCircleOutlined} from '@ant-design/icons';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -26,8 +27,7 @@ const {Panel} = Collapse;
  */
 const JadePanelCollapse = ({defaultActiveKey, panelKey, headerText, children, panelStyle, disabled, triggerSelect, popoverContent}) => {
     return (<>
-        <Collapse bordered={false} className="jade-collapse-custom-background-color"
-                  defaultActiveKey={defaultActiveKey}>
+        <JadeCollapse className="jade-collapse-custom-background-color" defaultActiveKey={defaultActiveKey}>
             <Panel
                     key={panelKey}
                     header={
@@ -57,7 +57,7 @@ const JadePanelCollapse = ({defaultActiveKey, panelKey, headerText, children, pa
             >
                 {children}
             </Panel>
-        </Collapse>
+        </JadeCollapse>
     </>);
 };
 

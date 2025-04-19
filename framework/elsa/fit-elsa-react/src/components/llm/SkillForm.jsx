@@ -15,6 +15,7 @@ import ToolIcon from '../asserts/icon-tool.svg?react';
 import WorkflowIcon from '../asserts/icon-workflow.svg?react';
 import {useTranslation} from 'react-i18next';
 import {TOOL_TYPE} from '@/common/Consts.js';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -56,8 +57,7 @@ const _SkillForm = ({toolOptions, disabled}) => {
   };
 
   return (
-    <Collapse bordered={false} className='jade-custom-collapse'
-              defaultActiveKey={['skillPanel']}>
+    <JadeCollapse defaultActiveKey={['skillPanel']}>
       {
         <Panel
           key={'skillPanel'}
@@ -78,7 +78,7 @@ const _SkillForm = ({toolOptions, disabled}) => {
           <SkillContent toolOptions={toolOptions} disabled={disabled} dispatch={dispatch} t={t}/>
         </Panel>
       }
-    </Collapse>
+    </JadeCollapse>
   );
 };
 

@@ -18,6 +18,7 @@ const DataContext = createContext(null);
 const ShapeContext = createContext(null);
 const DispatchContext = createContext(null);
 const FormContext = createContext(null);
+const ConfigContext = createContext(null);
 
 /**
  * 默认根节点，作为其他所有组件的容器.
@@ -133,12 +134,14 @@ export const DefaultRoot = forwardRef(function (
             <FormContext.Provider value={form}>
               <ShapeContext.Provider value={shape}>
                 <DataContext.Provider value={data}>
-                  <div
-                    className="react-node-content"
-                    style={{borderRadius: `${shape.borderRadius}px`}}
-                  >
-                    {component.getReactComponents(shapeStatus, data, false)}
-                  </div>
+                  <ConfigContext.Provider value={false}>
+                    <div
+                      className="react-node-content"
+                      style={{borderRadius: `${shape.borderRadius}px`}}
+                    >
+                      {component.getReactComponents(shapeStatus, data)}
+                    </div>
+                  </ConfigContext.Provider>
                 </DataContext.Provider>
               </ShapeContext.Provider>
             </FormContext.Provider>
@@ -168,9 +171,11 @@ export const DefaultRoot = forwardRef(function (
                 <FormContext.Provider value={form}>
                   <ShapeContext.Provider value={shape}>
                     <DataContext.Provider value={data}>
-                      <div className="react-node-content">
-                        {component.getReactComponents(shapeStatus, data, true)}
-                      </div>
+                      <ConfigContext.Provider value={true}>
+                        <div className="react-node-content">
+                          {component.getReactComponents(shapeStatus, data)}
+                        </div>
+                      </ConfigContext.Provider>
                     </DataContext.Provider>
                   </ShapeContext.Provider>
                 </FormContext.Provider>
@@ -204,4 +209,8 @@ export function useDispatch() {
 
 export function useFormContext() {
   return useContext(FormContext);
+}
+
+export function useConfigContext() {
+  return useContext(ConfigContext);
 }

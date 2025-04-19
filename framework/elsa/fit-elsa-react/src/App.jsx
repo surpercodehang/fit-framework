@@ -241,6 +241,32 @@ function App({i18n}) {
         <Button onClick={() => window.agent.createNodeByPosition('textExtractionNodeState', {x:100, y:100}, {uniqueName : ''})}>创建文本提取节点</Button>
         <Button onClick={() => window.agent.createNodeByPosition('queryOptimizationNodeState', {x:100, y:100}, {uniqueName : ''})}>创建问题优化节点</Button>
         <Button onClick={() => window.agent.createNodeByPosition('codeNodeState', {x:100, y:100}, {uniqueName : ''})}>创建code节点</Button>
+        <Button onClick={() => {
+          const nodeTypes = ['endNodeEnd',
+            'retrievalNodeState',
+            'llmNodeState',
+            'manualCheckNodeState',
+            'conditionNodeCondition',
+            'codeNodeState',
+            'knowledgeRetrievalNodeState',
+            'queryOptimizationNodeState',
+            'textExtractionNodeState',
+            'questionClassificationNodeCondition',
+            'variableAggregationNodeState',
+            'httpNodeState',
+            'fileExtractionNodeState',
+            'textToImageNodeState',
+            'noteNode',
+            'loopNodeState',
+            'intelligentFormNodeState'];
+          nodeTypes.forEach((type, index) => {
+            window.agent.createNodeByPosition(
+              type,
+              {x: 100 + index * 200, y: 100},
+              {uniqueName: ''},
+            );
+          });
+        }}>创建每一种节点</Button>
       </div>
       <div id='stage' style={{position: 'relative', width: 1600, height: 800}}></div>
       <CodeDrawer container={document.getElementById('stage')}

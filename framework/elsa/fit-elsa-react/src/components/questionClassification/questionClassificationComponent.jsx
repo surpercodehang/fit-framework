@@ -208,8 +208,8 @@ export const questionClassificationComponent = (jadeConfig, shape) => {
   /**
    * @Override
    */
-  self.getReactComponents = (shapeStatus, data, isConfig) => {
-    return (<><QuestionClassificationWrapper shapeStatus={shapeStatus} data={data} isConfig={isConfig}/></>);
+  self.getReactComponents = (shapeStatus, data) => {
+    return (<><QuestionClassificationWrapper shapeStatus={shapeStatus} data={data}/></>);
   };
 
   /**

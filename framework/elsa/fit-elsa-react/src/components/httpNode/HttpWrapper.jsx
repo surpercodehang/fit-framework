@@ -107,9 +107,6 @@ const _HttpWrapper = ({data, shapeStatus}) => {
 
   return (<>
     <JadeInputForm
-      typeSelectClassName={'http-field-type-select'}
-      fieldValueClassName={'http-field-value'}
-      deleteBtnClassName={'delete-btn'}
       shapeStatus={shapeStatus}
       items={initItems()}
       addItem={addItem}

@@ -11,6 +11,7 @@ import React from 'react';
 import {Trans, useTranslation} from 'react-i18next';
 import {JadeReferenceMultiTreeSelect} from '@/components/common/JadeReferenceMultiTreeSelect.jsx';
 import {QuestionCircleOutlined} from '@ant-design/icons';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -44,7 +45,7 @@ const _KnowledgeForm = ({knowledgeData, disabled}) => {
       dispatch({type: 'moveKnowledgeItem', id: id, updateParams: [{key: 'referenceKey', value: referenceKey}, {key: 'value', value: value}, {key: 'type', value: type}]});
   };
 
-  return (<Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['knowledgePanel']}>
+  return (<JadeCollapse defaultActiveKey={['knowledgePanel']}>
     {<Panel
       key={'knowledgePanel'}
       header={
@@ -77,7 +78,7 @@ const _KnowledgeForm = ({knowledgeData, disabled}) => {
         />
       </div>
     </Panel>}
-  </Collapse>);
+  </JadeCollapse>);
 };
 
 _KnowledgeForm.propTypes = {

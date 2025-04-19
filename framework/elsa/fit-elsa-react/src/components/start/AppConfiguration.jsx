@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {Collapse, Form, Image} from 'antd';
 import {EyeOutlined} from '@ant-design/icons';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -87,7 +88,7 @@ const _AppConfiguration = ({item, disabled, configs}) => {
   };
 
   return (
-    <Collapse bordered={false} className="jade-custom-collapse" defaultActiveKey={['configPanel']}>
+    <JadeCollapse defaultActiveKey={['configPanel']}>
       <Panel
         key={'configPanel'}
         header={
@@ -118,7 +119,7 @@ const _AppConfiguration = ({item, disabled, configs}) => {
           })()}
         </div>
       </Panel>
-    </Collapse>
+    </JadeCollapse>
   );
 };
 

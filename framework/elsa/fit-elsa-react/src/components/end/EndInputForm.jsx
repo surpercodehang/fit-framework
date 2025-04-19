@@ -12,6 +12,7 @@ import {Checkbox, Collapse, Form} from 'antd';
 import {useTranslation} from 'react-i18next';
 import {useDispatch} from '@/components/DefaultRoot.jsx';
 import {JadePanelHeader} from '@/components/common/JadePanelHeader.jsx';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -46,7 +47,7 @@ const _EndInputForm = ({inputParams, shapeStatus}) => {
     };
 
     return (<>
-        <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['Output variable']}>
+        <JadeCollapse defaultActiveKey={['Output variable']}>
             <Panel
               header={<JadePanelHeader text={'output'} shapeStatus={shapeStatus} onClick={addItem}/>}
               className='jade-panel'
@@ -66,7 +67,7 @@ const _EndInputForm = ({inputParams, shapeStatus}) => {
                   width={320}
                 />
             </Panel>
-        </Collapse>
+        </JadeCollapse>
     </>);
 };
 

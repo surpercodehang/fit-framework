@@ -12,6 +12,7 @@ import {useDispatch, useShapeContext} from '@/components/DefaultRoot.jsx';
 import {Trans, useTranslation} from 'react-i18next';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea.js';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -66,8 +67,7 @@ const _ModelConfig = ({
   };
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse'
-              defaultActiveKey={[`commonModelPanel${shapeId}`]}>
+    <JadeCollapse defaultActiveKey={[`commonModelPanel${shapeId}`]}>
       {<Panel
         key={`commonModelPanel${shapeId}`}
         header={<div className='panel-header'>
@@ -98,7 +98,7 @@ const _ModelConfig = ({
           />
         </div>
       </Panel>}
-    </Collapse>
+    </JadeCollapse>
   </>);
 };
 

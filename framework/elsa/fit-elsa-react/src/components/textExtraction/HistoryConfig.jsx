@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
 import React, {useEffect, useState} from 'react';
 import {MemoryConfig} from '@/components/queryOptimization/MemoryConfig.jsx';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -58,9 +59,7 @@ const _HistoryConfig = ({
 
   return (<>
       <div className={'jade-multi-conversation'}>
-        <Collapse bordered={false} className='jade-custom-collapse'
-                  activeKey={activeKey}
-                  onChange={handleCollapseChange}>
+        <JadeCollapse activeKey={activeKey} onChange={handleCollapseChange}>
           {<Panel
             key={'historyConfigPanel'}
             header={<div className='panel-header'>
@@ -80,7 +79,7 @@ const _HistoryConfig = ({
                             isShowUseMemoryType={true} historyOption={historyOption}/>
             </div>
           </Panel>}
-        </Collapse>
+        </JadeCollapse>
       </div>
     </>
   );

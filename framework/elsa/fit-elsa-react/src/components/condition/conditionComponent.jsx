@@ -71,8 +71,8 @@ export const conditionComponent = (jadeConfig) => {
     /**
      * @Override
      */
-    self.getReactComponents = (shapeStatus, data, isConfig) => {
-        return (<><ConditionFormWrapper data={data} shapeStatus={shapeStatus} isConfig={isConfig}/></>);
+    self.getReactComponents = (shapeStatus, data) => {
+        return (<><ConditionFormWrapper data={data} shapeStatus={shapeStatus}/></>);
     };
 
     /**

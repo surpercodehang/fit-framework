@@ -13,6 +13,7 @@ import {Button, Col, Collapse, Form, Popover, Row, Tree} from 'antd';
 import {PlusOutlined, QuestionCircleOutlined} from '@ant-design/icons';
 import TreeSwitcherIcon from '@/components/common/TreeSwitcherIcon.jsx';
 import PropTypes from 'prop-types';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -172,7 +173,7 @@ const _TextExtractionSchema = ({disabled, output}) => {
   };
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['textExtractionInputPanel']}>
+    <JadeCollapse defaultActiveKey={['textExtractionInputPanel']}>
       {<Panel key={'textExtractionInputPanel'}
               header={<TextExtractionHeader output={output} t={t} disabled={disabled}
                                             handleAddSubItem={handleAddSubItem} outputTreeData={outputTreeData}/>}
@@ -187,7 +188,7 @@ const _TextExtractionSchema = ({disabled, output}) => {
               titleRender={renderTreeNode}
         />
       </Panel>}
-    </Collapse>
+    </JadeCollapse>
   </>);
 };
 

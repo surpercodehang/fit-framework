@@ -6,7 +6,7 @@
 
 import {IfForm} from '@/components/condition/IfForm.jsx';
 import ElseForm from '@/components/condition/ElseForm.jsx';
-import {useDispatch} from '@/components/DefaultRoot.jsx';
+import {useConfigContext, useDispatch} from '@/components/DefaultRoot.jsx';
 import {Button} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {ConnectorProvider} from '@/components/common/ConnectorProvider.jsx';
@@ -23,11 +23,11 @@ ConditionFormWrapper.propTypes = {
  *
  * @param shapeStatus 节点状态.
  * @param data jadeConfig.
- * @param isConfig 是否配置界面.
  * @returns {JSX.Element} 条件节点表单Wrapper的DOM
  */
-export default function ConditionFormWrapper({shapeStatus, data, isConfig}) {
+export default function ConditionFormWrapper({shapeStatus, data}) {
   const dispatch = useDispatch();
+  const isConfig = useConfigContext();
 
   const {t} = useTranslation();
 

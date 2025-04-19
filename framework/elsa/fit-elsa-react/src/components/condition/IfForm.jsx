@@ -15,6 +15,7 @@ import {JadeInput} from '@/components/common/JadeInput.jsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -532,7 +533,7 @@ export const IfForm = (
   };
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['ifPanel']}>
+    <JadeCollapse defaultActiveKey={['ifPanel']}>
       {<Panel
         key={'ifPanel'}
         header={
@@ -548,7 +549,7 @@ export const IfForm = (
           {renderForm()}
         </div>
       </Panel>}
-    </Collapse>
+    </JadeCollapse>
   </>);
 };
 

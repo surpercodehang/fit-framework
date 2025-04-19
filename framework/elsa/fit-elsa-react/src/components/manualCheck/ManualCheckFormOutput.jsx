@@ -9,6 +9,7 @@ import {Collapse} from 'antd';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -21,8 +22,7 @@ const {Panel} = Collapse;
 const _ManualCheckFormOutput = ({outputItems}) => {
   const {t} = useTranslation();
 
-  return (<Collapse bordered={false} className='jade-custom-collapse'
-                    defaultActiveKey={['InvokeOutput']}>
+  return (<JadeCollapse defaultActiveKey={['InvokeOutput']}>
     <Panel
       className='jade-panel'
       header={<div style={{display: 'flex', alignItems: 'center'}}>
@@ -33,7 +33,7 @@ const _ManualCheckFormOutput = ({outputItems}) => {
         <JadeObservableTree data={outputItems}/>
       </div>
     </Panel>
-  </Collapse>);
+  </JadeCollapse>);
 };
 
 _ManualCheckFormOutput.propTypes = {
