@@ -10,9 +10,10 @@ import TextArea from 'antd/es/input/TextArea.js';
 import {PlusOutlined, QuestionCircleOutlined} from '@ant-design/icons';
 import {Trans, useTranslation} from 'react-i18next';
 import DeleteItem from '../asserts/icon-tool-delete.svg?react';
-import {useDispatch, useShapeContext} from '@/components/DefaultRoot.jsx';
+import {useConfigContext, useDispatch, useShapeContext} from '@/components/DefaultRoot.jsx';
 import PropTypes from 'prop-types';
 import {ConnectorProvider} from '@/components/common/ConnectorProvider.jsx';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -21,12 +22,12 @@ const {Panel} = Collapse;
  *
  * @param disabled 是否禁用.
  * @param questionTypeList 问题类型列表.
- * @param isConfig 是否配置界面.
  * @returns {React.JSX.Element}
  * @private
  */
-const _QuestionClassificationPanel = ({disabled, questionTypeList, isConfig}) => {
+const _QuestionClassificationPanel = ({disabled, questionTypeList}) => {
   const dispatch = useDispatch();
+  const isConfig = useConfigContext();
   const {t} = useTranslation();
 
   const content = (<>
@@ -225,8 +226,7 @@ const QuestionClassificationItem = ({disabled, question, index, isLastIndex}) =>
   };
 
   return (<>
-    <Collapse bordered={false} className="jade-custom-collapse"
-              defaultActiveKey={[`questionClassificationPanel${shapeId}-${questionId.value}`]}>
+    <JadeCollapse defaultActiveKey={[`questionClassificationPanel${shapeId}-${questionId.value}`]}>
       {<Panel
         key={`questionClassificationPanel${shapeId}-${questionId.value}`}
         header={
@@ -259,7 +259,7 @@ const QuestionClassificationItem = ({disabled, question, index, isLastIndex}) =>
           </Form.Item>
         </div>
       </Panel>}
-    </Collapse>
+    </JadeCollapse>
   </>);
 };
 

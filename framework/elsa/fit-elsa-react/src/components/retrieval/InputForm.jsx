@@ -14,6 +14,7 @@ import {JadeInput} from '@/components/common/JadeInput.jsx';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
 import {DATA_TYPES} from '@/common/Consts.js';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -160,7 +161,7 @@ function _InputForm({queryData, shapeStatus}) {
   };
 
   return (<div>
-    <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['Input']}>
+    <JadeCollapse defaultActiveKey={['Input']}>
       <Panel
         header={getHeader()}
         className='jade-panel'
@@ -217,7 +218,7 @@ function _InputForm({queryData, shapeStatus}) {
           </Row>
         </div>
       </Panel>
-    </Collapse>
+    </JadeCollapse>
   </div>);
 }
 

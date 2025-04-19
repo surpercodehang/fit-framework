@@ -5,9 +5,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import {Collapse, Switch} from 'antd';
-import PropTypes from "prop-types";
-import MultiConversationContent from "@/components/start/MultiConversationContent.jsx";
-import {useTranslation} from "react-i18next";
+import PropTypes from 'prop-types';
+import MultiConversationContent from '@/components/start/MultiConversationContent.jsx';
+import {useTranslation} from 'react-i18next';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -42,7 +43,7 @@ export default function MultiConversation({
 
     return (<>
         <div className={className}>
-            <Collapse bordered={false} className="jade-custom-collapse" defaultActiveKey={["multiConversationPanel"]}>
+            <JadeCollapse defaultActiveKey={["multiConversationPanel"]}>
                 {<Panel
                     key={"multiConversationPanel"}
                     header={<div className="panel-header">
@@ -63,7 +64,7 @@ export default function MultiConversation({
                                               className={`${className}-content`}
                                               props={props} i18n={t}/>
                 </Panel>}
-            </Collapse>
+            </JadeCollapse>
         </div>
     </>);
 }

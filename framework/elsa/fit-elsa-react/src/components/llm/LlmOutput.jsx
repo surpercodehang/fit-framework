@@ -4,14 +4,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import React from "react";
+import React from 'react';
 import {Checkbox, Collapse, Form, Popover} from 'antd';
 import {QuestionCircleOutlined} from '@ant-design/icons';
-import "../common/style.css";
-import {JadeObservableTree} from "@/components/common/JadeObservableTree.jsx";
-import PropTypes from "prop-types";
-import {useTranslation} from "react-i18next";
+import '../common/style.css';
+import {JadeObservableTree} from '@/components/common/JadeObservableTree.jsx';
+import PropTypes from 'prop-types';
+import {useTranslation} from 'react-i18next';
 import {useDispatch} from '@/components/DefaultRoot.jsx';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -63,7 +64,7 @@ function _LlmOutput({outputItems, enableLogData, disabled}) {
     );
 
     return (
-        <Collapse bordered={false} className="jade-custom-collapse" defaultActiveKey={["outputPanel"]}>
+        <JadeCollapse defaultActiveKey={["outputPanel"]}>
             {
                 <Panel
                     key={"outputPanel"}
@@ -188,7 +189,7 @@ function _LlmOutput({outputItems, enableLogData, disabled}) {
                     </div>
                 </Panel>
             }
-        </Collapse>
+        </JadeCollapse>
     );
 }
 

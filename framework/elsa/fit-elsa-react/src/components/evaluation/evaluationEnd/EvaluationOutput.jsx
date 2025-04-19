@@ -4,18 +4,19 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import {Button, Col, Collapse, Form, Popover, Row, Tree} from "antd";
-import {QuestionCircleOutlined} from "@ant-design/icons";
-import React, {useEffect, useState} from "react";
-import {JadeStopPropagationSelect} from "@/components/common/JadeStopPropagationSelect.jsx";
-import {useDispatch, useFormContext, useShapeContext} from "@/components/DefaultRoot.jsx";
+import {Button, Col, Collapse, Form, Popover, Row, Tree} from 'antd';
+import {QuestionCircleOutlined} from '@ant-design/icons';
+import React, {useEffect, useState} from 'react';
+import {JadeStopPropagationSelect} from '@/components/common/JadeStopPropagationSelect.jsx';
+import {useDispatch, useFormContext, useShapeContext} from '@/components/DefaultRoot.jsx';
 import DeleteItem from '../../asserts/icon-delete.svg?react';
 import AddSubItem from '../../asserts/icon-add-subitem.svg?react';
-import TreeSwitcherIcon from "@/components/common/TreeSwitcherIcon.jsx";
-import {JadeInput} from "@/components/common/JadeInput.jsx";
-import PropTypes from "prop-types";
-import {JadeReferenceTreeSelect} from "@/components/common/JadeReferenceTreeSelect.jsx";
-import { useTranslation } from "react-i18next";
+import TreeSwitcherIcon from '@/components/common/TreeSwitcherIcon.jsx';
+import {JadeInput} from '@/components/common/JadeInput.jsx';
+import PropTypes from 'prop-types';
+import {JadeReferenceTreeSelect} from '@/components/common/JadeReferenceTreeSelect.jsx';
+import {useTranslation} from 'react-i18next';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -82,7 +83,7 @@ function _EvaluationOutput({shapeStatus, output}) {
     };
 
     return (<>
-        <Collapse bordered={false} className="jade-custom-collapse" defaultActiveKey={["evaluationOutputPanel"]}>
+        <JadeCollapse defaultActiveKey={["evaluationOutputPanel"]}>
             {<Panel key={"evaluationOutputPanel"}
                     header={<div className="panel-header">
                         <span className="jade-panel-header-font">{t('output')}</span>
@@ -104,7 +105,7 @@ function _EvaluationOutput({shapeStatus, output}) {
                       titleRender={renderTreeNode}
                 />
             </Panel>}
-        </Collapse>
+        </JadeCollapse>
     </>);
 }
 

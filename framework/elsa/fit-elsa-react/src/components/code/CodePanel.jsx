@@ -100,7 +100,7 @@ function _CodePanel({disabled, input, dispatch}) {
     };
 
     return (<>
-        <Collapse bordered={false} className="jade-custom-collapse" defaultActiveKey={["codeOutputPanel"]}>
+        <JadeCollapse defaultActiveKey={["codeOutputPanel"]}>
             {<Panel key={"codeOutputPanel"}
                     header={<Header handleEditClick={handleEditClick} disabled={disabled}/>}
                     className="jade-panel"
@@ -129,7 +129,7 @@ function _CodePanel({disabled, input, dispatch}) {
                             onConfirm={(v) => editCode(v)}
                             executeFunc={executeFunc}/>
             </Panel>}
-        </Collapse>
+        </JadeCollapse>
     </>);
 }
 

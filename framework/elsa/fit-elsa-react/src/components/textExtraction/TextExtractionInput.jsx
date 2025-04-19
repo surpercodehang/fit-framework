@@ -13,6 +13,7 @@ import {JadeReferenceTreeSelect} from '@/components/common/JadeReferenceTreeSele
 import {getConfigValue} from '@/components/util/JadeConfigUtils.js';
 import {JadeInput} from '@/components/common/JadeInput.jsx';
 import PropTypes from 'prop-types';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Text} = Typography;
 const {Panel} = Collapse;
@@ -54,8 +55,7 @@ const _TextExtractionInput = ({shapeStatus, extractParam, dispatch}) => {
   };
 
   return (
-    <Collapse bordered={false} className='jade-custom-collapse'
-              defaultActiveKey={[`textExtractionInputPanel${shape.id}`]}>
+    <JadeCollapse defaultActiveKey={[`textExtractionInputPanel${shape.id}`]}>
       {<Panel
         key={`textExtractionInputPanel${shape.id}`}
         header={<div className='panel-header'>
@@ -68,7 +68,7 @@ const _TextExtractionInput = ({shapeStatus, extractParam, dispatch}) => {
           {renderComponent(text)}
         </div>
       </Panel>}
-    </Collapse>
+    </JadeCollapse>
   );
 };
 

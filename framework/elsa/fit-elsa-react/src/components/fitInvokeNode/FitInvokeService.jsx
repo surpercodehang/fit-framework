@@ -4,10 +4,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import {Collapse} from "antd";
-import React from "react";
-import FitSelectGenericable from "@/components/fitInvokeNode/FitSelectGenericable.jsx";
-import FitSelectTool from "@/components/fitInvokeNode/FitSelectTool.jsx";
+import {Collapse} from 'antd';
+import React from 'react';
+import FitSelectGenericable from '@/components/fitInvokeNode/FitSelectGenericable.jsx';
+import FitSelectTool from '@/components/fitInvokeNode/FitSelectTool.jsx';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 /**
@@ -18,8 +19,7 @@ const {Panel} = Collapse;
 export default function FitInvokeService() {
 
     return (
-        <Collapse bordered={false} className="jade-custom-collapse"
-                  defaultActiveKey={['FitInvokeService']}>
+        <JadeCollapse defaultActiveKey={['FitInvokeService']}>
             <Panel
                 className="jade-panel"
                 header={<div style={{display: 'flex', alignItems: 'center'}}>
@@ -35,6 +35,6 @@ export default function FitInvokeService() {
                     <FitSelectTool/>
                 </div>
             </Panel>
-        </Collapse>
+        </JadeCollapse>
     );
 };

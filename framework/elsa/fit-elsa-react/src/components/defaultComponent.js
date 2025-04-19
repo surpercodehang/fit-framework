@@ -23,9 +23,8 @@ export const defaultComponent = (jadeConfig) => {
      *
      * @param shapeStatus 图形状态集合.
      * @param data 数据.
-     * @param isConfig 是否配置界面.
      */
-    self.getReactComponents = (shapeStatus, data, isConfig) => {
+    self.getReactComponents = (shapeStatus, data) => {
     };
 
     /**

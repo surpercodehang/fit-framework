@@ -10,6 +10,7 @@ import React from 'react';
 import {JadeObservableTree} from '@/components/common/JadeObservableTree.jsx';
 import PropTypes from 'prop-types';
 import {Trans, useTranslation} from 'react-i18next';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -27,8 +28,7 @@ const _OutputForm = ({outputParams, outputPopover}) => {
   </div>;
 
   return (
-    <Collapse
-      bordered={false} className='jade-custom-collapse'
+    <JadeCollapse
       style={{marginTop: '10px', marginBottom: 8, borderRadius: '8px', width: '100%'}}
       defaultActiveKey={['Output']}>
       <Panel
@@ -48,7 +48,7 @@ const _OutputForm = ({outputParams, outputPopover}) => {
           <JadeObservableTree data={outputParams}/>
         </div>
       </Panel>
-    </Collapse>
+    </JadeCollapse>
   );
 };
 

@@ -20,6 +20,7 @@ import {JadePanelHeader} from '@/components/common/JadePanelHeader.jsx';
 import {JadeFormText} from '@/components/common/JadeFormText.jsx';
 import {DATA_TYPES, FROM_TYPE} from '@/common/Consts.js';
 import {useFormContext} from '@/components/DefaultRoot.jsx';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -47,10 +48,6 @@ const {Panel} = Collapse;
  * @param options 自定义的类型选择下拉框
  * @param maxInputLength 输入的最大长度限制.
  * @param editable 是否可编辑.
- * @param fieldNameClassName
- * @param typeSelectClassName
- * @param fieldValueClassName
- * @param deleteBtnClassName
  * @returns {JSX.Element} Jade标准输入表单的DOM
  */
 const _JadeInputForm = (
@@ -64,10 +61,6 @@ const _JadeInputForm = (
     options = [],
     maxInputLength,
     editable = true,
-    fieldNameClassName,
-    typeSelectClassName,
-    fieldValueClassName,
-    deleteBtnClassName,
   }) => {
   const form = useFormContext();
   const {t} = useTranslation();
@@ -130,22 +123,6 @@ const _JadeInputForm = (
     updateItem(itemId, changes);
   };
 
-  const getValueSelectClassName = () => {
-    if (fieldValueClassName) {
-      return `value-custom jade-select ${fieldValueClassName}`;
-    } else {
-      return 'value-custom jade-select';
-    }
-  };
-
-  const getValueInputClassName = () => {
-    if (fieldValueClassName) {
-      return `value-custom jade-input ${fieldValueClassName}`;
-    } else {
-      return 'value-custom jade-input';
-    }
-  };
-
   // 根据不同的值渲染不同的组件
   const renderComponent = (item) => {
     switch (item.from) {
@@ -154,7 +131,7 @@ const _JadeInputForm = (
           <JadeReferenceTreeSelect
             disabled={shapeStatus.referenceDisabled}
             rules={[{required: true, message: t('fieldValueCannotBeEmpty')}]}
-            className={getValueSelectClassName()}
+            className={'value-custom jade-select'}
             placeholder={t('pleaseSelect')}
             reference={item}
             onReferencedValueChange={(referenceKey, value, type) => handleReferenceValueChange(item, referenceKey, value, type)}
@@ -175,7 +152,7 @@ const _JadeInputForm = (
             disabled={shapeStatus.disabled}
             maxLength={maxInputLength}
             placeholder={t('plsEnter')}
-            className={getValueInputClassName()}
+            className={'value-custom jade-input'}
             value={item.value}
             onChange={(e) => handleItemChange('value', e.target.value, item.id)}
           />
@@ -198,7 +175,7 @@ const _JadeInputForm = (
   };
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['inputPanel']}>
+    <JadeCollapse defaultActiveKey={['inputPanel']}>
       {<Panel key={'inputPanel'}
               header={<>
                 <JadePanelHeader
@@ -220,15 +197,12 @@ const _JadeInputForm = (
                 <Col span={8}>
                   <JadeInputFieldName item={item}
                                       t={t}
-                                      className={fieldNameClassName}
                                       shapeStatus={shapeStatus}
                                       handleItemChange={handleItemChange}
                                       items={items}/>
                 </Col>
                 <Col span={6} style={{paddingRight: 0}}>
                   <JadeInputTypeSelect
-                    t={t}
-                    className={typeSelectClassName}
                     shapeStatus={shapeStatus}
                     updateItem={updateItem}
                     item={item}
@@ -240,13 +214,13 @@ const _JadeInputForm = (
                 </Col>
                 <Col span={2} style={{paddingLeft: 0}}>
                   {getDeletable(item) && <JadeInputRowDeleteButton
-                    shapeStatus={shapeStatus} item={item} deleteItem={deleteItem} className={deleteBtnClassName}/>}
+                    shapeStatus={shapeStatus} item={item} deleteItem={deleteItem}/>}
                 </Col>
               </Row>
           </>))}
         </div>
       </Panel>}
-    </Collapse>
+    </JadeCollapse>
   </>);
 };
 
@@ -260,10 +234,6 @@ _JadeInputForm.propTypes = {
   editable: PropTypes.bool,
   options: PropTypes.array,
   maxInputLength: PropTypes.number,
-  fieldNameClassName: PropTypes.string,
-  typeSelectClassName: PropTypes.string,
-  fieldValueClassName: PropTypes.string,
-  deleteBtnClassName: PropTypes.string,
 };
 
 const areEqual = (prevProps, nextProps) => {
@@ -304,17 +274,15 @@ JadeInputTitle.propTypes = {
  * @param items 所有条目
  * @param shapeStatus shape状态
  * @param handleItemChange 条目改变后的回调
- * @param className 输入框样式
  * @returns {React.JSX.Element} 输入条目的属性名组件
  * @constructor
  */
-const JadeInputFieldName = ({t, item, items, shapeStatus, handleItemChange, className}) => {
+const JadeInputFieldName = ({t, item, items, shapeStatus, handleItemChange}) => {
   // 判断是否可编辑，决定使用不同的组件渲染
   return item.editable !== false ? (<>
     <JadeFieldName
       id={item.id}
       name={item.name}
-      className={className}
       onNameChange={(v) => handleItemChange('name', v, item.id)}
       shapeStatus={shapeStatus}
       style={{paddingRight: '12px'}}
@@ -343,30 +311,20 @@ JadeInputFieldName.propTypes = {
 /**
  * 展示JadeInput输入字段名组件
  *
- * @param t 国际化组件
  * @param item 条目
  * @param shapeStatus shape状态
  * @param handleItemChange 更新条目回调
- * @param className 自定义的className
  * @param options 自定义的options
  * @returns {React.JSX.Element} 展示JadeInput输入字段名组件
  * @constructor
  */
-const JadeInputTypeSelect = ({t, item, shapeStatus, handleItemChange, className, options}) => {
-  const getClassName = () => {
-    if (className) {
-      return `value-source-custom jade-select ${className}`;
-    } else {
-      return 'value-source-custom jade-select';
-    }
-  };
-
+const JadeInputTypeSelect = ({item, shapeStatus, handleItemChange, options}) => {
   return (<>
     <Form.Item id={`from-${item.id}`} name={`from-${item.id}`} initialValue={item.from}>
       <JadeStopPropagationSelect
         disabled={shapeStatus.disabled}
         id={`from-select-${item.id}`}
-        className={getClassName()}
+        className={'value-source-custom jade-select'}
         style={{width: '100%'}}
         onChange={(value) => handleItemChange('from', value, item.id)}
         options={options}
@@ -393,7 +351,7 @@ JadeInputTypeSelect.propTypes = {
  * @returns {React.JSX.Element} 条目删除按钮
  * @constructor
  */
-const JadeInputRowDeleteButton = ({item, shapeStatus, deleteItem, className}) => {
+const JadeInputRowDeleteButton = ({item, shapeStatus, deleteItem}) => {
   /**
    * 删除回调
    *
@@ -403,19 +361,11 @@ const JadeInputRowDeleteButton = ({item, shapeStatus, deleteItem, className}) =>
     deleteItem(itemId);
   };
 
-  const getDeleteBtnClassName = () => {
-    if (className) {
-      return `icon-button ${className}`;
-    } else {
-      return 'icon-button';
-    }
-  };
-
   return (<>
     <Form.Item id={`delete-${item.id}`} name={`delete-${item.id}`}>
       <Button disabled={shapeStatus.disabled}
               type='text'
-              className={getDeleteBtnClassName()}
+              className={'icon-button'}
               style={{height: '100%'}}
               onClick={() => handleDelete(item.id)}>
         <MinusCircleOutlined/>

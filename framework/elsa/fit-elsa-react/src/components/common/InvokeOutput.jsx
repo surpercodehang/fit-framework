@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import ArrayUtil from '@/components/util/ArrayUtil.js';
 import {useTranslation} from 'react-i18next';
 import {JadeTree} from '@/components/common/JadeTree.jsx';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -60,8 +61,7 @@ function _InvokeOutput({outputData, getDescription = getContent, isObservableTre
   const content = getDescription(outputData, t);
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse'
-              defaultActiveKey={['InvokeOutput']}>
+    <JadeCollapse defaultActiveKey={['InvokeOutput']}>
       <Panel
         className='jade-panel'
         header={<div style={{display: 'flex', alignItems: 'center'}}>
@@ -81,7 +81,7 @@ function _InvokeOutput({outputData, getDescription = getContent, isObservableTre
           {isObservableTree ? <JadeObservableTree data={outputData}/> : <JadeTree data={outputData}/>}
         </div>
       </Panel>
-    </Collapse>
+    </JadeCollapse>
   </>);
 }
 

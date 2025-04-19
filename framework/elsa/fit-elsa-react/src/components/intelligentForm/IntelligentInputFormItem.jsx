@@ -64,18 +64,18 @@ const _IntelligentInputFormItem = ({item, items, shapeStatus, output}) => {
 
   return (<>
     <Row>
-      <Col flex='0 0 151px'>
+      <Col flex='1'>
         <FormItemName itemId={item.id} propValue={item.name} type={item.type} disabled={shapeStatus.disabled} onChange={handleFormValueChange} items={items} output={output}/>
       </Col>
-      <Col flex='0 0 151px'>
+      <Col flex='1'>
         <FormItemDisplayName itemId={item.id} propValue={item.displayName} disabled={shapeStatus.disabled} onChange={handleFormValueChange} items={items}/>
       </Col>
     </Row>
     <Row>
-      <Col flex='0 0 151px'>
+      <Col flex='1'>
         <Type itemId={item.id} propValue={item.type} disableModifiable={shapeStatus.disabled} onChange={handleChange} labelName={t('formItemType')} className={'intelligent-form-left-select'}/>
       </Col>
-      <Col flex='0 0 151px'>
+      <Col flex='1'>
         <FormItemRenderType itemId={item.id} propValue={item.renderType} disabled={shapeStatus.disabled} onChange={handleFormValueChange} type={item.type}/>
       </Col>
     </Row>

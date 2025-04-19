@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
 import SearchConfigIcon from '../asserts/icon-search-args-config.svg?react';
 import {DEFAULT_KNOWLEDGE_REPO_GROUP} from '@/common/Consts.js';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -149,9 +150,7 @@ const _KnowledgeForm = ({knowledge, groupId, disabled, maximum = null, enableGro
   };
 
   return (<>
-    <Collapse
-      bordered={false}
-      className='jade-custom-collapse'
+    <JadeCollapse
       style={{marginTop: '10px', marginBottom: 8, borderRadius: '8px', width: '100%'}}
       defaultActiveKey={['Knowledge']}>
       <Panel
@@ -189,7 +188,7 @@ const _KnowledgeForm = ({knowledge, groupId, disabled, maximum = null, enableGro
           {maximum !== null && <KnowledgeConfig maximum={maximum} disabled={disabled}/>}
         </div>
       </Panel>
-    </Collapse>
+    </JadeCollapse>
   </>);
 };
 

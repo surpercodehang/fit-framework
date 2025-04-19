@@ -12,6 +12,7 @@ import {Template} from '@/components/queryOptimization/Template.jsx';
 import {useShapeContext} from '@/components/DefaultRoot.jsx';
 import {MemoryConfig} from '@/components/queryOptimization/MemoryConfig.jsx';
 import {useTranslation} from 'react-i18next';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -42,7 +43,7 @@ const _OptimizationConfig = ({disabled, modelOptions, template, memoryConfig, te
   const historyOption = [{label: t('byConversation'), value: 'full'}, {label: t('byQuery'), value: 'question_only'}];
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={[`optimizationPanel${shapeId}`]}>
+    <JadeCollapse defaultActiveKey={[`optimizationPanel${shapeId}`]}>
       {<Panel
         key={`optimizationPanel${shapeId}`}
         header={<div className='panel-header'>
@@ -59,7 +60,7 @@ const _OptimizationConfig = ({disabled, modelOptions, template, memoryConfig, te
                         isShowUseMemoryType={strategy.value === 'custom'} historyOption={historyOption}/>
         </div>
       </Panel>}
-    </Collapse>
+    </JadeCollapse>
   </>);
 };
 

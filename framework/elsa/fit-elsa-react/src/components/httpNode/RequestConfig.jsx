@@ -16,6 +16,7 @@ import {HTTP_METHOD_TYPE} from '@/common/Consts.js';
 import {AuthenticationButton} from '@/components/httpNode/AuthenticationButton.jsx';
 import {TimeoutInput} from '@/components/httpNode/TimeOutInput.jsx';
 import {AuthenticationModal} from '@/components/httpNode/AuthenticationModal.jsx';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -73,7 +74,7 @@ const _RequestConfig = ({timeout, authentication, httpMethod, url, disabled}) =>
   };
 
   return (
-    <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['httpConfigPanel']}>
+    <JadeCollapse defaultActiveKey={['httpConfigPanel']}>
       <Panel key={'httpConfigPanel'} header={<RequestConfigHeader
         onAuthenticationClick={onAuthenticationClick} t={t} disabled={disabled} onBlur={onBlur}
         timeout={timeout}/>}>
@@ -88,7 +89,7 @@ const _RequestConfig = ({timeout, authentication, httpMethod, url, disabled}) =>
           authentication={authentication}
         />
       )}
-    </Collapse>
+    </JadeCollapse>
   );
 };
 
@@ -120,8 +121,8 @@ const areEqual = (prevProps, nextProps) => {
  * @constructor
  */
 const RequestConfigHeader = ({onAuthenticationClick, t, disabled, timeout, onBlur}) => (
-  <div className='panel-header' style={{display: 'flex', alignItems: 'center'}}>
-    <span className='jade-panel-header-font'>{t('requestConfig')}</span>
+  <div className="panel-header" style={{display: 'flex', alignItems: 'center'}}>
+    <span className="jade-panel-header-font">{t('requestConfig')}</span>
     <div style={{flexGrow: 1}}></div>
     <AuthenticationButton disabled={disabled} onClick={onAuthenticationClick}/>
     <div
@@ -181,11 +182,11 @@ export const RequestUrlConfig = ({httpMethod, url, disabled, dispatch, t}) => {
     <div className={'request-url-config-wrapper'}>
       <Row>
         <Col>
-          <span className='http-config-request-mode-title jade-font-color'>{t('requestMode')}</span>
+          <span className={'http-config-request-mode-title jade-font-color'}>{t('requestMode')}</span>
         </Col>
       </Row>
-      <Row gutter={16} style={{width: '424px'}}>
-        <Col style={{paddingRight: 0}}>
+      <Row gutter={16} style={{width:'100%'}}>
+        <Col style={{paddingRight: 0}} span={6}>
           <Form.Item
             id={`http-form-method-type-${httpMethod.id}`}
             name={`http-form-method-type-${httpMethod.id}`}
@@ -202,13 +203,13 @@ export const RequestUrlConfig = ({httpMethod, url, disabled, dispatch, t}) => {
           </Form.Item>
         </Col>
 
-        <Col style={{paddingLeft: 0}}>
+        <Col style={{paddingLeft: 0}} span={18}>
           <Form.Item
             id={`http-method-url-${url.id}`}
             name={`http-method-url-${url.id}`}
             rules={[{required: true, message: t('pleaseInputRequestUrl')}]} // 设置必填项
             initialValue={url.value}
-            validateTrigger='onBlur'
+            validateTrigger="onBlur"
           >
             <JadeInput
               disabled={disabled}

@@ -7,7 +7,8 @@
 import {Collapse, Popover} from 'antd';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -49,7 +50,7 @@ export default function JadeInputTreeCollapse({data, children}) {
     const content = getContent();
 
     return (<>
-        <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['jadeInputTreePanel']}>
+        <JadeCollapse defaultActiveKey={['jadeInputTreePanel']}>
             <Panel
                 key={'jadeInputTreePanel'}
                 header={
@@ -72,6 +73,6 @@ export default function JadeInputTreeCollapse({data, children}) {
                     {children}
                 </div>
             </Panel>
-        </Collapse>
+        </JadeCollapse>
     </>);
 }

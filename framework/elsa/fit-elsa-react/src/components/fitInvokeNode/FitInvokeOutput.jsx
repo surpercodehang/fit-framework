@@ -4,11 +4,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import {JadeObservableTree} from "@/components/common/JadeObservableTree.jsx";
-import {useDataContext} from "@/components/DefaultRoot.jsx";
-import React from "react";
-import {Collapse} from "antd";
-import {useTranslation} from "react-i18next";
+import {JadeObservableTree} from '@/components/common/JadeObservableTree.jsx';
+import {useDataContext} from '@/components/DefaultRoot.jsx';
+import React from 'react';
+import {Collapse} from 'antd';
+import {useTranslation} from 'react-i18next';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 /**
@@ -21,8 +22,7 @@ export default function FitInvokeOutput() {
     const {t} = useTranslation();
     const outputData = data && data.outputParams;
 
-    return (<Collapse bordered={false} className="jade-custom-collapse"
-                      defaultActiveKey={['FitInvokeOutput']}>
+    return (<JadeCollapse defaultActiveKey={['FitInvokeOutput']}>
         <Panel
             className="jade-panel"
             header={<div style={{display: 'flex', alignItems: 'center'}}>
@@ -33,5 +33,5 @@ export default function FitInvokeOutput() {
                 <JadeObservableTree data={outputData}/>
             </div>
         </Panel>
-    </Collapse>);
+    </JadeCollapse>);
 }

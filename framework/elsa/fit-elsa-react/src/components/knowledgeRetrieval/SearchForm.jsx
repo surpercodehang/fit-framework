@@ -13,6 +13,7 @@ import './knowledge.css';
 import {useDispatch, useShapeContext} from '@/components/DefaultRoot.jsx';
 import {configToStruct, getConfigValue} from '@/components/util/JadeConfigUtils.js';
 import {DEFAULT_KNOWLEDGE_REPO_GROUP} from '@/common/Consts.js';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -68,16 +69,16 @@ export const _SearchForm = ({option, groupId, shapeStatus}) => {
     return (<>
       <div className={'search-args-config-form-content'}>
         <div className={'search-args-config-form-column'}>
-          <span className='jade-font-size jade-font-color'>{indexTypeName}</span>
+          <span className="jade-font-size jade-font-color">{indexTypeName}</span>
         </div>
         <div className={'search-args-config-form-column'}>
-                    <span className='jade-font-size jade-font-color'>
+                    <span className="jade-font-size jade-font-color">
                         {referenceLimitType && referenceLimitValue ?
                           `${referenceLimitType}:${referenceLimitValue}` : ''}
                     </span>
         </div>
         <div className={'search-args-config-form-column'}>
-          <span className='jade-font-size jade-font-color'>{similarityThreshold}</span>
+          <span className="jade-font-size jade-font-color">{similarityThreshold}</span>
         </div>
         <div className={'search-args-config-form-column'}>
           <Switch checked={rerank} onChange={onChange}/>
@@ -87,38 +88,38 @@ export const _SearchForm = ({option, groupId, shapeStatus}) => {
   };
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['inputPanel']}>
+    <JadeCollapse defaultActiveKey={['inputPanel']}>
       {
         <Panel key={'inputPanel'}
                header={<>
                  <div style={{display: 'flex', alignItems: 'center'}}>
-                   <span className='jade-panel-header-font'>{t(text)}</span>
+                   <span className="jade-panel-header-font">{t(text)}</span>
                    <Button disabled={shapeStatus.disabled}
                            style={{padding: 0, height: 22}}
-                           type='text'
+                           type="text"
                            icon={<SearchConfigIcon/>}
                            onClick={onClick}/>
                  </div>
                </>}
-               className='jade-panel'
+               className="jade-panel"
         >
           <div className={'search-args-config-form'}>
             <div className={'search-args-config-form-row'}>
               <div className={'search-args-config-form-header'}>
                 <div className={'search-args-config-form-column'}>
-                  <span className='jade-font-size jade-font-color'>{t('retrievalIndexType')}</span>
+                  <span className="jade-font-size jade-font-color">{t('retrievalIndexType')}</span>
                 </div>
                 <div className={'search-args-config-form-fence'}/>
                 <div className={'search-args-config-form-column'}>
-                  <span className='jade-font-size jade-font-color'>{t('referenceLimit')}</span>
+                  <span className="jade-font-size jade-font-color">{t('referenceLimit')}</span>
                 </div>
                 <div className={'search-args-config-form-fence'}/>
                 <div className={'search-args-config-form-column'}>
-                  <span className='jade-font-size jade-font-color'>{t('similarityThreshold')}</span>
+                  <span className="jade-font-size jade-font-color">{t('similarityThreshold')}</span>
                 </div>
                 <div className={'search-args-config-form-fence'}/>
                 <div className={'search-args-config-form-column'}>
-                  <span className='jade-font-size jade-font-color'>{t('rerankParam')}</span>
+                  <span className="jade-font-size jade-font-color">{t('rerankParam')}</span>
                 </div>
               </div>
               {option.value.length > 0 && getContent()}
@@ -126,7 +127,7 @@ export const _SearchForm = ({option, groupId, shapeStatus}) => {
           </div>
         </Panel>
       }
-    </Collapse>
+    </JadeCollapse>
   </>);
 };
 

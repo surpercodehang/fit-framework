@@ -5,7 +5,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import {Col, Collapse, Form, Row, Slider} from 'antd';
-import {useDataContext, useDispatch, useFormContext, useShapeContext} from '@/components/DefaultRoot.jsx';
+import {useDispatch, useFormContext, useShapeContext} from '@/components/DefaultRoot.jsx';
 import PropTypes from 'prop-types';
 import {Trans, useTranslation} from 'react-i18next';
 import React, {useEffect, useRef, useState} from 'react';
@@ -14,6 +14,7 @@ import {Prompt} from '@/components/common/prompt/Prompt.jsx';
 import AiPromptIcon from '../asserts/icon-ai-prompt.svg?react';
 import FullScreenIcon from '../asserts/icon-full-screen.svg?react';
 import {DEFAULT_AP_PROMPT_MODEL_CONFIG} from '../../common/Consts.js';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -85,7 +86,7 @@ const _ModelForm = ({shapeId, modelData, modelOptions, disabled}) => {
   };
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['modelPanel']}>
+    <JadeCollapse defaultActiveKey={['modelPanel']}>
       {<Panel
         key={'modelPanel'}
         header={<div className='panel-header'>
@@ -148,7 +149,7 @@ const _ModelForm = ({shapeId, modelData, modelOptions, disabled}) => {
             title={t('systemPrompt')}/>
         </div>
       </Panel>}
-    </Collapse>
+    </JadeCollapse>
   </>);
 };
 

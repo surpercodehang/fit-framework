@@ -14,6 +14,7 @@ import {MinusCircleOutlined} from '@ant-design/icons';
 import {useDispatch} from '@/components/DefaultRoot.jsx';
 import {DATA_TYPES} from '@/common/Consts.js';
 import './variable.css';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -39,7 +40,7 @@ const _VariableAggregationInputForm = ({variables, shapeStatus}) => {
   };
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse' defaultActiveKey={['inputPanel']}>
+    <JadeCollapse defaultActiveKey={['inputPanel']}>
       {<Panel
         key={'inputPanel'}
         className='jade-panel'
@@ -55,7 +56,7 @@ const _VariableAggregationInputForm = ({variables, shapeStatus}) => {
           <VariableContent variables={variables} shapeStatus={shapeStatus}/>
         </div>
       </Panel>}
-    </Collapse>
+    </JadeCollapse>
   </>);
 };
 

@@ -9,6 +9,7 @@ import React from 'react';
 import {Collapse, Slider} from 'antd';
 import {useDispatch, useShapeContext} from '@/components/DefaultRoot.jsx';
 import {useTranslation} from 'react-i18next';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 const DEFAULT_TEXT_TO_IMAGE_COUNT_CONFIG_RECALLS = {
@@ -33,8 +34,7 @@ const _TextToImageParamConfig = ({disabled, imageCount}) => {
   };
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse'
-              defaultActiveKey={[`textToImageParamPanel-${shapeId}`]}>
+    <JadeCollapse defaultActiveKey={[`textToImageParamPanel-${shapeId}`]}>
       {<Panel
         key={`textToImageParamPanel-${shapeId}`}
         header={<div className='panel-header'>
@@ -59,7 +59,7 @@ const _TextToImageParamConfig = ({disabled, imageCount}) => {
           />
         </div>
       </Panel>}
-    </Collapse>
+    </JadeCollapse>
   </>);
 };
 

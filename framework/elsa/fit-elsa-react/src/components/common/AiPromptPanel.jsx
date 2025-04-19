@@ -17,6 +17,7 @@ import {PromptDrawer} from '../common/prompt/PromptDrawer.jsx';
 import AiPromptIcon from '../asserts/icon-ai-prompt.svg?react';
 import FullScreenIcon from '../asserts/icon-full-screen.svg?react';
 import {DEFAULT_AP_PROMPT_MODEL_CONFIG} from '@/common/Consts.js';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {Panel} = Collapse;
 
@@ -76,8 +77,7 @@ const _AiPromptPanel = ({disabled, prompt, name, popoverContent = null, header, 
   };
 
   return (<>
-    <Collapse bordered={false} className='jade-custom-collapse'
-              defaultActiveKey={[`AiPromptPanel-${shapeId}`]}>
+    <JadeCollapse defaultActiveKey={[`AiPromptPanel-${shapeId}`]}>
       {<Panel
         key={`AiPromptPanel-${shapeId}`}
         header={<AiPromptPanelHeader
@@ -116,7 +116,7 @@ const _AiPromptPanel = ({disabled, prompt, name, popoverContent = null, header, 
             onAIGenerate={triggerAIGenerateEvent}/>
         </div>
       </Panel>}
-    </Collapse>
+    </JadeCollapse>
   </>);
 };
 

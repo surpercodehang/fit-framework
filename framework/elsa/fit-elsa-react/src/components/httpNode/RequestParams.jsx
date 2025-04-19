@@ -16,6 +16,7 @@ import {BodyEditor} from '@/components/httpNode/BodyEditor.jsx';
 import {BodyTypeSelector} from '@/components/httpNode/BodyTypeSelector.jsx';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import {HTTP_METHOD_TYPE} from '@/common/Consts.js';
+import {JadeCollapse} from '@/components/common/JadeCollapse.jsx';
 
 const {TabPane} = Tabs;
 const {Panel} = Collapse;
@@ -118,28 +119,27 @@ const _RequestParams = ({disabled, params, headers, requestBody, activeKey, http
   };
 
   const content = <div className={'jade-font-size'} style={{lineHeight: '1.2'}}>
-    <Trans i18nKey='requestParamsTips' components={{p: <p/>}}/>
+    <Trans i18nKey="requestParamsTips" components={{p: <p/>}}/>
   </div>;
 
   return (
-    <Collapse bordered={false} className='jade-custom-collapse'
-              defaultActiveKey={['requestParamsPanel']}>
+    <JadeCollapse defaultActiveKey={['requestParamsPanel']}>
       {
         <Panel
           key={'requestParamsPanel'}
           header={
-            <div className='panel-header' style={{display: 'flex', alignItems: 'center'}}>
-              <span className='jade-panel-header-font'>{t('requestParams')}</span>
+            <div className="panel-header" style={{display: 'flex', alignItems: 'center'}}>
+              <span className="jade-panel-header-font">{t('requestParams')}</span>
               <Popover content={content}>
-                <QuestionCircleOutlined className='jade-panel-header-popover-content'/>
+                <QuestionCircleOutlined className="jade-panel-header-popover-content"/>
               </Popover>
             </div>
           }
-          className='jade-panel'
+          className="jade-panel"
         >
           <div className={'jade-custom-panel-content'}>
             <Tabs defaultActiveKey={activeKey} onChange={(key) => handleTabChange(key)}>
-              <TabPane tab='Params' key='1'>
+              <TabPane tab="Params" key="1">
                 <ParamList
                   params={params}
                   disabled={disabled}
@@ -150,7 +150,7 @@ const _RequestParams = ({disabled, params, headers, requestBody, activeKey, http
               </TabPane>
 
               {httpMethod.value !== HTTP_METHOD_TYPE.GET && (
-                <TabPane tab='Body' key='2'>
+                <TabPane tab="Body" key="2">
                   <BodyTypeSelector onBodyTypeChange={handleBodyTypeChange} disabled={disabled} type={type}/>
                   <BodyEditor
                     type={type}
@@ -162,7 +162,7 @@ const _RequestParams = ({disabled, params, headers, requestBody, activeKey, http
                 </TabPane>
               )}
 
-              <TabPane tab='Headers' key='3'>
+              <TabPane tab="Headers" key="3">
                 <ParamList
                   params={headers}
                   disabled={disabled}
@@ -175,7 +175,7 @@ const _RequestParams = ({disabled, params, headers, requestBody, activeKey, http
           </div>
         </Panel>
       }
-    </Collapse>
+    </JadeCollapse>
   );
 };
 
