@@ -9,7 +9,7 @@ import {FormItemName} from '@/components/intelligentForm/FormItemName.jsx';
 import Type from '@/components/common/Type.jsx';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {useDispatch} from '@/components/DefaultRoot.jsx';
+import {useDispatch, useFormContext} from '@/components/DefaultRoot.jsx';
 import {FormItemRenderType} from '@/components/intelligentForm/FormItemRenderType.jsx';
 import {FormItemSelectValue} from '@/components/intelligentForm/FormItemSelectValue.jsx';
 import {RENDER_OPTIONS_TYPE} from '@/components/intelligentForm/Consts.js';
@@ -28,6 +28,7 @@ import {DATA_TYPES, FROM_TYPE} from '@/common/Consts.js';
  */
 const _IntelligentInputFormItem = ({item, items, shapeStatus, output}) => {
   const dispatch = useDispatch();
+  const form = useFormContext();
   const { t } = useTranslation();
 
   /**
@@ -41,6 +42,8 @@ const _IntelligentInputFormItem = ({item, items, shapeStatus, output}) => {
     // 如果 type 是 'type'，清空 renderType
     if (changes.has('type') && changes.get('type') !== item.type) {
       changes.set('renderType', undefined);
+      changes.set('value', null);
+      form.setFieldsValue({[`value-${item.id}`]: undefined});
     }
     dispatch({ type: 'updateParam', id: id, changes });
   };

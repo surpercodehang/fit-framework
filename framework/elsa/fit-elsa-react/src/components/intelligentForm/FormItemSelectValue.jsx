@@ -5,7 +5,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import PropTypes from 'prop-types';
-import {Col, Form, Row} from 'antd';
+import {Col, Form, InputNumber, Row, Switch} from 'antd';
 import {useTranslation} from 'react-i18next';
 import {JadeInput} from '@/components/common/JadeInput.jsx';
 import {DATA_TYPES, FROM_TYPE} from '@/common/Consts.js';
@@ -64,6 +64,47 @@ export const FormItemSelectValue = ({item, shapeStatus, onChange, label, inputRe
     }, {key: 'value', value: e.value}, {key: 'type', value: e.type}]);
   };
 
+  const renderInputValueComponent = (item) => {
+    switch (item.type) {
+      case DATA_TYPES.BOOLEAN:
+        return <Switch
+          disabled={shapeStatus.disabled}
+          style={{marginLeft: '8px'}}
+          onChange={(e) => onInputChange('value', e)}
+          checked={item.value}/>;
+      case DATA_TYPES.INTEGER:
+        return <InputNumber
+          className="jade-input"
+          disabled={shapeStatus.disabled}
+          step={1}
+          precision={0}
+          parser={(value) => value.replace(/[^\d-]/g, '')} // 只允许输入整数部分
+          onChange={(e) => onInputChange('value', e)}
+          stringMode
+          value={item.value}
+        />;
+      case DATA_TYPES.NUMBER:
+        return <InputNumber
+          className="jade-input"
+          disabled={shapeStatus.disabled}
+          step={1}
+          onChange={(e) => onInputChange('value', e)}
+          stringMode
+          value={item.value}
+        />;
+      case DATA_TYPES.STRING:
+      default:
+        return <JadeInput
+          disabled={shapeStatus.disabled}
+          className="jade-input"
+          style={{borderRadius: '0px 8px 8px 0px'}}
+          placeholder={t('plsEnter')}
+          value={item.type === DATA_TYPES.ARRAY || item.type === DATA_TYPES.OBJECT ? JSON.stringify(item.value) : item.value}
+          onChange={(e) => onInputChange('value', e)}
+        />;
+    }
+  };
+
   /* 获取值field. */
   const getValueField = () => {
     if (item.from === FROM_TYPE.INPUT) {
@@ -76,14 +117,7 @@ export const FormItemSelectValue = ({item, shapeStatus, onChange, label, inputRe
         initialValue={item.type === DATA_TYPES.ARRAY || item.type === DATA_TYPES.OBJECT ? JSON.stringify(item.value) : item.value}
         validateTrigger='onBlur'
       >
-        <JadeInput
-          disabled={shapeStatus.disabled}
-          className='jade-input'
-          style={{borderRadius: '0px 8px 8px 0px'}}
-          placeholder={t('plsEnter')}
-          value={item.type === DATA_TYPES.ARRAY || item.type === DATA_TYPES.OBJECT ? JSON.stringify(item.value) : item.value}
-          onChange={(e) => onInputChange('value', e)}
-        />
+        {renderInputValueComponent(item)}
       </Form.Item>;
     } else if (item.from === FROM_TYPE.REFERENCE) {
       return <JadeReferenceTreeSelect
