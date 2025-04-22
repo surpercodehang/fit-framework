@@ -149,7 +149,7 @@ export const DefaultRoot = forwardRef(function (
           </DispatchContext.Provider>
         </Form>
       </div>
-      {createPortal(
+      {shape.allowConfig && createPortal(
         <div className={`jade-form-drawer ${open ? '' : 'hidden'}`}>
           <Form
             form={form}
