@@ -40,8 +40,8 @@ export const FormItemRenderType = ({itemId, propValue, disabled, onChange, type}
         ];
       case DATA_TYPES.STRING:
         return [
-          {value: RENDER_TYPE.RADIO, label: RENDER_TYPE.RADIO},
           {value: RENDER_TYPE.INPUT, label: RENDER_TYPE.INPUT},
+          {value: RENDER_TYPE.RADIO, label: RENDER_TYPE.RADIO},
         ];
       default:
         return [];
