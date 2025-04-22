@@ -43,12 +43,10 @@
         <dependency>
             <groupId>org.fitframework.service</groupId>
             <artifactId>fit-http-classic</artifactId>
-            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework.service</groupId>
             <artifactId>fit-http-protocol</artifactId>
-            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework</groupId>
@@ -63,7 +61,6 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -71,7 +68,6 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -79,37 +75,30 @@
         <dependency>
             <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-value-fastjson</artifactId>
-            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-message-serializer-json-jackson</artifactId>
-            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-http-client-okhttp</artifactId>
-            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-http-server-netty</artifactId>
-            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-server-http</artifactId>
-            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-http-handler-registry</artifactId>
-            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-client-http</artifactId>
-            <version>${fit.version}</version>
         </dependency>
 
         <!-- Test -->
@@ -138,21 +127,10 @@
             <plugin>
                 <groupId>org.fitframework</groupId>
                 <artifactId>fit-dependency-maven-plugin</artifactId>
-                <version>${fit.version}</version>
-                <executions>
-                    <execution>
-                        <id>dependency</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>dependency</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven.jar.version}</version>
                 <configuration>
                     <archive>
                         <manifestEntries>

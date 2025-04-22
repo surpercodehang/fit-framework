@@ -12,7 +12,7 @@
     <artifactId>fit-message-serializer</artifactId>
 
     <dependencies>
-        <!-- FIT -->
+        <!-- FIT core -->
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>

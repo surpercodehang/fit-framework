@@ -6,7 +6,7 @@
     <name>OhScript</name>
     <groupId>org.fitframework.ohscript</groupId>
     <artifactId>ohscript</artifactId>
-    <version>0.0.3.6-SNAPSHOT</version>
+    <version>3.6.0-SNAPSHOT</version>
 
     <description>A Lightweight Java-Based Scripting Language</description>
     <url>https://github.com/ModelEngine-Group/fit-framework</url>
@@ -51,31 +51,27 @@
         <fit.version>3.6.0-SNAPSHOT</fit.version>
 
         <!-- Third-Party version -->
+        <byte-buddy.version>1.17.0</byte-buddy.version>
         <fastjson.version>1.2.83</fastjson.version>
         <lombok.version>1.18.36</lombok.version>
-
-        <!-- Byte-buddy version -->
-        <byte-buddy.version>1.17.0</byte-buddy.version>
 
         <!-- Test framework versions -->
         <assertj.version>3.27.3</assertj.version>
         <junit5.version>5.11.4</junit5.version>
         <mockito.version>5.15.2</mockito.version>
 
-        <!-- Jacoco version -->
-        <jacoco.version>0.8.10</jacoco.version>
-
         <!-- Maven plugin versions -->
-        <maven.antrun.version>3.1.0</maven.antrun.version>
         <maven.compiler.version>3.14.0</maven.compiler.version>
-        <maven.dependency.version>3.6.1</maven.dependency.version>
-        <maven.jar.version>3.3.0</maven.jar.version>
+        <maven.gpg.version>3.0.1</maven.gpg.version>
         <maven.javadoc.version>3.11.2</maven.javadoc.version>
         <maven.surefire.version>3.2.5</maven.surefire.version>
         <maven.source.version>3.3.0</maven.source.version>
+        <jacoco.maven.version>0.8.10</jacoco.maven.version>
+        <sonatype.maven.version>0.7.0</sonatype.maven.version>
     </properties>
 
     <dependencies>
+        <!-- Third-party -->
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
@@ -87,6 +83,7 @@
             <version>${fastjson.version}</version>
         </dependency>
 
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -94,7 +91,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Fit -->
+        <!-- FIT -->
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>
@@ -126,7 +123,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Test Fit Core -->
+        <!-- Test FIT Core -->
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-runtime</artifactId>
@@ -204,6 +201,20 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${maven.gpg.version}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven.javadoc.version}</version>
                 <executions>
@@ -236,7 +247,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
+                <version>${jacoco.maven.version}</version>
                 <configuration>
                     <destFile>target/coverage-reports/jacoco-unit.exec</destFile>
                     <dataFile>target/coverage-reports/jacoco-unit.exec</dataFile>
@@ -258,23 +269,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>0.7.0</version>
+                <version>${sonatype.maven.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <publishingServerId>central</publishingServerId>

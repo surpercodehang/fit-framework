@@ -12,6 +12,7 @@
     <artifactId>fit-retry</artifactId>
 
     <dependencies>
+        <!-- FIT core -->
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>

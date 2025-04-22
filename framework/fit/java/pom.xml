@@ -3,6 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <name>FIT Framework Parent</name>
     <groupId>org.fitframework</groupId>
     <artifactId>fitframework-parent</artifactId>
     <version>3.6.0-SNAPSHOT</version>
@@ -66,17 +67,17 @@
         <!-- FIT version -->
         <fit.version>3.6.0-SNAPSHOT</fit.version>
 
-        <!-- Jacoco version -->
-        <jacoco.version>0.8.10</jacoco.version>
-
         <!-- Maven plugin versions -->
         <maven.antrun.version>3.1.0</maven.antrun.version>
         <maven.compiler.version>3.14.0</maven.compiler.version>
         <maven.dependency.version>3.6.1</maven.dependency.version>
+        <maven.gpg.version>3.0.1</maven.gpg.version>
         <maven.jar.version>3.3.0</maven.jar.version>
         <maven.javadoc.version>3.11.2</maven.javadoc.version>
         <maven.surefire.version>3.2.5</maven.surefire.version>
         <maven.source.version>3.3.0</maven.source.version>
+        <central-publishing.maven-plugin.version>0.7.0</central-publishing.maven-plugin.version>
+        <jacoco.maven-plugin.version>0.8.10</jacoco.maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -92,6 +93,51 @@
     </dependencyManagement>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.fitframework</groupId>
+                    <artifactId>fit-build-maven-plugin</artifactId>
+                    <version>${fit.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.fitframework</groupId>
+                    <artifactId>fit-dependency-maven-plugin</artifactId>
+                    <version>${fit.version}</version>
+                    <executions>
+                        <execution>
+                            <id>dependency</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>dependency</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${maven.antrun.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${maven.dependency.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven.jar.version}</version>
+                    <configuration>
+                        <archive>
+                            <manifestEntries>
+                                <Created-By>FIT Lab</Created-By>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -107,6 +153,20 @@
                         <arg>-parameters</arg>
                     </compilerArgs>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${maven.gpg.version}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -142,7 +202,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
+                <version>${jacoco.maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>jacoco-initialize</id>
@@ -156,23 +216,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>0.7.0</version>
+                <version>${central-publishing.maven-plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <publishingServerId>central</publishingServerId>

@@ -21,7 +21,6 @@
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-protocol-nestable-jar</artifactId>
-            <version>${fit.version}</version>
         </dependency>
 
         <!-- Test -->
@@ -53,21 +52,10 @@
             <plugin>
                 <groupId>org.fitframework</groupId>
                 <artifactId>fit-dependency-maven-plugin</artifactId>
-                <version>${fit.version}</version>
-                <executions>
-                    <execution>
-                        <id>dependency</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>dependency</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven.jar.version}</version>
                 <configuration>
                     <outputDirectory>../target/shared/</outputDirectory>
                     <archive>

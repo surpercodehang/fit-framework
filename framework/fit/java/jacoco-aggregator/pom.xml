@@ -108,11 +108,6 @@
             <groupId>org.fitframework</groupId>
             <artifactId>fit-test-framework</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <!-- FIT Service -->
         <dependency>
@@ -187,6 +182,10 @@
         </dependency>
         <dependency>
             <groupId>org.fitframework.plugin</groupId>
+            <artifactId>fit-security-simple</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-server-http</artifactId>
         </dependency>
         <dependency>
@@ -230,7 +229,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
+                <version>${jacoco.maven-plugin.version}</version>
                 <configuration>
                     <excludes>**/*.jar</excludes>
                 </configuration>
