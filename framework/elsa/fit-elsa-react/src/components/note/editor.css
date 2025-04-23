@@ -3,6 +3,22 @@ body {
     line-height: 1.4;
 }
 
+ol, ul {
+    display: block !important;
+    margin-block-start: 1em !important;
+    margin-block-end: 1em !important;
+    padding-inline-start: 40px !important;
+    unicode-bidi: isolate !important;
+}
+
+ol {
+    list-style-type: decimal !important;
+}
+
+ul {
+    list-style-type: disc !important;
+}
+
 table {
     border-collapse: collapse
 }
