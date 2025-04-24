@@ -624,7 +624,7 @@ export const jadeFlowPage = (div, graph, name, id) => {
   self.reorganizeNodes = (scale, nodes = self.sm.getShapes(s => s.isTypeof('jadeNode')), lines = self.sm.getShapes(s => s.isTypeof('jadeEvent'))) => {
     lines.sort((a, b) => {
       if (a.fromShape !== b.fromShape) {
-        return 0;
+        return a.fromShape.localeCompare(b.fromShape);
       }
       const aFromConnector = a.definedFromConnector;
       const bFromConnector = b.definedFromConnector;
