@@ -70,7 +70,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>../../target/shared/</outputDirectory>
+                            <outputDirectory>../../../../../build/shared/</outputDirectory>
                             <includeGroupIds>jakarta.validation</includeGroupIds>
                         </configuration>
                     </execution>
