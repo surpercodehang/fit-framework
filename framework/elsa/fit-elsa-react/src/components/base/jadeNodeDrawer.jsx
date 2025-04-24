@@ -262,7 +262,7 @@ export const jadeNodeDrawer = (shape, div, x, y) => {
      * @override
      */
     self.drawDynamic = (context, x, y) => {
-        self.marquees.forEach(wd => {
+        (self.marquees || []).forEach(wd => {
             if (wd.loaded) {
                 wd.draw(context, x, y, shape)
             } else {
