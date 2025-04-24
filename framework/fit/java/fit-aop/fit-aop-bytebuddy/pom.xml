@@ -68,7 +68,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>../../target/third-party/</outputDirectory>
+                            <outputDirectory>../../../../../build/third-party/</outputDirectory>
                             <includeScope>runtime</includeScope>
                             <excludeGroupIds>org.fitframework</excludeGroupIds>
                         </configuration>
@@ -79,7 +79,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <outputDirectory>../../target/lib/</outputDirectory>
+                    <outputDirectory>../../../../../build/lib/</outputDirectory>
                     <archive>
                         <manifestEntries>
                             <Created-By>FIT Lab</Created-By>

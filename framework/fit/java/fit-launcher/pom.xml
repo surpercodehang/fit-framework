@@ -22,7 +22,7 @@
         <resources>
             <resource>
                 <directory>src/main/resources/bin/</directory>
-                <targetPath>${project.basedir}/../target/bin/</targetPath>
+                <targetPath>${project.basedir}/../../../../build/bin/</targetPath>
             </resource>
         </resources>
         <plugins>
@@ -62,7 +62,7 @@
                         <configuration>
                             <target>
                                 <copy file="${project.build.directory}/${project.build.finalName}.jar"
-                                      todir="../target"/>
+                                      todir="../../../../build"/>
                             </target>
                         </configuration>
                         <goals>
