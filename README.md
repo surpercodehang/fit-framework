@@ -94,29 +94,29 @@ mvn clean install
 **输出目录**
 
 ```
-framework/fit/java/target
+build/
 ```
 
 **增加权限**
 
 ```
-chmod +x framework/fit/java/target/bin/*
+chmod +x build/bin/*
 ```
 
 **启动命令**
 
 ```
-framework/fit/java/target/bin/fit start
+build/bin/fit start
 ```
 
 > 以上编译构建出的 `fit` 命令可以通过系统操作（别名或添加系统路径）来简化输入。
 
 **配置系统环境变量及创建插件目录**
 
-- 首先用`maven`编译打包`./framework/fit/java`，将`target`目录内容存储在本地`fitframework`目录下，此目录为 FIT 核心框架目录地址。
-- 配置`FIT`框架目录的系统环境变量，变量值为`FIT`核心框架目录地址，使`fit`命令可执行。例如 `FIT` 核心框架位置在
-  `D:/demo/fitframework`，则变量值配置为`D:/demo/fitframework`。
-- 新建任意目录作为插件目录，在该目录下存放插件，可在插件目录下使用命令`fit start`启动服务。
+- 首先用 `maven` 编译打包 `./framework/fit/java`，将 `build` 目录内容存储在本地 `fitframework` 目录下，此目录为 FIT 核心框架目录地址。
+- 配置 `FIT` 框架目录的系统环境变量，变量值为 `FIT` 核心框架目录地址，使 `fit` 命令可执行。例如 `FIT` 核心框架位置在
+  `/demo/fitframework`，则变量值配置为 `/demo/fitframework`。
+- 新建任意目录作为插件目录，在该目录下存放插件，可在插件目录下使用命令 `fit start` 启动服务。
 
 > 以上环境配置步骤请根据使用的操作系统使用相应的路径分隔符和环境变量配置操作。
 
@@ -126,14 +126,14 @@ framework/fit/java/target/bin/fit start
   - 请参考 [FIT 快速开始](framework%2Ffit%2Fjava%2FREADME.md)，该指南将简单介绍 FIT 的核心设计概念，并指导您构建基础的应用。
 - WaterFlow 流调度引擎
   - 请参考 [WaterFlow 快速开始](framework%2Fwaterflow%2Fjava%2Fwaterflow-core%2FREADME.md)，该指南将简单介绍 WaterFlow
-    声明式语法，并构建流程输出`hello world！`。
+    声明式语法，并构建流程输出 `hello world！`。
 - FEL 标准原语
   - 请参考 [FEL 快速开始](docs/framework/fel/java/quick-start-guide/01.%20模型.md)，该指南将简要介绍如何使用 FEL
     构建端到端的大模型应用程序。
 
 ## 文档
 
-您可以从`docs`目录查看项目的完整文档，文档包含框架的快速入门指南和用户指导手册，并以一个基于本框架开发的大模型应用编排平台（Model
+您可以从 `docs` 目录查看项目的完整文档，文档包含框架的快速入门指南和用户指导手册，并以一个基于本框架开发的大模型应用编排平台（Model
 Engine）为例，向您介绍本框架在商业化的成熟产品中是如何应用的。
 
 - [ModelEngine 技术白皮书](docs/model-engine-technical-white-paper/00.%20摘要.md)
