@@ -23,7 +23,7 @@
         <fit.version>3.5.0-SNAPSHOT</fit.version>
 
         <!-- Byte-buddy version -->
-        <byte-buddy.version>1.17.0</byte-buddy.version>
+        <byte-buddy.version>1.17.5</byte-buddy.version>
 
         <!-- Maven plugin versions -->
         <maven.gpg.version>3.0.1</maven.gpg.version>

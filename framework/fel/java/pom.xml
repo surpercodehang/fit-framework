@@ -57,7 +57,7 @@
         <tool.version>1.0.0-SNAPSHOT</tool.version>
 
         <!-- Third-party versions -->
-        <bytebuddy.version>1.17.0</bytebuddy.version>
+        <bytebuddy.version>1.17.5</bytebuddy.version>
         <jackson.version>2.18.2</jackson.version>
 
         <!-- Test framework versions -->

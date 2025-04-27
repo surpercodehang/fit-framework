@@ -51,7 +51,7 @@
         <fit.version>3.5.0-SNAPSHOT</fit.version>
 
         <!-- Third-Party version -->
-        <byte-buddy.version>1.17.0</byte-buddy.version>
+        <byte-buddy.version>1.17.5</byte-buddy.version>
         <fastjson.version>1.2.83</fastjson.version>
         <lombok.version>1.18.36</lombok.version>
 
