@@ -117,9 +117,13 @@ export const jadeNode = (id, x, y, width, height, parent, drawer) => {
     // 开始节点只有输入，结束节点只有输出，普通节点输入输出，条件节点有条件1...n和输出
     self.output = {};
     self.input = {};
-    if (data.parameters[0]) {
-      self.output = JSON.parse(data.parameters[0].output);
-      self.input = JSON.parse(data.parameters[0].input);
+    if (data?.parameters?.[0]) {
+      try {
+        self.output = JSON.parse(data.parameters[0]?.output ?? '{}');
+        self.input = JSON.parse(data.parameters[0]?.input ?? '{}');
+      } catch (e) {
+        console.error('JSON 解析失败:', e);
+      }
     }
     self.errorMsg = data.errorMsg;
     self.cost = data.runCost;
