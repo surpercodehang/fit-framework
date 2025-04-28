@@ -60,7 +60,7 @@
 
         <!-- Test framework versions -->
         <assertj.version>3.27.3</assertj.version>
-        <junit.version>5.11.4</junit.version>
+        <junit5.version>5.12.2</junit5.version>
         <mockito.version>5.15.2</mockito.version>
         <mockito-junit-jupiter.version>5.9.0</mockito-junit-jupiter.version>
     </properties>
@@ -181,7 +181,7 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>${junit.version}</version>
+                <version>${junit5.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
