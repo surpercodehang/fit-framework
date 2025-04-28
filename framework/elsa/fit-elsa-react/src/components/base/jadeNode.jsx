@@ -505,5 +505,16 @@ export const jadeNode = (id, x, y, width, height, parent, drawer) => {
     }
   };
 
+  /**
+   * @override
+   */
+  const unSelect = self.unSelect;
+  self.unSelect = () => {
+    unSelect.apply(self, []);
+    if (self.page.onConfigShape === self.id) {
+      self.page.onConfigShape = undefined;
+    }
+  };
+
   return self;
 };

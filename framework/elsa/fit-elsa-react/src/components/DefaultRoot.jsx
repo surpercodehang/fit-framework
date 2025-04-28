@@ -161,7 +161,7 @@ export const DefaultRoot = forwardRef(function (
               <div className="sticky-header">
                 {shape.drawer.getHeaderComponent(data, shapeStatus)}
                 <div className="jade-form-drawer-close" onClick={() => {
-                  shape.page.onConfigShape = undefined;
+                  shape.unSelect();
                   setOpen(false);
                 }}>
                   <CloseOutlined style={{fontSize: '12px'}}/>
