@@ -61,7 +61,7 @@
         <!-- Test framework versions -->
         <assertj.version>3.27.3</assertj.version>
         <junit5.version>5.12.2</junit5.version>
-        <mockito.version>5.15.2</mockito.version>
+        <mockito.version>5.17.0</mockito.version>
         <mockito-junit-jupiter.version>5.9.0</mockito-junit-jupiter.version>
     </properties>
 
