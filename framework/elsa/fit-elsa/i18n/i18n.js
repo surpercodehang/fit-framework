@@ -5,27 +5,21 @@
  *--------------------------------------------------------------------------------------------*/
 
 import i18n from 'i18next';
-import {initReactI18next} from 'react-i18next';
-import en from './en_US.json';
-import zh from './zh_CN.json';
-import coreEn from '@fit-elsa/elsa-core/locales/en.json';
-import coreZh from '@fit-elsa/elsa-core/locales/zh.json';
-
-const mergeTranslations = (local, core) => {
-  return { ...core, ...local }; // core 的翻译作为基础，本地翻译优先级更高
-};
+import en from './en.json';
+import zh from './zh.json';
 
 const resources = {
   en: {
-    translation: mergeTranslations(en, coreEn),
+    translation: en,
   },
   zh: {
-    translation: mergeTranslations(zh, coreZh),
+    translation: zh,
   },
 };
 
-i18n.use(initReactI18next).init({
+i18n.init({
   resources,
+  lng: 'zh',
   fallbackLng: 'zh',
   interpolation: {
     escapeValue: false,

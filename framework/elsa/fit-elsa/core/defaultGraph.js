@@ -9,12 +9,14 @@ import ElsaEditor from '../editor/default/elsa-editor.js';
 import {EVENT_TYPE} from '../common/const.js';
 import {elsaCKEditor} from '../editor/default/elsaCKEditor.js';
 import {editorCommand} from './commands.js';
+import i18n from '../i18n/i18n.js';
 
 /**
  * @inheritDoc
  */
 const defaultGraph = (div, title) => {
   const self = graph(div, title);
+  self.i18n = i18n;
 
   self.editor = null;
   const initialize = self.initialize;
