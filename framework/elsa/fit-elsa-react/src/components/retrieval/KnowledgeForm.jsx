@@ -89,6 +89,7 @@ const _KnowledgeForm = ({knowledge, groupId, disabled, maximum = null, enableGro
     shape.page.triggerEvent({
       type: 'SELECT_KNOWLEDGE_BASE_GROUP',
       value: {
+        selectedGroupId: groupId ?? DEFAULT_KNOWLEDGE_REPO_GROUP,
         onSelect: (repoGroupId) => {
           dispatch({
             type: 'updateGroupId',
