@@ -93,11 +93,13 @@ const interactDrawer = (graph, page, div) => {
      * @param {string} options.icon SVG 图标。
      * @param {string} options.className CSS 类名。
      * @param {Function} [options.onClick] 点击事件回调。
+     * @param {string} [options.tooltip] 工具说明。
      * @returns {{ getComponent: Function, update: Function }}
      */
-    const createBaseTool = ({icon, className, onClick}) => {
+    const createBaseTool = ({icon, className, onClick, tooltip}) => {
       const button = graph.createDom('div', 'div', className, page.id);
       button.innerHTML = icon;
+      button.title = tooltip;
       Object.assign(button.style, {
         display: 'flex',
         width: '22px',
@@ -134,6 +136,7 @@ const interactDrawer = (graph, page, div) => {
           page.fitScreen(PAGE_FIT_SCREEN_SCALE_MIN, PAGE_FIT_SCREEN_SCALE_MAX);
           e.stopPropagation();
         },
+        tooltip: graph.i18n.t('displayAllNodes'),
       });
     };
 
@@ -151,6 +154,7 @@ const interactDrawer = (graph, page, div) => {
           tool.update(); // 触发更新
           e.stopPropagation();
         },
+        tooltip: graph.i18n.t('handMode'),
       });
 
       /**
@@ -178,6 +182,7 @@ const interactDrawer = (graph, page, div) => {
           page.reorganizeNodes(PAGE_REORGANIZE_SCREEN_SCALE);
           e.stopPropagation() // 阻止事件冒泡
         },
+        tooltip: graph.i18n.t('reorganizeNodes'),
       });
     };
 
@@ -189,7 +194,7 @@ const interactDrawer = (graph, page, div) => {
     const zoomTool = () => {
       const me = {};
 
-      const createZoomIn = () => {
+      const createZoomOut = () => {
         const button = graph.createDom(div, 'div', 'barToolsZoomIn', page.id);
         button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><path fill="#1D1C23" fill-opacity="0.8" d="M1.333 8c0-.368.299-.666.667-.666h12a.667.667 0 1 1 0 1.333H2a.667.667 0 0 1-.667-.666Z"></path></svg>`;
         button.style.display = 'flex';
@@ -201,6 +206,7 @@ const interactDrawer = (graph, page, div) => {
         button.onclick = () => {
           me.zoomTo(page.scaleX - 0.1);
         };
+        button.title = graph.i18n.t('zoomOut');
         return button;
       };
 
@@ -234,7 +240,7 @@ const interactDrawer = (graph, page, div) => {
         return button;
       };
 
-      const createZoomOut = () => {
+      const createZoomIn = () => {
         const button = graph.createDom(div, 'div', 'barToolsZoomOut', page.id);
         button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" style="align-items: center;"><path fill="#1D1C23" fill-opacity="0.8" d="M8 1.334a.667.667 0 0 0-.667.667v5.333H2a.667.667 0 0 0 0 1.333h5.333v5.334a.667.667 0 0 0 1.334 0V8.667H14a.667.667 0 1 0 0-1.333H8.667V2.001A.667.667 0 0 0 8 1.334Z"></path></svg>`;
         button.style.display = 'flex';
@@ -246,6 +252,7 @@ const interactDrawer = (graph, page, div) => {
         button.onclick = () => {
           me.zoomTo(page.scaleX + 0.1);
         };
+        button.title = graph.i18n.t('zoomIn');
         return button;
       };
 
@@ -255,15 +262,15 @@ const interactDrawer = (graph, page, div) => {
       zoomWrapper.style.width = 'fit-content';
       zoomWrapper.style.height = 'fit-content';
 
-      const zoomIn = createZoomIn();
+      const zoomOut = createZoomOut();
       const zoomSlider = createZoomSlider();
       const zoomText = createZoomText();
-      const zoomOut = createZoomOut();
+      const zoomIn = createZoomIn();
 
-      zoomWrapper.appendChild(zoomIn);
+      zoomWrapper.appendChild(zoomOut);
       zoomWrapper.appendChild(zoomSlider);
       zoomWrapper.appendChild(zoomText);
-      zoomWrapper.appendChild(zoomOut);
+      zoomWrapper.appendChild(zoomIn);
 
       /**
        * 获取缩放工具组件
