@@ -9,8 +9,10 @@ import {getDefaultReference} from '@/components/util/ReferenceUtil.js';
 import {
   DATA_TYPES,
   DEFAULT_KNOWLEDGE_REPO_GROUP_STRUCT,
+  DEFAULT_KNOWLEDGE_RETRIEVAL_NODE_USER_ID,
   DEFAULT_LLM_KNOWLEDGE_BASES,
-  DEFAULT_LLM_REFERENCE_OUTPUT, DEFAULT_LOOP_NODE_CONTEXT,
+  DEFAULT_LLM_REFERENCE_OUTPUT,
+  DEFAULT_LOOP_NODE_CONTEXT,
   DEFAULT_MAX_MEMORY_ROUNDS,
   END_NODE_TYPE,
   FLOW_TYPE,
@@ -390,10 +392,32 @@ export const knowledgeRetrievalCompatibilityProcessor = (shapeData, graph, pageH
   const process = self.process;
   self.process = () => {
     process.apply(self);
-    const optionValue = self.shapeData.flowMeta.jober.converter.entity.inputParams.find(inputParam => inputParam.name === 'option').value;
-    if (!optionValue.find(v => v.name === 'groupId')) {
-      optionValue.push(DEFAULT_KNOWLEDGE_REPO_GROUP_STRUCT);
-    }
+
+    const optionParamProcess = () => {
+      const optionValue = self.shapeData.flowMeta.jober.converter.entity.inputParams
+        .find(inputParam => inputParam.name === 'option')?.value;
+
+      if (Array.isArray(optionValue) && !optionValue.some(v => v.name === 'groupId')) {
+        optionValue.push(DEFAULT_KNOWLEDGE_REPO_GROUP_STRUCT);
+      }
+    };
+
+    const userIdParamProcess = () => {
+      const inputParams = self.shapeData.flowMeta.jober.converter.entity.inputParams;
+      const userIdParam = inputParams.find(inputParam => inputParam.name === 'userId');
+      if (!userIdParam) {
+        inputParams.push(DEFAULT_KNOWLEDGE_RETRIEVAL_NODE_USER_ID);
+      }
+      const entityParams = self.shapeData.flowMeta.jober.entity.params;
+      if (!entityParams.find(param => param.name === 'userId')) {
+        const optionIndex = entityParams.findIndex(param => param.name === 'option');
+        const insertIndex = optionIndex !== -1 ? optionIndex + 1 : entityParams.length;
+        entityParams.splice(insertIndex, 0, {name: 'userId'});
+      }
+    };
+
+    optionParamProcess();
+    userIdParamProcess();
   };
 
   return self;

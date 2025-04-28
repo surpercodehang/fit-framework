@@ -205,3 +205,15 @@ export const DEFAULT_LOOP_NODE_CONTEXT = {
     value: [VIRTUAL_CONTEXT_NODE_VARIABLES.INSTANCE_ID],
   }],
 };
+
+export const DEFAULT_KNOWLEDGE_RETRIEVAL_NODE_USER_ID = {
+  id: `userId_${uuidv4()}`,
+  name: 'userId',
+  type: 'String',
+  from: 'Reference',
+  referenceNode: VIRTUAL_CONTEXT_NODE.id,
+  referenceId: VIRTUAL_CONTEXT_NODE_VARIABLES.USER_ID,
+  referenceKey: VIRTUAL_CONTEXT_NODE_VARIABLES.USER_ID,
+  editable: false,
+  value: [VIRTUAL_CONTEXT_NODE_VARIABLES.USER_ID],
+};

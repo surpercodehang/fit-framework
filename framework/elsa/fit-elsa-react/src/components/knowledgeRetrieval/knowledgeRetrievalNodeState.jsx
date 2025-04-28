@@ -39,6 +39,9 @@ export const knowledgeRetrievalNodeState = (id, x, y, width, height, parent, dra
           {
             name: 'option',
           },
+          {
+            name: 'userId',
+          },
         ],
         return: {
           type: 'object',
