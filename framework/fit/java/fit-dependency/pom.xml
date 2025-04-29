@@ -6,7 +6,7 @@
     <name>FIT Dependency Management</name>
     <groupId>org.fitframework</groupId>
     <artifactId>fit-dependency</artifactId>
-    <version>3.5.0-SNAPSHOT</version>
+    <version>3.5.0-M2</version>
     <packaging>pom</packaging>
 
     <description>Dependency Management of The Plugin-Based Programming Framework</description>
@@ -42,7 +42,7 @@
         <java.version>17</java.version>
 
         <!-- FIT version -->
-        <fit.version>3.5.0-SNAPSHOT</fit.version>
+        <fit.version>3.5.0-M2</fit.version>
 
         <!-- Test framework versions -->
         <assertj.version>3.27.3</assertj.version>

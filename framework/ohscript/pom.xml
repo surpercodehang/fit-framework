@@ -6,7 +6,7 @@
     <name>OhScript</name>
     <groupId>org.fitframework.ohscript</groupId>
     <artifactId>ohscript</artifactId>
-    <version>3.5.0-SNAPSHOT</version>
+    <version>3.5.0-M2</version>
 
     <description>A Lightweight Java-Based Scripting Language</description>
     <url>https://github.com/ModelEngine-Group/fit-framework</url>
@@ -48,7 +48,7 @@
         <java.version>17</java.version>
 
         <!-- FIT version -->
-        <fit.version>3.5.0-SNAPSHOT</fit.version>
+        <fit.version>3.5.0-M2</fit.version>
 
         <!-- Third-Party version -->
         <byte-buddy.version>1.17.5</byte-buddy.version>
