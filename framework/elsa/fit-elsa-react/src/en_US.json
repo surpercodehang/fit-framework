@@ -410,5 +410,6 @@
   "pushResultToChat": "待翻译",
   "appConfig": "App Configuration",
   "appChatStyle": "App Interface Configuration",
-  "appChatStyleCannotBeEmpty": "App interface configuration cannot be empty"
+  "appChatStyleCannotBeEmpty": "App interface configuration cannot be empty",
+  "formItemFieldTypeCannotBeEmpty": "Field type is required"
 }

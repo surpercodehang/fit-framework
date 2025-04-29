@@ -23,7 +23,7 @@ export const AddParamReducer = () => {
       id: action.id,
       name: '',
       displayName: '',
-      type: DATA_TYPES.STRING,
+      type: undefined,
       from: FROM_TYPE.INPUT,
       value: '',
       renderType: '',
