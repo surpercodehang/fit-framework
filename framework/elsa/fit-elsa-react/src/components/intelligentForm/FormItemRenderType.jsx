@@ -19,34 +19,11 @@ import {DATA_TYPES, RENDER_TYPE} from '@/common/Consts.js';
  * @param propValue 名称的初始值
  * @param disabled 该字段是否禁止修改
  * @param onChange 值被修改时调用的函数
- * @param type 该表单对象的类型
  * @returns {JSX.Element} 开始节点关于入参名称的Dom
  */
-export const FormItemRenderType = ({itemId, propValue, disabled, onChange, type}) => {
+export const FormItemRenderType = ({itemId, propValue, disabled, onChange}) => {
   const { t } = useTranslation();
   const form = useFormContext();
-
-  // 根据 type 渲染不同的组件
-  const renderOptions = () => {
-    switch (type) {
-      case DATA_TYPES.BOOLEAN:
-        return [
-          {value: RENDER_TYPE.SWITCH, label: RENDER_TYPE.SWITCH},
-        ];
-      case DATA_TYPES.NUMBER:
-      case DATA_TYPES.INTEGER:
-        return [
-          {value: RENDER_TYPE.INPUT, label: RENDER_TYPE.INPUT},
-        ];
-      case DATA_TYPES.STRING:
-        return [
-          {value: RENDER_TYPE.INPUT, label: RENDER_TYPE.INPUT},
-          {value: RENDER_TYPE.RADIO, label: RENDER_TYPE.RADIO},
-        ];
-      default:
-        return [];
-    }
-  };
 
   useEffect(() => {
     form.setFieldsValue({ [`renderType-${itemId}`]: propValue });
@@ -62,14 +39,21 @@ export const FormItemRenderType = ({itemId, propValue, disabled, onChange, type}
     initialValue={propValue}
   >
     <JadeStopPropagationSelect
-      className="jade-select intelligent-form-right-select"
+      className="jade-select intelligent-form-left-select"
       disabled={disabled}
       style={{width: '100%'}}
       onChange={(value) => {
         onChange(itemId, [{key: 'renderType', value:value}]); // 当选择框的值发生变化时调用父组件传递的回调函数
         document.activeElement.blur();// 在选择后取消焦点
       }}
-      options={renderOptions()}
+      options={[
+        {value: RENDER_TYPE.INPUT, label: RENDER_TYPE.INPUT},
+        {value: RENDER_TYPE.SWITCH, label: RENDER_TYPE.SWITCH},
+        {value: RENDER_TYPE.RADIO, label: RENDER_TYPE.RADIO},
+        {value: RENDER_TYPE.SELECT, label: RENDER_TYPE.SELECT},
+        {value: RENDER_TYPE.CHECK_BOX, label: RENDER_TYPE.CHECK_BOX},
+        {value: RENDER_TYPE.LABEL, label: RENDER_TYPE.LABEL},
+      ]}
     />
   </Form.Item>);
 };
@@ -79,5 +63,4 @@ FormItemRenderType.propTypes = {
   propValue: PropTypes.string.isRequired, // 确保 propValue 是一个必需的字符串
   disabled: PropTypes.bool.isRequired, // 确保 disabled 是一个必须的布尔值
   onChange: PropTypes.func.isRequired, // 确保 onChange 是一个必需的函数
-  type: PropTypes.string.isRequired, // 确保 items 是一个必须的列表
 };

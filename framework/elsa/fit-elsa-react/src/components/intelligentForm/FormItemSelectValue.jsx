@@ -29,12 +29,12 @@ export const FormItemSelectValue = ({item, shapeStatus, onChange, label, inputRe
   const {t} = useTranslation();
 
   /* input变化时的回调. */
-  const onInputChange = (key, e) => {
-    let value = e.target.value.trim() === '' ? null : e.target.value;
-    if (value === null) {
+  const onInputChange = (e) => {
+    if (e === null) {
       form.setFieldsValue({[`value-${item.id}`]: null});
     }
     const type = item.type;
+    let value = e
     if (type === 'Object' || type === 'Array') {
       try {
         value = JSON.parse(value);
@@ -42,7 +42,7 @@ export const FormItemSelectValue = ({item, shapeStatus, onChange, label, inputRe
         // 不影响，报错可以继续执行.
       }
     }
-    onChange(item.id, [{key, value}]);
+    onChange(item.id, [{key: 'value', value}]);
   };
 
   /**
@@ -70,7 +70,7 @@ export const FormItemSelectValue = ({item, shapeStatus, onChange, label, inputRe
         return <Switch
           disabled={shapeStatus.disabled}
           style={{marginLeft: '8px'}}
-          onChange={(e) => onInputChange('value', e)}
+          onChange={(e) => onInputChange(e)}
           checked={item.value}/>;
       case DATA_TYPES.INTEGER:
         return <InputNumber
@@ -79,7 +79,7 @@ export const FormItemSelectValue = ({item, shapeStatus, onChange, label, inputRe
           step={1}
           precision={0}
           parser={(value) => value.replace(/[^\d-]/g, '')} // 只允许输入整数部分
-          onChange={(e) => onInputChange('value', e)}
+          onChange={(e) => onInputChange(e)}
           stringMode
           value={item.value}
         />;
@@ -88,7 +88,7 @@ export const FormItemSelectValue = ({item, shapeStatus, onChange, label, inputRe
           className="jade-input"
           disabled={shapeStatus.disabled}
           step={1}
-          onChange={(e) => onInputChange('value', e)}
+          onChange={(e) => onInputChange(e)}
           stringMode
           value={item.value}
         />;
@@ -100,7 +100,7 @@ export const FormItemSelectValue = ({item, shapeStatus, onChange, label, inputRe
           style={{borderRadius: '0px 8px 8px 0px'}}
           placeholder={t('plsEnter')}
           value={item.type === DATA_TYPES.ARRAY || item.type === DATA_TYPES.OBJECT ? JSON.stringify(item.value) : item.value}
-          onChange={(e) => onInputChange('value', e)}
+          onChange={(e) => onInputChange(e.target.value.trim() === '' ? null : e.target.value)}
         />;
     }
   };

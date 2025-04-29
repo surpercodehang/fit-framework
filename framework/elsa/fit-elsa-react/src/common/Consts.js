@@ -187,6 +187,8 @@ export const RENDER_TYPE = {
   RADIO: 'Radio',
   INPUT: 'Input',
   SWITCH: 'Switch',
+  CHECK_BOX: 'CheckBox',
+  LABEL: 'Label',
 };
 
 export const DEFAULT_LOOP_NODE_CONTEXT = {

@@ -6,4 +6,4 @@
 
 import {RENDER_TYPE} from '@/common/Consts.js';
 
-export const RENDER_OPTIONS_TYPE = new Set([RENDER_TYPE.RADIO]);
+export const RENDER_OPTIONS_TYPE = new Set([RENDER_TYPE.RADIO, RENDER_TYPE.SELECT, RENDER_TYPE.CHECK_BOX]);
