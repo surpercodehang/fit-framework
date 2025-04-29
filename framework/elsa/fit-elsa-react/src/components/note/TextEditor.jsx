@@ -16,7 +16,6 @@ import {useShapeContext} from '@/components/DefaultRoot.jsx';
 import {EditorToolbar} from '@/components/note/EditorToolBar.jsx';
 import PropTypes from 'prop-types';
 import {TOOL_BAR_SIZE} from '@/components/note/const.js';
-import {useTranslation} from 'react-i18next';
 import {ResizeButton} from '@/components/note/ResizeButton.jsx';
 import {EVENT_TYPE, isPointInRect} from '@fit-elsa/elsa-core';
 
@@ -33,7 +32,6 @@ import {EVENT_TYPE, isPointInRect} from '@fit-elsa/elsa-core';
  */
 const _TextEditor = ({text, style, dispatch, isFocused, isInDragging}) => {
   const shape = useShapeContext();
-  const {t} = useTranslation();
   const shapeDiv = shape.drawer.parent;
   const [isEditing, setIsEditing] = useState(false); // 控制编辑状态
   const editorRef = useRef(null); // 创建一个ref
