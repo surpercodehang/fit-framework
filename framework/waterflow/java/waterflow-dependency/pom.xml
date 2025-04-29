@@ -5,7 +5,7 @@
 
     <groupId>org.fitframework.waterflow</groupId>
     <artifactId>waterflow-dependency</artifactId>
-    <version>3.5.0-SNAPSHOT</version>
+    <version>3.5.0-M2</version>
     <packaging>pom</packaging>
 
     <description>Dependency Management of A Reactive Process Engine combining Traditional BPM Capabilities</description>
@@ -41,9 +41,9 @@
         <java.version>17</java.version>
 
         <!-- Framework versions -->
-        <fit.version>3.5.0-SNAPSHOT</fit.version>
-        <waterflow.version>3.5.0-SNAPSHOT</waterflow.version>
-        <ohscript.version>3.5.0-SNAPSHOT</ohscript.version>
+        <fit.version>3.5.0-M2</fit.version>
+        <waterflow.version>3.5.0-M2</waterflow.version>
+        <ohscript.version>3.5.0-M2</ohscript.version>
 
         <!-- Third-party versions -->
         <druid.version>1.2.20</druid.version>
