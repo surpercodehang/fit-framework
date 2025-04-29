@@ -158,10 +158,8 @@ const VariableItem = ({variable, variables, shapeStatus}) => {
     }
 
     // 只有一个已引用变量，并且变量是自身，也可以换类型.
-    if (referencedVariables.length === 1) {
-      if (referencedVariables[0].id === variable.id) {
+    if (referencedVariables.length === 1 && referencedVariables[0].id === variable.id) {
         return true;
-      }
     }
 
     // o所代表的observable已被引用了，不可再次引用.
@@ -169,7 +167,10 @@ const VariableItem = ({variable, variables, shapeStatus}) => {
       return false;
     }
 
-    return o.type.toUpperCase() === referencedVariables[0]?.type?.toUpperCase() ?? DATA_TYPES.STRING.toUpperCase();
+    const defaultType = DATA_TYPES?.STRING?.toUpperCase() ?? "STRING"; // 防御性兜底
+    const oType = o?.type?.toUpperCase() ?? defaultType;
+    const refType = referencedVariables[0]?.type?.toUpperCase() ?? defaultType;
+    return oType === refType;
   };
 
   // 删除变量.
