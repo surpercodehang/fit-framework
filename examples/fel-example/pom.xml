@@ -17,7 +17,7 @@
 
         <!-- Framework versions -->
         <fit.version>3.5.0-SNAPSHOT</fit.version>
-        <fel.version>1.0.0-SNAPSHOT</fel.version>
+        <fel.version>3.5.0-SNAPSHOT</fel.version>
 
         <!-- Maven plugin versions -->
         <maven.antrun.version>3.1.0</maven.antrun.version>

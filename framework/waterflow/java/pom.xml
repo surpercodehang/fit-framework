@@ -5,7 +5,7 @@
 
     <groupId>org.fitframework.waterflow</groupId>
     <artifactId>waterflow-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>3.5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <description>A Reactive Process Engine combining Traditional BPM Capabilities</description>
@@ -49,7 +49,7 @@
 
         <!-- Framework version -->
         <fit.version>3.5.0-SNAPSHOT</fit.version>
-        <waterflow.version>1.0.0-SNAPSHOT</waterflow.version>
+        <waterflow.version>3.5.0-SNAPSHOT</waterflow.version>
 
         <!-- Maven plugin versions -->
         <maven.antrun.version>3.1.0</maven.antrun.version>
