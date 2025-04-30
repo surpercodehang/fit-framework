@@ -12,11 +12,11 @@ body {
     unicode-bidi: isolate !important;
 }
 
-.mce-content-body ol {
+.mce-content-body ol li {
     list-style-type: decimal !important;
 }
 
-.mce-content-body ul {
+.mce-content-body ul li {
     list-style-type: disc !important;
 }
 
