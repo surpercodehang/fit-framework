@@ -202,7 +202,9 @@ const QuestionClassificationItem = ({disabled, question, index, isLastIndex}) =>
    * @param id config的id
    */
   const changeOnBlur = (e, actionType, id) => {
-    dispatch({actionType: actionType, id: id, value: e.target.value});
+    if (questionDesc.value !== e.target.value) {
+      dispatch({actionType: actionType, id: id, value: e.target.value});
+    }
   };
 
   /**

@@ -95,7 +95,7 @@ const defaultJadeConfig = {
         name: 'property',
         type: 'Integer',
         from: 'Input',
-        value: '6',
+        value: '3',
       }],
     }, {
       id: `histories_${uuidv4()}`,

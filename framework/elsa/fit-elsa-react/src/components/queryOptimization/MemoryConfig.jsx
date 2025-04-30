@@ -123,7 +123,6 @@ export const ConfigSlider = ({disabled, propertyValue, sliderConfig}) => {
             max={sliderConfig.max}
             value={propertyValue}
             marks={getDefaultRecalls()}
-            defaultValue={sliderConfig.default}
             onChange={(value) => dispatch({actionType: 'changeWindowValue', value: value})}
     />
   </>);
