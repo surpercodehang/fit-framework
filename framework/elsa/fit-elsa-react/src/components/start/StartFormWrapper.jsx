@@ -163,6 +163,7 @@ export default function StartFormWrapper({data, shapeStatus}) {
               }
               className="jade-panel"
               style={{marginBottom: 8, borderRadius: '8px', width: '100%'}}
+              forceRender
             >
               <div className={'jade-custom-panel-content'}>
                 <StartInputForm item={item} items={items}/>

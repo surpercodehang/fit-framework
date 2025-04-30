@@ -123,9 +123,9 @@ export const FormItemSelectValue = ({item, shapeStatus, onChange, label, inputRe
       return <JadeReferenceTreeSelect
         className='jade-input-tree-title-tree-select jade-select'
         disabled={shapeStatus.referenceDisabled}
-        rules={[{
+        rules={inputRequired ? [{
           required: true, message: t('fieldValueCannotBeEmpty'),
-        }]}
+        }] : []}
         reference={item}
         onReferencedKeyChange={(e) => onReferenceKeyChange(e)}
         onReferencedValueChange={(referenceKey, value, type) => onReferenceValueChange(referenceKey, value, type)}

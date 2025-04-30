@@ -38,17 +38,35 @@ const _IntelligentInputFormItem = ({item, items, shapeStatus, output}) => {
    * @param entries 修改的数组
    */
   const handleFormValueChange = (id, entries = []) => {
-    const changes = new Map(entries.map(({ key, value }) => [key, value])); // 将 entries 转换为 Map
-    // 如果 type 是 'type'，清空 renderType
-    if (changes.has('renderType') && changes.get('renderType') !== item.renderType) {
-      changes.set('type', undefined);
-      if (changes.get('renderType') === RENDER_TYPE.CHECK_BOX) {
-        changes.set('type', DATA_TYPES.ARRAY);
+    const changes = new Map(entries.map(({key, value}) => [key, value])); // 将 entries 转换为 Map
+
+    const updateFormValues = (newValue) => {
+      const fieldName = `value-${item.id}`;
+      const formValue = Array.isArray(newValue) ? newValue : newValue || undefined;
+      changes.set('value', newValue);
+      form.setFieldsValue({ [fieldName]: formValue });
+    };
+
+    const handleRenderTypeChange = () => {
+      if (!changes.has('renderType') || changes.get('renderType') === item.renderType) {
+        return;
       }
-      changes.set('value', null);
-      form.setFieldsValue({[`value-${item.id}`]: undefined});
-    }
-    dispatch({ type: 'updateParam', id: id, changes });
+      const isCheckbox = changes.get('renderType') === RENDER_TYPE.CHECK_BOX;
+      changes.set('type', isCheckbox ? DATA_TYPES.ARRAY : undefined);
+      updateFormValues(isCheckbox ? [] : '');
+    };
+
+    const handleTypeChange = () => {
+      if (!changes.has('type') || changes.get('type') === item.type) {
+        return;
+      }
+      const isArrayType = changes.get('type') === DATA_TYPES.ARRAY;
+      updateFormValues(isArrayType ? [] : '');
+    };
+
+    handleRenderTypeChange();
+    handleTypeChange();
+    dispatch({type: 'updateParam', id: id, changes});
   };
 
   const handleOptionsChange = (id, entries = []) => {
