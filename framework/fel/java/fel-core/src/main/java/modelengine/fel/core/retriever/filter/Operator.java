@@ -13,15 +13,36 @@ package modelengine.fel.core.retriever.filter;
  * @since 2024-08-10
  */
 public enum Operator {
+    /** 等于。 */
     EQ,
+
+    /** 不等于。 */
     NE,
+
+    /** 小于。 */
     LT,
+
+    /** 大于。 */
     GT,
+
+    /** 小于等于。 */
     LE,
+
+    /** 大于等于。 */
     GE,
+
+    /** 在集合中。 */
     IN,
+
+    /** 不在集合中。 */
     NIN,
+
+    /** 模糊匹配。 */
     LIKE,
+
+    /** 或运算。 */
     OR,
-    AND,
+
+    /** 与运算。 */
+    AND
 }

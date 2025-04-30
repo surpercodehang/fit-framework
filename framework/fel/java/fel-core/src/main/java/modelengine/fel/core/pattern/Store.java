@@ -18,7 +18,7 @@ public interface Store<D> extends Pattern<D, Void> {
     /**
      * 添加数据到存储中。
      *
-     * @param data 表示待添加数据的 {@link D>}。
+     * @param data 表示待添加数据的 {@link D}。
      */
     void persistent(D data);
 

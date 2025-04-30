@@ -19,7 +19,7 @@ public interface PostProcessor<D> extends Pattern<D, D> {
      * 对检索结果进行后处理。
      *
      * @param data 表示输入数据的 {@link D}。
-     * @return 表示处理后数据的 {@link D>}。
+     * @return 表示处理后数据的 {@link D}。
      */
     D process(D data);
 

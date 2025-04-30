@@ -44,12 +44,10 @@ public abstract class AbstractExpressionParser implements ExpressionParser {
 
     /**
      * 解析值对象，有以下两种情况：
-     * <p>
      * <ol>
      *     <li>如果是集合，则将集合中的每一个元素分别解析后组装</li>
      *     <li>如果不是集合，则直接进行解析</li>
      * </ol>
-     * </p>
      *
      * @param value 表示值对象的 {@link Operand.Value}。
      * @param buf 表示输出缓冲区的 {@link StringBuilder}。

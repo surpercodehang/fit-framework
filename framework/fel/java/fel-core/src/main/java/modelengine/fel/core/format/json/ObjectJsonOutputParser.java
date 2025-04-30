@@ -21,6 +21,7 @@ public class ObjectJsonOutputParser extends AbstractJsonOutputParser<Object> {
      * 创建 {@link ObjectJsonOutputParser} 的实例。
      *
      * @param serializer 表示对象序列化器的 {@link ObjectSerializer}。
+     * @param jsonSchema 表示 Json 格式的描述文件的 {@link String}。
      */
     public ObjectJsonOutputParser(ObjectSerializer serializer, String jsonSchema) {
         super(serializer, Object.class);
