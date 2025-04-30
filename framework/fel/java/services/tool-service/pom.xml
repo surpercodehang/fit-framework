@@ -3,37 +3,91 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.fitframework.fel</groupId>
-        <artifactId>fel-services-parent</artifactId>
-        <version>3.5.0-M2</version>
-    </parent>
-
+    <groupId>org.fitframework.fel</groupId>
     <artifactId>tool-service</artifactId>
+    <version>3.5.0-M2</version>
+
+    <description>Tool Service</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Ji Yujie</name>
+            <email>codecaster365@outlook.com</email>
+            <roles>
+                <role>Maintainer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Song Yongtan</name>
+            <email>271667068.qq.com</email>
+            <roles>
+                <role>Committer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/ModelEngine-Group/fit-framework.git</connection>
+        <developerConnection>scm:git:ssh://github.com/ModelEngine-Group/fit-framework.git</developerConnection>
+        <url>https://github.com/ModelEngine-Group/fit-framework</url>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>17</java.version>
+
+        <!-- Framework version -->
+        <fit.version>3.5.0-M2</fit.version>
+        <fel.version>3.5.0-M2</fel.version>
+
+        <!-- Maven plugin versions -->
+        <maven.compiler.version>3.14.0</maven.compiler.version>
+        <maven.gpg.version>3.2.7</maven.gpg.version>
+        <maven.javadoc.version>3.11.2</maven.javadoc.version>
+        <maven.jar.version>3.4.2</maven.jar.version>
+        <maven.surefire.version>3.5.3</maven.surefire.version>
+        <maven.source.version>3.3.1</maven.source.version>
+        <central-publishing.maven-plugin.version>0.7.0</central-publishing.maven-plugin.version>
+    </properties>
 
     <dependencies>
         <!-- FIT -->
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-api</artifactId>
+            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-util</artifactId>
+            <version>${fit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework.service</groupId>
             <artifactId>fit-http-classic</artifactId>
+            <version>${fit.version}</version>
         </dependency>
 
         <!-- FEL -->
         <dependency>
             <groupId>org.fitframework.fel</groupId>
             <artifactId>fel-core</artifactId>
+            <version>${fel.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework.fel</groupId>
             <artifactId>tool-info</artifactId>
+            <version>${fel.version}</version>
         </dependency>
 
         <!-- Test Fit Core -->
@@ -82,14 +136,116 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <version>5.12.2</version>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+            <version>5.17.0</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+            <version>3.27.3</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${maven.gpg.version}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.jar.version}</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Created-By>FIT lab</Created-By>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>${central-publishing.maven-plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.fitframework</groupId>
+                <artifactId>fit-build-maven-plugin</artifactId>
+                <version>${fit.version}</version>
+                <executions>
+                    <execution>
+                        <id>build-service</id>
+                        <goals>
+                            <goal>build-service</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
