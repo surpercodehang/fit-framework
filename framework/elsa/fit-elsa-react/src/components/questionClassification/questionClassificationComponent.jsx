@@ -172,7 +172,7 @@ export const questionClassificationComponent = (jadeConfig, shape) => {
             name: 'property',
             type: 'Integer',
             from: 'Input',
-            value: '6',
+            value: '3',
           }],
         }, {
           id: `memorySwitch_${uuidv4()}`,

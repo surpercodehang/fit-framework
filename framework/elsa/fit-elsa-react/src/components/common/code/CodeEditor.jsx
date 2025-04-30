@@ -42,6 +42,7 @@ export const CodeEditor = (
   const monacoRef = useRef(null);
   const providerRef = useRef(null);
   const divRef = useRef();
+  const isFirstChange = useRef(true);
 
   useEffect(() => {
     if (suggestions.length <= 0) {
@@ -87,7 +88,11 @@ export const CodeEditor = (
       fontFamily: 'inherit',
     });
     monacoRef.current.onDidChangeModelContent(() => {
-      onChange && onChange(monacoRef.current.getModel().getValue());
+      if (isFirstChange.current) {
+        isFirstChange.current = false;
+        return;
+      }
+      onChange?.(monacoRef.current.getModel().getValue());
     });
     registerSuggestions();
     return () => {

@@ -281,7 +281,11 @@ export const TreeNode = ({
       id={`description-input-${node.id}-${key}`}
       className='jade-input'
       disabled={disabled}
-      onBlur={(e) => editOutputFieldProperty(key, 'editOutputFieldProperty', 'description', e)}
+      onBlur={(e) => {
+        if (description !== e.target.value) {
+          editOutputFieldProperty(key, 'editOutputFieldProperty', 'description', e);
+        }
+      }}
     /> : <div style={{width: '50px'}}></div>;
   };
 

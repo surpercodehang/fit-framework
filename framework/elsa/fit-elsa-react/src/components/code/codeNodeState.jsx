@@ -20,7 +20,7 @@ export const codeNodeState = (id, x, y, width, height, parent, drawer) => {
     self.type = "codeNodeState";
     self.width = 360;
     self.componentName = "codeComponent";
-    self.text = "code"
+    self.text = "代码节点"
     self.width = 368;
     self.flowMeta.jober.type = 'STORE_JOBER';
     const toolEntity = {

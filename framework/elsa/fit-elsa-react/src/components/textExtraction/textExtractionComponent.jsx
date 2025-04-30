@@ -91,7 +91,7 @@ export const textExtractionComponent = (jadeConfig) => {
         }, {
           id: `serializeAlg_${uuidv4()}`, name: 'serializeAlg', type: 'String', from: 'Input', value: 'full',
         }, {
-          id: `property_${uuidv4()}`, name: 'property', type: 'Integer', from: 'Input', value: '0',
+          id: `property_${uuidv4()}`, name: 'property', type: 'Integer', from: 'Input', value: '3',
         }],
       }, {
         id: `memorySwitch_${uuidv4()}`, name: 'memorySwitch', type: 'Boolean', from: 'Input', value: false,

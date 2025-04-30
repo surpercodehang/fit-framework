@@ -51,7 +51,9 @@ export const Prompt = (
    * @param e event事件
    */
   const changeOnBlur = (e) => {
-    _onChange(e.target.value);
+    if (prompt.value !== e.target.value) {
+      _onChange(e.target.value);
+    }
   };
 
   const createButton = (buttonConfig) => {
