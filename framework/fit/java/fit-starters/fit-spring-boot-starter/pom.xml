@@ -14,6 +14,13 @@
     <artifactId>fit-spring-boot-starter</artifactId>
     <version>3.5.0-SNAPSHOT</version>
 
+    <name>FIT Spring Boot Starter</name>
+    <description>FIT Framework Spring Boot Starter module provides a Spring-compatible runtime environment for FIT
+        Framework, enabling seamless integration with Spring applications while supporting dynamic plugin loading and
+        inter-plugin communication.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

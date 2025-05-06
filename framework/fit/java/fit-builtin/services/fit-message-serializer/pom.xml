@@ -12,6 +12,12 @@
     <artifactId>fit-message-serializer-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Message Serializer Parent</name>
+    <description>FIT Framework Message Serializer Service module provides FIT communication level service definitions
+        and tests.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>definition</module>
         <module>test</module>

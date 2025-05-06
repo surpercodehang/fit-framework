@@ -11,6 +11,11 @@
 
     <artifactId>fit-http-client-okhttp</artifactId>
 
+    <name>FIT Http Client OkHttp</name>
+    <description>FIT Framework Http Client OkHttp Plugin module provides OkHttp implementation of HTTP client service.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Third-party versions -->
         <okhttp.version>4.12.0</okhttp.version>

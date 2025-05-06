@@ -11,6 +11,12 @@
 
     <artifactId>fit-client</artifactId>
 
+    <name>FIT Client</name>
+    <description>FIT Framework Client Service Definition module provides client-side components for general
+        communication services.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

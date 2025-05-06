@@ -12,6 +12,12 @@
     <artifactId>fit-log-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Log Parent</name>
+    <description>FIT Framework Log module provides integration support for various common logging frameworks (including
+        log4j, logback, etc.).
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>fit-log-console</module>
         <module>fit-log-log4j2</module>

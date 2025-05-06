@@ -11,6 +11,12 @@
 
     <artifactId>fit-discrete-launcher</artifactId>
 
+    <name>FIT Discrete Launcher</name>
+    <description>FIT Framework Discrete Launcher module provides a discrete launcher for modular application startup and
+        management.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <dependency>
             <groupId>org.fitframework</groupId>

@@ -11,6 +11,11 @@
 
     <artifactId>fit-service-discovery</artifactId>
 
+    <name>FIT Service Discovery</name>
+    <description>FIT Framework Service Discovery Plugin module provides built-in service discovery implementation.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

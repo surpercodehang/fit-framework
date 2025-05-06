@@ -11,6 +11,12 @@
 
     <artifactId>fit-aop-aspect</artifactId>
 
+    <name>FIT AOP Aspect</name>
+    <description>FIT AOP Aspect is a self-developed extension implementation of the aspect layer that provides
+        aspect-oriented programming capabilities.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

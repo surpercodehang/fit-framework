@@ -11,6 +11,12 @@
 
     <artifactId>fit-validation-hibernate</artifactId>
 
+    <name>FIT Validation Hibernate</name>
+    <description>FIT Framework Validation Hibernate module provides validation functionality based on Hibernate
+        Validator implementation.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Third-party versions -->
         <hibernate.version>6.2.5.Final</hibernate.version>

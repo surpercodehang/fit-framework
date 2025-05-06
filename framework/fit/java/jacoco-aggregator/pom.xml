@@ -12,6 +12,10 @@
     <artifactId>jacoco-aggregator</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Jacoco Aggregator</name>
+    <description>FIT Framework Jacoco Aggregator module provides integration with Jacoco.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT Maven Plugin -->
         <dependency>

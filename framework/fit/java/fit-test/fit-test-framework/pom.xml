@@ -11,6 +11,12 @@
 
     <artifactId>fit-test-framework</artifactId>
 
+    <name>FIT Test Framework</name>
+    <description>FIT Framework Test Framework module provides a test framework that can run on FIT runtime, making it
+        convenient to perform application/plugin level integration testing in the FIT environment.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Third-party versions -->
         <junit5.version>5.12.2</junit5.version>

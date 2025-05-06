@@ -11,6 +11,12 @@
 
     <artifactId>fit-server-http</artifactId>
 
+    <name>FIT Server Http</name>
+    <description>FIT Framework Server Http Plugin module provides HTTP implementation for server-side FIT communication
+        service.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

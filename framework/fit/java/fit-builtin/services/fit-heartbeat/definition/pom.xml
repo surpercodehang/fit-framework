@@ -11,6 +11,12 @@
 
     <artifactId>fit-heartbeat</artifactId>
 
+    <name>FIT Heartbeat</name>
+    <description>FIT Framework Heartbeat Service Definition module provides heartbeat maintenance and detection related
+        services.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

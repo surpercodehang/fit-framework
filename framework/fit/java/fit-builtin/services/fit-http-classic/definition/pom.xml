@@ -11,6 +11,11 @@
 
     <artifactId>fit-http-classic</artifactId>
 
+    <name>FIT Http Classic</name>
+    <description>FIT Framework Http Classic Service Definition module provides high level Http protocol usage services.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

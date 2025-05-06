@@ -12,6 +12,12 @@
     <artifactId>fit-aop-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT AOP Parent</name>
+    <description>FIT Framework AOP module provides aspect-oriented programming support with multiple implementations
+        (AspectJ, ByteBuddy, etc.).
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>fit-aop</module>
         <module>fit-aop-aspect</module>

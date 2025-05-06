@@ -13,9 +13,12 @@
     <artifactId>fit-service-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Service Parent</name>
+    <description>FIT Framework Service module provides built-in system services.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>fit-client</module>
-        <module>fit-data-repository-service</module>
         <module>fit-heartbeat</module>
         <module>fit-http-classic</module>
         <module>fit-http-protocol</module>

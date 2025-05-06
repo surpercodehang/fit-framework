@@ -12,6 +12,12 @@
     <artifactId>fit-starter-web</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Starter Web</name>
+    <description>FIT Framework Starter Web module provides different dependency collections for referencing plugins and
+        services in web scenarios.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>fit-plugins-starter-web</module>
         <module>fit-services-starter-web</module>

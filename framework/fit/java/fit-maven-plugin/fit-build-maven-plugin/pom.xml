@@ -12,6 +12,12 @@
     <artifactId>fit-build-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
 
+    <name>FIT Build Maven Plugin</name>
+    <description>FIT Framework Build Maven Plugin module provides a specified maven plugin for compiling and building
+        FIT services, plugins and applications.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

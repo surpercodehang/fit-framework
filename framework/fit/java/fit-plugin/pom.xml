@@ -11,6 +11,10 @@
 
     <artifactId>fit-plugin</artifactId>
 
+    <name>FIT Plugin</name>
+    <description>FIT Framework Plugin module provides the plugin architecture foundation for FIT.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

@@ -11,6 +11,11 @@
 
     <artifactId>fit-security</artifactId>
 
+    <name>FIT Security</name>
+    <description>FIT Framework Security Service Definition module provides various common basic security services.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

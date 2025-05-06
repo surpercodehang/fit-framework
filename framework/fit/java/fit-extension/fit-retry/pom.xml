@@ -11,6 +11,10 @@
 
     <artifactId>fit-retry</artifactId>
 
+    <name>FIT Retry</name>
+    <description>FIT Framework Retry module provides built-in retry functionality.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

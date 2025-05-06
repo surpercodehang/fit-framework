@@ -11,6 +11,10 @@
 
     <artifactId>fit-validation</artifactId>
 
+    <name>FIT Validation</name>
+    <description>FIT Framework Validation module provides built-in validation functionality.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

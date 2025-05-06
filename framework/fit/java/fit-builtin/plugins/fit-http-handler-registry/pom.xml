@@ -11,6 +11,12 @@
 
     <artifactId>fit-http-handler-registry</artifactId>
 
+    <name>FIT Http Handler Registry</name>
+    <description>FIT Framework Http Handler Registry Plugin module provides automatic registration and discovery of HTTP
+        handlers.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

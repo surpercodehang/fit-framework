@@ -12,6 +12,12 @@
     <artifactId>fit-service-registry-and-discovery-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Service Registry and Discovery Parent</name>
+    <description>FIT Framework Service Registry and Discovery Service module provides service auto-registration and
+        discovery related definitions and tests.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>definition</module>
     </modules>

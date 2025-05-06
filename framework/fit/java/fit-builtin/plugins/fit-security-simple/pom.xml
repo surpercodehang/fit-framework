@@ -11,6 +11,12 @@
 
     <artifactId>fit-security-simple</artifactId>
 
+    <name>FIT Security Simple</name>
+    <description>FIT Framework Security Simple Plugin module provides built-in simple implementation of security
+        service, which does not actually handle security issues and is only used for testing.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

@@ -11,6 +11,10 @@
 
     <artifactId>fit-log-console</artifactId>
 
+    <name>FIT Log Console</name>
+    <description>FIT Framework Console module provides console implementation for logging.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

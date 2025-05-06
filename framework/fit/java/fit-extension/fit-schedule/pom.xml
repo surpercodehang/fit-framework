@@ -11,6 +11,10 @@
 
     <artifactId>fit-schedule</artifactId>
 
+    <name>FIT Schedule</name>
+    <description>FIT Framework Schedule module provides built-in scheduled task functionality.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

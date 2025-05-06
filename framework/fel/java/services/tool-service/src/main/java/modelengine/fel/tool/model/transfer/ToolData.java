@@ -100,7 +100,6 @@ public class ToolData {
     /**
      * 获取工具的描述信息。
      *
-     * @return *
      * @return 表示工具的描述信息的 {@link String}。
      */
     public String getDescription() {

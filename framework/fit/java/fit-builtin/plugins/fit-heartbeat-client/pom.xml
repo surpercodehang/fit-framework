@@ -11,6 +11,11 @@
 
     <artifactId>fit-heartbeat-client</artifactId>
 
+    <name>FIT Heartbeat Client</name>
+    <description>FIT Framework Heartbeat Client Plugin module provides built-in heartbeat client service implementation.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

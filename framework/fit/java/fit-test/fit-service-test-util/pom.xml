@@ -11,6 +11,10 @@
 
     <artifactId>fit-service-test-util</artifactId>
 
+    <name>FIT Service Test Util</name>
+    <description>FIT Framework Service Test Util module provides service acceptance test utilities.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Third-party versions -->
         <junit5.version>5.12.2</junit5.version>

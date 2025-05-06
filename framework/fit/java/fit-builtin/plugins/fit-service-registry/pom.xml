@@ -11,6 +11,11 @@
 
     <artifactId>fit-service-registry</artifactId>
 
+    <name>FIT Service Registry</name>
+    <description>FIT Framework Service Registry Plugin module provides built-in service registry implementation.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

@@ -11,6 +11,12 @@
 
     <artifactId>fit-service-registry-and-discovery</artifactId>
 
+    <name>FIT Service Registry and Discovery</name>
+    <description>FIT Framework Service Registry and Discovery Service Definition module provides service
+        auto-registration and discovery related services.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

@@ -11,6 +11,12 @@
 
     <artifactId>fit-server</artifactId>
 
+    <name>FIT Server</name>
+    <description>FIT Framework Server Service Definition module provides server-side components for general
+        communication services.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

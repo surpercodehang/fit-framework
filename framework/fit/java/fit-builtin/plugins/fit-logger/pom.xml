@@ -11,6 +11,12 @@
 
     <artifactId>fit-logger</artifactId>
 
+    <name>FIT Logger</name>
+    <description>FIT Framework Logger Plugin module provides unified logging operations for various logging
+        implementations.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Third-party versions -->
         <log4j2.version>2.24.3</log4j2.version>

@@ -12,6 +12,10 @@
     <artifactId>fit-client-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Client Parent</name>
+    <description>FIT Framework Client Service module provides client service definitions and tests.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>definition</module>
     </modules>

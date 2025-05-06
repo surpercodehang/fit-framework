@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>FIT Dependency Management</name>
     <groupId>org.fitframework</groupId>
     <artifactId>fit-dependency</artifactId>
     <version>3.5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <description>Dependency Management of The Plugin-Based Programming Framework</description>
+    <name>FIT Dependency Management</name>
+    <description>This is a dependency management module for the plugin-based programming framework FIT.</description>
     <url>https://github.com/ModelEngine-Group/fit-framework</url>
 
     <licenses>

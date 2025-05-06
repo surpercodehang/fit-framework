@@ -11,6 +11,12 @@
 
     <artifactId>fit-actuator</artifactId>
 
+    <name>FIT Actuator</name>
+    <description>FIT Framework Actuator Plugin module provides monitoring and management capabilities for FIT
+        applications.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>
