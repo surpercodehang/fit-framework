@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>fit-message-serializer-json-jackson</artifactId>
+    <version>3.5.0-M2.1</version>
 
     <properties>
         <!-- Third-party versions -->
