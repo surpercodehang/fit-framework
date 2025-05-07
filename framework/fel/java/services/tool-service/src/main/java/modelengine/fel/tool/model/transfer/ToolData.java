@@ -12,6 +12,7 @@ import modelengine.fel.tool.Tool;
 import modelengine.fel.tool.ToolSchema;
 import modelengine.fitframework.util.ObjectUtils;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +50,7 @@ public class ToolData {
      * @return 表示工具的参数的 {@link Map}。
      */
     public Map<String, Object> getParameters() {
-        return cast(this.schema.get(ToolSchema.PARAMETERS));
+        return cast(this.schema.getOrDefault(ToolSchema.PARAMETERS, Collections.emptyMap()));
     }
 
     /**
@@ -100,7 +101,6 @@ public class ToolData {
     /**
      * 获取工具的描述信息。
      *
-     * @return *
      * @return 表示工具的描述信息的 {@link String}。
      */
     public String getDescription() {
@@ -131,7 +131,7 @@ public class ToolData {
      * @return 表示工具的扩展信息的 {@link Map}。
      */
     public Map<String, Object> getExtensions() {
-        return this.extensions;
+        return this.extensions != null ? this.extensions : Collections.emptyMap();
     }
 
     /**
@@ -149,7 +149,7 @@ public class ToolData {
      * @return 表示工具是否是最新版本的 {@link Boolean}。
      */
     public Boolean getLatest() {
-        return isLatest;
+        return this.isLatest != null ? this.isLatest : true;
     }
 
     /**
@@ -259,14 +259,16 @@ public class ToolData {
      */
     public static Tool.Info convertToInfo(ToolData toolData) {
         return Tool.Info.custom()
-                .name(toolData.getName())
+                .namespace(toolData.getNamespace() != null ? toolData.getNamespace() : "")
+                .name(toolData.getName() != null ? toolData.getName() : "")
                 .groupName(toolData.getGroupName())
                 .definitionName(toolData.getDefName())
                 .definitionGroupName(toolData.getDefGroupName())
                 .uniqueName(toolData.getUniqueName())
-                .description(toolData.getDescription())
+                .description(toolData.getDescription() != null ? toolData.getDescription() : "")
                 .schema(toolData.getSchema())
                 .runnables(toolData.getRunnables())
+                .parameters(toolData.getParameters())
                 .extensions(toolData.getExtensions())
                 .version(toolData.getVersion())
                 .isLatest(toolData.getLatest())

@@ -5,7 +5,7 @@
 
     <groupId>org.fitframework.fel</groupId>
     <artifactId>tool-service</artifactId>
-    <version>3.5.0-M2</version>
+    <version>3.5.0-M2.1</version>
 
     <description>Tool Service</description>
     <url>https://github.com/ModelEngine-Group/fit-framework</url>
@@ -79,11 +79,6 @@
         </dependency>
 
         <!-- FEL -->
-        <dependency>
-            <groupId>org.fitframework.fel</groupId>
-            <artifactId>fel-core</artifactId>
-            <version>${fel.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.fitframework.fel</groupId>
             <artifactId>tool-info</artifactId>

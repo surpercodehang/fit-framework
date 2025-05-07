@@ -89,7 +89,7 @@
         <dependency>
             <groupId>org.fitframework.fel</groupId>
             <artifactId>tool-service</artifactId>
-            <version>${fel.version}</version>
+            <version>3.5.0-M2.1</version>
         </dependency>
         <dependency>
             <groupId>org.fitframework.fel</groupId>
