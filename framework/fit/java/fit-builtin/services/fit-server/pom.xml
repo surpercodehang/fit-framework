@@ -12,6 +12,10 @@
     <artifactId>fit-server-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Server Parent</name>
+    <description>FIT Framework Server Service module provides server service definitions and tests.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>definition</module>
     </modules>

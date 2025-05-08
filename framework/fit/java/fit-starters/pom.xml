@@ -12,8 +12,13 @@
     <artifactId>fit-starter-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Starter Parent</name>
+    <description>FIT Framework Starter module provides a collection of dependencies for various scenarios, aiming to
+        simplify dependency management for FIT beginners.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
-        <module>fit-http-starter</module>
         <module>fit-spring-boot-starter</module>
         <module>fit-starter</module>
         <module>fit-starter-web</module>

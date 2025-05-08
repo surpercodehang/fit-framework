@@ -11,6 +11,10 @@
 
     <artifactId>fit-mybatis</artifactId>
 
+    <name>FIT Mybatis</name>
+    <description>FIT Framework Mybatis module provides integration with Mybatis.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Third-party versions -->
         <mybatis.version>3.5.13</mybatis.version>

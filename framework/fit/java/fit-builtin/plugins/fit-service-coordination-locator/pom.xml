@@ -11,6 +11,12 @@
 
     <artifactId>fit-service-coordination-locator</artifactId>
 
+    <name>FIT Service Coordination Locator</name>
+    <description>FIT Framework Service Coordination Locator Plugin module provides built-in implementation of FIT
+        communication service coordinate positioning.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

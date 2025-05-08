@@ -11,6 +11,12 @@
 
     <artifactId>fit-message-serializer-cbor</artifactId>
 
+    <name>FIT Message Serializer Cbor</name>
+    <description>FIT Framework Message Serializer Cbor Plugin module provides CBOR implementation for FIT communication
+        services.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

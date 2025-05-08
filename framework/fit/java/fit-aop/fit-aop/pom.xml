@@ -11,6 +11,11 @@
 
     <artifactId>fit-aop</artifactId>
 
+    <name>FIT AOP</name>
+    <description>FIT AOP provides core infrastructure that enables extension through both aspect and proxy layers.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

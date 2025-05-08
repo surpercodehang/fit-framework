@@ -11,6 +11,12 @@
 
     <artifactId>fit-http-openapi3-swagger</artifactId>
 
+    <name>FIT Http Openapi3 Swagger</name>
+    <description>FIT Framework Http Openapi3 Swagger Plugin module provides Swagger implementation that complies with
+        OpenAPI 3.0 standard.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

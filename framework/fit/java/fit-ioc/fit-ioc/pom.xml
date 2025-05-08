@@ -11,6 +11,10 @@
 
     <artifactId>fit-ioc</artifactId>
 
+    <name>FIT IoC</name>
+    <description>FIT IoC provides hierarchical container architecture.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

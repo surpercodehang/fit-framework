@@ -11,6 +11,12 @@
 
     <artifactId>fit-message-serializer</artifactId>
 
+    <name>FIT Message Serializer</name>
+    <description>FIT Framework Message Serializer Service Definition module provides common serialization services for
+        FIT communication.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

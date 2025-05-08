@@ -12,6 +12,10 @@
     <artifactId>fit-builtin-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Builtin Parent</name>
+    <description>FIT Framework Builtin module provides built-in system services and plugins.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>plugins</module>
         <module>services</module>

@@ -11,6 +11,11 @@
 
     <artifactId>fit-http-server-netty</artifactId>
 
+    <name>FIT Http Server Netty</name>
+    <description>FIT Framework Http Server Netty Plugin module provides Netty implementation of HTTP server service.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Third-party versions -->
         <netty.version>4.2.0.Final</netty.version>

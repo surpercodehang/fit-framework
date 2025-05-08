@@ -11,6 +11,12 @@
 
     <artifactId>fit-value-fastjson</artifactId>
 
+    <name>FIT Value Fastjson</name>
+    <description>FIT Framework Value Fastjson Plugin module provides Fastjson implementation for value getting and
+        setting operations.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Third-party versions -->
         <fastjson.version>1.2.83</fastjson.version>

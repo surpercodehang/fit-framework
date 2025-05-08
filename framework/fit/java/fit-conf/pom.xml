@@ -12,6 +12,12 @@
     <artifactId>fit-conf-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Configuration Parent</name>
+    <description>FIT Framework Configuration module provides hierarchical configuration architecture and supports
+        multiple configuration formats (.properties, .json, .yaml, etc.).
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>fit-conf</module>
         <module>fit-conf-yaml</module>

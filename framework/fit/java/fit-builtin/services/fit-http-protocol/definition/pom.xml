@@ -11,6 +11,11 @@
 
     <artifactId>fit-http-protocol</artifactId>
 
+    <name>FIT Http Protocol</name>
+    <description>FIT Framework Http Protocol Service Definition module provides low level Http protocol usage services.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

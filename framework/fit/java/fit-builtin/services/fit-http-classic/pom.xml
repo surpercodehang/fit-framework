@@ -12,6 +12,11 @@
     <artifactId>fit-http-classic-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Http Classic Parent</name>
+    <description>FIT Framework Http Classic Service module provides classic http service definitions and tests.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>definition</module>
     </modules>

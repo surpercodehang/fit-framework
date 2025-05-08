@@ -13,6 +13,10 @@
     <artifactId>fit-extension-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Extension Parent</name>
+    <description>FIT Framework Extension module provides various system extension point implementations.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>fit-retry</module>
         <module>fit-schedule</module>

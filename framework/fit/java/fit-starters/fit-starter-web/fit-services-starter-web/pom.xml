@@ -11,6 +11,12 @@
 
     <artifactId>fit-services-starter-web</artifactId>
 
+    <name>FIT Services Starter Web</name>
+    <description>FIT Framework Services Starter Web module provides dependency collections for referencing services in
+        web scenarios.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <dependency>
             <groupId>org.fitframework</groupId>

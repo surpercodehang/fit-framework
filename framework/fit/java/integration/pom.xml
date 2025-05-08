@@ -13,6 +13,11 @@
     <artifactId>integration-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Integration Parent</name>
+    <description>FIT Framework Integration Parent module provides various third-party packages integration.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>fit-druid</module>
         <module>fit-mybatis</module>

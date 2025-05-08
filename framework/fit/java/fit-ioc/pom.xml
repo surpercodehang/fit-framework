@@ -12,6 +12,12 @@
     <artifactId>fit-ioc-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT IoC Parent</name>
+    <description>FIT Framework IoC module provides hierarchical container architecture and multiple standard
+        integrations (including FIT's self-developed annotation system, JSR-250 standard, etc.).
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>fit-ioc</module>
     </modules>

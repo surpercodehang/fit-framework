@@ -12,6 +12,11 @@
     <artifactId>fit-http-protocol-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Http Protocol Parent</name>
+    <description>FIT Framework Http Protocol Service module provides http protocol level service definitions and tests.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>definition</module>
     </modules>

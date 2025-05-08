@@ -12,6 +12,12 @@
     <artifactId>fit-maven-plugin</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Maven Plugin</name>
+    <description>FIT Framework Maven Plugin module provides built-in maven plugins, including compilation, building,
+        dependency checking, etc.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Maven plugin versions -->
         <maven.version>3.8.8</maven.version>

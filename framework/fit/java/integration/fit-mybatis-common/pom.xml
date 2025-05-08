@@ -11,6 +11,11 @@
 
     <artifactId>fit-mybatis-common</artifactId>
 
+    <name>FIT Mybatis Common</name>
+    <description>FIT Framework Mybatis Common module provides common components of integration with Mybatis.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Third-party versions -->
         <bytebuddy.version>1.17.5</bytebuddy.version>

@@ -11,6 +11,10 @@
 
     <artifactId>fit-reactor</artifactId>
 
+    <name>FIT Reactor</name>
+    <description>FIT Framework Reactor module provides reactive related basic operations.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

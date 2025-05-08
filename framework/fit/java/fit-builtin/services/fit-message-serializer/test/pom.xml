@@ -11,6 +11,12 @@
 
     <artifactId>fit-message-serializer-test</artifactId>
 
+    <name>FIT Message Serializer Test</name>
+    <description>FIT Framework Message Serializer Service Test module provides common FIT framework communication
+        service acceptance test suite.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

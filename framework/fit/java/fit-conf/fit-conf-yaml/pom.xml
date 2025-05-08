@@ -11,6 +11,12 @@
 
     <artifactId>fit-conf-yaml</artifactId>
 
+    <name>FIT Configuration YAML</name>
+    <description>FIT Configuration YAML provides YAML configuration format support for the FIT Framework, enabling
+        structured configuration management through YAML files.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Third-party versions -->
         <snakeyaml.version>2.3</snakeyaml.version>

@@ -12,6 +12,12 @@
     <artifactId>fit-dependency-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
 
+    <name>FIT Dependency Maven Plugin</name>
+    <description>FIT Framework Dependency Maven Plugin module provides a specified maven plugin for dependency
+        detection.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Third-party versions -->
         <lombok.version>1.18.36</lombok.version>

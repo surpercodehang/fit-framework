@@ -11,6 +11,10 @@
 
     <artifactId>fit-transaction</artifactId>
 
+    <name>FIT Transaction</name>
+    <description>FIT Framework Transaction module provides built-in transaction functionality.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

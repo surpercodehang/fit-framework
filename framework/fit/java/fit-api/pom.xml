@@ -11,6 +11,12 @@
 
     <artifactId>fit-api</artifactId>
 
+    <name>FIT API</name>
+    <description>FIT Framework API module is the core interface layer, providing all public API interfaces and
+        annotation definitions.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

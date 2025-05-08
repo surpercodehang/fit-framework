@@ -11,6 +11,10 @@
 
     <artifactId>fit-log-log4j2</artifactId>
 
+    <name>FIT Log Console</name>
+    <description>FIT Framework Log4j2 module provides Log4j2 implementation for logging.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <properties>
         <!-- Third-party versions -->
         <log4j2.version>2.24.3</log4j2.version>

@@ -12,6 +12,10 @@
     <artifactId>fit-test-parent</artifactId>
     <packaging>pom</packaging>
 
+    <name>FIT Test Parent</name>
+    <description>FIT Framework Test Parent module provides FIT test framework related modules.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <modules>
         <module>fit-service-test-util</module>
         <module>fit-test-framework</module>

@@ -11,6 +11,12 @@
 
     <artifactId>fit-starter</artifactId>
 
+    <name>FIT Starter</name>
+    <description>FIT Framework Starter module provides a minimal dependency collection that enables FIT applications to
+        run.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <dependency>
             <groupId>org.fitframework</groupId>

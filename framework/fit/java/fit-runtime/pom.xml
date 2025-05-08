@@ -11,6 +11,10 @@
 
     <artifactId>fit-runtime</artifactId>
 
+    <name>FIT Runtime</name>
+    <description>FIT Framework Runtime module provides FIT runtime environment.</description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <!-- FIT core -->
         <dependency>

@@ -11,6 +11,12 @@
 
     <artifactId>fit-plugins-starter-web</artifactId>
 
+    <name>FIT Plugins Starter Web</name>
+    <description>FIT Framework Plugins Starter Web module provides dependency collections for referencing plugins in web
+        scenarios.
+    </description>
+    <url>https://github.com/ModelEngine-Group/fit-framework</url>
+
     <dependencies>
         <dependency>
             <groupId>org.fitframework.service</groupId>

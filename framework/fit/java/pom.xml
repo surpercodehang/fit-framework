@@ -3,13 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>FIT Framework Parent</name>
     <groupId>org.fitframework</groupId>
     <artifactId>fitframework-parent</artifactId>
     <version>3.6.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <description>A Plugin-Based Programming Framework</description>
+    <name>FIT Framework Parent</name>
+    <description>FIT Framework is a lightweight, plugin-based Java framework designed for building modular and
+        extensible applications. It provides a robust plugin architecture that enables seamless integration and
+        management of components.
+    </description>
     <url>https://github.com/ModelEngine-Group/fit-framework</url>
 
     <licenses>
