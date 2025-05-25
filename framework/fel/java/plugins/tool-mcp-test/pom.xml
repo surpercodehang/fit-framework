@@ -9,7 +9,7 @@
         <version>3.6.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>fel-tool-repository-simple</artifactId>
+    <artifactId>fel-tool-mcp-test</artifactId>
 
     <dependencies>
         <!-- FIT core -->
@@ -21,16 +21,36 @@
             <groupId>org.fitframework</groupId>
             <artifactId>fit-util</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.fitframework</groupId>
+            <artifactId>fit-reactor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.fitframework.service</groupId>
+            <artifactId>fit-http-classic</artifactId>
+        </dependency>
 
+        <!-- MCP -->
         <dependency>
             <groupId>org.fitframework.fel</groupId>
-            <artifactId>tool-service</artifactId>
+            <artifactId>tool-mcp-client-service</artifactId>
         </dependency>
 
         <!-- Test -->
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -55,25 +75,6 @@
                         <id>package-plugin</id>
                         <goals>
                             <goal>package-plugin</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>${maven.antrun.version}</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <configuration>
-                            <target>
-                                <copy file="${project.build.directory}/${project.build.finalName}.jar"
-                                      todir="../../../../../build/plugins"/>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>
