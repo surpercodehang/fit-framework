@@ -28,10 +28,6 @@
             <groupId>org.fitframework</groupId>
             <artifactId>fit-util</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.fitframework</groupId>-->
-<!--            <artifactId>fit-plugin</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.fitframework</groupId>
             <artifactId>fit-maven-plugin-util</artifactId>
