@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 项目文档 / Project Documentation
+    url: https://github.com/ModelEngine-Group/fit-framework/wiki
+    about: 查看项目文档和使用指南 / View project documentation and usage guides
+  - name: 💬 讨论区 / Discussions
+    url: https://github.com/ModelEngine-Group/fit-framework/discussions
+    about: 加入社区讨论，分享想法和经验 / Join community discussions, share ideas and experiences
+  - name: 🆘 获取帮助 / Get Help
+    url: https://github.com/ModelEngine-Group/fit-framework/discussions/categories/q-a
+    about: 在Q&A区域获取使用帮助 / Get usage help in the Q&A section
