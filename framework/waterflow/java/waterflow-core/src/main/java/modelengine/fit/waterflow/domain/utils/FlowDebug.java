@@ -42,8 +42,11 @@ public class FlowDebug {
         if (!isOpen) {
             return;
         }
-        LOG.debug("Thread:{0}. tokenCount:{1}, getTosSize={2}, isComplete={3}. msg={4}", Thread.currentThread().getId(),
-                session.getWindow().tokenCount(), session.getWindow().getTosSize(), session.getWindow().isComplete(),
+        LOG.debug("Thread:{0}. tokenCount:{1}, getTosSize={2}, isComplete={3}. msg={4}",
+                Thread.currentThread().getId(),
+                session.getWindow().tokenCount(),
+                session.getWindow().getTosSize(),
+                session.getWindow().isComplete(),
                 msg);
     }
 }
