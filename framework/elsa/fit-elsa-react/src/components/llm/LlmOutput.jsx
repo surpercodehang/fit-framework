@@ -62,11 +62,11 @@ function _LlmOutput({outputItems, enableLogData, disabled}) {
                     forceRender
                 >
                     <div className={"jade-custom-panel-content"}>
-                        <Form.Item className='jade-form-item' name={`enableLog-${enableLogData.id}`}>
+                        {enableLogData && <Form.Item className="jade-form-item" name={`enableLog-${enableLogData.id}`}>
                             <Checkbox checked={enableLogData.value} disabled={disabled}
-                                      onChange={e => dispatch({ type: 'updateLogStatus', value: e.target.checked})}><span
+                                      onChange={e => dispatch({type: 'updateLogStatus', value: e.target.checked})}><span
                               className={'jade-font-size'}>{t('pushResultToChat')}</span></Checkbox>
-                        </Form.Item>
+                        </Form.Item>}
                         <JadeObservableTree data={outputItems}/>
                     </div>
                 </Panel>
