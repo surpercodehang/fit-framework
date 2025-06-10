@@ -13,3 +13,4 @@ plugin:
       core-thread-num: 10
       max-thread-num: 100
       queue-capacity: 0
+      display-error: false

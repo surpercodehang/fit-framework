@@ -176,7 +176,7 @@ public class HttpToolTest {
         Tool.Info info = readToolInfo("void.json");
         Tool tool = createTool(info);
 
-        String result = cast(tool.execute());
+        Object result = tool.execute();
         assertThat(result).isEqualTo(null);
     }
 
