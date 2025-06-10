@@ -9,6 +9,7 @@ package modelengine.fel.engine.operators.patterns;
 import static modelengine.fitframework.inspection.Validation.notBlank;
 import static modelengine.fitframework.inspection.Validation.notNull;
 
+import lombok.Getter;
 import modelengine.fel.core.chat.ChatMessage;
 import modelengine.fel.core.chat.Prompt;
 import modelengine.fel.core.chat.support.AiMessage;
@@ -63,12 +64,22 @@ public abstract class AbstractAgent extends AbstractFlowPattern<Prompt, ChatMess
     }
 
     /**
+     * 获取配置的模型对象。
+     *
+     * @return 配置的模型对象。
+     */
+    public ChatFlowModel getModel() {
+        return model;
+    }
+
+    /**
      * 执行工具调用。
      *
      * @param toolCalls 表示工具调用的 {@link List}{@code <}{@link ToolCall}{@code >}。
+     * @param ctx 表示工具调用上下文的 {@link StateContext}。
      * @return 表示工具调用结果的 {@link Prompt}。
      */
-    protected abstract Prompt doToolCall(List<ToolCall> toolCalls);
+    protected abstract Prompt doToolCall(List<ToolCall> toolCalls, StateContext ctx);
 
     @Override
     protected AiProcessFlow<Prompt, ChatMessage> buildFlow() {
@@ -93,6 +104,6 @@ public abstract class AbstractAgent extends AbstractFlowPattern<Prompt, ChatMess
     private void handleTool(ChatMessage message, StateContext ctx) {
         ChatMessages lastRequest = ctx.getState(this.memoryId);
         lastRequest.add(message);
-        lastRequest.addAll(this.doToolCall(message.toolCalls()).messages());
+        lastRequest.addAll(this.doToolCall(message.toolCalls(), ctx).messages());
     }
 }
