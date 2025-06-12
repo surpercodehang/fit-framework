@@ -11,6 +11,8 @@
 
     <artifactId>waterflow-bridge-fit-reactor</artifactId>
 
+    <name>Waterflow Bridge FIT Reactor</name>
+
     <dependencies>
         <dependency>
             <groupId>org.fitframework.waterflow</groupId>
@@ -29,14 +31,9 @@
             <artifactId>mockito-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>junit-jupiter-api</artifactId>
-                    <groupId>org.junit.jupiter</groupId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
