@@ -181,7 +181,7 @@ public class DefaultMcpClient implements McpClient {
         this.messageEndpoint = textEvent.data().toString();
         ClientSchema schema = new ClientSchema("2024-11-05",
                 new ClientSchema.Capabilities(),
-                new ClientSchema.Info("FIT MCP Client", "3.5.0-SNAPSHOT"));
+                new ClientSchema.Info("FIT MCP Client", "3.5.0-M3"));
         this.post2McpServer(Method.INITIALIZE, schema, (request, currentId) -> {
             this.sessionId = request.queries()
                     .first("session_id")
