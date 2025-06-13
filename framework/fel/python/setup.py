@@ -15,12 +15,12 @@ setuptools.setup(
     name="fel",
     version=_FEL_FRAMEWORK_VERSION,
     author="fit",
-    url="https://gitlab.huawei.com/fitlab/fit",
+    url="https://github.com/ModelEngine-Group/fit-framework",
     packages=setuptools.find_packages(
         exclude=["*.tests", "*.tests.*", "tests.*", "tests", "_test.*", "_test"]),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: Huawei license",
+        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
     install_requires=["langchain==0.2.6",
