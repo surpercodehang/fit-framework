@@ -23,6 +23,7 @@ import modelengine.fit.http.protocol.ReadableMessageBody;
 import modelengine.fit.http.protocol.RequestLine;
 import modelengine.fit.http.protocol.ServerRequest;
 import modelengine.fit.http.protocol.util.HeaderUtils;
+import modelengine.fitframework.log.Logger;
 import modelengine.fitframework.util.ObjectUtils;
 
 import java.io.IOException;
@@ -39,6 +40,8 @@ import java.util.Optional;
  * @since 2022-07-08
  */
 public class NettyHttpServerRequest implements ServerRequest, OnHttpContentReceived {
+    private static final Logger log = Logger.get(NettyHttpServerRequest.class);
+
     private static final char QUERY_SEPARATOR = '?';
 
     private final HttpRequest request;
@@ -155,6 +158,7 @@ public class NettyHttpServerRequest implements ServerRequest, OnHttpContentRecei
 
     @Override
     public void close() throws IOException {
+        log.info("Netty http request closed. [id={}]", this.ctx.name());
         this.isClosed = true;
         this.body.close();
     }
