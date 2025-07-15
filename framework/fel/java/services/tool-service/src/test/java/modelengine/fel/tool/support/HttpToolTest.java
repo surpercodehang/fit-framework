@@ -71,9 +71,7 @@ public class HttpToolTest {
 
     @AfterAll
     static void teardownAll() {
-        System.out.println("Test runtime will be stop.");
         TestFitRuntime.INSTANCE.stop();
-        System.out.println("Test runtime has been stopped.");
     }
 
     private static Tool.Info readToolInfo(String fileName) {
@@ -134,13 +132,11 @@ public class HttpToolTest {
 
         Address address = Address.create("jiangsu", "suzhou", 3205);
         Education education = Education.create("QUST", "UCAS");
-        System.out.println("Test shouldReturnMap, before execute tool");
         Map<String, Object> result = cast(tool.execute("Alice",
                 26,
                 address,
                 education,
                 Stream.of("0123-4567-8888", "0123-4567-9999").collect(Collectors.toList())));
-        System.out.println("Test shouldReturnMap, after execute tool");
         Map<String, Object> addressResult = cast(result.get("address"));
         Map<String, Object> educationResult = cast(result.get("education"));
         List<String> phoneNumbers = cast(result.get("phoneNumbers"));
@@ -160,9 +156,7 @@ public class HttpToolTest {
         Tool.Info info = readToolInfo("string.json");
         Tool tool = createTool(info);
 
-        System.out.println("Test shouldReturnString, before execute tool");
         String result = cast(tool.execute(Stream.of("abc", "def", "ghi").collect(Collectors.toList())));
-        System.out.println("Test shouldReturnString, after execute tool");
         assertThat(result).isEqualTo("abc,def,ghi");
     }
 
@@ -172,9 +166,7 @@ public class HttpToolTest {
         Tool.Info info = readToolInfo("integer.json");
         Tool tool = createTool(info);
 
-        System.out.println("Test shouldReturnInteger, before execute tool");
         Integer result = cast(tool.execute(Stream.of(1, 2, 3).collect(Collectors.toList())));
-        System.out.println("Test shouldReturnInteger, after execute tool");
         assertThat(result).isEqualTo(6);
     }
 
@@ -184,9 +176,7 @@ public class HttpToolTest {
         Tool.Info info = readToolInfo("void.json");
         Tool tool = createTool(info);
 
-        System.out.println("Test shouldReturnNull, before execute tool");
         Object result = tool.execute();
-        System.out.println("Test shouldReturnNull, after execute tool");
         assertThat(result).isEqualTo(null);
     }
 
@@ -196,9 +186,7 @@ public class HttpToolTest {
         Tool.Info info = readToolInfo("basic-auth.json");
         Tool tool = createTool(info);
 
-        System.out.println("Test BasicShouldReturnOk, before execute tool");
         boolean result = cast(tool.execute("{\"name\":\"testuser\", \"pwd\":\"testpass\"}"));
-        System.out.println("Test BasicShouldReturnOk, after execute tool");
         assertThat(result).isEqualTo(true);
     }
 
@@ -208,9 +196,7 @@ public class HttpToolTest {
         Tool.Info info = readToolInfo("api-key-auth.json");
         Tool tool = createTool(info);
 
-        System.out.println("Test ApiKeyShouldReturnOk, before execute tool");
         boolean result = cast(tool.execute("{\"name\":\"ApiKey\", \"pwd\":\"ApiKeyValue\"}"));
-        System.out.println("Test ApiKeyShouldReturnOk, after execute tool");
         assertThat(result).isEqualTo(true);
     }
 
@@ -220,9 +206,7 @@ public class HttpToolTest {
         Tool.Info info = readToolInfo("api-key-query-auth.json");
         Tool tool = createTool(info);
 
-        System.out.println("Test ApiKeyQueryShouldReturnOk, before execute tool");
         boolean result = cast(tool.execute("{\"name\":\"ApiKey\", \"pwd\":\"ApiKeyValue\"}"));
-        System.out.println("Test ApiKeyQueryShouldReturnOk, after execute tool");
         assertThat(result).isEqualTo(true);
     }
 
@@ -232,9 +216,7 @@ public class HttpToolTest {
         Tool.Info info = readToolInfo("bearer-auth.json");
         Tool tool = createTool(info);
 
-        System.out.println("Test BearerShouldReturnOk, before execute tool");
         boolean result = cast(tool.execute("{\"name\":\"test666666666\", \"pwd\":\"invalid\"}"));
-        System.out.println("Test BearerShouldReturnOk, after execute tool");
         assertThat(result).isEqualTo(true);
     }
 }
