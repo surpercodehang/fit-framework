@@ -43,7 +43,9 @@ public class DefaultTestClassResolver implements TestClassResolver {
         return TestContextConfiguration.custom()
                 .testClass(clazz)
                 .includeClasses(Stream.of(includeClasses)
-                        .collect(Collectors.toMap(Function.identity(), key -> () -> null)))
+                        .collect(Collectors.toMap(Function.identity(),
+                                key -> () -> null,
+                                (existing, replacement) -> existing)))
                 .excludeClasses(this.resolveExcludeClasses(clazz))
                 .scannedPackages(this.scanBeans(includeClasses))
                 .mockedBeanFields(this.scanMockBeansFieldSet(clazz))
