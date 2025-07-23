@@ -33,6 +33,8 @@ Please read our Contributing Guide(CONTRIBUTING.md) before submitting your Pull 
 - [ ] 📚 文档更新 / Documentation update
 - [ ] 🔧 重构 / Refactoring (no functional changes)
 - [ ] ⚡ 性能优化 / Performance improvement
+- [ ] 📦 依赖升级 / Dependency upgrade (update dependencies to newer versions)
+- [ ] 🚀 功能增强 / Feature enhancement (improve existing functionality without breaking changes)
 - [ ] 🧹 代码清理 / Code cleanup
 
 ## 📝 变更目的 / Purpose of the Change
