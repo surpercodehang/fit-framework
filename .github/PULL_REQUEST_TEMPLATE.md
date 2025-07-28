@@ -13,6 +13,11 @@ Trivial changes like typos do not require a Github issue.
 
 提交 PR 之前请务必先阅读我们的贡献指南。
 Please read our Contributing Guide(CONTRIBUTING.md) before submitting your Pull Request.
+
+⚠️ 注意 / Note：
+
+不要重复创建类似的 PR，当你发现需要调整一个 PR 的时候，优先选择编辑修改它，而不是关闭之后再创建一个。
+Do not create a Pull Request without creating an issue first.
 -->
 
 ## 🔗 相关问题 / Related Issue
