@@ -43,6 +43,7 @@
 - 候选版本以特殊词组结尾，后面可以跟若干数字代表序号。例如：`fit-java-1.0.0-alpha1` 或 `waterflow-python-2.0.0-beta2`。
 - 当标签被打出后，对应的发布分支应当删除，`Git-Flow` 模式下的 `*-main` 分支除外。
 - **注意：** 请不要使用自动生成的深色标签，如 `dependencies`、`python`、`java` 等，他们是平台自动生成用于机器人创建的 Issue 的。
+- 所有的 Issue 和 PR 都需要至少包含两种标签，一种是 `in: {$module}`，另一种是 `type: {$type}`。
 
 ## 开发规范
 
