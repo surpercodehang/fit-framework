@@ -223,3 +223,31 @@ export const DEFAULT_MCP_SERVERS = {
   from: FROM_TYPE.INPUT,
   value: {}
 };
+
+export const DEFAULT_KNOWLEDGE_NODE_ACCESS_INFO = {
+  id: uuidv4(),
+  name: 'accessInfo',
+  type: DATA_TYPES.OBJECT,
+  from: FROM_TYPE.EXPAND,
+  value: [{
+    id: uuidv4(),
+    name: 'serviceName',
+    type: DATA_TYPES.STRING,
+    from: FROM_TYPE.INPUT,
+    value: '',
+  }, {
+    id: uuidv4(),
+    name: 'tag',
+    type: DATA_TYPES.STRING,
+    from: FROM_TYPE.INPUT,
+    value: '',
+  }],
+};
+
+export const DEFAULT_KNOWLEDGE_NODE_RERANK_TOP_N = {
+  id: uuidv4(),
+  name: 'topN',
+  type: DATA_TYPES.INTEGER,
+  from: FROM_TYPE.INPUT,
+  value: 3,
+};
