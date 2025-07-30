@@ -6,14 +6,20 @@
 
 package modelengine.fel.core.document.support;
 
+import modelengine.fel.core.document.MeasurableDocument;
+import modelengine.fel.core.rerank.RerankModel;
+import modelengine.fel.core.rerank.RerankOption;
+
+import java.util.List;
+
 /**
- * 提供 Rerank 客户端接口：发送 Rerank API 格式的请求并接收响应。
+ * 重排模型服务的打桩实现。
  *
- * @since 2024-09-27
+ * @since 2025-07-28
  */
-public interface RerankApi {
-    /**
-     * Rerank 模型请求的端点。
-     */
-    String RERANK_ENDPOINT = "/rerank";
+class RerankModelStub implements RerankModel {
+    @Override
+    public List<MeasurableDocument> generate(List<MeasurableDocument> documents, RerankOption rerankOption) {
+        return documents;
+    }
 }
