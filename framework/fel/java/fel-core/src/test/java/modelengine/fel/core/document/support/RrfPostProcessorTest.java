@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import modelengine.fel.core.document.Document;
 import modelengine.fel.core.document.MeasurableDocument;
 import modelengine.fel.core.document.support.postprocessor.RrfPostProcessor;
-import modelengine.fel.core.document.support.postprocessor.RrfScoreStrategyEnum;
+import modelengine.fel.core.document.support.postprocessor.RrfScoreStrategy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +41,7 @@ public class RrfPostProcessorTest {
     @Test
     @DisplayName("测试 RFF 算法平均值策略成功")
     public void testWhenCallRRFAvgThenSuccess() {
-        RrfPostProcessor rrf = new RrfPostProcessor(RrfScoreStrategyEnum.AVG);
+        RrfPostProcessor rrf = new RrfPostProcessor(RrfScoreStrategy.AVG);
         List<MeasurableDocument> process = rrf.process(getDocumentList());
         assertThat(process).map(MeasurableDocument::score).containsExactly(0.84, 0.655, 0.36, 0.52, 0.32);
         assertThat(process).map(MeasurableDocument::id).containsExactly("1", "4", "2", "5", "3");
@@ -50,7 +50,7 @@ public class RrfPostProcessorTest {
     @Test
     @DisplayName("测试 RFF 算法倒数系数")
     public void testWhenCallRRFFactorThenSuccess() {
-        RrfPostProcessor rrf = new RrfPostProcessor(RrfScoreStrategyEnum.AVG, 100);
+        RrfPostProcessor rrf = new RrfPostProcessor(RrfScoreStrategy.AVG, 100);
         List<MeasurableDocument> process = rrf.process(getDocumentList());
         assertThat(process).map(MeasurableDocument::score).containsExactly(0.84, 0.655, 0.36, 0.52, 0.32);
         assertThat(process).map(MeasurableDocument::id).containsExactly("1", "4", "2", "5", "3");
@@ -60,7 +60,7 @@ public class RrfPostProcessorTest {
     @DisplayName("测试 RFF 算法策略失败")
     public void testWhenCallRRFArgNullThenFail() {
         assertThatThrownBy(() -> new RrfPostProcessor(null, 60)).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new RrfPostProcessor(RrfScoreStrategyEnum.AVG, -1)).isInstanceOf(
+        assertThatThrownBy(() -> new RrfPostProcessor(RrfScoreStrategy.AVG, -1)).isInstanceOf(
                 IllegalArgumentException.class);
     }
 
