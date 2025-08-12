@@ -3,12 +3,13 @@
 # This file is a part of the ModelEngine Project.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 # ======================================================================================================================
+import typing
 
-class Media(object):
-    def __init__(self, mime: str, data: str):
-        self.mime = mime
-        self.data = data
-    
+from .media import Media
+class RetrieverOptions(object):
+    def __init__(self, similarity_cutoff: float):
+        self.similarity_cutoff = similarity_cutoff 
+
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return False

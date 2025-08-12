@@ -3,12 +3,12 @@
 # This file is a part of the ModelEngine Project.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 # ======================================================================================================================
+class EmbeddingChoiceSelectorOptions(object):
+    def __init__(self , model_name : str , api_key : str , api_base : str):
+        self.model_name = model_name
+        self.api_key = api_key
+        self.api_base = api_base
 
-class Media(object):
-    def __init__(self, mime: str, data: str):
-        self.mime = mime
-        self.data = data
-    
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return False

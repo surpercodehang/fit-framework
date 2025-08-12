@@ -3,11 +3,17 @@
 # This file is a part of the ModelEngine Project.
 # Licensed under the MIT License. See License.txt in the project root for license information.
 # ======================================================================================================================
+import typing
 
-class Media(object):
-    def __init__(self, mime: str, data: str):
-        self.mime = mime
-        self.data = data
+from .media import Media
+
+class EmbeddingOptions(object):
+    def __init__(self, model_name: str,api_key: str,api_base: str,percentile_cutoff: float,threshold_cutoff: float):
+        self.model_name = model_name
+        self.api_key = api_key
+        self.api_base = api_base
+        self.percentile_cutoff = percentile_cutoff
+        self.threshold_cutoff = threshold_cutoff
     
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
