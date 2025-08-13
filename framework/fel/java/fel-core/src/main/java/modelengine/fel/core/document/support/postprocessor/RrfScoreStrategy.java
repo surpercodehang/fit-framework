@@ -11,7 +11,7 @@ package modelengine.fel.core.document.support.postprocessor;
  *
  * @since 2024-09-29
  */
-public enum RrfScoreStrategyEnum {
+public enum RrfScoreStrategy {
     /**
      * 相同文档的分数取最大值。
      */
