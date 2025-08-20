@@ -203,16 +203,6 @@
                 <artifactId>fit-transaction</artifactId>
                 <version>${fit.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.fitframework.extension</groupId>
-                <artifactId>fit-validation</artifactId>
-                <version>${fit.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.fitframework.extension</groupId>
-                <artifactId>fit-validation-hibernate</artifactId>
-                <version>${fit.version}</version>
-            </dependency>
 
             <!-- Test -->
             <dependency>
@@ -362,7 +352,17 @@
             </dependency>
             <dependency>
                 <groupId>org.fitframework.plugin</groupId>
+                <artifactId>fit-service-coordination-nacos</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fitframework.plugin</groupId>
                 <artifactId>fit-service-coordination-simple</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fitframework.plugin</groupId>
+                <artifactId>fit-service-discovery</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>
@@ -372,7 +372,12 @@
             </dependency>
             <dependency>
                 <groupId>org.fitframework.plugin</groupId>
-                <artifactId>fit-service-discovery</artifactId>
+                <artifactId>fit-validation-hibernate-jakarta</artifactId>
+                <version>${fit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fitframework.plugin</groupId>
+                <artifactId>fit-validation-hibernate-javax</artifactId>
                 <version>${fit.version}</version>
             </dependency>
             <dependency>

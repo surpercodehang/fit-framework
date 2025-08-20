@@ -98,10 +98,6 @@
             <groupId>org.fitframework.extension</groupId>
             <artifactId>fit-transaction</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.fitframework.extension</groupId>
-            <artifactId>fit-validation</artifactId>
-        </dependency>
 
         <!-- FIT Test -->
         <dependency>
@@ -198,7 +194,15 @@
         </dependency>
         <dependency>
             <groupId>org.fitframework.plugin</groupId>
+            <artifactId>fit-service-coordination-nacos</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.fitframework.plugin</groupId>
             <artifactId>fit-service-coordination-simple</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.fitframework.plugin</groupId>
+            <artifactId>fit-service-discovery</artifactId>
         </dependency>
         <dependency>
             <groupId>org.fitframework.plugin</groupId>
@@ -206,7 +210,11 @@
         </dependency>
         <dependency>
             <groupId>org.fitframework.plugin</groupId>
-            <artifactId>fit-service-discovery</artifactId>
+            <artifactId>fit-validation-hibernate-jakarta</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.fitframework.plugin</groupId>
+            <artifactId>fit-validation-hibernate-javax</artifactId>
         </dependency>
         <dependency>
             <groupId>org.fitframework.plugin</groupId>
