@@ -25,7 +25,10 @@ Do not create a Pull Request without creating an issue first.
 <!-- 请先创建 Issue 讨论，然后在这里链接 -->
 <!-- Please create an issue for discussion first, then link it here -->
 
-**Issue 链接 / Issue Link:** #
+**Issue 链接 / Issue Link:** #{$IssueNumber}
+
+<!-- 请修改 {$IssueNumber} 为真实的编号。 -->
+<!-- Please update {$IssueNumber} to an actual number. -->
 
 - [ ] 我已经创建了相关 Issue 并进行了讨论 / I have created and discussed the related issue
 - [ ] 这是一个微小的修改（如错别字），不需要 Issue / This is a trivial change (like typo fix) that doesn't need an issue
