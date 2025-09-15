@@ -44,10 +44,10 @@ import javax.validation.executable.ExecutableValidator;
 public class ValidationHandler implements AutoCloseable {
     private final ValidatorFactory validatorFactory;
     private final Validator validator;
-    private final LocaleMessageInterpolator messageInterpolator;
+    private final LocaleContextMessageInterpolator messageInterpolator;
 
     public ValidationHandler() {
-        this.messageInterpolator = new LocaleMessageInterpolator();
+        this.messageInterpolator = new LocaleContextMessageInterpolator();
         this.validatorFactory = Validation.byProvider(HibernateValidator.class)
                 .configure()
                 .messageInterpolator(this.messageInterpolator)

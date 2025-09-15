@@ -341,7 +341,8 @@ public class ValidationHandlerTest {
         public void givenParametersThenGroupValidateHappened() {
             // 测试学生年龄验证 - 现在会抛出异常，因为使用了学生分组
             Method method = ReflectionUtils.getDeclaredMethod(GroupValidateService.StudentValidateService.class,
-                    "validateStudentAge", int.class);
+                    "validateStudentAge",
+                    int.class);
             Method handleValidatedMethod = ReflectionUtils.getDeclaredMethod(ValidationHandler.class,
                     "handle",
                     JoinPoint.class,
@@ -754,5 +755,22 @@ public class ValidationHandlerTest {
                 ReflectionUtils.getDeclaredMethod(ValidateService.class, "testRangeBigDecimal", BigDecimal.class);
         ConstraintViolationException exception = invokeHandleMethod(method, new Object[] {new BigDecimal("5.5")});
         assertThat(exception.getMessage()).contains("需要在10和100之间");
+    }
+
+    @Nested
+    @DisplayName("测试 Locale 默认值为 null 时的情况")
+    public class ValidationHandlerNullTest {
+        @BeforeEach
+        void setUp() {
+            ValidationHandlerTest.this.handler.setLocale(null);
+        }
+
+        @Test
+        @DisplayName("测试@Null注解")
+        void testNullValidation() {
+            Method method = ReflectionUtils.getDeclaredMethod(ValidateService.class, "testNull", String.class);
+            ConstraintViolationException exception = invokeHandleMethod(method, new Object[] {"not null"});
+            assertThat(exception.getMessage()).isNotNull();
+        }
     }
 }

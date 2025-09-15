@@ -32,9 +32,9 @@ public class GroupValidateService {
          * @param age 表示年龄的 {@code int}。
          */
         public void validateStudentAge(
-                @Min(value = 7, message = "范围要在7~20之内", groups = ValidationTestData.StudentGroup.class) @Max(
-                        value = 20, message = "范围要在7~20之内",
-                        groups = ValidationTestData.StudentGroup.class) int age) {
+                @Min(value = 7, message = "范围要在7~20之内", groups = ValidationTestData.StudentGroup.class)
+                @Max(value = 20, message = "范围要在7~20之内", groups = ValidationTestData.StudentGroup.class)
+                int age) {
             LOG.debug("Validating student age: {}", age);
         }
     }
@@ -48,9 +48,9 @@ public class GroupValidateService {
          * @param age 表示年龄的 {@code int}。
          */
         public void validateTeacherAge(
-                @Min(value = 22, message = "范围要在22~65之内", groups = ValidationTestData.TeacherGroup.class) @Max(
-                        value = 65, message = "范围要在22~65之内",
-                        groups = ValidationTestData.TeacherGroup.class) int age) {
+                @Min(value = 22, message = "范围要在22~65之内", groups = ValidationTestData.TeacherGroup.class)
+                @Max(value = 65, message = "范围要在22~65之内", groups = ValidationTestData.TeacherGroup.class)
+                int age) {
             LOG.debug("Validating teacher age: {}", age);
         }
     }
