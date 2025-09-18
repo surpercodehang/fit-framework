@@ -16,6 +16,7 @@ import modelengine.fel.tool.mcp.server.handler.InitializeHandler;
 import modelengine.fel.tool.mcp.server.handler.PingHandler;
 import modelengine.fel.tool.mcp.server.handler.ToolCallHandler;
 import modelengine.fel.tool.mcp.server.handler.ToolListHandler;
+import modelengine.fel.tool.mcp.server.handler.LoggingSetLevelHandler;
 import modelengine.fel.tool.mcp.server.handler.UnsupportedMethodHandler;
 import modelengine.fit.http.annotation.GetMapping;
 import modelengine.fit.http.annotation.PostMapping;
@@ -77,6 +78,7 @@ public class McpServerController implements McpServer.ToolsChangedObserver {
         this.methodHandlers.put(Method.PING.code(), new PingHandler());
         this.methodHandlers.put(Method.TOOLS_LIST.code(), new ToolListHandler(mcpServer));
         this.methodHandlers.put(Method.TOOLS_CALL.code(), new ToolCallHandler(mcpServer, this.serializer));
+        this.methodHandlers.put(Method.LOGGING_SET_LEVEL.code(), new LoggingSetLevelHandler());
 
         ThreadPoolScheduler channelDetectorScheduler = ThreadPoolScheduler.custom()
                 .corePoolSize(1)
