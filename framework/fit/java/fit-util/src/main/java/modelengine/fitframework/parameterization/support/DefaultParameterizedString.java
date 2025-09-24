@@ -102,7 +102,9 @@ class DefaultParameterizedString implements ParameterizedString {
             StringBuilder builder = new StringBuilder(this.escapedString.length() << 1);
             for (DefaultResolvedParameter parameter : sortedParameters) {
                 builder.append(this.escapedString, index, parameter.getEscapedPosition());
-                builder.append(StringUtils.normalize(getParameterValue(actualArgs, parameter.getName(), defaultValue)));
+                builder.append(StringUtils.normalize(this.getParameterValue(actualArgs,
+                        parameter.getName(),
+                        defaultValue)));
                 index = parameter.getEscapedPosition() + affixLength + measure(parameter.getName());
             }
             builder.append(this.escapedString.substring(index));
