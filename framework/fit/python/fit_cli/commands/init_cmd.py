@@ -13,7 +13,7 @@ def hello(name: str) -> str: # 定义可供调用的函数，特别注意需要�
 
     修改函数名和参数
     - 函数名（hello）应根据功能调整，例如 concat, multiply
-    - 参数（name: str）可以增加多个，类型也可以是 int, float 等
+    - 参数（name: str）可以增加多个，类型支持 int, float, str, bool, dict, list, tuple, set, bytes, Union 等
     """
 
     return f"Hello, {name}!" # 提供函数实现逻辑
