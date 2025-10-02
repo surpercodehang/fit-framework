@@ -8,7 +8,7 @@ package modelengine.fit.http.client.proxy.scanner.resolver;
 
 import modelengine.fit.http.annotation.RequestAuth;
 import modelengine.fit.http.client.proxy.auth.AuthType;
-import modelengine.fit.http.client.proxy.support.setter.AuthDestinationSetter;
+import modelengine.fit.http.client.proxy.support.setter.AuthorizationDestinationSetter;
 import modelengine.fit.http.client.proxy.support.setter.DestinationSetterInfo;
 import modelengine.fit.http.server.handler.Source;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +29,7 @@ class RequestAuthResolverTest {
 
     @BeforeEach
     void setUp() {
-        resolver = new RequestAuthResolver();
+        this.resolver = new RequestAuthResolver();
     }
 
     @Test
@@ -39,12 +39,16 @@ class RequestAuthResolverTest {
         String jsonPath = "$.token";
 
         // 解析注解
-        DestinationSetterInfo setterInfo = resolver.resolve(authAnnotation, jsonPath);
+        DestinationSetterInfo setterInfo = this.resolver.resolve(authAnnotation, jsonPath);
 
-        // 验证结果
+        // 验证结果 - 现在使用 AuthorizationDestinationSetter
         assertNotNull(setterInfo);
-        assertInstanceOf(AuthDestinationSetter.class, setterInfo.destinationSetter());
+        assertInstanceOf(AuthorizationDestinationSetter.class, setterInfo.destinationSetter());
         assertEquals(jsonPath, setterInfo.sourcePath());
+
+        // 验证 Setter 类型（字段名的正确性由 AuthFieldMapperTest 验证）
+        AuthorizationDestinationSetter setter = (AuthorizationDestinationSetter) setterInfo.destinationSetter();
+        assertNotNull(setter);
     }
 
     @Test
@@ -55,12 +59,17 @@ class RequestAuthResolverTest {
         String jsonPath = "$.apiKey";
 
         // 解析注解
-        DestinationSetterInfo setterInfo = resolver.resolve(authAnnotation, jsonPath);
+        DestinationSetterInfo setterInfo = this.resolver.resolve(authAnnotation, jsonPath);
 
-        // 验证结果
+        // 验证结果 - 现在使用 AuthorizationDestinationSetter
         assertNotNull(setterInfo);
-        assertInstanceOf(AuthDestinationSetter.class, setterInfo.destinationSetter());
+        assertInstanceOf(AuthorizationDestinationSetter.class, setterInfo.destinationSetter());
         assertEquals(jsonPath, setterInfo.sourcePath());
+
+        // 验证 Setter 类型（字段名的正确性由 AuthFieldMapperTest 验证）
+        // 注意：此测试发现之前的 Bug - API Key 应该映射到 "value" 字段，而不是 annotation.name()
+        AuthorizationDestinationSetter setter = (AuthorizationDestinationSetter) setterInfo.destinationSetter();
+        assertNotNull(setter);
     }
 
     @Test
@@ -71,12 +80,16 @@ class RequestAuthResolverTest {
         String jsonPath = "$";
 
         // 解析注解
-        DestinationSetterInfo setterInfo = resolver.resolve(authAnnotation, jsonPath);
+        DestinationSetterInfo setterInfo = this.resolver.resolve(authAnnotation, jsonPath);
 
-        // 验证结果
+        // 验证结果 - 现在使用 AuthorizationDestinationSetter
         assertNotNull(setterInfo);
-        assertInstanceOf(AuthDestinationSetter.class, setterInfo.destinationSetter());
+        assertInstanceOf(AuthorizationDestinationSetter.class, setterInfo.destinationSetter());
         assertEquals(jsonPath, setterInfo.sourcePath());
+
+        // 验证 Setter 类型（字段名的正确性由 AuthFieldMapperTest 验证）
+        AuthorizationDestinationSetter setter = (AuthorizationDestinationSetter) setterInfo.destinationSetter();
+        assertNotNull(setter);
     }
 
     // 辅助方法：创建RequestAuth注解的模拟对象
