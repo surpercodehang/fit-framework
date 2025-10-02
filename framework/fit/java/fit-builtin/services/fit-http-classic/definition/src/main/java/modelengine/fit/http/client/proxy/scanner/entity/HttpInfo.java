@@ -22,7 +22,8 @@ public class HttpInfo {
     private Address address;
     private HttpRequestMethod method;
     private String pathPattern;
-    private List<PropertyValueApplier> appliers = new ArrayList<>();
+    private List<PropertyValueApplier> staticAppliers = new ArrayList<>();
+    private List<PropertyValueApplier> paramAppliers = new ArrayList<>();
 
     /**
      * Gets the address information for the HTTP request.
@@ -79,20 +80,38 @@ public class HttpInfo {
     }
 
     /**
-     * Gets the list of property value appliers for the HTTP request.
+     * Gets the list of static property value appliers (not requiring parameters).
      *
-     * @return The list of property value appliers.
+     * @return The list of static property value appliers.
      */
-    public List<PropertyValueApplier> getAppliers() {
-        return this.appliers;
+    public List<PropertyValueApplier> getStaticAppliers() {
+        return this.staticAppliers;
     }
 
     /**
-     * Sets the list of property value appliers for the HTTP request.
+     * Sets the list of static property value appliers (not requiring parameters).
      *
-     * @param appliers The list of property value appliers to set.
+     * @param staticAppliers The list of static property value appliers to set.
      */
-    public void setAppliers(List<PropertyValueApplier> appliers) {
-        this.appliers = appliers;
+    public void setStaticAppliers(List<PropertyValueApplier> staticAppliers) {
+        this.staticAppliers = staticAppliers;
+    }
+
+    /**
+     * Gets the list of parameter-based property value appliers.
+     *
+     * @return The list of parameter-based property value appliers.
+     */
+    public List<PropertyValueApplier> getParamAppliers() {
+        return this.paramAppliers;
+    }
+
+    /**
+     * Sets the list of parameter-based property value appliers.
+     *
+     * @param paramAppliers The list of parameter-based property value appliers to set.
+     */
+    public void setParamAppliers(List<PropertyValueApplier> paramAppliers) {
+        this.paramAppliers = paramAppliers;
     }
 }

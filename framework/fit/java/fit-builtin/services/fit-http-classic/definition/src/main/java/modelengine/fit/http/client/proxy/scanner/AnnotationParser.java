@@ -7,6 +7,7 @@
 package modelengine.fit.http.client.proxy.scanner;
 
 import static modelengine.fitframework.inspection.Validation.notNull;
+import static modelengine.fitframework.util.ObjectUtils.cast;
 
 import modelengine.fit.http.annotation.DeleteMapping;
 import modelengine.fit.http.annotation.GetMapping;
@@ -15,6 +16,7 @@ import modelengine.fit.http.annotation.PathVariable;
 import modelengine.fit.http.annotation.PostMapping;
 import modelengine.fit.http.annotation.PutMapping;
 import modelengine.fit.http.annotation.RequestAddress;
+import modelengine.fit.http.annotation.RequestAuth;
 import modelengine.fit.http.annotation.RequestBean;
 import modelengine.fit.http.annotation.RequestBody;
 import modelengine.fit.http.annotation.RequestCookie;
@@ -22,20 +24,20 @@ import modelengine.fit.http.annotation.RequestForm;
 import modelengine.fit.http.annotation.RequestHeader;
 import modelengine.fit.http.annotation.RequestMapping;
 import modelengine.fit.http.annotation.RequestQuery;
-import modelengine.fit.http.annotation.RequestAuth;
 import modelengine.fit.http.client.proxy.PropertyValueApplier;
 import modelengine.fit.http.client.proxy.scanner.entity.Address;
 import modelengine.fit.http.client.proxy.scanner.entity.HttpInfo;
 import modelengine.fit.http.client.proxy.scanner.resolver.PathVariableResolver;
+import modelengine.fit.http.client.proxy.scanner.resolver.RequestAuthResolver;
 import modelengine.fit.http.client.proxy.scanner.resolver.RequestBodyResolver;
 import modelengine.fit.http.client.proxy.scanner.resolver.RequestCookieResolver;
 import modelengine.fit.http.client.proxy.scanner.resolver.RequestFormResolver;
 import modelengine.fit.http.client.proxy.scanner.resolver.RequestHeaderResolver;
 import modelengine.fit.http.client.proxy.scanner.resolver.RequestQueryResolver;
-import modelengine.fit.http.client.proxy.scanner.resolver.RequestAuthResolver;
 import modelengine.fit.http.client.proxy.support.applier.MultiDestinationsPropertyValueApplier;
 import modelengine.fit.http.client.proxy.support.applier.StaticAuthApplier;
 import modelengine.fit.http.client.proxy.support.setter.DestinationSetterInfo;
+import modelengine.fitframework.ioc.BeanContainer;
 import modelengine.fitframework.util.ArrayUtils;
 import modelengine.fitframework.util.ReflectionUtils;
 import modelengine.fitframework.util.StringUtils;
@@ -68,7 +70,7 @@ public class AnnotationParser {
     private static final Set<Class<? extends Annotation>> mappingMethodAnnotations =
             Stream.of(PostMapping.class, PutMapping.class, GetMapping.class, DeleteMapping.class, PatchMapping.class)
                     .collect(Collectors.toSet());
-    private static final Map<Class<? extends Annotation>, ParamResolver> annotationParsers = new HashMap<>();
+    private static final Map<Class<? extends Annotation>, ParamResolver<?>> annotationParsers = new HashMap<>();
 
     static {
         annotationParsers.put(RequestQuery.class, new RequestQueryResolver());
@@ -81,14 +83,17 @@ public class AnnotationParser {
     }
 
     private final ValueFetcher valueFetcher;
+    private final BeanContainer beanContainer;
 
     /**
      * Constructs an AnnotationParser with the specified ValueFetcher.
      *
-     * @param valueFetcher The ValueFetcher used to fetch values for property setters.
+     * @param valueFetcher The {@link ValueFetcher} used to fetch values for property setters.
+     * @param beanContainer The {@link BeanContainer} used to retrieve beans.
      */
-    public AnnotationParser(ValueFetcher valueFetcher) {
+    public AnnotationParser(ValueFetcher valueFetcher, BeanContainer beanContainer) {
         this.valueFetcher = notNull(valueFetcher, "The value fetcher cannot be null.");
+        this.beanContainer = notNull(beanContainer, "The bean container cannot be null.");
     }
 
     /**
@@ -106,10 +111,12 @@ public class AnnotationParser {
             Arrays.stream(clazz.getMethods()).forEach(method -> {
                 HttpInfo httpInfo = this.parseMethod(method, pathPatternPrefix);
                 httpInfo.setAddress(address);
-                // 添加类级别的鉴权应用器
-                List<PropertyValueApplier> appliers = new ArrayList<>(classLevelAuthAppliers);
-                appliers.addAll(httpInfo.getAppliers());
-                httpInfo.setAppliers(appliers);
+
+                // 构建静态应用器列表（类级别鉴权 + 方法级别鉴权）
+                List<PropertyValueApplier> staticAppliers = new ArrayList<>(classLevelAuthAppliers);
+                staticAppliers.addAll(this.getMethodLevelAuthAppliers(method));
+                httpInfo.setStaticAppliers(staticAppliers);
+
                 httpInfoMap.put(method, httpInfo);
             });
         }
@@ -119,15 +126,12 @@ public class AnnotationParser {
     private HttpInfo parseMethod(Method method, String pathPatternPrefix) {
         HttpInfo httpInfo = new HttpInfo();
         this.parseHttpMethod(method, httpInfo, pathPatternPrefix);
-        List<PropertyValueApplier> appliers = new ArrayList<>();
 
-        // 添加方法级别的鉴权应用器
-        List<PropertyValueApplier> methodLevelAuthAppliers = this.getMethodLevelAuthAppliers(method);
-        appliers.addAll(methodLevelAuthAppliers);
+        // 构建参数应用器列表
+        List<PropertyValueApplier> paramAppliers = new ArrayList<>();
+        Arrays.stream(method.getParameters()).forEach(parameter -> paramAppliers.add(this.parseParam(parameter)));
+        httpInfo.setParamAppliers(paramAppliers);
 
-        // 添加参数应用器
-        Arrays.stream(method.getParameters()).forEach(parameter -> appliers.add(this.parseParam(parameter)));
-        httpInfo.setAppliers(appliers);
         return httpInfo;
     }
 
@@ -183,7 +187,7 @@ public class AnnotationParser {
     private PropertyValueApplier parseParam(Parameter parameter) {
         Annotation[] annotations = parameter.getAnnotations();
         Class<?> type = parameter.getType();
-        List<DestinationSetterInfo> setterInfos = getSetterInfos(annotations, type.getDeclaredFields(), "$");
+        List<DestinationSetterInfo> setterInfos = this.getSetterInfos(annotations, type.getDeclaredFields(), "$");
         return new MultiDestinationsPropertyValueApplier(setterInfos, this.valueFetcher);
     }
 
@@ -197,9 +201,9 @@ public class AnnotationParser {
                                 prefix + "." + field.getName())));
                 return setterInfos;
             } else {
-                ParamResolver resolver = annotationParsers.get(annotation.annotationType());
+                ParamResolver<?> resolver = annotationParsers.get(annotation.annotationType());
                 if (resolver != null) {
-                    setterInfos.add(resolver.resolve(annotation, prefix));
+                    setterInfos.add(resolver.resolve(cast(annotation), prefix));
                     return setterInfos;
                 }
             }
@@ -211,7 +215,7 @@ public class AnnotationParser {
         List<PropertyValueApplier> appliers = new ArrayList<>();
         RequestAuth[] authAnnotations = clazz.getAnnotationsByType(RequestAuth.class);
         for (RequestAuth auth : authAnnotations) {
-            appliers.add(new StaticAuthApplier(auth));
+            appliers.add(new StaticAuthApplier(auth, this.beanContainer));
         }
         return appliers;
     }
@@ -220,7 +224,7 @@ public class AnnotationParser {
         List<PropertyValueApplier> appliers = new ArrayList<>();
         RequestAuth[] authAnnotations = method.getAnnotationsByType(RequestAuth.class);
         for (RequestAuth auth : authAnnotations) {
-            appliers.add(new StaticAuthApplier(auth));
+            appliers.add(new StaticAuthApplier(auth, this.beanContainer));
         }
         return appliers;
     }
