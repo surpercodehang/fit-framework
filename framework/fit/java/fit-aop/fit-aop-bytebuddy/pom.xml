@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.fitframework</groupId>
         <artifactId>fit-aop-parent</artifactId>
-        <version>3.5.0-SNAPSHOT</version>
+        <version>3.5.4-SNAPSHOT</version>
     </parent>
 
     <artifactId>fit-aop-bytebuddy</artifactId>
@@ -18,7 +18,7 @@
 
     <properties>
         <!-- Third-party versions -->
-        <bytebuddy.version>1.17.5</bytebuddy.version>
+        <bytebuddy.version>1.17.6</bytebuddy.version>
     </properties>
 
     <dependencies>

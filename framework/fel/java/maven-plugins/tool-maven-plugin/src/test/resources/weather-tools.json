@@ -13,25 +13,47 @@
           "type" : "object",
           "properties" : {
             "location" : {
-              "defaultValue" : "",
               "description" : "查询地点",
               "name" : "location",
               "type" : "string",
-              "examples" : "",
-              "required" : true
+              "examples" : [ "Hangzhou" ],
+              "default" : ""
             },
             "date" : {
-              "defaultValue" : "",
               "description" : "查询日期",
               "name" : "date",
               "type" : "string",
-              "examples" : "",
-              "required" : true
+              "examples" : [ "" ],
+              "default" : ""
+            },
+            "rainPosition" : {
+              "description" : "下雨的经纬度",
+              "name" : "rainPosition",
+              "type" : "object",
+              "properties" : {
+                "latitude" : {
+                  "type" : "string"
+                },
+                "longitude" : {
+                  "type" : "string"
+                }
+              },
+              "examples" : [ "" ],
+              "required" : [ "latitude", "longitude" ],
+              "default" : ""
+            },
+            "info" : {
+              "description" : "其他信息",
+              "name" : "info",
+              "type" : "object",
+              "properties" : { },
+              "examples" : [ "" ],
+              "default" : ""
             }
           },
           "required" : [ "location", "date" ]
         },
-        "order" : [ "location", "date" ],
+        "order" : [ "location", "date", "rainPosition", "info" ],
         "return" : {
           "type" : "string",
           "convertor" : ""
@@ -46,13 +68,11 @@
           "properties" : {
             "location" : {
               "name" : "location",
-              "type" : "string",
-              "required" : false
+              "type" : "string"
             },
             "date" : {
               "name" : "date",
-              "type" : "string",
-              "required" : false
+              "type" : "string"
             }
           },
           "required" : [ ]
@@ -84,24 +104,40 @@
           "properties" : {
             "location" : {
               "name" : "location",
-              "type" : "string",
-              "required" : false
+              "type" : "string"
             },
             "date" : {
               "name" : "date",
-              "type" : "string",
-              "required" : false
+              "type" : "string"
+            },
+            "rainPosition" : {
+              "name" : "rainPosition",
+              "type" : "object",
+              "properties" : {
+                "latitude" : {
+                  "type" : "string"
+                },
+                "longitude" : {
+                  "type" : "string"
+                }
+              },
+              "required" : [ "latitude", "longitude" ]
+            },
+            "info" : {
+              "name" : "info",
+              "type" : "object",
+              "properties" : { }
             }
           },
           "required" : [ ]
         },
-        "order" : [ "location", "date" ],
+        "order" : [ "location", "date", "rainPosition", "info" ],
         "return" : {
           "name" : "",
           "description" : "获取今日下雨信息的结果",
           "type" : "string",
           "convertor" : "",
-          "examples" : ""
+          "examples" : [ "" ]
         }
       },
       "runnables" : {
@@ -124,13 +160,11 @@
           "properties" : {
             "location" : {
               "name" : "location",
-              "type" : "string",
-              "required" : false
+              "type" : "string"
             },
             "date" : {
               "name" : "date",
-              "type" : "string",
-              "required" : false
+              "type" : "string"
             }
           },
           "required" : [ ]
@@ -141,7 +175,7 @@
           "description" : "获取明日下雨信息的结果",
           "type" : "string",
           "convertor" : "",
-          "examples" : ""
+          "examples" : [ "" ]
         }
       },
       "runnables" : {
@@ -171,18 +205,34 @@
           "properties" : {
             "location" : {
               "name" : "location",
-              "type" : "string",
-              "required" : false
+              "type" : "string"
             },
             "date" : {
               "name" : "date",
-              "type" : "string",
-              "required" : false
+              "type" : "string"
+            },
+            "rainPosition" : {
+              "name" : "rainPosition",
+              "type" : "object",
+              "properties" : {
+                "latitude" : {
+                  "type" : "string"
+                },
+                "longitude" : {
+                  "type" : "string"
+                }
+              },
+              "required" : [ "latitude", "longitude" ]
+            },
+            "info" : {
+              "name" : "info",
+              "type" : "object",
+              "properties" : { }
             }
           },
           "required" : [ ]
         },
-        "order" : [ "location", "date" ],
+        "order" : [ "location", "date", "rainPosition", "info" ],
         "return" : {
           "type" : "string",
           "convertor" : ""
@@ -208,13 +258,11 @@
           "properties" : {
             "location" : {
               "name" : "location",
-              "type" : "string",
-              "required" : false
+              "type" : "string"
             },
             "date" : {
               "name" : "date",
-              "type" : "string",
-              "required" : false
+              "type" : "string"
             }
           },
           "required" : [ ]

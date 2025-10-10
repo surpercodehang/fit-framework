@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) 2024 Huawei Technologies Co., Ltd. All rights reserved.
- *  This file is a part of the ModelEngine Project.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/*
+ * Copyright (c) 2024-2025 Huawei Technologies Co., Ltd. All rights reserved.
+ * This file is a part of the ModelEngine Project.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 
 package modelengine.fit.http.server.netty;
 
@@ -23,6 +23,8 @@ import modelengine.fit.http.protocol.ReadableMessageBody;
 import modelengine.fit.http.protocol.RequestLine;
 import modelengine.fit.http.protocol.ServerRequest;
 import modelengine.fit.http.protocol.util.HeaderUtils;
+import modelengine.fitframework.log.Logger;
+import modelengine.fitframework.util.LockUtils;
 import modelengine.fitframework.util.ObjectUtils;
 
 import java.io.IOException;
@@ -31,6 +33,9 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
 
 /**
  * {@link ServerRequest} 的 Netty 实现。
@@ -39,6 +44,8 @@ import java.util.Optional;
  * @since 2022-07-08
  */
 public class NettyHttpServerRequest implements ServerRequest, OnHttpContentReceived {
+    private static final Logger log = Logger.get(NettyHttpServerRequest.class);
+
     private static final char QUERY_SEPARATOR = '?';
 
     private final HttpRequest request;
@@ -48,8 +55,12 @@ public class NettyHttpServerRequest implements ServerRequest, OnHttpContentRecei
     private final RequestLine startLine;
     private final MessageHeaders headers;
     private final NettyReadableMessageBody body;
-    private boolean isClosed;
-    private Thread executeThread;
+    private final AtomicBoolean isClosed = new AtomicBoolean(false);
+    private final ReadWriteLock isClosedLock = LockUtils.newReentrantReadWriteLock();
+    private final AtomicBoolean isComplete = new AtomicBoolean(false);
+    private final AtomicBoolean isFinished = new AtomicBoolean(false);
+    private final Lock tryCloseLock = LockUtils.newReentrantLock();
+    private volatile Thread executeThread;
 
     public NettyHttpServerRequest(HttpRequest request, ChannelHandlerContext ctx, boolean isSecure,
             long largeBodySize) {
@@ -60,6 +71,7 @@ public class NettyHttpServerRequest implements ServerRequest, OnHttpContentRecei
         this.startLine = this.initStartLine();
         this.headers = this.initHeaders();
         this.body = this.isLargeBody() ? NettyReadableMessageBody.large() : NettyReadableMessageBody.common();
+        log.debug("Netty http request initialized. [id={0}, request={1}]", ctx.name(), this.startLine());
     }
 
     private boolean isLargeBody() {
@@ -123,6 +135,7 @@ public class NettyHttpServerRequest implements ServerRequest, OnHttpContentRecei
         this.checkIfClosed();
         ByteBuf byteBuf = content.content();
         this.body.write(byteBuf, true);
+        LockUtils.synchronize(this.tryCloseLock, () -> this.isComplete.set(true));
     }
 
     @Override
@@ -148,15 +161,48 @@ public class NettyHttpServerRequest implements ServerRequest, OnHttpContentRecei
     }
 
     private void checkIfClosed() throws IOException {
-        if (this.isClosed) {
-            throw new IOException("The netty http server request has already been closed.");
+        this.isClosedLock.readLock().lock();
+        try {
+            if (this.isClosed.get()) {
+                throw new IOException("The netty http server request has already been closed.");
+            }
+        } finally {
+            this.isClosedLock.readLock().unlock();
+        }
+    }
+
+    /**
+     * 尝试关闭。
+     *
+     * @throws IOException 当关闭失败时。
+     */
+    void tryClose() throws IOException {
+        this.tryCloseLock.lock();
+        try {
+            if (this.isFinished.get() && this.isComplete.get()) {
+                this.close();
+            }
+        } finally {
+            this.tryCloseLock.unlock();
         }
     }
 
     @Override
     public void close() throws IOException {
-        this.isClosed = true;
-        this.body.close();
+        if (this.isClosed.get()) {
+            return;
+        }
+        this.isClosedLock.writeLock().lock();
+        try {
+            if (this.isClosed.get()) {
+                return;
+            }
+            log.debug("Netty http request closed. [id={}]", this.ctx.name());
+            this.isClosed.set(true);
+            this.body.close();
+        } finally {
+            this.isClosedLock.writeLock().unlock();
+        }
     }
 
     @Override
@@ -223,6 +269,7 @@ public class NettyHttpServerRequest implements ServerRequest, OnHttpContentRecei
      */
     void removeExecuteThread() {
         this.executeThread = null;
+        LockUtils.synchronize(this.tryCloseLock, () -> this.isFinished.set(true));
     }
 
     /**

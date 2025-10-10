@@ -32,6 +32,7 @@ import io.netty.handler.codec.http.HttpUtil;
 import io.netty.handler.codec.http.LastHttpContent;
 import io.netty.util.Attribute;
 import io.netty.util.AttributeKey;
+import io.netty.util.AttributeMap;
 import modelengine.fit.http.protocol.HttpResponseStatus;
 import modelengine.fit.http.server.ErrorResponse;
 import modelengine.fit.http.server.HttpClassicServer;
@@ -88,16 +89,24 @@ public class HttpClassicRequestAssembler extends SimpleChannelInboundHandler<Htt
     }
 
     private static void setRequest(ChannelHandlerContext ctx, NettyHttpServerRequest serverRequest) {
-        Attribute<NettyHttpServerRequest> attr = ctx.channel().attr(REQUEST);
+        Attribute<NettyHttpServerRequest> attr = ((AttributeMap) ctx).attr(REQUEST);
         attr.set(serverRequest);
     }
 
     private static NettyHttpServerRequest getRequest(ChannelHandlerContext ctx) {
-        return ctx.channel().attr(REQUEST).get();
+        return ((AttributeMap) ctx).attr(REQUEST).get();
     }
 
     private static void clearRequest(ChannelHandlerContext ctx) {
-        ctx.channel().attr(REQUEST).set(null);
+        NettyHttpServerRequest request = getRequest(ctx);
+        if (request != null) {
+            ((AttributeMap) ctx).attr(REQUEST).set(null);
+            try {
+                request.close();
+            } catch (IOException e) {
+                log.warn("Failed to close netty http server request, ignored.", e);
+            }
+        }
     }
 
     @Override
@@ -117,12 +126,6 @@ public class HttpClassicRequestAssembler extends SimpleChannelInboundHandler<Htt
         super.channelInactive(ctx);
     }
 
-    @Override
-    public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
-        this.stopExecution(ctx);
-        super.channelUnregistered(ctx);
-    }
-
     private void stopExecution(ChannelHandlerContext ctx) {
         NettyHttpServerRequest request = getRequest(ctx);
         if (request != null) {
@@ -135,6 +138,7 @@ public class HttpClassicRequestAssembler extends SimpleChannelInboundHandler<Htt
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) {
         if (msg instanceof HttpRequest) {
+            clearRequest(ctx);
             this.handleHttpRequest(ctx, cast(msg));
             return;
         }
@@ -160,8 +164,11 @@ public class HttpClassicRequestAssembler extends SimpleChannelInboundHandler<Htt
     private void doHttpRequest(ChannelHandlerContext ctx, NettyHttpServerRequest request) {
         request.setExecuteThread(Thread.currentThread());
         try (HttpClassicServerRequest classicRequest = HttpClassicServerRequest.create(this.server, request);
-             NettyHttpServerResponse response = new NettyHttpServerResponse(ctx, request);
-             HttpClassicServerResponse classicResponse = HttpClassicServerResponse.create(this.server, response)) {
+             // Inline Netty response creation to avoid it being managed as a separate
+             // try-with-resources variable. This prevents premature closure at the end
+             // of the try block, which would cause write failures when SSE sends data.
+             HttpClassicServerResponse classicResponse = HttpClassicServerResponse.create(this.server,
+                     new NettyHttpServerResponse(ctx, request))) {
             HttpHandler handler = this.server.httpDispatcher().dispatch(classicRequest, classicResponse);
             classicRequest.attributes().set(PATH_PATTERN.key(), handler.pathPattern());
             classicRequest.attributes().set(HTTP_HANDLER.key(), handler);
@@ -171,6 +178,11 @@ public class HttpClassicRequestAssembler extends SimpleChannelInboundHandler<Htt
             this.exceptionCaught(ctx, cause, request);
         } finally {
             request.removeExecuteThread();
+            try {
+                request.tryClose();
+            } catch (IOException e) {
+                log.warn("Failed to close netty http server request when request finished, ignored.", e);
+            }
         }
     }
 
@@ -184,15 +196,18 @@ public class HttpClassicRequestAssembler extends SimpleChannelInboundHandler<Htt
                     ctx.channel().isOpen());
             throw new IllegalStateException(message);
         }
-        this.receiveHttpContent(ctx, request, content);
+        this.receiveHttpContent(request, content);
     }
 
-    private void receiveHttpContent(ChannelHandlerContext ctx, NettyHttpServerRequest serverRequest,
-            HttpContent content) {
+    private void receiveHttpContent(NettyHttpServerRequest serverRequest, HttpContent content) {
         try {
             if (content instanceof LastHttpContent) {
                 serverRequest.receiveLastHttpContent(cast(content));
-                clearRequest(ctx);
+                try {
+                    serverRequest.tryClose();
+                } catch (IOException e) {
+                    log.warn("Failed to close netty http server request when received last http content, ignored.", e);
+                }
             } else {
                 serverRequest.receiveHttpContent(content);
             }

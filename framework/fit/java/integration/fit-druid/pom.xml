@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.fitframework.integration</groupId>
         <artifactId>integration-parent</artifactId>
-        <version>3.5.0-SNAPSHOT</version>
+        <version>3.5.4-SNAPSHOT</version>
     </parent>
 
     <artifactId>fit-druid</artifactId>
@@ -17,7 +17,7 @@
 
     <properties>
         <!-- Third-party versions -->
-        <druid.version>1.2.20</druid.version>
+        <druid.version>1.2.25</druid.version>
     </properties>
 
     <dependencies>

@@ -1,7 +1,7 @@
 <div align="center">
   <img src="docs/resources/fit-logo.png" alt="FIT Logo" width="395">
 
-# FIT Framework v3.5.0-SNAPSHOT
+# FIT Framework v3.5.4-SNAPSHOT
 
 **Java 企业级 AI 开发框架，提供多语言函数引擎（FIT）、流式编排引擎（WaterFlow）及 Java 生态的 LangChain 替代方案（FEL）。原生 /
 Spring 双模运行，支持插件热插拔与智能聚散部署，无缝统一大模型与业务系统。**
@@ -106,7 +106,9 @@ chmod +x build/bin/*
 **启动命令**
 
 ```
-build/bin/fit start
+mkdir dynamic-plugins
+cd dynamic-plugins
+../build/bin/fit start
 ```
 
 > 以上编译构建出的 `fit` 命令可以通过系统操作（别名或添加系统路径）来简化输入。
@@ -119,6 +121,8 @@ build/bin/fit start
 - 新建任意目录作为插件目录，在该目录下存放插件，可在插件目录下使用命令 `fit start` 启动服务。
 
 > 以上环境配置步骤请根据使用的操作系统使用相应的路径分隔符和环境变量配置操作。
+> 
+> `fit` 命令无法在包含 FIT 框架的目录中执行，只能够在一个新建的动态插件目录下执行。
 
 ## 快速开始
 

@@ -94,9 +94,10 @@ def _try_heart_beat_once():
                                       f"heart_beat_gap={'{:.3f}'.format(heart_beat_gap)}s, "
                                       f"heart_beat_interval={'{:.3f}'.format(_interval() / 1000)}s]")
         if _FAIL_COUNT != 0:
-            _registry_fitable_addresses()
             sys_plugin_logger.info(f"heart beat reconnect success. [fail_count={_FAIL_COUNT}]")
             _FAIL_COUNT = 0
+        # 当前的优化仅为临时优化，待 Nacos 版注册中心上线后，更新并验证
+        _registry_fitable_addresses()
         sys_plugin_logger.debug(f'heart beating success.')
         _LAST_HEART_BEAT_SUCCESS_TIME = heart_beat_finish_time
     except:
@@ -114,7 +115,7 @@ def _heart_beat_task(queue: multiprocessing.Queue):
             sys_plugin_logger.info("heart beat task will terminated gracefully.")
             break
         except Empty:
-            if platform.system() != 'Windows' and not multiprocessing.parent_process().is_alive():
+            if platform.system() not in ('Windows', 'Darwin') and not multiprocessing.parent_process().is_alive():
                 sys_plugin_logger.info("heart beat task will terminated due to parent process died.")
                 break
             _try_heart_beat_once()
@@ -134,7 +135,7 @@ def _heart_beat_monitor(heart_beat_background_job):
 def online() -> None:
     """ Runtime向心跳代理申请启动本地心跳服务，心跳代理周期性触发heartbeat() """
     sys_plugin_logger.info(f"start heart beating with interval {_interval()} ms, alive time {_alive_time()} ms.")
-    if platform.system() == 'Windows':
+    if platform.system() in ('Windows', 'Darwin'):
         heart_beat_background_job = Thread(target=_heart_beat_task, args=(_HEART_BEAT_FINISH_QUEUE,),
                                            name='HeartBeatThread')
     else:
@@ -169,7 +170,7 @@ def _registry_fitable_addresses():
     """
     try:
         register_all_fit_services()
-        sys_plugin_logger.info("In heart beat agent registry all fitable address success.")
+        sys_plugin_logger.debug("In heart beat agent registry all fitable address success.")
     except:
         sys_plugin_logger.warning(f"In heart beat agent registry all fitable address failed.")
         except_type, except_value, except_traceback = sys.exc_info()

@@ -6,6 +6,10 @@
 
 package modelengine.fel.tool.info.entity;
 
+import modelengine.fitframework.annotation.Property;
+
+import java.util.List;
+
 /**
  * 表示参数属性的实体类。
  *
@@ -14,14 +18,16 @@ package modelengine.fel.tool.info.entity;
  * @since 2024-10-26
  */
 public class PropertyEntity {
+    @Property(name = "default")
     private String defaultValue;
     private String description;
     private String name;
     private String type;
     private Object items;
     private Object properties;
-    private String examples;
-    private boolean required;
+    private List<String> examples;
+    private List<String> required;
+    private transient boolean need;
 
     /**
      * 获取参数的默认值。
@@ -60,21 +66,39 @@ public class PropertyEntity {
     }
 
     /**
+     * 获取对象类型的必填字段列表。
+     *
+     * @return 表示对象类型必填字段列表的 {@link List}{@code <}{@link String}{@code >}。
+     */
+    public List<String> getRequired() {
+        return this.required;
+    }
+
+    /**
+     * 设置对象类型的必填字段列表。
+     *
+     * @param required 表示对象类型必填字段列表的 {@link List}{@code <}{@link String}{@code >}。
+     */
+    public void setRequired(List<String> required) {
+        this.required = required;
+    }
+
+    /**
      * 获取参数是否是必需的标志。
      *
      * @return 如果参数是必需的，则返回 {@code true}，否则返回 {@code false}。
      */
-    public boolean isRequired() {
-        return this.required;
+    public boolean isNeed() {
+        return need;
     }
 
     /**
      * 设置参数是否是必需的标志。
      *
-     * @param required 表示参数是否是必需的 {@link boolean}。
+     * @param need 表示参数是否是必需的 {@link boolean}。
      */
-    public void setRequired(boolean required) {
-        this.required = required;
+    public void setNeed(boolean need) {
+        this.need = need;
     }
 
     /**
@@ -152,18 +176,18 @@ public class PropertyEntity {
     /**
      * 获取参数的示例值。
      *
-     * @return 表示参数的示例值的 {@link String}。
+     * @return 表示参数的示例值的 {@link List}{@code <}{@link String}{@code >}。
      */
-    public String getExamples() {
+    public List<String> getExamples() {
         return this.examples;
     }
 
     /**
      * 设置参数的示例值。
      *
-     * @param examples 表示参数的示例值的 {@link String}。
+     * @param examples 表示参数的示例值的 {@link List}{@code <}{@link String}{@code >}。
      */
-    public void setExamples(String examples) {
+    public void setExamples(List<String> examples) {
         this.examples = examples;
     }
 }

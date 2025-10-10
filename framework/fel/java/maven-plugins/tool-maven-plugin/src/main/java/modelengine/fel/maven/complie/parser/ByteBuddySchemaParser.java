@@ -21,7 +21,9 @@ import net.bytebuddy.description.method.ParameterDescription;
 
 import static modelengine.fitframework.inspection.Validation.notNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -77,9 +79,7 @@ public class ByteBuddySchemaParser {
         if (returnPropertyEntity.getConvertor() != null) {
             returnProperty.put("convertor", returnPropertyEntity.getConvertor());
         }
-        if (returnPropertyEntity.getExamples() != null) {
-            returnProperty.put("examples", returnPropertyEntity.getExamples());
-        }
+        returnProperty.put("examples", returnPropertyEntity.getExamples());
         return returnProperty;
     }
 
@@ -92,7 +92,7 @@ public class ByteBuddySchemaParser {
             String methodName = parameterDescription.getName();
             PropertyEntity property = parseProperty(parameterDescription);
             properties.put(methodName, property);
-            if (property.isRequired()) {
+            if (property.isNeed()) {
                 required.add(methodName);
             }
         }
@@ -112,9 +112,9 @@ public class ByteBuddySchemaParser {
         if (paramAnnotation != null) {
             Property property = paramAnnotation.load();
             entity.setDescription(property.description());
-            entity.setRequired(property.required());
+            entity.setNeed(property.required());
             entity.setDefaultValue(property.defaultValue());
-            entity.setExamples(property.example());
+            entity.setExamples(Collections.singletonList(property.example()));
         }
         return entity;
     }
@@ -127,7 +127,7 @@ public class ByteBuddySchemaParser {
             Property property = returnAnnotation.load();
             returnPropertyEntity.setName(property.name());
             returnPropertyEntity.setDescription(property.description());
-            returnPropertyEntity.setExamples(property.example());
+            returnPropertyEntity.setExamples(Collections.singletonList(property.example()));
         }
         notNull(methodDescription.getReturnType(), "The return type cannot be null.");
         JsonNode jsonNode = JacksonTypeParser.getParameterSchema(methodDescription.getReturnType());
@@ -142,14 +142,18 @@ public class ByteBuddySchemaParser {
 
     private static void setPropertyType(PropertyEntity returnPropertyEntity, JsonNode jsonNode) {
         returnPropertyEntity.setType(jsonNode.get("type").asText());
-        returnPropertyEntity.setItems(null);
-        returnPropertyEntity.setProperties(null);
         if (Objects.equals(returnPropertyEntity.getType(), "array")) {
             returnPropertyEntity.setItems(jsonNode.get("items"));
         }
         if (Objects.equals(returnPropertyEntity.getType(), "object")) {
             if (jsonNode.get("properties") != null) {
                 returnPropertyEntity.setProperties(jsonNode.get("properties"));
+                // 为对象类型添加required数组，包含所有属性名
+                List<String> requiredFields = new LinkedList<>();
+                jsonNode.get("properties").fieldNames().forEachRemaining(requiredFields::add);
+                returnPropertyEntity.setRequired(requiredFields);
+            } else {
+                returnPropertyEntity.setProperties(new LinkedHashMap<>());
             }
         }
     }

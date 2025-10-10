@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.fitframework</groupId>
         <artifactId>fit-conf-parent</artifactId>
-        <version>3.5.0-SNAPSHOT</version>
+        <version>3.5.4-SNAPSHOT</version>
     </parent>
 
     <artifactId>fit-conf-yaml</artifactId>
@@ -19,7 +19,7 @@
 
     <properties>
         <!-- Third-party versions -->
-        <snakeyaml.version>2.3</snakeyaml.version>
+        <snakeyaml.version>2.4</snakeyaml.version>
     </properties>
 
     <dependencies>

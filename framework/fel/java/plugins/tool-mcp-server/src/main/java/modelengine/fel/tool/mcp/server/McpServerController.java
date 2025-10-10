@@ -16,6 +16,7 @@ import modelengine.fel.tool.mcp.server.handler.InitializeHandler;
 import modelengine.fel.tool.mcp.server.handler.PingHandler;
 import modelengine.fel.tool.mcp.server.handler.ToolCallHandler;
 import modelengine.fel.tool.mcp.server.handler.ToolListHandler;
+import modelengine.fel.tool.mcp.server.handler.LoggingSetLevelHandler;
 import modelengine.fel.tool.mcp.server.handler.UnsupportedMethodHandler;
 import modelengine.fit.http.annotation.GetMapping;
 import modelengine.fit.http.annotation.PostMapping;
@@ -78,6 +79,7 @@ public class McpServerController implements McpServer.ToolsChangedObserver {
         this.methodHandlers.put(Method.PING.code(), new PingHandler());
         this.methodHandlers.put(Method.TOOLS_LIST.code(), new ToolListHandler(mcpServer));
         this.methodHandlers.put(Method.TOOLS_CALL.code(), new ToolCallHandler(mcpServer, this.serializer));
+        this.methodHandlers.put(Method.LOGGING_SET_LEVEL.code(), new LoggingSetLevelHandler());
 
         ThreadPoolScheduler channelDetectorScheduler = ThreadPoolScheduler.custom()
                 .corePoolSize(1)
@@ -88,19 +90,22 @@ public class McpServerController implements McpServer.ToolsChangedObserver {
             if (MapUtils.isEmpty(this.responses)) {
                 return;
             }
-            List<String> toRemoved = new ArrayList<>();
+            List<String> obsoleteSessionIds = new ArrayList<>();
             for (Map.Entry<String, HttpClassicServerResponse> entry : this.responses.entrySet()) {
                 if (entry.getValue().isActive()) {
                     continue;
                 }
-                toRemoved.add(entry.getKey());
+                obsoleteSessionIds.add(entry.getKey());
             }
-            if (CollectionUtils.isEmpty(toRemoved)) {
+            if (CollectionUtils.isEmpty(obsoleteSessionIds)) {
                 return;
             }
-            toRemoved.forEach(this.responses::remove);
-            toRemoved.forEach(this.emitters::remove);
-            log.info("Channels are inactive, remove emitters and responses. [sessionIds={}]", toRemoved);
+            obsoleteSessionIds.forEach(this.responses::remove);
+            for (String obsoleteSessionId : obsoleteSessionIds) {
+                Emitter<TextEvent> removed = this.emitters.remove(obsoleteSessionId);
+                removed.complete();
+            }
+            log.info("Channels are inactive, remove emitters and responses. [sessionIds={}]", obsoleteSessionIds);
         }).build());
     }
 
