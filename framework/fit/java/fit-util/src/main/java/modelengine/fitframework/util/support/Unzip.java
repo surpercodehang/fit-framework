@@ -204,9 +204,29 @@ public class Unzip extends AbstractZip<Unzip> {
             }
         }
 
+        // 使用专门的方法验证并构建安全的目标路径
+        return this.validateAndBuildTargetPath(entry);
+    }
+
+    /**
+     * 验证 ZIP entry 并构建安全的目标路径，防止 Zip Slip 路径遍历攻击(CWE-22)。
+     * <p>
+     * 此方法实现以下安全措施：
+     * <ul>
+     *     <li>检测绝对路径攻击（以 {@code /}、{@code \} 或驱动器字母开头的路径）。</li>
+     *     <li>使用 {@link Path#normalize()} 规范化路径，消除 {@code ..} 和 {@code .} 等元素。</li>
+     *     <li>使用 {@link Path#startsWith(Path)} 验证路径未逃逸目标目录。</li>
+     * </ul>
+     * </p>
+     *
+     * @param entry 表示待解包的 ZIP 文件项的 {@link ZipEntry}。
+     * @return 表示经过安全验证的目标文件的 {@link File}。
+     * @throws SecurityException 如果检测到潜在的路径遍历攻击。
+     */
+    private File validateAndBuildTargetPath(ZipEntry entry) {
         String name = entry.getName();
 
-        // 检查是否包含绝对路径字符(以'/'或驱动器字母开头)
+        // 第一道防线：检查是否包含绝对路径字符(以'/'或驱动器字母开头)
         if (name.startsWith("/") || name.startsWith("\\") || (name.length() > 1 && name.charAt(1) == ':')) {
             if (!this.security.isCrossPath()) {
                 throw new SecurityException(StringUtils.format("Detected a potential path traversal attack. [path={0}]",
@@ -214,10 +234,11 @@ public class Unzip extends AbstractZip<Unzip> {
             }
         }
 
+        // 第二道防线：构建规范化路径并验证
         Path targetDir = this.getTargetDirectory().toPath().normalize();
         Path targetPath = targetDir.resolve(name).normalize();
 
-        // 使用Path.startsWith进行前缀检查(比String.startsWith更安全)
+        // 第三道防线：使用Path.startsWith进行前缀检查(比String.startsWith更安全)
         if (!this.security.isCrossPath() && !targetPath.startsWith(targetDir)) {
             throw new SecurityException(StringUtils.format("Detected a potential path traversal attack. [path={0}]",
                     name));
