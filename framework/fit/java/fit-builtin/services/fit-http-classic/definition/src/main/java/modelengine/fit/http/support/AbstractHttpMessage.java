@@ -8,7 +8,6 @@ package modelengine.fit.http.support;
 
 import static modelengine.fit.http.protocol.MessageHeaderNames.CONTENT_LENGTH;
 import static modelengine.fit.http.protocol.MessageHeaderNames.CONTENT_TYPE;
-import static modelengine.fit.http.protocol.MessageHeaderNames.COOKIE;
 import static modelengine.fit.http.protocol.MessageHeaderNames.TRANSFER_ENCODING;
 import static modelengine.fit.http.protocol.MessageHeaderValues.CHUNKED;
 import static modelengine.fitframework.inspection.Validation.notNull;
@@ -47,8 +46,6 @@ import java.util.Optional;
  * @since 2022-08-03
  */
 public abstract class AbstractHttpMessage implements HttpMessage {
-    private static final String COOKIE_DELIMITER = ";";
-
     private final ParameterCollection parameters =
             ParameterCollection.create().set(DefaultContentType.CHARSET, StandardCharsets.UTF_8.name());
     private final HttpResource httpResource;
@@ -70,8 +67,7 @@ public abstract class AbstractHttpMessage implements HttpMessage {
         this.httpResource = notNull(httpResource, "The http resource cannot be null.");
         this.startLine = notNull(startLine, "The start line cannot be null.");
         this.headers = notNull(headers, "The message headers cannot be null.");
-        String actualCookie = String.join(COOKIE_DELIMITER, this.headers.all(COOKIE));
-        this.cookies = ConfigurableCookieCollection.create(HttpUtils.parseHeaderValue(actualCookie));
+        this.cookies = ConfigurableCookieCollection.create();
     }
 
     @Override

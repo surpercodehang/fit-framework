@@ -6,6 +6,7 @@
 
 package modelengine.fit.http.support;
 
+import static modelengine.fit.http.protocol.MessageHeaderNames.COOKIE;
 import static modelengine.fit.http.protocol.MessageHeaderNames.HOST;
 import static modelengine.fitframework.inspection.Validation.notNull;
 
@@ -16,6 +17,7 @@ import modelengine.fit.http.protocol.MessageHeaderNames;
 import modelengine.fit.http.protocol.MessageHeaders;
 import modelengine.fit.http.protocol.QueryCollection;
 import modelengine.fit.http.protocol.RequestLine;
+import modelengine.fit.http.util.HttpUtils;
 
 /**
  * 表示 {@link HttpClassicRequest} 的抽象实现类。
@@ -24,6 +26,8 @@ import modelengine.fit.http.protocol.RequestLine;
  * @since 2022-11-23
  */
 public abstract class AbstractHttpClassicRequest extends AbstractHttpMessage implements HttpClassicRequest {
+    private static final String COOKIE_DELIMITER = ";";
+
     private final RequestLine startLine;
     private final MessageHeaders headers;
 
@@ -38,6 +42,8 @@ public abstract class AbstractHttpClassicRequest extends AbstractHttpMessage imp
         super(httpResource, startLine, headers);
         this.startLine = notNull(startLine, "The request line cannot be null.");
         this.headers = notNull(headers, "The message headers cannot be null.");
+        String actualCookie = String.join(COOKIE_DELIMITER, this.headers.all(COOKIE));
+        HttpUtils.parseCookies(actualCookie).forEach(this.cookies()::add);
     }
 
     @Override
