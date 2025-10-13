@@ -6,6 +6,7 @@
 
 package modelengine.fit.http.support;
 
+import static modelengine.fit.http.protocol.MessageHeaderNames.SET_COOKIE;
 import static modelengine.fitframework.inspection.Validation.notNull;
 
 import modelengine.fit.http.HttpClassicResponse;
@@ -13,6 +14,9 @@ import modelengine.fit.http.HttpResource;
 import modelengine.fit.http.protocol.MessageHeaders;
 import modelengine.fit.http.protocol.RequestLine;
 import modelengine.fit.http.protocol.StatusLine;
+import modelengine.fit.http.util.HttpUtils;
+
+import java.util.List;
 
 /**
  * {@link HttpClassicResponse} 的默认实现。
@@ -33,6 +37,9 @@ public abstract class AbstractHttpClassicResponse extends AbstractHttpMessage im
     public AbstractHttpClassicResponse(HttpResource httpResource, StatusLine startLine, MessageHeaders headers) {
         super(httpResource, startLine, headers);
         this.startLine = notNull(startLine, "The status line cannot be null.");
+        notNull(headers, "The headers cannot be null.");
+        List<String> actualCookies = headers.all(SET_COOKIE);
+        actualCookies.stream().map(HttpUtils::parseSetCookie).forEach(this.cookies()::add);
     }
 
     @Override

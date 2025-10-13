@@ -6,18 +6,22 @@
 
 package modelengine.fit.http.support;
 
-import static modelengine.fitframework.inspection.Validation.notNull;
+import static modelengine.fit.http.util.HttpUtils.COOKIES_FORMAT_SEPARATOR;
+import static modelengine.fit.http.util.HttpUtils.COOKIE_PAIR_SEPARATOR;
 
 import modelengine.fit.http.Cookie;
 import modelengine.fit.http.header.ConfigurableCookieCollection;
 import modelengine.fit.http.header.CookieCollection;
-import modelengine.fit.http.header.HeaderValue;
-import modelengine.fit.http.header.support.DefaultHeaderValue;
-import modelengine.fit.http.header.support.DefaultParameterCollection;
+import modelengine.fit.http.util.HttpUtils;
+import modelengine.fitframework.util.CollectionUtils;
 import modelengine.fitframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -27,49 +31,56 @@ import java.util.stream.Collectors;
  * @author 季聿阶
  * @since 2022-07-06
  */
-public class DefaultCookieCollection extends DefaultHeaderValue implements ConfigurableCookieCollection {
-    /**
-     * 初始化 {@link DefaultCookieCollection} 的新实例。
-     */
-    public DefaultCookieCollection() {
-        super(StringUtils.EMPTY, new DefaultParameterCollection());
-    }
-
-    /**
-     * 使用指定的消息头初始化 {@link DefaultCookieCollection} 的新实例。
-     *
-     * @param headerValue 表示消息头的 {@link HeaderValue}。
-     * @throws IllegalArgumentException 当 {@code headerValue} 为 {@code null} 时。
-     */
-    public DefaultCookieCollection(HeaderValue headerValue) {
-        super(notNull(headerValue, "The header value cannot be null.").value(), headerValue.parameters());
-    }
+public class DefaultCookieCollection implements ConfigurableCookieCollection {
+    private final Map<String, List<Cookie>> store = new LinkedHashMap<>();
 
     @Override
     public Optional<Cookie> get(String name) {
-        return this.parameters().get(name).map(value -> Cookie.builder().name(name).value(value).build());
+        List<Cookie> cookies = this.store.get(name);
+        if (CollectionUtils.isEmpty(cookies)) {
+            return Optional.empty();
+        }
+        return Optional.of(cookies.get(0));
+    }
+
+    @Override
+    public List<Cookie> all(String name) {
+        return this.store.getOrDefault(name, Collections.emptyList());
     }
 
     @Override
     public List<Cookie> all() {
-        return Collections.unmodifiableList(this.parameters()
-                .keys()
-                .stream()
-                .map(this::get)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList()));
+        return this.store.values().stream().flatMap(List::stream).collect(Collectors.toList());
     }
 
     @Override
     public int size() {
-        return this.parameters().size();
+        return this.store.values().stream().mapToInt(List::size).sum();
     }
 
     @Override
     public void add(Cookie cookie) {
-        if (cookie != null) {
-            this.parameters().set(cookie.name(), cookie.value());
+        if (cookie == null || StringUtils.isBlank(cookie.name())) {
+            return;
         }
+        if (HttpUtils.isInvalidCookiePair(cookie.name(), cookie.value())) {
+            throw new IllegalArgumentException("Invalid cookie: name or value is not allowed.");
+        }
+        this.store.computeIfAbsent(cookie.name(), k -> new ArrayList<>());
+        List<Cookie> list = this.store.get(cookie.name());
+        list.removeIf(c -> Objects.equals(c.path(), cookie.path()) && Objects.equals(c.domain(), cookie.domain()));
+        list.add(cookie);
+    }
+
+    @Override
+    public String toRequestHeaderValue() {
+        return all().stream()
+                .map(c -> c.name() + COOKIE_PAIR_SEPARATOR + c.value())
+                .collect(Collectors.joining(COOKIES_FORMAT_SEPARATOR));
+    }
+
+    @Override
+    public List<String> toResponseHeadersValues() {
+        return all().stream().map(HttpUtils::formatSetCookie).collect(Collectors.toList());
     }
 }
