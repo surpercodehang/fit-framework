@@ -9,8 +9,6 @@ Please use the following table to understand which versions are currently suppor
 | -------------- | ------------------------- |
 | v3.5.x         | ✅ 支持 / Supported       |
 | < v3.5.0       | ❌ 不支持 / Not Supported |
-| elsa-v0.1.x    | ✅ 支持 / Supported       |
-| < elsa-v0.1.x  | ❌ 不支持 / Not Supported |
 
 ## 🚨 报告漏洞 / Reporting Vulnerabilities
 

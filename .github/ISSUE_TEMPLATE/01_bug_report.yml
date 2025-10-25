@@ -33,7 +33,6 @@ body:
       description: 您使用的是哪个版本？/ Which version are you using?
       options:
         - "v3.5.3"
-        - "elsa-v0.4.2"
         - "其他 (请在下方说明) / Other (please specify below)"
     validations:
       required: true
