@@ -225,6 +225,11 @@ sudo chown $OWNER_GROUP <file>
 **`/review <pr-number>`** - 审查 Pull Request
 - `/review 369` - 审查 #369 PR
 
+### 项目管理命令
+
+**`/fix-permissions`** - 检查和修复文件权限
+- `/fix-permissions` - 检查并自动修复所有权限问题
+
 ### 开发相关命令
 
 **`/commit [message]`** - 提交变更
