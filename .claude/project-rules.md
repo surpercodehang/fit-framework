@@ -75,7 +75,7 @@ Bash("OWNER_GROUP=$(ls -l pom.xml | awk '{print $3\":\"$4}') && sudo chown $OWNE
 本项目的 PR 规范定义在 `.github/PULL_REQUEST_TEMPLATE.md` 文件中。
 
 **强制要求：**
-1. 创建 PR 前，必须先阅读 `.github/PULL_REQUEST_TEMPLATE.md`
+1. 创建 PR 前，**必须先阅读** `.github/PULL_REQUEST_TEMPLATE.md`
 2. PR 描述必须完整填写模板中的所有必填项
 3. 不需要每次让用户提醒查看 PR 模板
 
@@ -96,11 +96,11 @@ Bash("OWNER_GROUP=$(ls -l pom.xml | awk '{print $3\":\"$4}') && sudo chown $OWNE
    - [ ] 详细描述变更的目的和必要性
 
 4. **主要变更 / Brief Changelog**
-   - [ ] 列出主要的变更内容
+   - [ ] 列出主要的变更内容（使用项目符号）
 
 5. **验证变更 / Verifying this Change**
-   - [ ] 测试步骤
-   - [ ] 测试覆盖情况
+   - [ ] 测试步骤（编号列表）
+   - [ ] 测试覆盖情况（勾选项）
 
 6. **贡献者检查清单 / Contributor Checklist**
    - [ ] 基本要求
@@ -108,31 +108,59 @@ Bash("OWNER_GROUP=$(ls -l pom.xml | awk '{print $3\":\"$4}') && sudo chown $OWNE
    - [ ] 测试要求
    - [ ] 文档和兼容性
 
-**自动化流程：**
+7. **附加信息 / Additional Notes**
+   - [ ] 提供额外的上下文信息
 
-当用户要求创建 PR 时：
-1. 自动读取 `.github/PULL_REQUEST_TEMPLATE.md`
-2. 根据当前变更内容填写 PR 模板
-3. 生成完整的 PR 描述
-4. 提供推送和创建 PR 的命令
+8. **审查者注意事项 / Reviewer Notes**
+   - [ ] 为审查者提供特殊说明
 
-**示例工作流：**
+9. **结尾签名**
+   - [ ] 必须添加：`🤖 Generated with [Claude Code](https://claude.com/claude-code)`
 
-```bash
-# 1. 自动读取 PR 模板
-Read(".github/PULL_REQUEST_TEMPLATE.md")
+**自动化流程（强制执行）：**
 
-# 2. 分析当前变更
-Bash("git diff --stat")
-Bash("git log -1")
+当用户要求创建 PR 时，**必须按照以下顺序执行**：
 
-# 3. 生成 PR 描述（根据模板）
-# ... 填写各个部分
+1. **读取 PR 模板**
+   ```bash
+   Read(".github/PULL_REQUEST_TEMPLATE.md")
+   ```
 
-# 4. 推送并创建 PR
-Bash("git push -u origin <branch>")
-Bash("gh pr create --base <target> --title <title> --body <description>")
-```
+2. **查看最近的 PR 示例**（参考格式和风格）
+   ```bash
+   Bash("gh pr list --limit 3 --state merged --json number,title,body")
+   ```
+
+3. **分析当前分支的变更**
+   ```bash
+   Bash("git status")
+   Bash("git log <base-branch>..HEAD --oneline")
+   Bash("git diff <base-branch>...HEAD --stat")
+   ```
+
+4. **检查远程分支状态**
+   ```bash
+   Bash("git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>&1 || echo 'No upstream branch'")
+   ```
+
+5. **如果需要推送**
+   ```bash
+   Bash("git push -u origin <branch>")
+   ```
+
+6. **创建 PR**（使用 HEREDOC 格式）
+   ```bash
+   gh pr create --base <target-branch> --title "<title>" --body "$(cat <<'EOF'
+   <按照模板格式填写的完整内容>
+   EOF
+   )"
+   ```
+
+**PR 标题格式：**
+- 依赖升级：`[模块名] Upgrade <package> from vX.Y.Z to vA.B.C`
+- Bug 修复：`[模块名] Fix <issue-description>`
+- 新功能：`[模块名] Add <feature-description>`
+- 功能增强：`[模块名] Enhance <feature-description>`
 
 ## 通用最佳实践
 
@@ -180,5 +208,41 @@ sudo chown $OWNER_GROUP <file>
 
 ---
 
-**最后更新**: 2025-11-08
-**Claude Code 版本**: 最新版
+## 自定义 Slash Commands
+
+本项目配置了以下自定义命令，位于 `.claude/commands/` 目录：
+
+### PR 相关命令
+
+**`/pr [branch]`** - 创建 Pull Request
+- `/pr` - 创建PR到默认分支（3.5.x）
+- `/pr main` - 创建PR到 main 分支
+- `/pr 3.5.x` - 创建PR到 3.5.x 分支
+
+**`/pr-update <pr-number>`** - 更新现有PR的描述
+- `/pr-update 369` - 更新 #369 PR 的描述
+
+**`/review <pr-number>`** - 审查 Pull Request
+- `/review 369` - 审查 #369 PR
+
+### 开发相关命令
+
+**`/commit [message]`** - 提交变更
+- `/commit` - 交互式提交
+- `/commit "feat: add new feature"` - 使用指定消息提交
+
+**`/upgrade-dep <package> <from> <to>`** - 升级依赖
+- `/upgrade-dep swagger-ui 5.30.0 5.30.2` - 升级 swagger-ui
+
+### 命令参数说明
+
+Slash commands 支持参数传递，参数使用空格分隔：
+- 单个参数：`/pr main`
+- 多个参数：`/upgrade-dep swagger-ui 5.30.0 5.30.2`
+- 带引号的参数：`/commit "feat: new feature"`
+
+**参数解析规则：**
+- 命令和参数之间用空格分隔
+- 第一个词是命令名称（不含 `/`）
+- 其余部分是参数
+- 如果参数包含空格，用引号包裹
