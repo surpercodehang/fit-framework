@@ -7,9 +7,10 @@
 
 1. **获取参考文件的所有者信息**
    ```bash
-   ls -l pom.xml | awk '{print $3":"$4}'
+   ls -l README.md | awk '{print $3":"$4}'
    ```
-   - 从项目根目录的 `pom.xml` 动态获取正确的所有者信息
+   - 从项目根目录的 `README.md` 动态获取正确的所有者信息
+   - README.md 是所有项目都有的通用文件
    - 不硬编码用户名和用户组
 
 2. **统计当前文件权限分布**
@@ -33,7 +34,7 @@
 4. **修复文件权限**
    ```bash
    # 获取正确的所有者信息
-   OWNER_GROUP=$(ls -l pom.xml | awk '{print $3":"$4}')
+   OWNER_GROUP=$(ls -l README.md | awk '{print $3":"$4}')
 
    # 修复所有文件权限
    find . -type f -print0 2>/dev/null | xargs -0 ls -l 2>/dev/null | awk '$3 == "root" {print $9}' | xargs sudo chown $OWNER_GROUP
@@ -62,7 +63,8 @@
 根据 `.claude/project-rules.md` 中的规则 1：
 - 所有文件必须设置正确的所有者权限
 - 不要硬编码用户名和用户组
-- 动态从 `pom.xml` 等参考文件获取权限信息
+- 动态从 `README.md` 等参考文件获取权限信息
+- README.md 是通用文件，适用于所有语言的项目
 - 确保用户可以自主修改所有文件
 
 **常见问题：**

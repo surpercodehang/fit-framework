@@ -11,8 +11,8 @@
 **动态获取权限的方法：**
 
 ```bash
-# 方法1: 从项目根目录的 pom.xml 获取所有者
-REF_FILE="pom.xml"  # 或其他稳定存在的文件
+# 方法1: 从项目根目录的 README.md 获取所有者
+REF_FILE="README.md"  # 所有项目都有的通用文件
 OWNER=$(ls -l $REF_FILE | awk '{print $3}')
 GROUP=$(ls -l $REF_FILE | awk '{print $4}')
 
@@ -32,22 +32,47 @@ GROUP=$(stat -c "%G" $REF_FILE)   # Linux
 
 ```bash
 # 1. 先获取参考文件的所有者
-OWNER_GROUP=$(ls -l pom.xml | awk '{print $3":"$4}')
+OWNER_GROUP=$(ls -l README.md | awk '{print $3":"$4}')
 
 # 2. 应用到新文件
 sudo chown $OWNER_GROUP <file_path>
 
 # 或者分步执行
-OWNER=$(ls -l pom.xml | awk '{print $3}')
-GROUP=$(ls -l pom.xml | awk '{print $4}')
+OWNER=$(ls -l README.md | awk '{print $3}')
+GROUP=$(ls -l README.md | awk '{print $4}')
 sudo chown $OWNER:$GROUP <file_path>
 ```
 
+**⚠️ 强制执行规则（CRITICAL）：**
+
+每次使用 `Write` 或 `Edit` 工具创建/修改文件后，**必须立即**在同一个响应中使用 `Bash` 工具修复权限。
+
+**标准流程（必须遵循）：**
+
+```bash
+# 步骤 1: 创建或修改文件
+Write(file_path, content)  # 或 Edit(...)
+
+# 步骤 2: 立即动态获取正确的所有者并修复权限（在同一个响应中）
+Bash("OWNER_GROUP=$(ls -l README.md | awk '{print $3\":\"$4}') && sudo chown $OWNER_GROUP " + file_path)
+
+# 或者批量修复多个文件
+Bash("OWNER_GROUP=$(ls -l README.md | awk '{print $3\":\"$4}') && sudo chown $OWNER_GROUP file1 file2 file3")
+```
+
+**为什么必须这样做：**
+- Write 和 Edit 工具可能会将文件所有者更改为 root
+- 这会导致用户无法修改自己的文件
+- 必须动态获取权限，不能硬编码用户名
+- 必须在工具调用后立即修复，不能延后到下一个响应
+
 **检查清单：**
-- [ ] 使用 Write 工具创建新文件后，立即从已有文件获取权限并设置
-- [ ] 使用 Edit 工具修改文件时，确认文件所有者与项目其他文件一致
-- [ ] 批量创建文件后，统一修改所有权
+- [ ] 使用 Write 工具创建新文件后，**立即**在同一响应中动态获取并修复权限
+- [ ] 使用 Edit 工具修改文件后，**立即**在同一响应中动态获取并修复权限
+- [ ] 批量创建/修改文件后，统一修改所有权
 - [ ] 创建目录后，递归修改目录及其内容的所有权
+- [ ] 每次修改后验证权限是否正确
+- [ ] **绝对不要**硬编码用户名和用户组
 
 **完整示例：**
 
@@ -58,14 +83,14 @@ Bash("sudo chown jiyujie:staff " + file_path)  # 在其他人电脑上会失败
 
 # ✅ 正确做法：动态获取权限
 Write(file_path, content)
-# 从项目根目录的 pom.xml 获取所有者信息
-Bash("OWNER_GROUP=$(ls -l pom.xml | awk '{print $3\":\"$4}') && sudo chown $OWNER_GROUP " + file_path)
+# 从项目根目录的 README.md 获取所有者信息
+Bash("OWNER_GROUP=$(ls -l README.md | awk '{print $3\":\"$4}') && sudo chown $OWNER_GROUP " + file_path)
 
 # ✅ 更简洁的做法：批量处理
 Write(file1, content1)
 Write(file2, content2)
 Write(file3, content3)
-Bash("OWNER_GROUP=$(ls -l pom.xml | awk '{print $3\":\"$4}') && sudo chown $OWNER_GROUP file1 file2 file3")
+Bash("OWNER_GROUP=$(ls -l README.md | awk '{print $3\":\"$4}') && sudo chown $OWNER_GROUP file1 file2 file3")
 ```
 
 ## Pull Request 提交规范
@@ -201,8 +226,8 @@ mvn test
 # 检查文件权限
 ls -l <file>
 
-# 动态修改文件权限（从 pom.xml 获取所有者）
-OWNER_GROUP=$(ls -l pom.xml | awk '{print $3":"$4}')
+# 动态修改文件权限（从 README.md 获取所有者）
+OWNER_GROUP=$(ls -l README.md | awk '{print $3":"$4}')
 sudo chown $OWNER_GROUP <file>
 ```
 
