@@ -34,7 +34,7 @@ public class McpServerConfig {
     public McpSyncServer mcpSyncServer(FitMcpStreamableServerTransportProvider transportProvider,
             @Value("${mcp.server.request.timeout-seconds}") int requestTimeoutSeconds) {
         return McpServer.sync(transportProvider)
-                .serverInfo("FIT Store MCP Server", "3.6.0-SNAPSHOT")
+                .serverInfo("FIT Store MCP Server", "3.6.1-SNAPSHOT")
                 .capabilities(McpSchema.ServerCapabilities.builder().tools(true).logging().build())
                 .requestTimeout(Duration.ofSeconds(requestTimeoutSeconds))
                 .build();

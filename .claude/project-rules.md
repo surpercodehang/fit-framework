@@ -240,7 +240,7 @@ sudo chown $OWNER_GROUP <file>
 ### PR 相关命令
 
 **`/pr [branch]`** - 创建 Pull Request
-- `/pr` - 创建PR到默认分支（main）
+- `/pr` - 创建PR到默认分支（3.6.x）
 - `/pr main` - 创建PR到 main 分支
 - `/pr 3.5.x` - 创建PR到 3.5.x 分支
 
