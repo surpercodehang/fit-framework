@@ -5,7 +5,7 @@
 
     <groupId>org.fitframework</groupId>
     <artifactId>fitframework-parent</artifactId>
-    <version>3.5.6-SNAPSHOT</version>
+    <version>3.5.7-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>FIT Framework Parent</name>
@@ -67,7 +67,7 @@
         <java.version>17</java.version>
 
         <!-- FIT version -->
-        <fit.version>3.5.6-SNAPSHOT</fit.version>
+        <fit.version>3.5.7-SNAPSHOT</fit.version>
 
         <!-- Maven plugin versions -->
         <maven.antrun.version>3.1.0</maven.antrun.version>
