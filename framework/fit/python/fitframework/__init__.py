@@ -180,13 +180,17 @@ def heart_beat_exit_unexpectedly() -> bool:
     pass
 
 
-def determine_should_terminate_main() -> bool:
+def _safe_check(checker, desc: str) -> bool:
+    """
+    安全执行checker，异常时打印日志并返回False
+    """
     try:
-        return heart_beat_exit_unexpectedly() or get_should_terminate_main()
+        return checker()
     except:
         except_type, except_value, except_traceback = sys.exc_info()
-        fit_logger.warning(f"get should terminate main error, error type: {except_type}, value: {except_value}, "
-                           f"trace back:\n{''.join(traceback.format_tb(except_traceback))}")
+        fit_logger.warning(f"check {desc} error, error type: {except_type}, "
+                           f"value: {except_value}, trace back:\n"
+                           f"{''.join(traceback.format_tb(except_traceback))}")
         return False
 
 
@@ -205,7 +209,17 @@ def main():
     fit_logger.info(f"fit framework is now available in version {_FIT_FRAMEWORK_VERSION}.")
     if get_terminate_main_enabled():
         fit_logger.info("terminate main enabled.")
-        while not determine_should_terminate_main():
+        while True:
+            # 明确区分退出原因并打印日志
+            hb_exit = _safe_check(heart_beat_exit_unexpectedly, "heart_beat_exit_unexpectedly")
+            should_terminate = _safe_check(get_should_terminate_main, "get_should_terminate_main")
+            if hb_exit:
+                fit_logger.warning("main process will exit due to heartbeat background job exited unexpectedly.")
+                break
+            if should_terminate:
+                # 详细原因已在 terminate_main 插件内部按条件分别打印，这里汇总打印一次
+                fit_logger.info("main process will exit due to terminate-main condition matched.")
+                break
             time.sleep(1)
         fit_logger.info("main process terminated.")
         shutdown()
@@ -215,7 +229,33 @@ if __package__ == 'fitframework' and sys.argv[0].find("pytest") == -1:  # 避免
     if platform.system() in ('Windows', 'Darwin'):  # Windows 或 macOS
         main()
     else:  # Linux 及其他
+        from fitframework.utils.restart_policy import create_default_restart_policy
+
+        restart_policy = create_default_restart_policy()
+        fit_logger.info(f"Starting process manager with restart policy: {restart_policy.get_status()}")
+
         while True:
-            main_process = Process(target=main, name='MainProcess')
-            main_process.start()
-            main_process.join()
+            exit_code = None
+            try:
+                main_process = Process(target=main, name='MainProcess')
+                main_process.start()
+                fit_logger.info(f"Main process started with PID: {main_process.pid}")
+                main_process.join()
+                exit_code = main_process.exitcode
+            except Exception as e:
+                fit_logger.error(f"Error during process management: {e}")
+                exit_code = -1
+
+            fit_logger.info(f"Main process exited with code: {exit_code}")
+            # 使用重启策略判断是否应该重启
+            if not restart_policy.should_restart(exit_code):
+                fit_logger.info("Restart policy indicates no restart needed, stopping")
+                break
+
+            # 获取重启延迟
+            restart_delay = restart_policy.get_restart_delay()
+            status = restart_policy.get_status()
+
+            fit_logger.warning(f"Main process exited unexpectedly, restarting in {restart_delay:.2f} seconds... "
+                               f"(attempt {status['current_attempt']}/{status['max_attempts']})")
+            time.sleep(restart_delay)
