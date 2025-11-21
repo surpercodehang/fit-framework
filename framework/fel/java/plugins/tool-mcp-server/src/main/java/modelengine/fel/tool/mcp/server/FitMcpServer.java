@@ -4,7 +4,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-package modelengine.fel.tool.mcp.server.support;
+package modelengine.fel.tool.mcp.server;
 
 import static modelengine.fel.tool.info.schema.PluginSchema.TYPE;
 import static modelengine.fel.tool.info.schema.ToolsSchema.PROPERTIES;
@@ -15,56 +15,53 @@ import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import modelengine.fel.tool.mcp.entity.Tool;
-import modelengine.fel.tool.mcp.server.McpServer;
 import modelengine.fel.tool.service.ToolChangedObserver;
+import modelengine.fel.tool.service.ToolChangedObserverRegistry;
 import modelengine.fel.tool.service.ToolExecuteService;
-import modelengine.fitframework.annotation.Component;
+import modelengine.fitframework.ioc.annotation.PreDestroy;
 import modelengine.fitframework.log.Logger;
 import modelengine.fitframework.util.MapUtils;
 import modelengine.fitframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Mcp Server implementing interface {@link McpServer}, {@link ToolChangedObserver}
- * with MCP Server Bean {@link McpSyncServer}.
+ * Mcp Server implementing interface {@link ToolChangedObserver}
+ * with MCP Server {@link McpSyncServer} implemented with SDK.
  *
  * @author 季聿阶
  * @since 2025-05-15
  */
-@Component
-public class DefaultMcpStreamableServer implements McpServer, ToolChangedObserver {
-    private static final Logger log = Logger.get(DefaultMcpStreamableServer.class);
+public class FitMcpServer implements ToolChangedObserver {
+    private static final Logger log = Logger.get(FitMcpServer.class);
     private final McpSyncServer mcpSyncServer;
-
     private final ToolExecuteService toolExecuteService;
-    private final List<ToolsChangedObserver> toolsChangedObservers = new ArrayList<>();
+    private final ToolChangedObserverRegistry toolChangedObserverRegistry;
 
     /**
-     * Constructs a new instance of the DefaultMcpServer class.
+     * Constructs a new instance of the FitMcpServer class.
      *
      * @param toolExecuteService The service used to execute tools when handling tool call requests.
-     * @throws IllegalArgumentException If {@code toolExecuteService} is null.
+     * @param mcpSyncServer The MCP sync server.
      */
-    public DefaultMcpStreamableServer(ToolExecuteService toolExecuteService, McpSyncServer mcpSyncServer) {
+    public FitMcpServer(ToolExecuteService toolExecuteService, McpSyncServer mcpSyncServer,
+            ToolChangedObserverRegistry toolChangedObserverRegistry) {
         this.toolExecuteService = notNull(toolExecuteService, "The tool execute service cannot be null.");
         this.mcpSyncServer = mcpSyncServer;
+        this.toolChangedObserverRegistry = toolChangedObserverRegistry;
+        this.toolChangedObserverRegistry.register(this);
     }
 
-    @Override
+    @PreDestroy
+    public void onDestroy() {
+        this.toolChangedObserverRegistry.unregister(this);
+    }
+
     public List<Tool> getTools() {
         return this.mcpSyncServer.listTools().stream().map(this::convertToFelTool).collect(Collectors.toList());
-    }
-
-    @Override
-    public void registerToolsChangedObserver(ToolsChangedObserver observer) {
-        if (observer != null) {
-            this.toolsChangedObservers.add(observer);
-        }
     }
 
     @Override
@@ -88,10 +85,13 @@ public class DefaultMcpStreamableServer implements McpServer, ToolChangedObserve
 
         McpServerFeatures.SyncToolSpecification toolSpecification =
                 createToolSpecification(name, description, parameters);
-
-        this.mcpSyncServer.addTool(toolSpecification);
+        try {
+            this.mcpSyncServer.addTool(toolSpecification);
+        } catch (Exception e) {
+            log.error("Failed to added tool to MCP server. [toolName={}, error={}]", name, e.getMessage());
+            throw e;
+        }
         log.info("Tool added to MCP server. [toolName={}, description={}, schema={}]", name, description, parameters);
-        this.toolsChangedObservers.forEach(ToolsChangedObserver::onToolsChanged);
     }
 
     @Override
@@ -102,22 +102,15 @@ public class DefaultMcpStreamableServer implements McpServer, ToolChangedObserve
         }
         this.mcpSyncServer.removeTool(name);
         log.info("Tool removed from MCP server. [toolName={}]", name);
-        this.toolsChangedObservers.forEach(ToolsChangedObserver::onToolsChanged);
     }
 
     /**
      * Creates a tool specification for the MCP server.
-     * <p>
-     * This method constructs a {@link McpServerFeatures.SyncToolSpecification} that includes:
-     * <ul>
-     *     <li>Tool metadata (name, description, input schema)</li>
-     *     <li>Call handler that executes the tool and handles exceptions</li>
-     * </ul>
      *
      * @param name The name of the tool.
      * @param description The description of the tool.
      * @param parameters The parameter schema containing type, properties, and required fields.
-     * @return A fully configured {@link McpServerFeatures.SyncToolSpecification}.
+     * @return A configured {@link McpServerFeatures.SyncToolSpecification}.
      */
     private McpServerFeatures.SyncToolSpecification createToolSpecification(String name, String description,
             Map<String, Object> parameters) {
@@ -137,12 +130,6 @@ public class DefaultMcpStreamableServer implements McpServer, ToolChangedObserve
 
     /**
      * Executes a tool and handles any exceptions that may occur.
-     * <p>
-     * This method handles two types of exceptions:
-     * <ul>
-     *     <li>{@link IllegalArgumentException}: Invalid tool arguments (logged as warning)</li>
-     *     <li>{@link Exception}: Any other execution failure (logged as error)</li>
-     * </ul>
      *
      * @param toolName The name of the tool to execute.
      * @param request The tool call request containing arguments.
