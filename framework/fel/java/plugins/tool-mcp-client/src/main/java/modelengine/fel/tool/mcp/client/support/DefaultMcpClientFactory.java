@@ -6,13 +6,23 @@
 
 package modelengine.fel.tool.mcp.client.support;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.modelcontextprotocol.client.transport.HttpClientSseClientTransport;
+import io.modelcontextprotocol.client.transport.HttpClientStreamableHttpTransport;
+import io.modelcontextprotocol.json.jackson.JacksonMcpJsonMapper;
 import modelengine.fel.tool.mcp.client.McpClient;
 import modelengine.fel.tool.mcp.client.McpClientFactory;
+import modelengine.fel.tool.mcp.client.elicitation.ElicitRequest;
+import modelengine.fel.tool.mcp.client.elicitation.ElicitResult;
 import modelengine.fitframework.annotation.Component;
 import modelengine.fitframework.annotation.Value;
+import modelengine.fitframework.inspection.Nullable;
+
+import java.util.function.Function;
 
 /**
- * Represents a factory for creating instances of the {@link DefaultMcpStreamableClient}.
+ * Represents a factory for creating instances of the {@link DefaultMcpClient}.
  * This class is responsible for initializing and configuring.
  *
  * @author 季聿阶
@@ -32,7 +42,22 @@ public class DefaultMcpClientFactory implements McpClientFactory {
     }
 
     @Override
-    public McpClient create(String baseUri, String sseEndpoint) {
-        return new DefaultMcpStreamableClient(baseUri, sseEndpoint, requestTimeoutSeconds);
+    public McpClient createStreamable(String baseUri, String sseEndpoint,
+            @Nullable Function<ElicitRequest, ElicitResult> elicitationHandler) {
+        HttpClientStreamableHttpTransport transport = HttpClientStreamableHttpTransport.builder(baseUri)
+                .jsonMapper(new JacksonMcpJsonMapper(new ObjectMapper()))
+                .endpoint(sseEndpoint)
+                .build();
+        return new DefaultMcpClient(baseUri, sseEndpoint, transport, this.requestTimeoutSeconds, elicitationHandler);
+    }
+
+    @Override
+    public McpClient createSse(String baseUri, String sseEndpoint,
+            @Nullable Function<ElicitRequest, ElicitResult> elicitationHandler) {
+        HttpClientSseClientTransport transport = HttpClientSseClientTransport.builder(baseUri)
+                .jsonMapper(new JacksonMcpJsonMapper(new ObjectMapper()))
+                .sseEndpoint(sseEndpoint)
+                .build();
+        return new DefaultMcpClient(baseUri, sseEndpoint, transport, this.requestTimeoutSeconds, elicitationHandler);
     }
 }
