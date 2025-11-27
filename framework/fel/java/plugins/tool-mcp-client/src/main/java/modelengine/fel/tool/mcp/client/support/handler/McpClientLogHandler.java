@@ -4,7 +4,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-package modelengine.fel.tool.mcp.client.support;
+package modelengine.fel.tool.mcp.client.support.handler;
 
 import io.modelcontextprotocol.spec.McpSchema;
 import modelengine.fitframework.log.Logger;
@@ -16,16 +16,16 @@ import modelengine.fitframework.log.Logger;
  * @author 黄可欣
  * @since 2025-11-03
  */
-public class DefaultMcpClientLogHandler {
-    private static final Logger log = Logger.get(DefaultMcpClientLogHandler.class);
+public class McpClientLogHandler {
+    private static final Logger log = Logger.get(McpClientLogHandler.class);
     private final String clientId;
 
     /**
-     * Constructs a new instance of DefaultMcpClientLogHandler.
+     * Constructs a new instance of McpClientLogHandler.
      *
      * @param clientId The unique identifier of the MCP client.
      */
-    public DefaultMcpClientLogHandler(String clientId) {
+    public McpClientLogHandler(String clientId) {
         this.clientId = clientId;
     }
 
