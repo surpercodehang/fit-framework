@@ -17,6 +17,12 @@ FIT for Python 是基于 FIT Framework 的 Python 运行时与插件开发套件
 - `conf/`：框架及插件相关配置。
 - `bootstrap/`：运行时启动与配置加载的底层实现。
 - `requirements.txt`：运行时依赖列表。
+- `fit_common_struct/`：框架通用数据结构与工具。
+- `fit_flowable/`：流程/可流式组件相关实现。
+- `fit_py_nacos_registry/`：Nacos 注册中心适配。
+- `fit_test/`：示例与自测脚本。
+- `third_party_cache/`：依赖缓存或临时文件。
+- `fit_framework.log`：默认运行日志文件，便于排查。
 
 ## 配置说明
 
@@ -42,8 +48,18 @@ tornado==6.3.2
 
 推荐在虚拟环境中安装依赖：
 ```bash
+python -m venv .venv   # 创建虚拟环境
+source .venv/bin/activate   # Windows 可执行 .\.venv\Scripts\activate
 pip install -r requirements.txt
 ```
+
+## 快速开始
+
+1. 进入工程根目录：`cd framework/fit/python`。
+2. 创建并激活虚拟环境，安装依赖：同上所示。
+3. 按需修改 `conf/application.yml` 中的 `registry-center` 和端口配置。
+4. 启动：`python -m fitframework`，观察终端或 `fit_framework.log` 是否有错误。
+5. 健康检查：按下文 curl 示例确认返回 `OK`。
 
 ## 启动框架
 
@@ -81,3 +97,10 @@ curl --request GET \
    生成的产物位于 `plugin/your_plugin_name/build/`。
 
 更多 CLI 细节可参考 `fit_cli/readme.md`。
+
+## 常见排查
+
+- 启动报端口占用：调整 `conf/fit_startup.yml` 或 `application.yml` 中的端口后重启。
+- 注册中心连通性：确认 `registry-center.addresses` 可达，必要时先用 curl/ping 验证。
+- 重新安装依赖：在已激活虚拟环境中执行 `pip install -r requirements.txt --force-reinstall`。
+- 停止服务：直接中断前台进程（Ctrl+C），或关闭终端会话。
